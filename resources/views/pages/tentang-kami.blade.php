@@ -87,7 +87,7 @@ $members = [
     }" class="font-sans">
 
     <!-- Hero Section (Green) -->
-    <div class="relative pt-32 pb-24 overflow-hidden" style="background-color: var(--color-primary-700, #15803d);">
+    <div class="relative pt-32 pb-24 overflow-hidden" style="background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%), var(--color-primary-700, #15803d);">
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
             <div class="absolute -top-32 -right-32 w-[500px] md:w-[700px] h-[500px] md:h-[700px] rounded-full blur-[100px] bg-white opacity-20 transform rotate-12"></div>
             <div class="absolute top-1/4 -left-32 w-[400px] md:w-[600px] h-[500px] md:h-[800px] rounded-full blur-[100px] bg-white opacity-10 transform -rotate-12"></div>
@@ -104,8 +104,8 @@ $members = [
         </div>
     </div>
 
-    <!-- Section 1: Profil Singkat (White) -->
-    <section class="relative py-24 overflow-hidden bg-white">
+    <!-- Section 1: Profil Singkat (White with hint of green) -->
+    <section class="relative py-24 overflow-hidden" style="background: radial-gradient(circle at 0% 50%, rgba(21, 128, 61, 0.10) 0%, transparent 50%), radial-gradient(circle at 100% 50%, rgba(21, 128, 61, 0.10) 0%, transparent 50%), #ffffff;">
         <!-- Concentric Circles Right Grey -->
         <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 pointer-events-none opacity-5 hidden md:block">
             @for ($i = 0; $i < 15; $i++)
@@ -127,7 +127,7 @@ $members = [
     </section>
 
     <!-- Section 2: Mengapa Komdes Sultra (Green) -->
-    <section class="relative py-24 overflow-hidden" style="background-color: var(--color-primary-700, #15803d);">
+    <section class="relative py-24 overflow-hidden" style="background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%), var(--color-primary-700, #15803d);">
         <!-- Concentric Circles Left -->
         <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 pointer-events-none opacity-20 hidden md:block">
             @for ($i = 0; $i < 15; $i++)
@@ -148,8 +148,8 @@ $members = [
         </div>
     </section>
 
-    <!-- Section 3: Tujuan & Intensi (White) -->
-    <section class="relative py-24 overflow-hidden bg-white">
+    <!-- Section 3: Tujuan & Intensi (White with hint of green) -->
+    <section class="relative py-24 overflow-hidden" style="background: radial-gradient(circle at 0% 50%, rgba(21, 128, 61, 0.10) 0%, transparent 50%), radial-gradient(circle at 100% 50%, rgba(21, 128, 61, 0.10) 0%, transparent 50%), #ffffff;">
         <!-- Concentric Circles Left Grey -->
         <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 pointer-events-none opacity-5 hidden md:block">
             @for ($i = 0; $i < 15; $i++)
@@ -210,7 +210,7 @@ $members = [
     </section>
 
     <!-- Section 4: Sikap dan Deklarasi (Green) -->
-    <section class="relative py-24 overflow-hidden" style="background-color: var(--color-primary-700, #15803d);">
+    <section class="relative py-24 overflow-hidden" style="background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%), var(--color-primary-700, #15803d);">
         <!-- Concentric Circles Right -->
         <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 pointer-events-none opacity-20 hidden md:block">
             @for ($i = 0; $i < 15; $i++)
@@ -260,8 +260,8 @@ $members = [
         </div>
     </section>
 
-    <!-- Section 5: Anggota (White) -->
-    <section class="relative py-24 overflow-hidden bg-white">
+    <!-- Section 5: Anggota (White with hint of green) -->
+    <section class="relative py-24 overflow-hidden" style="background: radial-gradient(circle at 0% 50%, rgba(21, 128, 61, 0.10) 0%, transparent 50%), radial-gradient(circle at 100% 50%, rgba(21, 128, 61, 0.10) 0%, transparent 50%), #ffffff;">
         <!-- Concentric Circles Left -->
         <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 pointer-events-none opacity-5 hidden md:block">
             @for ($i = 0; $i < 15; $i++)
