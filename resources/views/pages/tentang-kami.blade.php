@@ -169,10 +169,19 @@ $members = [
                         "Sebagai ruang belajar, berbagi ide dan pengetahuan serta melahirkan aksi dan produk belajar terkait pesisir dan pulau kecil di Sulawesi Tenggara"
                     </p>
                     
-                    <ul class="space-y-3 text-zinc-700 text-lg font-light md:max-w-3xl">
-                        <li>Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta.</li>
-                        <li>Vivamus suscipit tortor eget felis porttitor volutpat.</li>
-                        <li>Pellentesque in ipsum id orci porta dapibus.</li>
+                    <ul class="space-y-4 text-zinc-700 text-base md:text-lg font-light md:max-w-3xl w-full">
+                        <li class="flex flex-row md:flex-row-reverse items-start gap-4">
+                            <svg class="w-6 h-6 mt-1 flex-shrink-0" style="color: var(--color-primary-700, #15803d);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-justify md:text-right leading-loose flex-grow">Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta.</span>
+                        </li>
+                        <li class="flex flex-row md:flex-row-reverse items-start gap-4">
+                            <svg class="w-6 h-6 mt-1 flex-shrink-0" style="color: var(--color-primary-700, #15803d);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-justify md:text-right leading-loose flex-grow">Vivamus suscipit tortor eget felis porttitor volutpat.</span>
+                        </li>
+                        <li class="flex flex-row md:flex-row-reverse items-start gap-4">
+                            <svg class="w-6 h-6 mt-1 flex-shrink-0" style="color: var(--color-primary-700, #15803d);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-justify md:text-right leading-loose flex-grow">Pellentesque in ipsum id orci porta dapibus.</span>
+                        </li>
                     </ul>
                 </div>
             </div>
