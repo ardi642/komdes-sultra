@@ -100,13 +100,10 @@ $members = [
     </div>
 
     <!-- Section 1: Profil Singkat (White with hint of green) -->
-    <section class="relative py-24 overflow-hidden bg-gradient-to-b from-white to-primary-50/80">
-        <!-- Concentric Circles Right Grey -->
-        <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 pointer-events-none opacity-5 hidden md:block">
-            @for ($i = 0; $i < 15; $i++)
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-800" style="width: {{ 400 + ($i * 60) }}px; height: {{ 400 + ($i * 60) }}px;"></div>
-            @endfor
-        </div>
+    <section class="relative py-24 overflow-hidden bg-white">
+        <!-- Ambient Glow Elements -->
+        <div class="absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-50 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+        <div class="absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-40 -translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             <div class="max-w-4xl">
@@ -137,13 +134,10 @@ $members = [
     </section>
 
     <!-- Section 3: Tujuan & Intensi (White with hint of green) -->
-    <section class="relative py-24 overflow-hidden bg-gradient-to-b from-primary-50/80 to-white">
-        <!-- Concentric Circles Left Grey -->
-        <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 pointer-events-none opacity-5 hidden md:block">
-            @for ($i = 0; $i < 15; $i++)
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-800" style="width: {{ 400 + ($i * 60) }}px; height: {{ 400 + ($i * 60) }}px;"></div>
-            @endfor
-        </div>
+    <section class="relative py-24 overflow-hidden bg-white">
+        <!-- Ambient Glow Elements -->
+        <div class="absolute left-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-50 -translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+        <div class="absolute right-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-40 translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             
@@ -251,13 +245,10 @@ $members = [
     </section>
 
     <!-- Section 5: Anggota (White with hint of green) -->
-    <section class="relative py-24 overflow-hidden bg-gradient-to-b from-white to-primary-50/80">
-        <!-- Concentric Circles Right Grey -->
-        <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 pointer-events-none opacity-5 hidden md:block">
-            @for ($i = 0; $i < 15; $i++)
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-800" style="width: {{ 400 + ($i * 60) }}px; height: {{ 400 + ($i * 60) }}px;"></div>
-            @endfor
-        </div>
+    <section class="relative py-24 overflow-hidden bg-white">
+        <!-- Ambient Glow Elements -->
+        <div class="absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-50 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+        <div class="absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-40 -translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             <div class="mb-16 flex flex-col md:items-end text-left md:text-right">
