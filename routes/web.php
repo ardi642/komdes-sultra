@@ -26,6 +26,9 @@ Route::view('/isu/detail', 'pages.isu-detail')->name('isu.detail');
 
 Route::view('/kontak', 'pages.kontak')->name('kontak');
 
+Route::view('/galeri', 'pages.galeri')->name('galeri');
+Route::view('/galeri/detail', 'pages.galeri-detail')->name('galeri.detail');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 });
