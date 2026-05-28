@@ -24,6 +24,8 @@ Route::view('/siaran-pers/detail', 'pages.siaran-pers-detail')->name('siaran-per
 Route::view('/isu', 'pages.isu')->name('isu');
 Route::view('/isu/detail', 'pages.isu-detail')->name('isu.detail');
 
+Route::view('/kontak', 'pages.kontak')->name('kontak');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 });

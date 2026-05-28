@@ -87,12 +87,7 @@ $members = [
     }" class="font-sans">
 
     <!-- Hero Section (Green) -->
-    <div class="relative pt-32 pb-24 overflow-hidden" style="background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%), var(--color-primary-700, #15803d);">
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute -top-32 -right-32 w-[500px] md:w-[700px] h-[500px] md:h-[700px] rounded-full blur-[100px] bg-white opacity-20 transform rotate-12"></div>
-            <div class="absolute top-1/4 -left-32 w-[400px] md:w-[600px] h-[500px] md:h-[800px] rounded-full blur-[100px] bg-white opacity-10 transform -rotate-12"></div>
-        </div>
-
+    <div class="relative pt-32 pb-24 overflow-hidden" style="background: linear-gradient(135deg, var(--color-primary-500, #22c55e) 0%, var(--color-primary-700, #15803d) 100%);">
         <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             <div class="text-center mt-10 mb-8 max-w-4xl mx-auto">
                 <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-widest uppercase text-white drop-shadow-md">Tentang Kami</h1>
@@ -105,7 +100,7 @@ $members = [
     </div>
 
     <!-- Section 1: Profil Singkat (White with hint of green) -->
-    <section class="relative py-24 overflow-hidden" style="background: radial-gradient(circle at 0% 50%, rgba(21, 128, 61, 0.10) 0%, transparent 50%), radial-gradient(circle at 100% 50%, rgba(21, 128, 61, 0.10) 0%, transparent 50%), #ffffff;">
+    <section class="relative py-24 overflow-hidden bg-gradient-to-b from-white to-primary-50/80">
         <!-- Concentric Circles Right Grey -->
         <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 pointer-events-none opacity-5 hidden md:block">
             @for ($i = 0; $i < 15; $i++)
@@ -127,14 +122,7 @@ $members = [
     </section>
 
     <!-- Section 2: Mengapa Komdes Sultra (Green) -->
-    <section class="relative py-24 overflow-hidden" style="background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%), var(--color-primary-700, #15803d);">
-        <!-- Concentric Circles Left -->
-        <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 pointer-events-none opacity-20 hidden md:block">
-            @for ($i = 0; $i < 15; $i++)
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white" style="width: {{ 400 + ($i * 60) }}px; height: {{ 400 + ($i * 60) }}px;"></div>
-            @endfor
-        </div>
-
+    <section class="relative py-24 overflow-hidden" style="background: linear-gradient(135deg, var(--color-primary-500, #22c55e) 0%, var(--color-primary-700, #15803d) 100%);">
         <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             <div class="max-w-4xl">
                 <div class="border-t-2 border-white w-20 md:w-32 mb-4"></div>
@@ -149,7 +137,7 @@ $members = [
     </section>
 
     <!-- Section 3: Tujuan & Intensi (White with hint of green) -->
-    <section class="relative py-24 overflow-hidden" style="background: radial-gradient(circle at 0% 50%, rgba(21, 128, 61, 0.10) 0%, transparent 50%), radial-gradient(circle at 100% 50%, rgba(21, 128, 61, 0.10) 0%, transparent 50%), #ffffff;">
+    <section class="relative py-24 overflow-hidden bg-gradient-to-b from-primary-50/80 to-white">
         <!-- Concentric Circles Left Grey -->
         <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 pointer-events-none opacity-5 hidden md:block">
             @for ($i = 0; $i < 15; $i++)
@@ -219,14 +207,7 @@ $members = [
     </section>
 
     <!-- Section 4: Sikap dan Deklarasi (Green) -->
-    <section class="relative py-24 overflow-hidden" style="background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%), var(--color-primary-700, #15803d);">
-        <!-- Concentric Circles Right -->
-        <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 pointer-events-none opacity-20 hidden md:block">
-            @for ($i = 0; $i < 15; $i++)
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white" style="width: {{ 400 + ($i * 60) }}px; height: {{ 400 + ($i * 60) }}px;"></div>
-            @endfor
-        </div>
-
+    <section class="relative py-24 overflow-hidden" style="background: linear-gradient(135deg, var(--color-primary-500, #22c55e) 0%, var(--color-primary-700, #15803d) 100%);">
         <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             <div class="border-t-2 border-white w-20 md:w-32 mb-4"></div>
             <h2 class="text-2xl md:text-3xl font-bold uppercase text-white tracking-widest mb-12">Sikap dan Deklarasi Komdes Sultra</h2>
@@ -270,9 +251,9 @@ $members = [
     </section>
 
     <!-- Section 5: Anggota (White with hint of green) -->
-    <section class="relative py-24 overflow-hidden" style="background: radial-gradient(circle at 0% 50%, rgba(21, 128, 61, 0.10) 0%, transparent 50%), radial-gradient(circle at 100% 50%, rgba(21, 128, 61, 0.10) 0%, transparent 50%), #ffffff;">
-        <!-- Concentric Circles Left -->
-        <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 pointer-events-none opacity-5 hidden md:block">
+    <section class="relative py-24 overflow-hidden bg-gradient-to-b from-white to-primary-50/80">
+        <!-- Concentric Circles Right Grey -->
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 pointer-events-none opacity-5 hidden md:block">
             @for ($i = 0; $i < 15; $i++)
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-800" style="width: {{ 400 + ($i * 60) }}px; height: {{ 400 + ($i * 60) }}px;"></div>
             @endfor

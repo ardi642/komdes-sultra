@@ -1,0 +1,231 @@
+@extends('layouts.public')
+
+@section('title', 'Kontak - Komdes Sultra')
+
+@section('content')
+
+@php
+// Dummy data for members contact based on screenshots
+$members = [
+    [
+        'id' => 1,
+        'name' => 'Tunas Bahari Maluku',
+        'email' => 'Tunasbaharimaluku@gmail.com',
+        'phone' => '085243306610',
+        'website' => '-',
+        'address' => 'Rumfakar, Kec Kian darat, Kab Seram Bagian Timur, Maluku',
+        'logo' => 'https://ui-avatars.com/api/?name=Tunas+Bahari&background=047857&color=fff&size=200&font-size=0.33',
+    ],
+    [
+        'id' => 2,
+        'name' => 'LSM KOMNASDESA-SULTRA',
+        'email' => 'komnasdesa@gmail.com',
+        'phone' => '04013085933',
+        'website' => 'komnasdesa.org',
+        'address' => 'Jl. Nusa Indah IV/No. 3, Kampus Lama Kemaraya, Kel. Lahundape, Kota Kendari 93128',
+        'logo' => 'https://ui-avatars.com/api/?name=KOMNAS+DESA&background=10B981&color=fff&size=200&font-size=0.33',
+    ],
+    [
+        'id' => 3,
+        'name' => 'Perkumpulan PakaTiva',
+        'email' => 'pakativa@gmail.com',
+        'phone' => '082271322114',
+        'website' => '-',
+        'address' => 'Jln. Lapangan Ubo-ubo, Kec Ternate Selatan, Kab Kota Ternate, Maluku Utara',
+        'logo' => 'https://ui-avatars.com/api/?name=Paka+Tiva&background=059669&color=fff&size=200&font-size=0.33',
+    ],
+    [
+        'id' => 4,
+        'name' => 'Jaring Advokasi Pengelolaan Sumberdaya Alam (JAPESDA)',
+        'email' => 'gorontalojapesda@gmail.com',
+        'phone' => '+62 852-4074-4488',
+        'website' => '-',
+        'address' => 'Gorontalo',
+        'logo' => 'https://ui-avatars.com/api/?name=Japesda&background=0D9488&color=fff&size=200&font-size=0.33',
+    ],
+];
+@endphp
+
+<!-- Wrapper -->
+<div class="w-full">
+
+    <!-- 1. Hero Section: Info Kontak Utama -->
+    <section class="relative text-white pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden" style="background: linear-gradient(135deg, var(--color-primary-500, #22c55e) 0%, var(--color-primary-700, #15803d) 100%);">
+        <div class="max-w-7xl mx-auto px-6 md:px-10 lg:px-12 relative z-10">
+            <!-- Judul -->
+            <h1 class="text-2xl md:text-4xl font-extrabold uppercase mb-10 tracking-wider">Kontak Komdes Sultra</h1>
+
+            <!-- Card Info Utama -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 lg:p-12 border border-zinc-100">
+                <div class="flex flex-col lg:flex-row gap-8 items-center justify-between">
+                    
+                    <!-- Kolom Kiri: Info -->
+                    <div class="w-full lg:w-2/3 space-y-6">
+                        <h2 class="text-xl md:text-2xl font-bold text-primary-800 mb-6 hidden">Sekretariat Jaring Nusa KTI</h2>
+                        
+                        <div class="space-y-5">
+                            <!-- Phone -->
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 text-primary-700 bg-primary-50 p-2 rounded-full">
+                                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                </div>
+                                <div class="text-zinc-700 font-medium text-lg pt-1.5">082290533640</div>
+                            </div>
+                            <!-- Email -->
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 text-primary-700 bg-primary-50 p-2 rounded-full">
+                                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                </div>
+                                <div class="text-zinc-700 font-medium text-lg pt-1.5">kantor@jaringnusa.id</div>
+                            </div>
+                            <!-- Website -->
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 text-primary-700 bg-primary-50 p-2 rounded-full">
+                                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                                </div>
+                                <div class="text-zinc-700 font-medium text-lg pt-1.5">jaringnusa.id</div>
+                            </div>
+                            <!-- Address -->
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 text-primary-700 bg-primary-50 p-2 rounded-full">
+                                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                </div>
+                                <div class="text-zinc-700 font-medium text-lg pt-1.5 leading-relaxed">
+                                    Perumahan Bumi Pesona Pelangi, Jl. Kuning No.15, Minasa Upa, Kec. Rappocini, Kota Makassar, Sulawesi Selatan, 90221
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom Kanan: Placeholder Logo -->
+                    <div class="w-full lg:w-1/3 flex justify-center lg:justify-end">
+                        <div class="bg-primary-900 w-48 h-48 md:w-56 md:h-56 rounded-xl flex items-center justify-center p-6 shadow-inner border border-primary-700/50">
+                            <!-- Placeholder Logo -->
+                            <div class="text-white text-center">
+                                <div class="font-bold text-2xl tracking-widest border-2 border-white p-4 inline-block">JARING<br>NUSA</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Section: Kontak Anggota -->
+    <section class="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-white to-primary-50/80">
+        <!-- Concentric Circles Right Grey -->
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 pointer-events-none opacity-5 hidden md:block">
+            @for ($i = 0; $i < 15; $i++)
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-800" style="width: {{ 400 + ($i * 60) }}px; height: {{ 400 + ($i * 60) }}px;"></div>
+            @endfor
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-10 lg:px-12 relative z-10">
+            <!-- Judul -->
+            <div class="text-left mb-12">
+                <div class="border-t-2 w-20 md:w-32 mb-4" style="border-color: var(--color-primary-700, #15803d);"></div>
+                <h2 class="text-2xl md:text-3xl font-bold uppercase tracking-wide" style="color: var(--color-primary-700, #15803d);">Kontak Anggota Komdes Sultra</h2>
+            </div>
+
+            <!-- List Card Anggota (3 Kolom) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+                @foreach($members as $member)
+                <div class="group bg-white rounded-[2rem] shadow-sm border border-zinc-100 p-8 hover:shadow-2xl hover:shadow-primary-900/5 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full relative overflow-hidden">
+                    
+                    <!-- Subtle background decoration on hover -->
+                    <div class="absolute -right-16 -top-16 w-48 h-48 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out pointer-events-none blur-3xl" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+                    
+                    <!-- Header Card: Logo and Name Centered -->
+                    <div class="flex flex-col items-center text-center mb-10 relative z-10">
+                        <div class="w-24 h-24 flex-shrink-0 flex items-center justify-center bg-white p-3 border border-zinc-100 rounded-full shadow-md group-hover:scale-110 group-hover:border-primary-200 transition-all duration-500 mb-6">
+                            <img src="{{ $member['logo'] }}" alt="Logo {{ $member['name'] }}" class="max-w-full max-h-full object-contain rounded-full">
+                        </div>
+                        <h3 class="text-xl font-bold text-zinc-800 transition-colors" style="color: var(--color-primary-700, #15803d);">{{ $member['name'] }}</h3>
+                        <div class="w-12 h-1 bg-zinc-100 rounded-full mt-5 group-hover:w-24 transition-all duration-500" style="background-color: var(--color-primary-100, #dcfce7);">
+                            <div class="h-full w-full rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background-color: var(--color-primary-500, #22c55e);"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Info Anggota -->
+                    <div class="space-y-5 relative z-10 flex-grow flex flex-col justify-center">
+                        @if($member['phone'] && $member['phone'] !== '-')
+                        <div class="flex items-center gap-4 group/item">
+                            <div class="w-10 h-10 rounded-xl bg-zinc-50 flex items-center justify-center transition-colors group-hover/item:bg-primary-50" style="color: var(--color-primary-600, #16a34a);">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            </div>
+                            <span class="text-zinc-600 font-medium text-sm">{{ $member['phone'] }}</span>
+                        </div>
+                        @endif
+
+                        @if($member['email'] && $member['email'] !== '-')
+                        <div class="flex items-center gap-4 group/item">
+                            <div class="w-10 h-10 rounded-xl bg-zinc-50 flex items-center justify-center transition-colors group-hover/item:bg-primary-50" style="color: var(--color-primary-600, #16a34a);">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <span class="text-zinc-600 font-medium text-sm break-all">{{ $member['email'] }}</span>
+                        </div>
+                        @endif
+
+                        @if($member['website'] && $member['website'] !== '-')
+                        <div class="flex items-center gap-4 group/item">
+                            <div class="w-10 h-10 rounded-xl bg-zinc-50 flex items-center justify-center transition-colors group-hover/item:bg-primary-50" style="color: var(--color-primary-600, #16a34a);">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                            </div>
+                            <span class="text-zinc-600 font-medium text-sm">{{ $member['website'] }}</span>
+                        </div>
+                        @endif
+
+                        @if($member['address'] && $member['address'] !== '-')
+                        <div class="flex items-start gap-4 group/item">
+                            <div class="w-10 h-10 rounded-xl bg-zinc-50 flex-shrink-0 flex items-center justify-center transition-colors group-hover/item:bg-primary-50 mt-0.5" style="color: var(--color-primary-600, #16a34a);">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <span class="text-zinc-600 text-sm leading-relaxed mt-1">{{ $member['address'] }}</span>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3. Section: Formulir Laporan / Aduan -->
+    <section class="py-16 md:py-24 relative overflow-hidden" style="background: linear-gradient(135deg, var(--color-primary-500, #22c55e) 0%, var(--color-primary-700, #15803d) 100%);">
+        <div class="max-w-4xl mx-auto px-6 md:px-10 lg:px-12 relative z-10">
+            
+            <div class="mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-white tracking-wider mb-3">LAPORAN / ADUAN</h2>
+                <div class="w-full h-[1px] bg-white/30 mb-4"></div>
+                <p class="text-primary-100/80 text-sm md:text-base font-medium">Sampaikan laporan, aduan atau pertanyaan Anda pada formulir di bawah ini, kami akan tindak lebih lanjut.</p>
+            </div>
+
+            <form action="#" method="POST" class="space-y-4">
+                @csrf
+                <div>
+                    <input type="text" name="nama" placeholder="Nama" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 border-0 shadow-sm transition-shadow">
+                </div>
+                <div>
+                    <input type="email" name="email" placeholder="Email" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 border-0 shadow-sm transition-shadow">
+                </div>
+                <div>
+                    <input type="text" name="subjek" placeholder="Subjek" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 border-0 shadow-sm transition-shadow">
+                </div>
+                <div>
+                    <textarea name="pesan" rows="6" placeholder="Pesan" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 resize-y border-0 shadow-sm transition-shadow"></textarea>
+                </div>
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-primary-500 hover:bg-primary-600 text-white font-bold py-4 px-6 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-primary-500/50">
+                        Kirim
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </section>
+
+</div>
+
+@endsection
