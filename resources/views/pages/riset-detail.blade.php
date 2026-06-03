@@ -4,7 +4,8 @@
 
 @section('content')
 <!-- Main Content Area -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 relative z-20">
+<div class="bg-white py-28 lg:py-36 relative overflow-hidden">
+<div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
     <!-- Breadcrumb -->
     <nav class="flex text-sm text-zinc-500 mb-8" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2">
@@ -32,10 +33,10 @@
         </ol>
     </nav>
 
-    <div class="flex flex-col lg:flex-row gap-12">
+    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
         
         <!-- Main Article Content (Left) -->
-        <div class="lg:w-2/3">
+        <div class="flex-1">
             <article class="bg-white rounded-2xl p-6 md:p-10 border border-zinc-100 shadow-sm">
                 <!-- Article Header Info -->
                 <div class="mb-8">
@@ -47,7 +48,7 @@
                         </span>
                     </div>
                     
-                    <h1 class="text-3xl md:text-4xl font-heading font-extrabold text-zinc-900 mb-6 leading-tight">Panduan Transparansi Dana Desa Versi 2024</h1>
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-zinc-900 mb-6 leading-tight">Panduan Transparansi Dana Desa Versi 2024</h1>
                     
                     <div class="flex items-center gap-4 text-sm">
                         <div class="flex items-center gap-3">
@@ -62,7 +63,7 @@
 
                 <!-- Cover Image -->
                 <div class="rounded-xl overflow-hidden mb-10 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1574046664972-e565980fcbc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Rapat Desa" class="w-full h-auto object-cover aspect-[16/9] hover:scale-105 transition-transform duration-700">
+                    <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Rapat Desa" class="w-full h-auto object-cover aspect-[16/9] hover:scale-105 transition-transform duration-700">
                 </div>
                 
                 <!-- Article Text (Prose) -->
@@ -115,12 +116,12 @@
         </div>
 
         <!-- Sidebar (Right Content) -->
-        <div class="lg:w-1/3">
+        <div class="lg:w-[350px] flex-shrink-0">
             <div class="sticky top-28 space-y-8">
                 
                 <!-- Search Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Cari Riset</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Cari Riset</h3>
                     <form action="#" method="GET" class="relative">
                         <input type="text" placeholder="Masukkan kata kunci..." class="w-full pl-4 pr-12 py-3 rounded-xl border border-zinc-200 bg-zinc-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-colors text-sm">
                         <button type="submit" class="absolute right-2 top-1.5 bottom-1.5 aspect-square bg-primary-600 hover:bg-primary-500 text-white rounded-lg flex items-center justify-center transition-colors">
@@ -131,7 +132,7 @@
 
                 <!-- Related News Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Publikasi Terkait</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Publikasi Terkait</h3>
                     <div class="space-y-4">
                         <!-- Related Item 1 -->
                         <a href="#" class="flex gap-4 group">
@@ -156,7 +157,7 @@
 
                 <!-- Tags Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Tags</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Tags</h3>
                     <div class="flex flex-wrap gap-2">
                         <a href="#" class="px-3 py-1.5 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-500 hover:text-white transition-colors">#DanaDesa</a>
                         <a href="#" class="px-3 py-1.5 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-500 hover:text-white transition-colors">#RPJMDes</a>
@@ -168,7 +169,7 @@
 
                 <!-- Categories Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Kategori Riset</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Kategori Riset</h3>
                     <ul class="space-y-3">
                         <li>
                             <a href="{{ route('riset.kategori') }}" class="flex items-center justify-between group">
@@ -213,5 +214,6 @@
         </div>
         
     </div>
+</div>
 </div>
 @endsection

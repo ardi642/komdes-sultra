@@ -24,29 +24,26 @@
     <!-- Header / Navbar -->
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-zinc-100 shadow-sm transition-all duration-300" x-data="{ mobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
+            <div class="flex justify-between h-24 items-center">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="/" class="flex items-center gap-2 group">
-                        <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center text-white font-heading font-bold text-xl group-hover:bg-primary-500 transition-colors shadow-lg shadow-primary-500/30">
-                            KS
-                        </div>
-                        <span class="font-heading font-bold text-2xl tracking-tight text-zinc-900 group-hover:text-primary-600 transition-colors">Komdes<span class="text-secondary-500">Sultra</span></span>
+                    <a href="/" class="flex items-center gap-3 group">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo Komdes Sultra" class="h-14 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+                        <span class="font-heading font-bold text-xl md:text-2xl tracking-tight text-[#165a3f] transition-colors">Komdes <span class="text-[#FFD700]">Sultra</span></span>
                     </a>
                 </div>
 
-                <!-- Desktop Menu -->
-                <nav class="hidden md:flex space-x-1 lg:space-x-2 items-center">
-                    <a href="{{ route('home') }}" class="px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('home') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Beranda</a>
-                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-zinc-600 hover:text-primary-600 hover:bg-zinc-50 transition-colors">Tentang Kami</a>
-                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-zinc-600 hover:text-primary-600 hover:bg-zinc-50 transition-colors">Anggota</a>
-                    <a href="{{ route('berita') }}" class="px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('berita') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Berita</a>
+                <nav class="hidden md:flex space-x-1 lg:space-x-3 items-center">
+                    <a href="{{ route('home') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('home') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Beranda</a>
+                    <a href="{{ route('tentang-kami') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('tentang-kami') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Tentang Kami</a>
+                    <a href="{{ route('anggota') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('anggota') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Anggota</a>
+                    <a href="{{ route('berita') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('berita', 'berita.*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Berita</a>
                     
                     <!-- Dropdown Publikasi -->
                     <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                        <button @click="open = !open" class="flex items-center px-3 py-2 rounded-md text-sm font-medium text-zinc-600 hover:text-primary-600 hover:bg-zinc-50 transition-colors focus:outline-none">
+                        <button @click="open = !open" class="flex items-center px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('acara*', 'artikel*', 'riset*', 'siaran-pers*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors focus:outline-none">
                             <span>Publikasi</span>
-                            <svg class="ml-1 w-4 h-4 transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="ml-1.5 w-4 h-4 transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         
                         <div x-show="open" 
@@ -59,18 +56,18 @@
                              class="absolute left-0 mt-0 w-48 rounded-xl shadow-xl bg-white ring-1 ring-black ring-opacity-5 z-50 overflow-hidden" 
                              style="display: none;">
                             <div class="py-1">
-                                <a href="{{ route('acara') }}" class="block px-4 py-2.5 text-sm text-zinc-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Acara</a>
-                                <a href="#" class="block px-4 py-2.5 text-sm text-zinc-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Artikel</a>
-                                <a href="#" class="block px-4 py-2.5 text-sm text-zinc-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Publikasi Riset</a>
-                                <a href="#" class="block px-4 py-2.5 text-sm text-zinc-700 hover:bg-primary-50 hover:text-primary-600 transition-colors">Siaran Pers</a>
+                                <a href="{{ route('acara') }}" class="block px-4 py-3 text-base {{ request()->routeIs('acara*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:bg-primary-50 hover:text-primary-600' }} transition-colors">Acara</a>
+                                <a href="{{ route('artikel') }}" class="block px-4 py-3 text-base {{ request()->routeIs('artikel*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:bg-primary-50 hover:text-primary-600' }} transition-colors">Artikel</a>
+                                <a href="{{ route('riset') }}" class="block px-4 py-3 text-base {{ request()->routeIs('riset*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:bg-primary-50 hover:text-primary-600' }} transition-colors">Publikasi Riset</a>
+                                <a href="{{ route('siaran-pers') }}" class="block px-4 py-3 text-base {{ request()->routeIs('siaran-pers*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:bg-primary-50 hover:text-primary-600' }} transition-colors">Siaran Pers</a>
                             </div>
                         </div>
                     </div>
                     
-                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-zinc-600 hover:text-primary-600 hover:bg-zinc-50 transition-colors">Isu</a>
-                    <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-zinc-600 hover:text-primary-600 hover:bg-zinc-50 transition-colors">Galeri</a>
+                    <a href="{{ route('isu') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('isu', 'isu.*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Isu</a>
+                    <a href="{{ route('galeri') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('galeri', 'galeri.*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Galeri</a>
                     
-                    <a href="#" class="ml-4 px-5 py-2.5 rounded-full text-sm font-medium text-white bg-primary-600 hover:bg-primary-500 shadow-md shadow-primary-500/20 hover:shadow-lg hover:shadow-primary-500/30 hover:-translate-y-0.5 transition-all duration-300">Kontak</a>
+                    <a href="{{ route('kontak') }}" class="ml-6 px-7 py-3 rounded-full text-base font-medium text-white bg-primary-600 hover:bg-primary-500 shadow-md shadow-primary-500/20 hover:shadow-lg hover:shadow-primary-500/30 hover:-translate-y-0.5 transition-all duration-300">Kontak</a>
                 </nav>
 
                 <!-- Mobile menu button -->
@@ -100,26 +97,26 @@
              style="display: none;">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="{{ route('home') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('home') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">Beranda</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-zinc-700 hover:text-primary-600 hover:bg-zinc-50">Tentang Kami</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-zinc-700 hover:text-primary-600 hover:bg-zinc-50">Anggota</a>
-                <a href="{{ route('berita') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('berita') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">Berita</a>
+                <a href="{{ route('tentang-kami') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('tentang-kami') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">Tentang Kami</a>
+                <a href="{{ route('anggota') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('anggota') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">Anggota</a>
+                <a href="{{ route('berita') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('berita', 'berita.*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">Berita</a>
                 
-                <div x-data="{ pubOpen: false }">
-                    <button @click="pubOpen = !pubOpen" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-zinc-700 hover:text-primary-600 hover:bg-zinc-50">
+                <div x-data="{ pubOpen: {{ request()->routeIs('acara*', 'artikel*', 'riset*', 'siaran-pers*') ? 'true' : 'false' }} }">
+                    <button @click="pubOpen = !pubOpen" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('acara*', 'artikel*', 'riset*', 'siaran-pers*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">
                         <span>Publikasi</span>
                         <svg class="w-4 h-4 transition-transform duration-200" :class="pubOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div x-show="pubOpen" class="pl-6 pr-3 py-2 space-y-1 bg-zinc-50/50 rounded-md mt-1" style="display: none;">
-                        <a href="{{ route('acara') }}" class="block px-3 py-2 rounded-md text-sm font-medium text-zinc-600 hover:text-primary-600 hover:bg-zinc-100">Acara</a>
-                        <a href="#" class="block px-3 py-2 rounded-md text-sm font-medium text-zinc-600 hover:text-primary-600 hover:bg-zinc-100">Artikel</a>
-                        <a href="#" class="block px-3 py-2 rounded-md text-sm font-medium text-zinc-600 hover:text-primary-600 hover:bg-zinc-100">Publikasi Riset</a>
-                        <a href="#" class="block px-3 py-2 rounded-md text-sm font-medium text-zinc-600 hover:text-primary-600 hover:bg-zinc-100">Siaran Pers</a>
+                    <div x-show="pubOpen" class="pl-6 pr-3 py-2 space-y-1 bg-zinc-50/50 rounded-md mt-1" style="{{ request()->routeIs('acara*', 'artikel*', 'riset*', 'siaran-pers*') ? '' : 'display: none;' }}">
+                        <a href="{{ route('acara') }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('acara*') ? 'text-primary-600 bg-primary-100' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-100' }}">Acara</a>
+                        <a href="{{ route('artikel') }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('artikel*') ? 'text-primary-600 bg-primary-100' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-100' }}">Artikel</a>
+                        <a href="{{ route('riset') }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('riset*') ? 'text-primary-600 bg-primary-100' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-100' }}">Publikasi Riset</a>
+                        <a href="{{ route('siaran-pers') }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('siaran-pers*') ? 'text-primary-600 bg-primary-100' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-100' }}">Siaran Pers</a>
                     </div>
                 </div>
                 
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-zinc-700 hover:text-primary-600 hover:bg-zinc-50">Isu</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-zinc-700 hover:text-primary-600 hover:bg-zinc-50">Galeri</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-primary-600 hover:text-primary-700 hover:bg-primary-50 mt-4 border border-primary-200 text-center">Kontak</a>
+                <a href="{{ route('isu') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('isu*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">Isu</a>
+                <a href="{{ route('galeri') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('galeri*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">Galeri</a>
+                <a href="{{ route('kontak') }}" class="block px-3 py-2 rounded-md text-base font-medium text-primary-600 hover:text-primary-700 hover:bg-primary-50 mt-4 border border-primary-200 text-center">Kontak</a>
             </div>
         </div>
     </header>
@@ -134,11 +131,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-8 mb-12">
                 <div class="col-span-1 md:col-span-1 lg:col-span-1">
-                    <a href="/" class="flex items-center gap-2 mb-6 group">
-                        <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center text-white font-heading font-bold text-xl group-hover:bg-primary-500 transition-colors">
-                            KS
-                        </div>
-                        <span class="font-heading font-bold text-2xl tracking-tight text-white group-hover:text-primary-400 transition-colors">Komdes<span class="text-secondary-500">Sultra</span></span>
+                    <a href="/" class="inline-flex items-center gap-3 mb-6 group bg-white/5 p-2 pr-4 rounded-xl w-fit border border-white/10">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo Komdes Sultra" class="h-14 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+                        <span class="font-heading font-bold text-xl md:text-2xl tracking-tight text-white transition-colors">Komdes <span class="text-[#FFD700]">Sultra</span></span>
                     </a>
                     <p class="text-zinc-400 text-sm leading-relaxed mb-6">
                         Lembaga Swadaya Masyarakat yang berdedikasi untuk pemberdayaan komunitas desa di Sulawesi Tenggara melalui advokasi, riset, dan program berkelanjutan.
@@ -162,21 +157,21 @@
                 <div>
                     <h3 class="font-heading font-semibold text-white tracking-wider uppercase text-sm mb-4">Navigasi</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="/" class="text-zinc-400 hover:text-primary-400 transition-colors">Beranda</a></li>
-                        <li><a href="#" class="text-zinc-400 hover:text-primary-400 transition-colors">Tentang Kami</a></li>
-                        <li><a href="#" class="text-zinc-400 hover:text-primary-400 transition-colors">Anggota</a></li>
-                        <li><a href="#" class="text-zinc-400 hover:text-primary-400 transition-colors">Isu Tematik</a></li>
-                        <li><a href="#" class="text-zinc-400 hover:text-primary-400 transition-colors">Galeri Kegiatan</a></li>
+                        <li><a href="{{ route('home') }}" class="text-zinc-400 hover:text-primary-400 transition-colors">Beranda</a></li>
+                        <li><a href="{{ route('tentang-kami') }}" class="text-zinc-400 hover:text-primary-400 transition-colors">Tentang Kami</a></li>
+                        <li><a href="{{ route('anggota') }}" class="text-zinc-400 hover:text-primary-400 transition-colors">Anggota</a></li>
+                        <li><a href="{{ route('isu') }}" class="text-zinc-400 hover:text-primary-400 transition-colors">Isu Tematik</a></li>
+                        <li><a href="{{ route('galeri') }}" class="text-zinc-400 hover:text-primary-400 transition-colors">Galeri Kegiatan</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="font-heading font-semibold text-white tracking-wider uppercase text-sm mb-4">Konten</h3>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="#" class="text-zinc-400 hover:text-primary-400 transition-colors">Berita Terkini</a></li>
-                        <li><a href="#" class="text-zinc-400 hover:text-primary-400 transition-colors">Artikel & Opini</a></li>
-                        <li><a href="#" class="text-zinc-400 hover:text-primary-400 transition-colors">Publikasi Riset</a></li>
-                        <li><a href="#" class="text-zinc-400 hover:text-primary-400 transition-colors">Siaran Pers</a></li>
+                        <li><a href="{{ route('berita') }}" class="text-zinc-400 hover:text-primary-400 transition-colors">Berita Terkini</a></li>
+                        <li><a href="{{ route('artikel') }}" class="text-zinc-400 hover:text-primary-400 transition-colors">Artikel & Opini</a></li>
+                        <li><a href="{{ route('riset') }}" class="text-zinc-400 hover:text-primary-400 transition-colors">Publikasi Riset</a></li>
+                        <li><a href="{{ route('siaran-pers') }}" class="text-zinc-400 hover:text-primary-400 transition-colors">Siaran Pers</a></li>
                         <li><a href="{{ route('acara') }}" class="text-zinc-400 hover:text-primary-400 transition-colors">Agenda Acara</a></li>
                     </ul>
                 </div>

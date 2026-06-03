@@ -14,11 +14,11 @@ $detail = [
     'description' => 'Kegiatan ini merupakan bagian dari komitmen bersama Jaring Nusa dan Komdes Sultra dalam menjaga ekosistem pesisir. Diikuti oleh lebih dari 500 relawan di berbagai titik kabupaten dan kota, aksi penanaman mangrove ini diharapkan mampu meminimalisir abrasi serta memulihkan ruang hidup masyarakat nelayan.',
     // photos array
     'photos' => [
-        'https://images.unsplash.com/photo-1601662528567-526cd06f6582?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1544474701-d00e0dfbdf42?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1596395355060-478627b003a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-        'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+        'https://images.unsplash.com/photo-1498623116890-37e912163d5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
     ],
     // video url
     'video_url' => 'https://www.youtube.com/embed/dQw4w9WgXcQ'
@@ -29,8 +29,8 @@ $detail = [
 <main class="w-full">
 
     <!-- 1. Header Section -->
-    <div class="relative pt-8 md:pt-12 pb-8 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
+    <div class="relative pt-32 pb-16 bg-white">
+        <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
             <!-- Breadcrumb -->
             <nav class="flex text-sm text-zinc-500 mb-8 font-medium" aria-label="Breadcrumb">
@@ -77,9 +77,9 @@ $detail = [
     </div>
 
     <!-- 2. Content Section -->
-    <section class="py-8 md:py-12 relative bg-white">
+    <section class="py-8 md:py-16 relative bg-white">
         
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
+        <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
             <!-- Optional Description -->
             @if(isset($detail['description']) && $detail['description'] != '')

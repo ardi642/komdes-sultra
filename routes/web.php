@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome')->name('home');
+Route::view('/', 'pages.home')->name('home');
 Route::view('/tentang-kami', 'pages.tentang-kami')->name('tentang-kami');
 Route::view('/anggota', 'pages.anggota')->name('anggota');
 Route::view('/berita', 'pages.berita')->name('berita');

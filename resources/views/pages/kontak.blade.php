@@ -50,10 +50,13 @@ $members = [
 <div class="w-full">
 
     <!-- 1. Hero Section: Info Kontak Utama -->
-    <section class="relative text-white pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden" style="background: linear-gradient(135deg, var(--color-primary-500, #22c55e) 0%, var(--color-primary-700, #15803d) 100%);">
-        <div class="max-w-7xl mx-auto px-6 md:px-10 lg:px-12 relative z-10">
+    <section class="relative text-white pt-40 pb-32 overflow-hidden bg-[#165a3f]">
+        <!-- Ambient Glow Putih -->
+        <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
+        <div class="max-w-[90rem] mx-auto px-6 md:px-10 lg:px-12 relative z-10">
             <!-- Judul -->
-            <h1 class="text-2xl md:text-4xl font-extrabold uppercase mb-10 tracking-wider">Kontak Komdes Sultra</h1>
+            <div class="w-32 h-[1px] bg-white mb-6 opacity-50"></div>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold uppercase mb-10 tracking-widest drop-shadow-md">Kontak Komdes Sultra</h1>
 
             <!-- Card Info Utama -->
             <div class="bg-white rounded-2xl shadow-xl p-8 lg:p-12 border border-zinc-100">
@@ -113,16 +116,16 @@ $members = [
     </section>
 
     <!-- 2. Section: Kontak Anggota -->
-    <section class="py-16 md:py-24 relative overflow-hidden bg-white">
+    <section class="py-28 lg:py-36 relative overflow-hidden bg-white">
         <!-- Ambient Glow Elements -->
         <div class="absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-50 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
         <div class="absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-40 -translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
 
-        <div class="max-w-7xl mx-auto px-6 md:px-10 lg:px-12 relative z-10">
+        <div class="max-w-[90rem] mx-auto px-6 md:px-10 lg:px-12 relative z-10">
             <!-- Judul -->
             <div class="text-left mb-12">
-                <div class="border-t-2 w-20 md:w-32 mb-4" style="border-color: var(--color-primary-700, #15803d);"></div>
-                <h2 class="text-2xl md:text-3xl font-bold uppercase tracking-wide" style="color: var(--color-primary-700, #15803d);">Kontak Anggota Komdes Sultra</h2>
+                <div class="w-32 h-[1px] bg-primary-600 mb-4"></div>
+                <h2 class="text-xl md:text-2xl font-heading font-bold uppercase tracking-widest text-primary-700">Kontak Anggota Komdes Sultra</h2>
             </div>
 
             <!-- List Card Anggota (3 Kolom) -->
@@ -190,13 +193,15 @@ $members = [
     </section>
 
     <!-- 3. Section: Formulir Laporan / Aduan -->
-    <section class="py-16 md:py-24 relative overflow-hidden" style="background: linear-gradient(135deg, var(--color-primary-500, #22c55e) 0%, var(--color-primary-700, #15803d) 100%);">
+    <section class="py-28 lg:py-36 relative overflow-hidden bg-[#165a3f]">
+        <!-- Ambient Glow Putih -->
+        <div class="absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 -translate-x-1/4 translate-y-1/4 bg-white"></div>
         <div class="max-w-4xl mx-auto px-6 md:px-10 lg:px-12 relative z-10">
             
             <div class="mb-10">
-                <h2 class="text-2xl md:text-3xl font-bold text-white tracking-wider mb-3">LAPORAN / ADUAN</h2>
-                <div class="w-full h-[1px] bg-white/30 mb-4"></div>
-                <p class="text-primary-100/80 text-sm md:text-base font-medium">Sampaikan laporan, aduan atau pertanyaan Anda pada formulir di bawah ini, kami akan tindak lebih lanjut.</p>
+                <div class="w-32 h-[1px] bg-white mb-4"></div>
+                <h2 class="text-xl md:text-2xl font-heading font-bold text-white uppercase tracking-widest mb-3">Laporan / Aduan</h2>
+                <p class="text-white/80 text-base md:text-lg font-light leading-relaxed">Sampaikan laporan, aduan atau pertanyaan Anda pada formulir di bawah ini, kami akan tindak lebih lanjut.</p>
             </div>
 
             <form action="#" method="POST" class="space-y-4">
@@ -213,9 +218,9 @@ $members = [
                 <div>
                     <textarea name="pesan" rows="6" placeholder="Pesan" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 resize-y border-0 shadow-sm transition-shadow"></textarea>
                 </div>
-                <div class="pt-2">
-                    <button type="submit" class="w-full bg-primary-500 hover:bg-primary-600 text-white font-bold py-4 px-6 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-primary-500/50">
-                        Kirim
+                <div class="pt-4 text-center">
+                    <button type="submit" class="inline-flex items-center px-8 py-3 border border-white text-white text-sm uppercase tracking-widest font-medium rounded-full hover:bg-white hover:text-[#165a3f] transition-all duration-300 w-full justify-center">
+                        Kirim Laporan
                     </button>
                 </div>
             </form>

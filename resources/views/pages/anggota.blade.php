@@ -86,7 +86,7 @@ $members = [
             document.body.style.overflow = 'auto';
         }
     }" 
-    class="bg-zinc-50 min-h-screen pt-32 pb-24 relative">
+    class="bg-zinc-50 min-h-screen pt-40 pb-36 relative">
     
     <!-- Decorative Background: Organic Blobs (Glassmorphism) -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -100,12 +100,12 @@ $members = [
         <div class="absolute -bottom-40 right-1/4 w-[600px] md:w-[900px] h-[400px] md:h-[600px] rounded-[50%_50%_20%_80%] bg-teal-100/50 blur-[120px] md:blur-[160px] transform rotate-45"></div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <!-- Header -->
         <div class="text-center mb-16 mt-10">
-            <h1 class="text-2xl md:text-4xl font-extrabold text-primary-700 mb-4 tracking-widest uppercase">Anggota Jaring Komdes Sultra</h1>
-            <div class="w-24 h-1.5 bg-primary-500 mx-auto rounded-full shadow-sm"></div>
+            <div class="w-32 h-[1px] bg-[#165a3f] mx-auto mb-6 opacity-50"></div>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-[#165a3f] mb-4 tracking-widest uppercase">Anggota Jaring Komdes Sultra</h1>
         </div>
 
         <!-- Members Grid -->

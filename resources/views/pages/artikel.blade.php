@@ -4,30 +4,28 @@
 
 @section('content')
 <!-- Page Header -->
-<div class="bg-primary-600 pt-32 pb-32 relative overflow-hidden">
-    <!-- Decorative Elements -->
-    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-primary-500 opacity-50 blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-secondary-400 opacity-30 blur-3xl"></div>
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="relative pt-40 pb-32 overflow-hidden bg-[#165a3f]">
+    <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center max-w-3xl mx-auto">
-            <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-white tracking-tight">Artikel</h1>
-            <p class="text-primary-100 text-lg max-w-2xl mx-auto mt-4">Kumpulan esai, opini, dan kajian dari Lembaga Swadaya Masyarakat.</p>
+            <div class="w-32 h-[1px] bg-white mx-auto mb-6 opacity-50"></div>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white uppercase tracking-widest mb-6 drop-shadow-md">Artikel</h1>
+            <p class="text-white/90 text-base md:text-lg font-light leading-relaxed drop-shadow-sm max-w-2xl mx-auto">Kumpulan esai, opini, dan kajian dari Lembaga Swadaya Masyarakat.</p>
         </div>
     </div>
 </div>
 
 <!-- Main Content Area -->
-<div class="bg-zinc-50/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 relative z-20">
-        <div class="flex flex-col lg:flex-row gap-12">
+<div class="bg-white relative overflow-hidden py-28 lg:py-36">
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+        <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
             
             <!-- Articles List (Left Content) -->
-            <div class="lg:w-2/3" x-data="{ showFilter: false }">
+            <div class="flex-1" x-data="{ showFilter: false }">
                 
                 <!-- Header & Toggle Button -->
                 <div class="flex justify-between items-center mb-8 border-b border-zinc-200 pb-4">
-                    <h2 class="font-heading font-bold text-2xl text-zinc-900">Tulisan Terbaru</h2>
+                    <h2 class="font-heading font-bold text-xl md:text-2xl text-[#165a3f] uppercase tracking-widest">Tulisan Terbaru</h2>
                     <button @click="showFilter = !showFilter" 
                             class="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg transition-colors border"
                             :class="showFilter ? 'bg-primary-50 border-primary-200 text-primary-700' : 'bg-white border-zinc-200 text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900'">
@@ -228,12 +226,12 @@
             </div>
 
             <!-- Sidebar (Right Content) -->
-            <div class="lg:w-1/3">
+            <div class="lg:w-[350px] flex-shrink-0">
                 <div class="sticky top-28 space-y-8">
                     
                     <!-- Search Widget -->
                     <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Cari Tulisan</h3>
+                        <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Cari Tulisan</h3>
                         <form action="#" method="GET" class="relative">
                             <input type="text" placeholder="Masukkan judul/penulis..." class="w-full pl-4 pr-12 py-3 rounded-xl border border-zinc-200 bg-zinc-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-colors text-sm">
                             <button type="submit" class="absolute right-2 top-1.5 bottom-1.5 aspect-square bg-primary-600 hover:bg-primary-500 text-white rounded-lg flex items-center justify-center transition-colors">
@@ -244,7 +242,7 @@
 
                     <!-- Categories Widget -->
                     <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Kategori Artikel</h3>
+                        <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Kategori Artikel</h3>
                         <ul class="space-y-3">
                             <li>
                                 <a href="#" class="flex items-center justify-between group">
@@ -287,7 +285,7 @@
 
                     <!-- Tags Widget -->
                     <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Topik Tulisan</h3>
+                        <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Topik Tulisan</h3>
                         <div class="flex flex-wrap gap-2">
                             <a href="#" class="px-3 py-1.5 bg-zinc-50 border border-zinc-200 text-zinc-600 text-xs rounded-lg hover:border-primary-500 hover:text-primary-600 transition-colors">#EkonomiDesa</a>
                             <a href="#" class="px-3 py-1.5 bg-zinc-50 border border-zinc-200 text-zinc-600 text-xs rounded-lg hover:border-primary-500 hover:text-primary-600 transition-colors">#Iklim</a>
@@ -299,7 +297,7 @@
 
                     <!-- Arsip Widget (Collapsible Accordion) -->
                     <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Arsip Artikel</h3>
+                        <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Arsip Artikel</h3>
                         <div class="space-y-3">
                             
                             <!-- Accordion Item 2024 -->

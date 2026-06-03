@@ -4,8 +4,8 @@
 
 @section('content')
 <!-- Detail Acara -->
-<div class="bg-zinc-50 pt-10 pb-20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-white py-28 lg:py-36 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         
         <!-- Breadcrumb -->
         <nav class="flex text-sm text-zinc-500 mb-8" aria-label="Breadcrumb">
@@ -77,28 +77,28 @@
                 </div>
 
                 <!-- Description / Body Content -->
-                <div class="prose prose-zinc prose-lg max-w-none text-zinc-600">
+                <div class="text-zinc-600 leading-relaxed space-y-6 text-lg">
                     <p>Komdes Sultra mengundang seluruh pemangku kepentingan desa, aktivis lingkungan, dan masyarakat umum untuk menghadiri seminar nasional dengan tema "Strategi Pengembangan Ekonomi Sirkular di Wilayah Pedesaan".</p>
                     
-                    <h3>Latar Belakang</h3>
+                    <h3 class="font-heading font-bold text-2xl text-zinc-900 mt-10 mb-4">Latar Belakang</h3>
                     <p>Pertumbuhan ekonomi desa tidak boleh mengabaikan daya dukung lingkungan. Model ekonomi sirkular menawarkan solusi di mana limbah desa (baik dari pertanian maupun rumah tangga) dapat dikelola dan dimanfaatkan kembali sebagai sumber daya baru yang memiliki nilai ekonomi.</p>
                     
-                    <h3>Materi yang Akan Dibahas</h3>
-                    <ul>
+                    <h3 class="font-heading font-bold text-2xl text-zinc-900 mt-10 mb-4">Materi yang Akan Dibahas</h3>
+                    <ul class="list-disc pl-6 space-y-2 mt-4">
                         <li>Konsep dasar dan implementasi ekonomi sirkular di level desa.</li>
                         <li>Studi kasus: Pemanfaatan limbah pertanian menjadi briket bioarang.</li>
                         <li>Strategi pemasaran produk hasil olahan daur ulang.</li>
                         <li>Akses pendanaan untuk inisiatif ramah lingkungan di pedesaan.</li>
                     </ul>
 
-                    <h3>Narasumber</h3>
-                    <ul>
-                        <li><strong>Dr. Ir. Budi Santoso</strong> - Pakar Ekonomi Lingkungan Universitas Halu Oleo</li>
-                        <li><strong>Siti Aminah</strong> - Praktisi Desa Mandiri Energi</li>
-                        <li><strong>Ketua Komdes Sultra</strong></li>
+                    <h3 class="font-heading font-bold text-2xl text-zinc-900 mt-10 mb-4">Narasumber</h3>
+                    <ul class="list-disc pl-6 space-y-2 mt-4">
+                        <li><strong class="text-zinc-900">Dr. Ir. Budi Santoso</strong> - Pakar Ekonomi Lingkungan Universitas Halu Oleo</li>
+                        <li><strong class="text-zinc-900">Siti Aminah</strong> - Praktisi Desa Mandiri Energi</li>
+                        <li><strong class="text-zinc-900">Ketua Komdes Sultra</strong></li>
                     </ul>
 
-                    <p>Seminar ini tidak dipungut biaya (Gratis) dan terbuka untuk umum. Mengingat kapasitas ruangan yang terbatas, peserta diharapkan hadir 30 menit sebelum acara dimulai.</p>
+                    <p class="mt-6 bg-primary-50 text-primary-900 p-4 rounded-xl border border-primary-100">Seminar ini tidak dipungut biaya (Gratis) dan terbuka untuk umum. Mengingat kapasitas ruangan yang terbatas, peserta diharapkan hadir 30 menit sebelum acara dimulai.</p>
                 </div>
 
                 <!-- Footer / CTA -->

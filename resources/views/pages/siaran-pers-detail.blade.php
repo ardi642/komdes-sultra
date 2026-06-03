@@ -4,7 +4,8 @@
 
 @section('content')
 <!-- Main Content Area -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 relative z-20">
+<div class="bg-white py-28 lg:py-36 relative overflow-hidden">
+<div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
     <!-- Breadcrumb -->
     <nav class="flex text-sm text-zinc-500 mb-8" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2">
@@ -26,10 +27,10 @@
         </ol>
     </nav>
 
-    <div class="flex flex-col lg:flex-row gap-12">
+    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
         
         <!-- Main Article Content (Left) -->
-        <div class="lg:w-2/3">
+        <div class="flex-1">
             <article class="bg-white rounded-2xl p-6 md:p-10 border border-zinc-100 shadow-sm">
                 <!-- Article Header Info -->
                 <div class="mb-8">
@@ -56,7 +57,7 @@
 
                 <!-- Cover Image -->
                 <div class="rounded-xl overflow-hidden mb-10 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1574046664972-e565980fcbc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Rapat Desa" class="w-full h-auto object-cover aspect-[16/9] hover:scale-105 transition-transform duration-700">
+                    <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Rapat Desa" class="w-full h-auto object-cover aspect-[16/9] hover:scale-105 transition-transform duration-700">
                 </div>
                 
                 <!-- Article Text (Prose) -->
@@ -67,7 +68,7 @@
                     </p>
                     
                     <p>
-                        Dalam upaya meningkatkan transparansi dan akuntabilitas pengelolaan Dana Desa, Komunitas Desa Sulawesi Tenggara (Komdes Sultra) mengadakan kegiatan Dialog Warga di Balai Desa Mekar Jaya, Kabupaten Konawe, pada hari Sabtu (11/05). Kegiatan ini dihadiri oleh lebih dari 50 peserta yang terdiri dari perwakilan warga, Badan Permusyawaratan Desa (BPD), dan perangkat desa setempat.
+                        Dalam upaya meningkatkan transparansi dan akuntabilitas pengelolaan Dana Desa, KOMUNITAS MASYARAKAT DESA-SULAWESI TENGGARA (Komdes Sultra) mengadakan kegiatan Dialog Warga di Balai Desa Mekar Jaya, Kabupaten Konawe, pada hari Sabtu (11/05). Kegiatan ini dihadiri oleh lebih dari 50 peserta yang terdiri dari perwakilan warga, Badan Permusyawaratan Desa (BPD), dan perangkat desa setempat.
                     </p>
                     
                     <h3 class="font-heading font-bold text-2xl text-zinc-900 mt-8 mb-4">Pentingnya Partisipasi Masyarakat</h3>
@@ -77,7 +78,7 @@
                     </p>
                     
                     <div class="my-8 rounded-xl overflow-hidden border border-zinc-100">
-                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Suasana Dialog" class="w-full h-auto">
+                        <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Suasana Dialog" class="w-full h-auto">
                         <p class="text-center text-sm text-zinc-500 py-2 bg-zinc-50 border-t border-zinc-100">Suasana diskusi antar warga dan perangkat desa.</p>
                     </div>
                     
@@ -123,12 +124,12 @@
         </div>
 
         <!-- Sidebar (Right Content) -->
-        <div class="lg:w-1/3">
+        <div class="lg:w-[350px] flex-shrink-0">
             <div class="sticky top-28 space-y-8">
                 
                 <!-- Search Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Cari Siaran Pers</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Cari Siaran Pers</h3>
                     <form action="#" method="GET" class="relative">
                         <input type="text" placeholder="Masukkan kata kunci..." class="w-full pl-4 pr-12 py-3 rounded-xl border border-zinc-200 bg-zinc-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-colors text-sm">
                         <button type="submit" class="absolute right-2 top-1.5 bottom-1.5 aspect-square bg-primary-600 hover:bg-primary-500 text-white rounded-lg flex items-center justify-center transition-colors">
@@ -139,7 +140,7 @@
 
                 <!-- Related News Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Siaran Pers Terbaru</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Siaran Pers Terbaru</h3>
                     <div class="space-y-4">
                         <!-- Related Item 1 -->
                         <a href="#" class="flex gap-4 group">
@@ -154,7 +155,7 @@
                         <!-- Related Item 2 -->
                         <a href="#" class="flex gap-4 group">
                             <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                                <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumb" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumb" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>
                             <div>
                                 <h4 class="font-bold text-zinc-900 text-sm leading-snug line-clamp-2 group-hover:text-primary-600 transition-colors mb-1">Sekolah Pemuda Penggerak Desa Angkatan ke-5 Resmi Dibuka</h4>
@@ -164,7 +165,7 @@
                         <!-- Related Item 3 -->
                         <a href="#" class="flex gap-4 group">
                             <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumb" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumb" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>
                             <div>
                                 <h4 class="font-bold text-zinc-900 text-sm leading-snug line-clamp-2 group-hover:text-primary-600 transition-colors mb-1">Mendorong Keterwakilan Perempuan di BPD</h4>
@@ -186,7 +187,7 @@
 
                 <!-- Tags Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Tags</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Tags</h3>
                     <div class="flex flex-wrap gap-2">
                         <a href="#" class="px-3 py-1.5 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-500 hover:text-white transition-colors">#DanaDesa</a>
                         <a href="#" class="px-3 py-1.5 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-500 hover:text-white transition-colors">#Mangrove</a>
@@ -200,7 +201,7 @@
 
                 <!-- Arsip Widget (Collapsible Accordion) -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Arsip Siaran Pers</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Arsip Siaran Pers</h3>
                     <div class="space-y-3">
                         
                         <!-- Accordion Item 2024 -->
@@ -281,5 +282,6 @@
         </div>
         
     </div>
+</div>
 </div>
 @endsection

@@ -3,21 +3,23 @@
 @section('title', 'Riset dan Publikasi - Komdes Sultra')
 
 @section('content')
-<!-- Hero Section (Split Layout like Greenpeace) -->
-<div class="bg-white pt-32 pb-20 border-b border-zinc-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+<!-- Hero Section -->
+<div class="relative pt-40 pb-32 overflow-hidden bg-[#0d3b29]">
+    <div class="absolute left-0 bottom-0 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none opacity-5 -translate-x-1/4 translate-y-1/4 bg-white"></div>
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
             <!-- Text Content -->
             <div class="lg:w-1/2">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-zinc-900 mb-6 tracking-tight">Riset dan Publikasi</h1>
-                <p class="text-lg text-zinc-600 leading-relaxed max-w-xl">
+                <div class="w-32 h-[1px] bg-white mb-6 opacity-50"></div>
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-6 uppercase tracking-widest drop-shadow-md">Riset dan Publikasi</h1>
+                <p class="text-base md:text-lg text-white/90 leading-relaxed font-light drop-shadow-sm max-w-xl">
                     Kerja advokasi Komdes Sultra selalu berdasarkan pada temuan hasil investigasi, pemetaan lapangan, dan riset ilmiah. Berikut ini adalah kumpulan publikasi yang menjadi panduan dan referensi dalam perjuangan kami.
                 </p>
             </div>
             <!-- Image Content -->
             <div class="lg:w-1/2 w-full">
-                <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] border border-zinc-200">
-                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Riset Lapangan" class="w-full h-full object-cover">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] border border-zinc-800">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Riset Lapangan" class="w-full h-full object-cover opacity-90 hover:opacity-100 hover:scale-105 transition-all duration-700">
                 </div>
             </div>
         </div>
@@ -26,7 +28,7 @@
 
 <!-- Search & Campaigns Section -->
 <div class="bg-zinc-50 py-16 border-b border-zinc-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Search Bar -->
         <div class="max-w-3xl mx-auto mb-16">
@@ -40,7 +42,8 @@
 
         <!-- Topic Categories Icons -->
         <div class="text-center mb-8">
-            <h2 class="font-heading font-extrabold text-2xl text-zinc-900 mb-10">Telusuri Berdasarkan Topik Riset</h2>
+            <div class="w-32 h-[1px] bg-[#165a3f] mx-auto mb-4"></div>
+            <h2 class="font-heading font-bold text-xl md:text-2xl text-[#165a3f] uppercase tracking-widest mb-10">Telusuri Berdasarkan Topik Riset</h2>
             <div class="flex flex-wrap justify-center gap-6 md:gap-12">
                 <!-- Icon 1 -->
                 <a href="#topik-tata-kelola" class="group flex flex-col items-center gap-4 w-28">
@@ -79,13 +82,13 @@
 </div>
 
 <!-- Content Sections (By Campaign) -->
-<div class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+<div class="py-28 lg:py-36 bg-white">
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
         
         <!-- Category Section: Tata Kelola Desa -->
         <section id="topik-tata-kelola" class="scroll-mt-10">
             <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 border-b border-zinc-200 pb-4 gap-4">
-                <h2 class="font-heading font-extrabold text-3xl text-zinc-900">Tata Kelola Desa</h2>
+                <h2 class="font-heading font-bold text-2xl md:text-3xl text-[#165a3f] uppercase tracking-widest">Tata Kelola Desa</h2>
                 <a href="{{ route('riset.kategori') }}" class="font-bold text-sm text-zinc-600 hover:text-primary-600 transition-colors flex items-center gap-1 pb-1">
                     Lihat semua publikasi <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
                 </a>
@@ -156,7 +159,7 @@
         <!-- Category Section: Lingkungan Hidup -->
         <section id="topik-lingkungan" class="scroll-mt-10">
             <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 border-b border-zinc-200 pb-4 gap-4">
-                <h2 class="font-heading font-extrabold text-3xl text-zinc-900">Lingkungan Hidup</h2>
+                <h2 class="font-heading font-bold text-2xl md:text-3xl text-[#165a3f] uppercase tracking-widest">Lingkungan Hidup</h2>
                 <a href="{{ route('riset.kategori') }}" class="font-bold text-sm text-zinc-600 hover:text-primary-600 transition-colors flex items-center gap-1 pb-1">
                     Lihat semua publikasi <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
                 </a>

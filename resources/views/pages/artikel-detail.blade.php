@@ -4,8 +4,8 @@
 
 @section('content')
 <!-- Main Content Area -->
-<div class="bg-zinc-50/50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 relative z-20">
+<div class="bg-white py-28 lg:py-36 relative overflow-hidden">
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <!-- Breadcrumb -->
         <nav class="flex text-sm text-zinc-500 mb-8" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2">
@@ -27,10 +27,10 @@
             </ol>
         </nav>
 
-        <div class="flex flex-col lg:flex-row gap-12">
+        <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
             
             <!-- Main Article Content (Left) -->
-            <div class="lg:w-2/3">
+            <div class="flex-1">
                 <article class="bg-white rounded-2xl p-6 md:p-12 border border-zinc-100 shadow-sm">
                     <!-- Article Header Info -->
                     <div class="mb-8">
@@ -42,7 +42,7 @@
                             </span>
                         </div>
                         
-                        <h1 class="text-3xl md:text-4xl font-heading font-extrabold text-zinc-900 mb-6 leading-tight">Membangun Kemandirian Ekonomi Desa Lewat Koperasi Modern</h1>
+                        <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-zinc-900 mb-6 leading-tight">Membangun Kemandirian Ekonomi Desa Lewat Koperasi Modern</h1>
                         
                         <div class="flex items-center gap-4 text-sm">
                             <div class="flex items-center gap-3">
@@ -57,35 +57,37 @@
 
                     <!-- Cover Image -->
                     <div class="rounded-xl overflow-hidden mb-10 shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead2708?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Menulis Esai" class="w-full object-cover max-h-[400px]">
+                        <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Menulis Esai" class="w-full object-cover max-h-[400px]">
                     </div>
 
                     <!-- Article Body (Typographic Focus) -->
-                    <div class="prose prose-zinc prose-lg max-w-none prose-headings:font-heading prose-headings:font-bold prose-a:text-primary-600 hover:prose-a:text-primary-700">
-                        <p class="lead text-xl text-zinc-600 mb-8 font-medium">Koperasi desa tidak lagi bisa hanya bergantung pada iuran anggota tradisional. Di era digital, inovasi dan digitalisasi pelayanan menjadi kunci utama kebangkitan ekonomi pedesaan.</p>
+                    <div class="text-zinc-700 leading-relaxed space-y-6 text-lg">
+                        <p class="text-xl text-zinc-600 font-medium mb-8">Koperasi desa tidak lagi bisa hanya bergantung pada iuran anggota tradisional. Di era digital, inovasi dan digitalisasi pelayanan menjadi kunci utama kebangkitan ekonomi pedesaan.</p>
 
                         <p>Dalam kurun waktu satu dekade terakhir, penyaluran Dana Desa telah memberikan stimulus yang signifikan bagi pembangunan infrastruktur dasar di pedesaan. Namun, pertanyaan kritis yang sering muncul adalah: sejauh mana stimulus fiskal tersebut mampu melahirkan kemandirian ekonomi yang berkelanjutan?</p>
                         
                         <p>Jawabannya seringkali bermuara pada kelembagaan ekonomi tingkat lokal, dan koperasi adalah salah satu institusi yang memiliki pijakan historis serta filosofis paling kuat di Indonesia.</p>
 
-                        <h3>Tantangan Koperasi Konvensional</h3>
+                        <h3 class="font-heading font-bold text-2xl text-zinc-900 mt-10 mb-4">Tantangan Koperasi Konvensional</h3>
                         <p>Kenyataan di lapangan menunjukkan bahwa banyak koperasi desa (termasuk KUD di masa lalu) yang mati suri atau berjalan sekadar memenuhi kewajiban administratif. Penyebabnya beragam, mulai dari kurangnya kapasitas manajerial pengurus, minimnya inovasi produk, hingga kegagalan beradaptasi dengan perubahan perilaku konsumen yang semakin digital.</p>
                         
-                        <blockquote>
-                            "Koperasi modern bukan berarti membuang nilai kekeluargaan, melainkan memperkuat nilai tersebut dengan instrumen teknologi dan tata kelola yang transparan."
-                        </blockquote>
+                        <div class="pl-6 border-l-4 border-primary-500 my-8 py-4 bg-primary-50 rounded-r-lg">
+                            <p class="text-xl italic text-zinc-800 font-medium">
+                                "Koperasi modern bukan berarti membuang nilai kekeluargaan, melainkan memperkuat nilai tersebut dengan instrumen teknologi dan tata kelola yang transparan."
+                            </p>
+                        </div>
 
                         <p>Membangun kemandirian ekonomi tidak bisa lagi dilakukan dengan pendekatan linear. Kita membutuhkan lompatan pemikiran, dan di sinilah konsep "Koperasi Modern" menemukan relevansinya.</p>
 
-                        <h3>Langkah Strategis Modernisasi</h3>
+                        <h3 class="font-heading font-bold text-2xl text-zinc-900 mt-10 mb-4">Langkah Strategis Modernisasi</h3>
                         <p>Berdasarkan kajian lapangan di beberapa desa binaan Komdes Sultra, terdapat tiga pilar utama untuk membangkitkan kembali kekuatan koperasi desa:</p>
-                        <ol>
-                            <li><strong>Digitalisasi Sistem Pelaporan:</strong> Transparansi adalah kunci kepercayaan. Penggunaan aplikasi pembukuan sederhana yang dapat diakses oleh anggota setiap saat akan menumbuhkan rasa kepemilikan yang kuat.</li>
-                            <li><strong>Diversifikasi Usaha Berbasis Potensi Lokal:</strong> Koperasi tidak boleh hanya terjebak pada simpan-pinjam konvensional. Mereka harus mulai melirik sektor riil, seperti pengemasan produk turunan hasil hutan bukan kayu (HHBK) atau pengelolaan pariwisata desa terpadu.</li>
-                            <li><strong>Pelibatan Kaum Muda:</strong> Regenerasi kepengurusan adalah mutlak. Pemuda desa membawa literasi digital dan jejaring pasar yang lebih luas.</li>
+                        <ol class="list-decimal pl-6 space-y-3 mt-4">
+                            <li><strong class="text-zinc-900">Digitalisasi Sistem Pelaporan:</strong> Transparansi adalah kunci kepercayaan. Penggunaan aplikasi pembukuan sederhana yang dapat diakses oleh anggota setiap saat akan menumbuhkan rasa kepemilikan yang kuat.</li>
+                            <li><strong class="text-zinc-900">Diversifikasi Usaha Berbasis Potensi Lokal:</strong> Koperasi tidak boleh hanya terjebak pada simpan-pinjam konvensional. Mereka harus mulai melirik sektor riil, seperti pengemasan produk turunan hasil hutan bukan kayu (HHBK) atau pengelolaan pariwisata desa terpadu.</li>
+                            <li><strong class="text-zinc-900">Pelibatan Kaum Muda:</strong> Regenerasi kepengurusan adalah mutlak. Pemuda desa membawa literasi digital dan jejaring pasar yang lebih luas.</li>
                         </ol>
 
-                        <p>Kesimpulannya, desa-desa di Sulawesi Tenggara memiliki potensi sumber daya yang melimpah. Jika dikelola melalui institusi koperasi yang modern, inklusif, dan adaptif, kemandirian ekonomi desa bukan lagi sekadar slogan, melainkan realitas yang bisa segera diwujudkan.</p>
+                        <p class="mt-6">Kesimpulannya, desa-desa di Sulawesi Tenggara memiliki potensi sumber daya yang melimpah. Jika dikelola melalui institusi koperasi yang modern, inklusif, dan adaptif, kemandirian ekonomi desa bukan lagi sekadar slogan, melainkan realitas yang bisa segera diwujudkan.</p>
                     </div>
 
                     <!-- Tags -->
@@ -112,17 +114,17 @@
             </div>
 
             <!-- Sidebar (Right Content) -->
-            <div class="lg:w-1/3">
+            <div class="lg:w-[350px] flex-shrink-0">
                 <div class="sticky top-28 space-y-8">
                     
                     <!-- Related Articles Widget -->
                     <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Tulisan Terkait</h3>
+                        <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Tulisan Terkait</h3>
                         <div class="space-y-4">
                             <!-- Related Item 1 -->
                             <a href="#" class="group flex gap-4 items-start pb-4 border-b border-zinc-50">
                                 <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                                    <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Related" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <img src="https://images.unsplash.com/photo-1498623116890-37e912163d5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Related" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-zinc-900 text-sm leading-snug line-clamp-2 group-hover:text-primary-600 transition-colors mb-2">Perempuan dan Akses Keadilan Ekologis di Pesisir Sultra</h4>
@@ -135,7 +137,7 @@
                             <!-- Related Item 2 -->
                             <a href="#" class="group flex gap-4 items-start pb-4 border-b border-zinc-50">
                                 <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Related" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Related" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 </div>
                                 <div>
                                     <h4 class="font-bold text-zinc-900 text-sm leading-snug line-clamp-2 group-hover:text-primary-600 transition-colors mb-2">Langkah Taktis Menyusun RPJMDes yang Inklusif</h4>
@@ -157,7 +159,7 @@
 
                     <!-- Categories Widget -->
                     <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Kategori</h3>
+                        <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Kategori</h3>
                         <ul class="space-y-3">
                             <li>
                                 <a href="#" class="flex items-center justify-between group">
@@ -209,7 +211,7 @@
 
                     <!-- Tags Widget -->
                     <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Tags</h3>
+                        <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Tags</h3>
                         <div class="flex flex-wrap gap-2">
                             <a href="#" class="px-3 py-1.5 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-500 hover:text-white transition-colors">#DanaDesa</a>
                             <a href="#" class="px-3 py-1.5 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-500 hover:text-white transition-colors">#Mangrove</a>

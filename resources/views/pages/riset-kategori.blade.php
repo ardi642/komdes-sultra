@@ -4,23 +4,22 @@
 
 @section('content')
 <!-- Page Header -->
-<div class="bg-primary-600 pt-32 pb-32 relative overflow-hidden">
-    <!-- Decorative Elements -->
-    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-primary-500 opacity-50 blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-secondary-400 opacity-30 blur-3xl"></div>
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-white mb-6 tracking-tight">Tata Kelola Desa</h1>
-        <p class="text-lg text-primary-100 max-w-2xl mx-auto">Kumpulan publikasi terkait panduan administratif, perencanaan pembangunan (RPJMDes), dan transparansi anggaran.</p>
+<div class="relative pt-40 pb-32 overflow-hidden bg-[#165a3f]">
+    <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div class="w-32 h-[1px] bg-white mx-auto mb-6 opacity-50"></div>
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-6 uppercase tracking-widest drop-shadow-md">Tata Kelola Desa</h1>
+        <p class="text-base md:text-lg text-white/90 font-light leading-relaxed drop-shadow-sm max-w-2xl mx-auto">Kumpulan publikasi terkait panduan administratif, perencanaan pembangunan (RPJMDes), dan transparansi anggaran.</p>
     </div>
 </div>
 
 <!-- Main Content Area -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 relative z-20">
-    <div class="flex flex-col lg:flex-row gap-12">
+<div class="bg-white py-28 lg:py-36 relative overflow-hidden">
+<div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
         
         <!-- Articles Grid (Left Content) -->
-        <div class="lg:w-2/3" x-data="{ showFilter: false }">
+        <div class="flex-1" x-data="{ showFilter: false }">
             
             <!-- Breadcrumb -->
             <nav class="flex mb-8" aria-label="Breadcrumb">
@@ -48,7 +47,7 @@
 
             <!-- Header & Toggle Button -->
             <div class="flex justify-between items-center mb-6">
-                <h2 class="font-heading font-bold text-2xl text-zinc-900">Semua Publikasi</h2>
+                <h2 class="font-heading font-bold text-xl md:text-2xl text-[#165a3f] uppercase tracking-widest">Semua Publikasi</h2>
                 <button @click="showFilter = !showFilter" 
                         class="flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg transition-colors border"
                         :class="showFilter ? 'bg-primary-50 border-primary-200 text-primary-700' : 'bg-white border-zinc-200 text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900'">
@@ -197,12 +196,12 @@
         </div>
 
         <!-- Sidebar (Right Content) -->
-        <div class="lg:w-1/3">
+        <div class="lg:w-[350px] flex-shrink-0">
             <div class="sticky top-28 space-y-8">
                 
                 <!-- Search Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Cari Riset</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Cari Riset</h3>
                     <form action="#" method="GET" class="relative">
                         <input type="text" placeholder="Masukkan kata kunci..." class="w-full pl-4 pr-12 py-3 rounded-xl border border-zinc-200 bg-zinc-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-colors text-sm">
                         <button type="submit" class="absolute right-2 top-1.5 bottom-1.5 aspect-square bg-primary-600 hover:bg-primary-500 text-white rounded-lg flex items-center justify-center transition-colors">
@@ -213,7 +212,7 @@
 
                 <!-- Tags Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Tags</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Tags</h3>
                     <div class="flex flex-wrap gap-2">
                         <a href="#" class="px-3 py-1.5 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-500 hover:text-white transition-colors">#DanaDesa</a>
                         <a href="#" class="px-3 py-1.5 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-500 hover:text-white transition-colors">#RPJMDes</a>
@@ -225,7 +224,7 @@
 
                 <!-- Arsip Widget (Collapsible Accordion) -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Arsip Riset: Tata Kelola Desa</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Arsip Riset: Tata Kelola Desa</h3>
                     <div class="space-y-3">
                         
                         <!-- Accordion Item 2024 -->
@@ -266,5 +265,6 @@
         </div>
         
     </div>
+</div>
 </div>
 @endsection

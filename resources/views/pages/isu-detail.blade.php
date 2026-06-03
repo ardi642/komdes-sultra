@@ -4,34 +4,35 @@
 
 @section('content')
 <!-- Page Header / Issue Overview -->
-<div class="bg-zinc-50 pt-32 pb-16 relative border-b border-zinc-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center gap-8">
+<div class="relative pt-40 pb-32 overflow-hidden bg-[#165a3f]">
+    <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center gap-12">
         <!-- Logo -->
-        <div class="w-32 h-32 md:w-40 md:h-40 flex-shrink-0 bg-white rounded-2xl shadow-sm border border-zinc-100 flex items-center justify-center text-primary-600 p-6">
+        <div class="w-32 h-32 md:w-40 md:h-40 flex-shrink-0 bg-white/10 rounded-2xl shadow-sm border border-white/20 flex items-center justify-center text-white p-6 backdrop-blur-sm">
             <svg class="w-full h-full" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
         </div>
         
         <!-- Text -->
         <div>
             <!-- Breadcrumb -->
-            <nav class="flex text-sm text-zinc-500 mb-4" aria-label="Breadcrumb">
+            <nav class="flex text-sm text-white/70 mb-4" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2">
                     <li class="inline-flex items-center">
-                        <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">Beranda</a>
+                        <a href="{{ route('home') }}" class="hover:text-white transition-colors">Beranda</a>
                     </li>
                     <li>
                         <div class="flex items-center">
-                            <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                            <a href="{{ route('isu') }}" class="ml-1 md:ml-2 hover:text-primary-600 transition-colors">Isu</a>
+                            <svg class="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            <a href="{{ route('isu') }}" class="ml-1 md:ml-2 hover:text-white transition-colors">Isu</a>
                         </div>
                     </li>
                 </ol>
             </nav>
             
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-zinc-900 mb-4">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-4 uppercase tracking-widest drop-shadow-md">
                 Keadilan Ekologis Pesisir
             </h1>
-            <p class="text-lg text-zinc-600 max-w-3xl leading-relaxed">
+            <p class="text-base md:text-lg text-white/90 font-light max-w-3xl leading-relaxed drop-shadow-sm">
                 Mendampingi masyarakat pesisir di Sulawesi Tenggara dalam menghadapi dampak krisis iklim dan proyek ekstraktif, serta mengadvokasi perlindungan sumber daya alam yang berkelanjutan dan pengakuan wilayah kelola rakyat.
             </p>
         </div>
@@ -39,8 +40,8 @@
 </div>
 
 <!-- Aggregated Content Section -->
-<div class="bg-white py-12" x-data="{ activeTab: 'semua' }">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-white py-28 lg:py-36 relative overflow-hidden" x-data="{ activeTab: 'semua' }">
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         
         <!-- Filter & Search Bar -->
         <div class="mb-8 bg-zinc-50 p-5 rounded-2xl border border-zinc-100 shadow-sm" x-data="{ selectedYear: '' }">

@@ -4,29 +4,30 @@
 
 @section('content')
 <!-- Page Header -->
-<div class="bg-primary-600 pt-32 pb-32 relative overflow-hidden">
-    <!-- Decorative Elements -->
-    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-primary-500 opacity-50 blur-3xl"></div>
-    <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-secondary-400 opacity-30 blur-3xl"></div>
+<div class="relative pt-40 pb-32 overflow-hidden bg-[#165a3f]">
+    <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
     
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center">
-            <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-white mb-4 tracking-tight">Agenda Acara</h1>
-            <p class="text-primary-100 text-lg max-w-2xl mx-auto">Ikuti berbagai kegiatan edukasi, diskusi, dan pelatihan bersama Komdes Sultra.</p>
+            <div class="w-32 h-[1px] bg-white mx-auto mb-6 opacity-50"></div>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white uppercase tracking-widest mb-6 drop-shadow-md">Agenda Acara</h1>
+            <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed drop-shadow-sm">Ikuti berbagai kegiatan edukasi, diskusi, dan pelatihan bersama Komdes Sultra.</p>
         </div>
     </div>
 </div>
 
 <!-- Main Content Area -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 relative z-20">
+<div class="relative bg-white py-28 lg:py-36 overflow-hidden">
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
     
-    <div class="flex flex-col lg:flex-row gap-12">
+    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
         
         <!-- Main Content (Daftar Acara) -->
-        <div class="lg:w-2/3">
+        <div class="flex-1">
             
-            <div class="flex justify-between items-center mb-8 border-b border-zinc-100 pb-4">
-                <h2 class="font-heading font-bold text-2xl text-zinc-900">Semua Acara</h2>
+            <div class="mb-10">
+                <div class="w-32 h-[1px] bg-[#165a3f] mb-4"></div>
+                <h2 class="font-heading font-bold text-xl md:text-2xl text-[#165a3f] uppercase tracking-widest">Semua Acara</h2>
             </div>
 
             <!-- Poster Grid (2 Columns on Desktop) -->
@@ -189,12 +190,12 @@
         </div>
 
         <!-- Sidebar (Widget) -->
-        <div class="lg:w-1/3">
+        <div class="lg:w-[350px] flex-shrink-0">
             <div class="sticky top-28 space-y-8">
                 
                 <!-- Search Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Cari Acara</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Cari Acara</h3>
                     <form action="#" method="GET" class="relative">
                         <input type="text" placeholder="Masukkan kata kunci..." class="w-full pl-4 pr-12 py-3 rounded-xl border border-zinc-200 bg-zinc-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-colors text-sm">
                         <button type="submit" class="absolute right-2 top-1.5 bottom-1.5 aspect-square bg-primary-600 hover:bg-primary-500 text-white rounded-lg flex items-center justify-center transition-colors">
@@ -205,7 +206,7 @@
 
                 <!-- Acara Mendatang Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-zinc-900 mb-4 border-b border-zinc-100 pb-2">Acara Mendatang</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Acara Mendatang</h3>
                     <div class="space-y-4">
                         <a href="{{ route('acara.detail') }}" class="flex gap-4 group">
                             <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0">

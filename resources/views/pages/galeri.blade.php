@@ -67,13 +67,14 @@ $galleries = [
 <!-- Main Content Area -->
 <main class="w-full">
 
-    <!-- 1. Header Section (Green Gradient) -->
-    <div class="relative py-16 md:py-20 overflow-hidden" style="background: linear-gradient(135deg, var(--color-primary-500, #22c55e) 0%, var(--color-primary-700, #15803d) 100%);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
+    <!-- 1. Header Section -->
+    <div class="relative pt-40 pb-32 overflow-hidden bg-[#165a3f]">
+        <div class="absolute right-0 bottom-0 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 translate-y-1/4 bg-white"></div>
+        <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             <div class="text-center mt-10 mb-8 max-w-4xl mx-auto">
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-widest uppercase text-white drop-shadow-md">Galeri Kegiatan</h1>
-                <div class="w-24 h-1.5 mx-auto rounded-full shadow-sm mb-6 bg-white opacity-80"></div>
-                <p class="text-xl text-white leading-loose drop-shadow-sm font-medium">
+                <div class="w-32 h-[1px] bg-white mx-auto mb-6 opacity-50"></div>
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6 tracking-widest uppercase text-white drop-shadow-md">Galeri Kegiatan</h1>
+                <p class="text-base md:text-lg text-white/90 leading-relaxed drop-shadow-sm font-light">
                     Jelajahi berbagai momen dan aktivitas yang merekam semangat kolaborasi Komdes Sultra.
                 </p>
             </div>
@@ -81,9 +82,9 @@ $galleries = [
     </div>
 
     <!-- 2. Grid Galeri (White Background) -->
-    <section class="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-white to-primary-50/80">
+    <section class="py-28 lg:py-36 relative overflow-hidden bg-white">
         
-        <div class="max-w-7xl mx-auto px-6 md:px-10 lg:px-12 relative z-10">
+        <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
             <!-- Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 mb-16">
