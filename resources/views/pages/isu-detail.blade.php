@@ -295,7 +295,7 @@
                     <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
                 <div class="p-6 flex flex-col flex-grow">
-                    <a href="{{ route($post->type . '.detail', $post->slug) }}" class="block group-hover:text-primary-600 transition-colors">
+                    <a href="{{ route(str_replace('_', '-', $post->type) . '.detail', $post->slug) }}" class="block group-hover:text-primary-600 transition-colors">
                         <h3 class="font-heading text-xl font-bold text-zinc-900 mb-3 leading-snug">{{ Str::limit($post->title, 60) }}</h3>
                     </a>
                     <p class="text-zinc-500 mb-6 line-clamp-3 text-sm leading-relaxed">{{ Str::limit(strip_tags($post->content), 120) }}</p>

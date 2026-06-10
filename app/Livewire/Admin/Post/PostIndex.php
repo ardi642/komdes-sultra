@@ -77,7 +77,7 @@ class PostIndex extends Component
         $this->title = '';
         $this->slug = '';
         $this->content = '';
-        $this->type = 'berita';
+        $this->type = $this->filterType ?: 'berita';
         $this->category_id = '';
         $this->is_published = true;
         $this->cover_image = null;

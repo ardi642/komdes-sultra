@@ -17,6 +17,7 @@
             @endif
 
             <!-- Filter -->
+            @if(empty($filterType))
             <div class="flex items-center space-x-4 bg-white p-4 rounded-xl shadow-sm border border-zinc-200">
                 <div class="flex items-center gap-2">
                     <span class="text-sm font-medium text-zinc-700">Filter Tipe:</span>
@@ -29,6 +30,7 @@
                     </select>
                 </div>
             </div>
+            @endif
 
             <div class="bg-white rounded-xl shadow-sm border border-zinc-200 overflow-hidden">
                 <div class="overflow-x-auto">
@@ -148,9 +150,11 @@
                         </div>
 
                         <!-- Klasifikasi Panel -->
+                        @if(empty($filterType) || ($type !== 'siaran_pers' && $type !== 'acara'))
                         <div class="bg-white p-5 rounded-xl shadow-sm border border-zinc-200 space-y-4">
                             <h3 class="font-semibold text-zinc-900 border-b border-zinc-100 pb-2">Klasifikasi</h3>
                             
+                            @if(empty($filterType))
                             <div>
                                 <x-label for="type" value="Jenis Konten" />
                                 <select id="type" wire:model.live="type" class="border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2 px-3 text-zinc-900 text-sm">
@@ -160,6 +164,7 @@
                                     <option value="siaran_pers">Siaran Pers</option>
                                 </select>
                             </div>
+                            @endif
 
                             @if($type !== 'siaran_pers' && $type !== 'acara')
                                 <div>
@@ -174,6 +179,7 @@
                                 </div>
                             @endif
                         </div>
+                        @endif
 
                         <!-- Kaitan Tag & Isu -->
                         <div class="bg-white p-5 rounded-xl shadow-sm border border-zinc-200 space-y-4">

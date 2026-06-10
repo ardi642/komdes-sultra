@@ -99,18 +99,21 @@ class FrontendController extends Controller
         
         $query = $issue->posts()->published();
 
-        // Tipe Konten
-        if (request()->filled('type')) {
+        $baseQuery = $issue->posts()->published();
+
+        // Base query for Posts
+        $query = clone $baseQuery;
+
+        // Apply filters for Post query (only if not viewing acara specifically)
+        if (request('type') && request('type') !== 'acara') {
             $query->where('type', request('type'));
         }
 
-        // Tahun
-        if (request()->filled('tahun')) {
+        if (request('tahun')) {
             $query->whereYear('published_at', request('tahun'));
         }
 
-        // Pencarian Teks
-        if (request()->filled('search')) {
+        if (request('search')) {
             $search = request('search');
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
@@ -118,7 +121,6 @@ class FrontendController extends Controller
             });
         }
 
-        // Tag (Multiple)
         if (request()->filled('tags')) {
             $tags = (array) request('tags');
             $query->whereHas('tags', function ($q) use ($tags) {
@@ -126,33 +128,89 @@ class FrontendController extends Controller
             });
         }
 
-        $relatedPosts = $query->latest('published_at')->paginate(12)->withQueryString();
+        // Acara count logic
+        $acaraCount = $issue->events()->where('is_published', true)->count();
 
-        // Dynamic years for this issue's posts
-        $availableYears = $issue->posts()->published()
-            ->selectRaw('YEAR(published_at) as year')
-            ->groupBy('year')
-            ->orderBy('year', 'desc')
-            ->pluck('year');
+        // Type counts for tabs
+        $typeCountsRaw = $issue->posts()->published()->selectRaw('type, count(*) as total')->groupBy('type')->pluck('total', 'type')->toArray();
+        $typeCounts = [
+            'semua' => array_sum($typeCountsRaw) + $acaraCount,
+            'berita' => $typeCountsRaw['berita'] ?? 0,
+            'artikel' => $typeCountsRaw['artikel'] ?? 0,
+            'riset' => $typeCountsRaw['riset'] ?? 0,
+            'siaran_pers' => $typeCountsRaw['siaran_pers'] ?? 0,
+            'acara' => $acaraCount,
+        ];
+
+        // Build Acara (Event) query filters
+        $eventQuery = $issue->events()->where('is_published', true);
+        if (request('tahun')) {
+            $eventQuery->whereYear('event_date', request('tahun'));
+        }
+        if (request('search')) {
+            $search = request('search');
+            $eventQuery->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+        if (request()->filled('tags')) {
+            $tags = (array) request('tags');
+            $eventQuery->whereHas('tags', function ($q) use ($tags) {
+                $q->whereIn('slug', $tags);
+            });
+        }
+
+        // Handle results based on type
+        if (request('type') === 'acara') {
+            $relatedPosts = $eventQuery->latest('event_date')->paginate(12)->withQueryString();
+            
+            $relatedPosts->getCollection()->transform(function ($item) {
+                $item->type = 'acara';
+                $item->content = $item->description;
+                $item->published_at = $item->event_date; 
+                return $item;
+            });
+        } elseif (empty(request('type')) || request('type') === 'semua') {
+            $posts = $query->latest('published_at')->get();
+            
+            $events = $eventQuery->latest('event_date')->get()->map(function ($item) {
+                $item->type = 'acara';
+                $item->content = $item->description;
+                $item->published_at = $item->event_date; 
+                return $item;
+            });
+
+            $all = $posts->concat($events)->sortByDesc('published_at')->values();
+
+            $page = \Illuminate\Pagination\Paginator::resolveCurrentPage() ?: 1;
+            $perPage = 12;
+            $relatedPosts = new \Illuminate\Pagination\LengthAwarePaginator(
+                $all->slice(($page - 1) * $perPage, $perPage)->values(),
+                $all->count(),
+                $perPage,
+                $page,
+                ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath(), 'query' => request()->query()]
+            );
+        } else {
+            $relatedPosts = $query->latest('published_at')->paginate(12)->withQueryString();
+        }
+
+        // Dynamic years for this issue's posts (union with events for completeness)
+        $postYears = $issue->posts()->published()->selectRaw('YEAR(published_at) as year')->pluck('year')->toArray();
+        $eventYears = $issue->events()->where('is_published', true)->selectRaw('YEAR(event_date) as year')->pluck('year')->toArray();
+        $availableYears = collect(array_merge($postYears, $eventYears))->unique()->sortDesc()->values();
 
         // Dynamic tags for this issue's posts
         $availableTags = \App\Models\Tag::whereHas('posts', function($q) use ($issue) {
             $q->whereHas('issues', function($q2) use ($issue) {
                 $q2->where('issues.id', $issue->id);
             })->published();
+        })->orWhereHas('events', function($q) use ($issue) {
+            $q->whereHas('issues', function($q2) use ($issue) {
+                $q2->where('issues.id', $issue->id);
+            })->where('is_published', true);
         })->get();
-
-        // Type counts for tabs (unfiltered by current type, but filtered by other active filters to be accurate, or just total for the issue)
-        // Usually, tabs show the total counts for the issue regardless of current filter.
-        $typeCountsRaw = $issue->posts()->published()->selectRaw('type, count(*) as total')->groupBy('type')->pluck('total', 'type')->toArray();
-        $typeCounts = [
-            'semua' => array_sum($typeCountsRaw),
-            'berita' => $typeCountsRaw['berita'] ?? 0,
-            'artikel' => $typeCountsRaw['artikel'] ?? 0,
-            'riset' => $typeCountsRaw['riset'] ?? 0,
-            'siaran_pers' => $typeCountsRaw['siaran_pers'] ?? 0,
-            'acara' => $typeCountsRaw['acara'] ?? 0,
-        ];
 
         return view('pages.isu-detail', compact('issue', 'relatedPosts', 'availableYears', 'availableTags', 'typeCounts'));
     }
