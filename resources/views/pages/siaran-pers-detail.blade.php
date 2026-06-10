@@ -1,11 +1,10 @@
-@extends('layouts.public')
+﻿@extends('layouts.public')
 
-@section('title', 'Dialog Warga: Menyoroti Transparansi Dana Desa - Siaran Pers Komdes Sultra')
+@section('title', 'Dialog Warga: Menyoroti Transparansi Dana Desa - Komdes Sultra')
 
 @section('content')
 <!-- Main Content Area -->
-<div class="bg-white py-28 lg:py-36 relative overflow-hidden">
-<div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+<div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-20 relative z-20">
     <!-- Breadcrumb -->
     <nav class="flex text-sm text-zinc-500 mb-8" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2">
@@ -21,7 +20,7 @@
             <li>
                 <div class="flex items-center">
                     <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    <span class="ml-1 md:ml-2 text-zinc-700 truncate max-w-[150px] sm:max-w-[300px]">Dialog Warga: Menyoroti Tran...</span>
+                    <span class="ml-1 md:ml-2 text-zinc-700 truncate max-w-[150px] sm:max-w-[300px]">{{ Str::limit($post->title, 30) }}</span>
                 </div>
             </li>
         </ol>
@@ -35,20 +34,22 @@
                 <!-- Article Header Info -->
                 <div class="mb-8">
                     <div class="mb-4 flex items-center gap-3">
-
+                        @if($post->category)
+                        <span class="bg-secondary-500 text-zinc-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">{{ $post->category->name }}</span>
+                        @endif
                         <span class="text-sm text-zinc-500 flex items-center gap-1.5">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> 
-                            12 Mei 2024
+                            {{ $post->published_at->format('d M Y') }}
                         </span>
                     </div>
                     
-                    <h1 class="text-3xl md:text-4xl font-heading font-extrabold text-zinc-900 mb-6 leading-tight">Dialog Warga: Menyoroti Transparansi Dana Desa di Kabupaten Konawe</h1>
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-zinc-900 mb-6 leading-tight">{{ $post->title }}</h1>
                     
                     <div class="flex items-center gap-4 text-sm">
                         <div class="flex items-center gap-3">
-                            <img src="https://ui-avatars.com/api/?name=Admin&background=random" alt="Penulis" class="w-10 h-10 rounded-full shadow-sm border border-zinc-100">
+                            <img src="https://ui-avatars.com/api/?name={{ urlencode($post->author->name ?? 'Admin') }}&background=random" alt="Penulis" class="w-10 h-10 rounded-full shadow-sm border border-zinc-100">
                             <div class="text-left">
-                                <p class="font-bold text-zinc-900">Admin</p>
+                                <p class="font-bold text-zinc-900">{{ $post->author->name ?? 'Admin' }}</p>
                                 <p class="text-xs text-zinc-500">Tim Redaksi</p>
                             </div>
                         </div>
@@ -56,48 +57,16 @@
                 </div>
 
                 <!-- Cover Image -->
-                <div class="rounded-xl overflow-hidden mb-10 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Rapat Desa" class="w-full h-auto object-cover aspect-[16/9] hover:scale-105 transition-transform duration-700">
+                @if($post->cover_image)
+                <div class="rounded-xl overflow-hidden mb-10 shadow-sm bg-zinc-100">
+                    <img src="{{ asset($post->cover_image) }}" alt="{{ $post->title }}" class="w-full h-auto object-cover aspect-[16/9] hover:scale-105 transition-transform duration-700">
                 </div>
+                @endif
                 
                 <!-- Article Text (Prose) -->
                 <!-- Note: using standard Tailwind classes since Typography plugin might not be installed -->
-                <div class="text-zinc-700 leading-relaxed space-y-6">
-                    <p class="text-xl text-zinc-800 font-medium leading-snug">
-                        Komdes Sultra bersama tokoh masyarakat di Kabupaten Konawe menggelar dialog publik untuk mengevaluasi penggunaan dana desa tahun anggaran 2023 dan mendorong partisipasi aktif warga.
-                    </p>
-                    
-                    <p>
-                        Dalam upaya meningkatkan transparansi dan akuntabilitas pengelolaan Dana Desa, KOMUNITAS MASYARAKAT DESA-SULAWESI TENGGARA (Komdes Sultra) mengadakan kegiatan Dialog Warga di Balai Desa Mekar Jaya, Kabupaten Konawe, pada hari Sabtu (11/05). Kegiatan ini dihadiri oleh lebih dari 50 peserta yang terdiri dari perwakilan warga, Badan Permusyawaratan Desa (BPD), dan perangkat desa setempat.
-                    </p>
-                    
-                    <h3 class="font-heading font-bold text-2xl text-zinc-900 mt-8 mb-4">Pentingnya Partisipasi Masyarakat</h3>
-                    
-                    <p>
-                        Direktur Eksekutif Komdes Sultra menekankan bahwa Dana Desa bukanlah milik kepala desa atau aparatur desa semata, melainkan hak seluruh masyarakat desa. "Masyarakat memiliki hak konstitusional untuk tahu, mengawasi, dan terlibat dalam setiap tahap pengelolaan Dana Desa, mulai dari perencanaan hingga evaluasi," ujarnya dalam sambutan pembuka.
-                    </p>
-                    
-                    <div class="my-8 rounded-xl overflow-hidden border border-zinc-100">
-                        <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Suasana Dialog" class="w-full h-auto">
-                        <p class="text-center text-sm text-zinc-500 py-2 bg-zinc-50 border-t border-zinc-100">Suasana diskusi antar warga dan perangkat desa.</p>
-                    </div>
-                    
-                    <p>
-                        Selama dialog berlangsung, sejumlah warga menyampaikan aspirasi dan keluhannya terkait minimnya informasi yang mereka terima mengenai proyek infrastruktur yang sedang berjalan. Merespons hal tersebut, pihak pemerintah desa berjanji akan memasang papan informasi APBDes di tempat-tempat strategis dan rutin mengadakan musyawarah evaluasi setiap kuartal.
-                    </p>
-                    
-                    <div class="pl-6 border-l-4 border-primary-500 my-8 py-2 bg-primary-50 rounded-r-lg">
-                        <p class="text-lg italic text-zinc-800 mb-2">
-                            "Kami berharap dialog seperti ini tidak hanya berhenti di sini, tetapi menjadi budaya baru di desa kami agar tidak ada lagi kecurigaan antara warga dan pemerintah desa."
-                        </p>
-                        <p class="text-sm font-semibold text-primary-700">— Siti Aminah, Tokoh Perempuan Desa</p>
-                    </div>
-                    
-                    <h3 class="font-heading font-bold text-2xl text-zinc-900 mt-8 mb-4">Rencana Tindak Lanjut</h3>
-                    
-                    <p>
-                        Sebagai hasil dari dialog ini, dibentuk sebuah Kelompok Kerja (Pokja) Transparansi Desa yang beranggotakan perwakilan warga dari masing-masing dusun. Pokja ini nantinya akan didampingi oleh fasilitator dari Komdes Sultra untuk melakukan pemantauan partisipatif secara berkala.
-                    </p>
+                <div class="text-zinc-700 leading-relaxed space-y-6 prose max-w-none">
+                    {!! $post->content !!}
                 </div>
                 
                 <!-- Tags & Share (Bottom of article) -->
@@ -105,9 +74,9 @@
                     <div class="flex items-center gap-3">
                         <span class="text-sm font-semibold text-zinc-900">Tags:</span>
                         <div class="flex flex-wrap gap-2">
-                            <a href="#" class="px-3 py-1 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-500 hover:text-white transition-colors">#DanaDesa</a>
-                            <a href="#" class="px-3 py-1 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-500 hover:text-white transition-colors">#Konawe</a>
-                            <a href="#" class="px-3 py-1 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-500 hover:text-white transition-colors">#Advokasi</a>
+                            @foreach($post->tags as $tag)
+                            <a href="#" class="px-3 py-1 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-500 hover:text-white transition-colors">#{{ $tag->name }}</a>
+                            @endforeach
                         </div>
                     </div>
                     
@@ -140,50 +109,84 @@
 
                 <!-- Related News Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Siaran Pers Terbaru</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Siaran Pers Terkait</h3>
                     <div class="space-y-4">
-                        <!-- Related Item 1 -->
-                        <a href="#" class="flex gap-4 group">
-                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumb" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        @forelse($relatedPosts as $related)
+                        <!-- Related Item -->
+                        <a href="{{ route('siaran-pers.detail', $related->slug) }}" class="flex gap-4 group">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-zinc-100">
+                                <img src="{{ $related->cover_image ? asset($related->cover_image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80' }}" alt="{{ $related->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>
                             <div>
-                                <h4 class="font-bold text-zinc-900 text-sm leading-snug line-clamp-2 group-hover:text-primary-600 transition-colors mb-1">Pelatihan Pengelolaan Hasil Hutan Bukan Kayu (HHBK)</h4>
-                                <span class="text-xs text-zinc-500">08 Mei 2024</span>
+                                <h4 class="font-bold text-zinc-900 text-sm leading-snug line-clamp-2 group-hover:text-primary-600 transition-colors mb-1">{{ $related->title }}</h4>
+                                <span class="text-xs text-zinc-500">{{ $related->published_at->format('d M Y') }}</span>
                             </div>
                         </a>
-                        <!-- Related Item 2 -->
-                        <a href="#" class="flex gap-4 group">
-                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumb" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-zinc-900 text-sm leading-snug line-clamp-2 group-hover:text-primary-600 transition-colors mb-1">Sekolah Pemuda Penggerak Desa Angkatan ke-5 Resmi Dibuka</h4>
-                                <span class="text-xs text-zinc-500">02 Mei 2024</span>
-                            </div>
-                        </a>
-                        <!-- Related Item 3 -->
-                        <a href="#" class="flex gap-4 group">
-                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                                <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumb" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-zinc-900 text-sm leading-snug line-clamp-2 group-hover:text-primary-600 transition-colors mb-1">Mendorong Keterwakilan Perempuan di BPD</h4>
-                                <span class="text-xs text-zinc-500">28 April 2024</span>
-                            </div>
-                        </a>
-                        
+                        @empty
+                        <p class="text-xs text-zinc-500 italic">Belum ada Siaran Pers Terkait.</p>
+                        @endforelse
+
                         <!-- View More Link -->
                         <div class="pt-2 border-t border-zinc-100">
                             <a href="{{ route('siaran-pers') }}" class="text-xs font-semibold text-primary-600 hover:text-primary-700 flex items-center justify-center w-full py-2 hover:bg-primary-50 rounded-lg transition-colors">
-                                Lihat Semua Siaran Pers
+                                Lihat Siaran Pers Serupa Lainnya
                                 <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </a>
                         </div>
                     </div>
                 </div>
 
-
+                <!-- Categories Widget -->
+                <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Kategori</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#" class="flex items-center justify-between group">
+                                <span class="text-sm text-zinc-600 group-hover:text-primary-600 transition-colors flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-secondary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                                    Pemberdayaan
+                                </span>
+                                <span class="bg-zinc-100 text-zinc-500 text-xs py-1 px-2.5 rounded-full group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors">12</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between group">
+                                <span class="text-sm text-zinc-600 group-hover:text-primary-600 transition-colors flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-secondary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                                    Lingkungan & Ekologi
+                                </span>
+                                <span class="bg-zinc-100 text-zinc-500 text-xs py-1 px-2.5 rounded-full group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors">8</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between group">
+                                <span class="text-sm text-zinc-600 group-hover:text-primary-600 transition-colors flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-secondary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                                    Gender & Sosial
+                                </span>
+                                <span class="bg-zinc-100 text-zinc-500 text-xs py-1 px-2.5 rounded-full group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors">15</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between group">
+                                <span class="text-sm text-zinc-600 group-hover:text-primary-600 transition-colors flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-secondary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                                    Pendidikan
+                                </span>
+                                <span class="bg-zinc-100 text-zinc-500 text-xs py-1 px-2.5 rounded-full group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors">6</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between group">
+                                <span class="text-sm text-zinc-600 group-hover:text-primary-600 transition-colors flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-secondary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                                    Kebijakan Publik
+                                </span>
+                                <span class="bg-zinc-100 text-zinc-500 text-xs py-1 px-2.5 rounded-full group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors">11</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
                 <!-- Tags Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
@@ -283,5 +286,5 @@
         
     </div>
 </div>
-</div>
 @endsection
+

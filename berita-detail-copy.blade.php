@@ -14,7 +14,7 @@
             <li>
                 <div class="flex items-center">
                     <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    <a href="{{ route('riset') }}" class="ml-1 md:ml-2 hover:text-primary-600 transition-colors">Riset</a>
+                    <a href="{{ route('berita') }}" class="ml-1 md:ml-2 hover:text-primary-600 transition-colors">Berita</a>
                 </div>
             </li>
             <li>
@@ -98,7 +98,7 @@
                 
                 <!-- Search Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Cari Riset</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Cari Berita</h3>
                     <form action="#" method="GET" class="relative">
                         <input type="text" placeholder="Masukkan kata kunci..." class="w-full pl-4 pr-12 py-3 rounded-xl border border-zinc-200 bg-zinc-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-colors text-sm">
                         <button type="submit" class="absolute right-2 top-1.5 bottom-1.5 aspect-square bg-primary-600 hover:bg-primary-500 text-white rounded-lg flex items-center justify-center transition-colors">
@@ -109,11 +109,11 @@
 
                 <!-- Related News Widget -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Riset Terkait</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Berita Terkait</h3>
                     <div class="space-y-4">
                         @forelse($relatedPosts as $related)
                         <!-- Related Item -->
-                        <a href="{{ route('riset.detail', $related->slug) }}" class="flex gap-4 group">
+                        <a href="{{ route('berita.detail', $related->slug) }}" class="flex gap-4 group">
                             <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-zinc-100">
                                 <img src="{{ $related->cover_image ? asset($related->cover_image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80' }}" alt="{{ $related->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>
@@ -123,13 +123,13 @@
                             </div>
                         </a>
                         @empty
-                        <p class="text-xs text-zinc-500 italic">Belum ada Riset Terkait.</p>
+                        <p class="text-xs text-zinc-500 italic">Belum ada berita terkait.</p>
                         @endforelse
 
                         <!-- View More Link -->
                         <div class="pt-2 border-t border-zinc-100">
-                            <a href="{{ route('riset') }}" class="text-xs font-semibold text-primary-600 hover:text-primary-700 flex items-center justify-center w-full py-2 hover:bg-primary-50 rounded-lg transition-colors">
-                                Lihat Riset Serupa Lainnya
+                            <a href="{{ route('berita') }}" class="text-xs font-semibold text-primary-600 hover:text-primary-700 flex items-center justify-center w-full py-2 hover:bg-primary-50 rounded-lg transition-colors">
+                                Lihat Berita Serupa Lainnya
                                 <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </a>
                         </div>
@@ -204,7 +204,7 @@
 
                 <!-- Arsip Widget (Collapsible Accordion) -->
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Arsip Riset</h3>
+                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Arsip Berita</h3>
                     <div class="space-y-3">
                         
                         <!-- Accordion Item 2024 -->
@@ -287,4 +287,3 @@
     </div>
 </div>
 @endsection
-

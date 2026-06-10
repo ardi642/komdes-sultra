@@ -133,119 +133,47 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                
-                <!-- News Item 1 -->
+                @forelse($posts as $post)
                 <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
                     <div class="relative h-56 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1574046664972-e565980fcbc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Rapat Desa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-primary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">Pemberdayaan</div>
+                        <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1574046664972-e565980fcbc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        @if($post->category)
+                        <div class="absolute top-4 left-4 bg-primary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">{{ $post->category->name }}</div>
+                        @endif
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <div class="flex items-center text-sm text-zinc-500 mb-3 gap-4">
-                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> 12 Mei 2024</span>
-                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> Admin</span>
+                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> {{ $post->published_at->format('d M Y') }}</span>
+                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> {{ $post->author->name ?? 'Admin' }}</span>
                         </div>
                         
-                        <!-- Isu Badge Mockup (Conditionally Rendered) -->
-                        <a href="{{ route('isu.detail') }}" class="inline-flex items-center gap-1.5 px-2.5 py-1 mb-2 rounded-lg bg-primary-50 text-primary-700 text-xs font-bold border border-primary-100 hover:bg-primary-100 transition-colors w-fit">
+                        @if($post->issues->isNotEmpty())
+                        <a href="{{ route('isu.detail', $post->issues->first()->slug) }}" class="inline-flex items-center gap-1.5 px-2.5 py-1 mb-2 rounded-lg bg-primary-50 text-primary-700 text-xs font-bold border border-primary-100 hover:bg-primary-100 transition-colors w-fit">
                             <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
-                            Keadilan Ekologis Pesisir
+                            {{ $post->issues->first()->title }}
                         </a>
+                        @endif
 
-                        <a href="#" class="block group-hover:text-primary-600 transition-colors">
-                            <h2 class="font-heading text-xl font-bold text-zinc-900 mb-3 leading-snug">Dialog Warga: Menyoroti Transparansi Dana Desa di Kabupaten Konawe</h2>
+                        <a href="{{ route('berita.detail', $post->slug) }}" class="block group-hover:text-primary-600 transition-colors">
+                            <h2 class="font-heading text-xl font-bold text-zinc-900 mb-3 leading-snug">{{ $post->title }}</h2>
                         </a>
-                        <p class="text-zinc-600 mb-6 line-clamp-3 text-sm flex-grow">Komdes Sultra bersama tokoh masyarakat di Kabupaten Konawe menggelar dialog publik untuk mengevaluasi penggunaan dana desa tahun anggaran 2023 dan mendorong partisipasi aktif warga.</p>
-                        <a href="#" class="inline-flex items-center text-primary-600 font-semibold text-sm group-hover:text-primary-700">
+                        <p class="text-zinc-600 mb-6 line-clamp-3 text-sm flex-grow">{{ Str::limit(strip_tags($post->content), 150) }}</p>
+                        <a href="{{ route('berita.detail', $post->slug) }}" class="inline-flex items-center text-primary-600 font-semibold text-sm group-hover:text-primary-700 mt-auto">
                             Baca Selengkapnya
                             <svg class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </a>
                     </div>
                 </article>
-
-                <!-- News Item 2 -->
-                <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                    <div class="relative h-56 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Konservasi Hutan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-primary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">Lingkungan</div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="flex items-center text-sm text-zinc-500 mb-3 gap-4">
-                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> 08 Mei 2024</span>
-                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> Tim Peneliti</span>
-                        </div>
-                        <a href="#" class="block group-hover:text-primary-600 transition-colors">
-                            <h2 class="font-heading text-xl font-bold text-zinc-900 mb-3 leading-snug">Pelatihan Pengelolaan Hasil Hutan Bukan Kayu (HHBK) untuk Kelompok Tani</h2>
-                        </a>
-                        <p class="text-zinc-600 mb-6 line-clamp-3 text-sm flex-grow">Meningkatkan kapasitas ekonomi masyarakat pesisir hutan melalui pelatihan pengelolaan dan pemasaran produk turunan HHBK secara berkelanjutan tanpa merusak ekosistem hutan lokal.</p>
-                        <a href="#" class="inline-flex items-center text-primary-600 font-semibold text-sm group-hover:text-primary-700">
-                            Baca Selengkapnya
-                            <svg class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- News Item 3 -->
-                <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                    <div class="relative h-56 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pemuda Desa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-primary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">Pendidikan</div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="flex items-center text-sm text-zinc-500 mb-3 gap-4">
-                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> 02 Mei 2024</span>
-                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> Admin</span>
-                        </div>
-                        <a href="#" class="block group-hover:text-primary-600 transition-colors">
-                            <h2 class="font-heading text-xl font-bold text-zinc-900 mb-3 leading-snug">Sekolah Pemuda Penggerak Desa Angkatan ke-5 Resmi Dibuka</h2>
-                        </a>
-                        <p class="text-zinc-600 mb-6 line-clamp-3 text-sm flex-grow">Sebanyak 30 pemuda dari berbagai kabupaten di Sultra mengikuti sekolah kepemimpinan untuk menjadi motor penggerak perubahan di desanya masing-masing dan belajar dasar advokasi kebijakan.</p>
-                        <a href="#" class="inline-flex items-center text-primary-600 font-semibold text-sm group-hover:text-primary-700">
-                            Baca Selengkapnya
-                            <svg class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- News Item 4 -->
-                <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                    <div class="relative h-56 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Diskusi Perempuan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-primary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">Gender & Sosial</div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="flex items-center text-sm text-zinc-500 mb-3 gap-4">
-                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> 28 April 2024</span>
-                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> Kontributor</span>
-                        </div>
-                        <a href="#" class="block group-hover:text-primary-600 transition-colors">
-                            <h2 class="font-heading text-xl font-bold text-zinc-900 mb-3 leading-snug">Mendorong Keterwakilan Perempuan di BPD: Tantangan dan Harapan</h2>
-                        </a>
-                        <p class="text-zinc-600 mb-6 line-clamp-3 text-sm flex-grow">Pentingnya mengawal kuota minimal keterwakilan perempuan dalam Badan Permusyawaratan Desa agar aspirasi dan kebutuhan kelompok rentan dapat diakomodasi dengan baik.</p>
-                        <a href="#" class="inline-flex items-center text-primary-600 font-semibold text-sm group-hover:text-primary-700">
-                            Baca Selengkapnya
-                            <svg class="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </a>
-                    </div>
-                </article>
-                
+                @empty
+                <div class="col-span-2 text-center py-12">
+                    <p class="text-zinc-500">Belum ada berita yang diterbitkan.</p>
+                </div>
+                @endforelse
             </div>
 
-            <!-- Pagination (Static Placeholder) -->
-            <div class="flex justify-center mb-12">
-                <nav class="inline-flex items-center gap-1 bg-white p-1 rounded-full border border-zinc-200 shadow-sm">
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 transition-colors">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    </a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-primary-600 text-white font-bold shadow-sm">1</a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-700 hover:bg-zinc-100 transition-colors">2</a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-700 hover:bg-zinc-100 transition-colors">3</a>
-                    <span class="w-10 h-10 flex items-center justify-center text-zinc-400">...</span>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-700 hover:bg-zinc-100 transition-colors">8</a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 transition-colors">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </a>
-                </nav>
+            <!-- Pagination -->
+            <div class="mt-12">
+                {{ $posts->links() }}
             </div>
         </div>
 

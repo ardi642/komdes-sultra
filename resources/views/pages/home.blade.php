@@ -123,69 +123,14 @@
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-16 mb-20">
-            <!-- Issue 1 -->
-            <a href="{{ route('isu.detail') }}" class="group flex flex-col items-center text-center">
+            @foreach($issues as $issue)
+            <a href="{{ route('isu.detail', $issue->slug) }}" class="group flex flex-col items-center text-center">
                 <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300">
-                    <svg class="w-10 h-10 text-[#165a3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                    {!! $issue->icon_svg !!}
                 </div>
-                <h3 class="font-heading font-semibold text-sm md:text-base text-white group-hover:text-primary-200 transition-colors">Transparansi<br>Dana Desa</h3>
+                <h3 class="font-heading font-semibold text-sm md:text-base text-white group-hover:text-primary-200 transition-colors">{{ $issue->title }}</h3>
             </a>
-            
-            <!-- Issue 2 -->
-            <a href="{{ route('isu.detail') }}" class="group flex flex-col items-center text-center">
-                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300">
-                    <svg class="w-10 h-10 text-[#165a3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </div>
-                <h3 class="font-heading font-semibold text-sm md:text-base text-white group-hover:text-primary-200 transition-colors">Perubahan<br>Iklim</h3>
-            </a>
-            
-            <!-- Issue 3 -->
-            <a href="{{ route('isu.detail') }}" class="group flex flex-col items-center text-center">
-                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300">
-                    <svg class="w-10 h-10 text-[#165a3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                </div>
-                <h3 class="font-heading font-semibold text-sm md:text-base text-white group-hover:text-primary-200 transition-colors">Inklusi Sosial &<br>Gender</h3>
-            </a>
-
-            <!-- Issue 4 -->
-            <a href="{{ route('isu.detail') }}" class="group flex flex-col items-center text-center">
-                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300">
-                    <svg class="w-10 h-10 text-[#165a3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                </div>
-                <h3 class="font-heading font-semibold text-sm md:text-base text-white group-hover:text-primary-200 transition-colors">Ekonomi Kreatif<br>Pedesaan</h3>
-            </a>
-
-            <!-- Issue 5 -->
-            <a href="{{ route('isu.detail') }}" class="group flex flex-col items-center text-center">
-                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300">
-                    <svg class="w-10 h-10 text-[#165a3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                </div>
-                <h3 class="font-heading font-semibold text-sm md:text-base text-white group-hover:text-primary-200 transition-colors">Literasi &<br>Pendidikan</h3>
-            </a>
-
-            <!-- Issue 6 -->
-            <a href="{{ route('isu.detail') }}" class="group flex flex-col items-center text-center">
-                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300">
-                    <svg class="w-10 h-10 text-[#165a3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                </div>
-                <h3 class="font-heading font-semibold text-sm md:text-base text-white group-hover:text-primary-200 transition-colors">Infrastruktur &<br>Pelayanan</h3>
-            </a>
-
-            <!-- Issue 7 -->
-            <a href="{{ route('isu.detail') }}" class="group flex flex-col items-center text-center">
-                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300">
-                    <svg class="w-10 h-10 text-[#165a3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                </div>
-                <h3 class="font-heading font-semibold text-sm md:text-base text-white group-hover:text-primary-200 transition-colors">Keadilan Ekologis<br>Pesisir</h3>
-            </a>
-
-            <!-- Issue 8 -->
-            <a href="{{ route('isu.detail') }}" class="group flex flex-col items-center text-center">
-                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300">
-                    <svg class="w-10 h-10 text-[#165a3f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
-                </div>
-                <h3 class="font-heading font-semibold text-sm md:text-base text-white group-hover:text-primary-200 transition-colors">Digitalisasi<br>Desa</h3>
-            </a>
+            @endforeach
         </div>
 
         <div class="text-center">
@@ -215,21 +160,20 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20 relative z-20">
-            
-            <!-- Event Card 1 -->
-            <article class="bg-white rounded-[2rem] overflow-hidden border border-zinc-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group relative">
+            @foreach($events as $event)
+            <article class="bg-white rounded-[2rem] overflow-hidden border border-zinc-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group relative {{ $loop->iteration > 2 ? 'md:hidden lg:flex' : '' }}">
                 <div class="relative aspect-video overflow-hidden bg-zinc-100">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Seminar Nasional" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <img src="{{ $event->cover_image ? asset($event->cover_image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $event->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     <div class="absolute inset-0 bg-primary-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
                 </div>
                 
                 <div class="p-8 flex flex-col flex-grow">
                     <div class="mb-4">
-                        <span class="text-xs font-bold text-primary-700 bg-primary-50 px-3 py-1.5 rounded-full uppercase tracking-widest">Seminar</span>
+                        <span class="text-xs font-bold text-primary-700 bg-primary-50 px-3 py-1.5 rounded-full uppercase tracking-widest">Agenda</span>
                     </div>
                     
-                    <a href="{{ route('acara.detail') }}" class="block group-hover:text-primary-600 transition-colors mb-6">
-                        <h3 class="font-heading text-lg font-bold text-zinc-900 leading-snug">Strategi Pengembangan Ekonomi Sirkular di Wilayah Pedesaan</h3>
+                    <a href="{{ route('acara.detail', $event->slug) }}" class="block group-hover:text-primary-600 transition-colors mb-6">
+                        <h3 class="font-heading text-lg font-bold text-zinc-900 leading-snug">{{ $event->title }}</h3>
                     </a>
                     
                     <div class="mt-auto space-y-3 border-t border-zinc-100 pt-6">
@@ -237,66 +181,12 @@
                             <div class="w-10 h-10 rounded-full bg-zinc-50 flex items-center justify-center mr-4 text-primary-600">
                                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             </div>
-                            <span class="font-medium">20 Mei 2024</span>
+                            <span class="font-medium">{{ $event->event_date->format('d M Y') }} - {{ $event->location }}</span>
                         </div>
                     </div>
                 </div>
             </article>
-
-            <!-- Event Card 2 -->
-            <article class="bg-white rounded-[2rem] overflow-hidden border border-zinc-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group relative">
-                <div class="relative aspect-video overflow-hidden bg-zinc-100">
-                    <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Diskusi Online" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-primary-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
-                </div>
-                
-                <div class="p-8 flex flex-col flex-grow">
-                    <div class="mb-4">
-                        <span class="text-xs font-bold text-primary-700 bg-primary-50 px-3 py-1.5 rounded-full uppercase tracking-widest">Diskusi</span>
-                    </div>
-                    
-                    <a href="{{ route('acara.detail') }}" class="block group-hover:text-primary-600 transition-colors mb-6">
-                        <h3 class="font-heading text-lg font-bold text-zinc-900 leading-snug">Webinar: Tantangan Perubahan Iklim bagi Petani Pesisir</h3>
-                    </a>
-                    
-                    <div class="mt-auto space-y-3 border-t border-zinc-100 pt-6">
-                        <div class="flex items-center text-sm text-zinc-500">
-                            <div class="w-10 h-10 rounded-full bg-zinc-50 flex items-center justify-center mr-4 text-primary-600">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            </div>
-                            <span class="font-medium">25 Mei 2024</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Event Card 3 -->
-            <article class="bg-white rounded-[2rem] overflow-hidden border border-zinc-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group relative md:hidden lg:flex">
-                <div class="relative aspect-video overflow-hidden bg-zinc-100">
-                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pelatihan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-primary-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
-                </div>
-                
-                <div class="p-8 flex flex-col flex-grow">
-                    <div class="mb-4">
-                        <span class="text-xs font-bold text-primary-700 bg-primary-50 px-3 py-1.5 rounded-full uppercase tracking-widest">Pelatihan</span>
-                    </div>
-                    
-                    <a href="{{ route('acara.detail') }}" class="block group-hover:text-primary-600 transition-colors mb-6">
-                        <h3 class="font-heading text-lg font-bold text-zinc-900 leading-snug">Pelatihan Literasi Digital & Pembuatan Website Desa</h3>
-                    </a>
-                    
-                    <div class="mt-auto space-y-3 border-t border-zinc-100 pt-6">
-                        <div class="flex items-center text-sm text-zinc-500">
-                            <div class="w-10 h-10 rounded-full bg-zinc-50 flex items-center justify-center mr-4 text-primary-600">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            </div>
-                            <span class="font-medium">10 April 2024</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
+            @endforeach
         </div>
         
         <div class="text-center relative z-20">
@@ -332,86 +222,74 @@
             <button @click="activeTab = 'siaran'" :class="{ 'bg-white text-[#165a3f] shadow-lg': activeTab === 'siaran', 'bg-transparent text-white border border-white/50 hover:bg-white/10': activeTab !== 'siaran' }" class="px-6 py-2.5 rounded-full font-medium text-sm transition-all whitespace-nowrap uppercase tracking-widest">Siaran Pers</button>
         </div>
 
-        @php
-        $posts = [
-            ['id' => 1, 'category' => 'berita', 'title' => 'Komdes Sultra Serahkan Bantuan Bibit Mangrove', 'image' => 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80', 'date' => '12 Okt 2023'],
-            ['id' => 2, 'category' => 'berita', 'title' => 'Pertemuan Jaringan Nelayan se-Kawasan Timur', 'image' => 'https://images.unsplash.com/photo-1516934816041-9df602a657e8?auto=format&fit=crop&w=800&q=80', 'date' => '05 Okt 2023'],
-            ['id' => 3, 'category' => 'berita', 'title' => 'Dialog Publik: Mengurai Konflik Ruang Laut', 'image' => 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80', 'date' => '28 Sep 2023'],
-            
-            ['id' => 4, 'category' => 'artikel', 'title' => 'Masa Depan Karbon Biru dan Hak Masyarakat Adat', 'image' => 'https://images.unsplash.com/photo-1526976663112-0050854d1937?auto=format&fit=crop&w=800&q=80', 'date' => '15 Sep 2023'],
-            ['id' => 5, 'category' => 'artikel', 'title' => 'Tantangan Ekologis Pulau Kabaena di Tengah Tambang', 'image' => 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80', 'date' => '02 Sep 2023'],
-            ['id' => 6, 'category' => 'artikel', 'title' => 'Pentingnya Keterlibatan Perempuan dalam Konservasi', 'image' => 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80', 'date' => '20 Agu 2023'],
-            
-            ['id' => 7, 'category' => 'riset', 'title' => 'Laporan Tahunan: Kondisi Terumbu Karang Wakatobi 2023', 'image' => 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&w=800&q=80', 'date' => '10 Agu 2023'],
-            ['id' => 8, 'category' => 'riset', 'title' => 'Policy Brief: Perlindungan Hak Tenurial Masyarakat Pesisir', 'image' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80', 'date' => '01 Agu 2023'],
-            ['id' => 9, 'category' => 'riset', 'title' => 'Buku Panduan Advokasi Tata Ruang Laut', 'image' => 'https://images.unsplash.com/photo-1498623116890-37e912163d5d?auto=format&fit=crop&w=800&q=80', 'date' => '15 Jul 2023'],
-            
-            ['id' => 10, 'category' => 'siaran', 'title' => 'Pernyataan Sikap Menolak Privatisasi Pulau Kecil', 'image' => null, 'date' => '10 Jul 2023'],
-            ['id' => 11, 'category' => 'siaran', 'title' => 'Desakan Transparansi Dokumen AMDAL Pertambangan', 'image' => null, 'date' => '25 Jun 2023'],
-            ['id' => 12, 'category' => 'siaran', 'title' => 'Dukungan untuk Gugatan Warga Pesisir Kendari', 'image' => null, 'date' => '12 Jun 2023'],
-        ];
-        @endphp
-
         <!-- Tab Contents -->
         <div class="relative min-h-[350px] mb-20">
             <!-- Berita -->
             <div x-show="activeTab === 'berita'" class="absolute inset-0 z-10" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    @foreach(collect($posts)->where('category', 'berita') as $post)
-                    <a href="{{ route('berita.detail') }}" class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100 relative">
+                    @forelse($berita as $post)
+                    <a href="{{ route('berita.detail', $post->slug) }}" class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100 relative">
                         <div class="aspect-video w-full overflow-hidden relative">
-                            <img src="{{ $post['image'] }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80' }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
-                            <span class="text-xs font-bold text-primary-600 mb-3">{{ $post['date'] }}</span>
-                            <h3 class="font-heading text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors leading-snug">{{ $post['title'] }}</h3>
+                            <span class="text-xs font-bold text-primary-600 mb-3">{{ $post->published_at->format('d M Y') }}</span>
+                            <h3 class="font-heading text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors leading-snug">{{ $post->title }}</h3>
                         </div>
                     </a>
-                    @endforeach
+                    @empty
+                    <div class="col-span-3 text-center text-white/70 py-10">Belum ada berita.</div>
+                    @endforelse
                 </div>
             </div>
 
             <!-- Artikel -->
             <div x-show="activeTab === 'artikel'" class="absolute inset-0 z-10" style="display: none;" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    @foreach(collect($posts)->where('category', 'artikel') as $post)
-                    <a href="{{ route('artikel.detail') }}" class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100">
+                    @forelse($artikel as $post)
+                    <a href="{{ route('artikel.detail', $post->slug) }}" class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100">
                         <div class="aspect-video w-full overflow-hidden relative">
-                            <img src="{{ $post['image'] }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1526976663112-0050854d1937?auto=format&fit=crop&w=800&q=80' }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
-                            <span class="text-xs font-bold text-secondary-600 mb-3">{{ $post['date'] }}</span>
-                            <h3 class="font-heading text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors leading-snug">{{ $post['title'] }}</h3>
+                            <span class="text-xs font-bold text-secondary-600 mb-3">{{ $post->published_at->format('d M Y') }}</span>
+                            <h3 class="font-heading text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors leading-snug">{{ $post->title }}</h3>
                         </div>
                     </a>
-                    @endforeach
+                    @empty
+                    <div class="col-span-3 text-center text-white/70 py-10">Belum ada artikel.</div>
+                    @endforelse
                 </div>
             </div>
 
             <!-- Riset -->
             <div x-show="activeTab === 'riset'" class="absolute inset-0 z-10" style="display: none;" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    @foreach(collect($posts)->where('category', 'riset') as $post)
-                    <a href="{{ route('riset.detail') }}" class="group flex flex-col bg-white rounded-2xl p-8 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100 relative overflow-hidden">
+                    @forelse($riset as $post)
+                    <a href="{{ route('riset.detail', $post->slug) }}" class="group flex flex-col bg-white rounded-2xl p-8 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100 relative overflow-hidden">
                         <div class="mb-5 text-primary-500 bg-primary-50 w-14 h-14 rounded-full flex items-center justify-center">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                         </div>
-                        <span class="text-xs font-bold text-zinc-500 mb-2">{{ $post['date'] }}</span>
-                        <h3 class="font-heading text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors leading-snug">{{ $post['title'] }}</h3>
+                        <span class="text-xs font-bold text-zinc-500 mb-2">{{ $post->published_at->format('d M Y') }}</span>
+                        <h3 class="font-heading text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors leading-snug">{{ $post->title }}</h3>
                     </a>
-                    @endforeach
+                    @empty
+                    <div class="col-span-3 text-center text-white/70 py-10">Belum ada riset.</div>
+                    @endforelse
                 </div>
             </div>
 
             <!-- Siaran Pers -->
             <div x-show="activeTab === 'siaran'" class="absolute inset-0 z-10" style="display: none;" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    @foreach(collect($posts)->where('category', 'siaran') as $post)
-                    <a href="{{ route('siaran-pers.detail') }}" class="group block bg-white rounded-xl p-6 shadow-sm hover:shadow-xl transition-all border-l-4 border-primary-500">
-                        <span class="text-xs text-zinc-500 font-bold mb-2 block">{{ $post['date'] }}</span>
-                        <h3 class="font-heading text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors">{{ $post['title'] }}</h3>
+                    @forelse($siaran as $post)
+                    <a href="{{ route('siaran-pers.detail', $post->slug) }}" class="group block bg-white rounded-xl p-6 shadow-sm hover:shadow-xl transition-all border-l-4 border-primary-500">
+                        <span class="text-xs text-zinc-500 font-bold mb-2 block">{{ $post->published_at->format('d M Y') }}</span>
+                        <h3 class="font-heading text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors">{{ $post->title }}</h3>
                     </a>
-                    @endforeach
+                    @empty
+                    <div class="col-span-2 text-center text-white/70 py-10">Belum ada siaran pers.</div>
+                    @endforelse
                 </div>
             </div>
         </div>

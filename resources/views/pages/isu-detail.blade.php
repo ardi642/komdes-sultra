@@ -30,10 +30,10 @@
             </nav>
             
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-4 uppercase tracking-widest drop-shadow-md">
-                Keadilan Ekologis Pesisir
+                {{ $issue->title }}
             </h1>
             <p class="text-base md:text-lg text-white/90 font-light max-w-3xl leading-relaxed drop-shadow-sm">
-                Mendampingi masyarakat pesisir di Sulawesi Tenggara dalam menghadapi dampak krisis iklim dan proyek ekstraktif, serta mengadvokasi perlindungan sumber daya alam yang berkelanjutan dan pengakuan wilayah kelola rakyat.
+                {{ $issue->description }}
             </p>
         </div>
     </div>
@@ -142,65 +142,29 @@
             <div x-show="activeTab === 'semua'" x-transition.opacity.duration.300ms>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     
-                    <!-- Content Card (Berita) -->
+                    @forelse($relatedPosts as $post)
                     <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
                         <div class="relative h-56 overflow-hidden">
-                            <span class="absolute top-4 left-4 z-10 bg-primary-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">Berita</span>
-                            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Thumb" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-4 left-4 z-10 bg-primary-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">{{ ucfirst($post->type) }}</span>
+                            <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
-                            <a href="{{ route('berita.detail') }}" class="block group-hover:text-primary-600 transition-colors">
-                                <h3 class="font-heading text-xl font-bold text-zinc-900 mb-3 leading-snug">Nelayan Konawe Kepulauan Tuntut Pemulihan Lingkungan Pesisir</h3>
+                            <a href="{{ route($post->type . '.detail', $post->slug) }}" class="block group-hover:text-primary-600 transition-colors">
+                                <h3 class="font-heading text-xl font-bold text-zinc-900 mb-3 leading-snug">{{ Str::limit($post->title, 60) }}</h3>
                             </a>
-                            <p class="text-zinc-500 mb-6 line-clamp-3 text-sm leading-relaxed">Ratusan nelayan melakukan aksi damai menyuarakan dampak kerusakan terumbu karang akibat aktivitas penambangan pasir laut.</p>
+                            <p class="text-zinc-500 mb-6 line-clamp-3 text-sm leading-relaxed">{{ Str::limit(strip_tags($post->content), 120) }}</p>
                             <div class="flex items-center justify-between mt-auto pt-4 border-t border-zinc-100">
-                                <span class="text-xs font-semibold text-zinc-900">Komdes Sultra</span>
-                                <span class="text-xs text-zinc-400">12 Mei 2024</span>
+                                <span class="text-xs font-semibold text-zinc-900">{{ $post->author->name ?? 'Admin' }}</span>
+                                <span class="text-xs text-zinc-400">{{ $post->published_at->format('d M Y') }}</span>
                             </div>
                         </div>
                     </article>
-
-                    <!-- Content Card (Riset) -->
-                    <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                        <div class="relative h-56 overflow-hidden bg-zinc-100 flex items-center justify-center">
-                            <span class="absolute top-4 left-4 z-10 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">Publikasi Riset</span>
-                            <div class="w-24 h-32 bg-white shadow-md border border-zinc-200 rounded flex flex-col items-center justify-center p-2 transform group-hover:-rotate-3 transition-transform duration-300">
-                                <div class="w-full h-2 bg-indigo-100 rounded-sm mb-1"></div>
-                                <div class="w-3/4 h-2 bg-indigo-100 rounded-sm mb-auto"></div>
-                                <div class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-500 flex items-center justify-center mb-1">
-                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-6 flex flex-col flex-grow">
-                            <a href="{{ route('riset.detail') }}" class="block group-hover:text-primary-600 transition-colors">
-                                <h3 class="font-heading text-xl font-bold text-zinc-900 mb-3 leading-snug">Pemetaan Deforestasi Hutan Mangrove Sultra 2023</h3>
-                            </a>
-                            <p class="text-zinc-500 mb-6 line-clamp-3 text-sm leading-relaxed">Laporan komprehensif mengenai laju penyusutan hutan mangrove di pesisir Sulawesi Tenggara beserta rekomendasi kebijakan restorasi.</p>
-                            <div class="flex items-center justify-between mt-auto pt-4 border-t border-zinc-100">
-                                <span class="text-xs font-semibold text-zinc-900">Jurnal Akademik</span>
-                                <span class="text-xs text-zinc-400">01 Apr 2024</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Content Card (Artikel) -->
-                    <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                        <div class="relative h-56 overflow-hidden">
-                            <span class="absolute top-4 left-4 z-10 bg-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">Artikel</span>
-                            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Thumb" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        </div>
-                        <div class="p-6 flex flex-col flex-grow">
-                            <a href="{{ route('artikel.detail') }}" class="block group-hover:text-primary-600 transition-colors">
-                                <h3 class="font-heading text-xl font-bold text-zinc-900 mb-3 leading-snug line-clamp-2">Perempuan Pesisir Menjadi Ujung Tombak Resiliensi Iklim</h3>
-                            </a>
-                            <p class="text-zinc-500 mb-6 line-clamp-3 text-sm leading-relaxed">Analisis tentang peran vital perempuan nelayan dalam menghadapi anomali cuaca ekstrim dan menjaga ketahanan pangan keluarga.</p>
-                            <div class="flex items-center justify-between mt-auto pt-4 border-t border-zinc-100">
-                                <span class="text-xs font-semibold text-zinc-900">Opini</span>
-                                <span class="text-xs text-zinc-400">10 Mei 2024</span>
-                            </div>
-                        </div>
-                    </article>
+                    @empty
+                    <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-20">
+                        <svg class="w-16 h-16 text-zinc-300 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        <p class="text-zinc-500 font-medium">Belum ada konten terkait isu ini.</p>
+                    </div>
+                    @endforelse
 
                 </div>
                 

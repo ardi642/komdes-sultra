@@ -2,27 +2,29 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'pages.home')->name('home');
+use App\Http\Controllers\FrontendController;
+
+Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::view('/tentang-kami', 'pages.tentang-kami')->name('tentang-kami');
 Route::view('/anggota', 'pages.anggota')->name('anggota');
-Route::view('/berita', 'pages.berita')->name('berita');
-Route::view('/berita/detail', 'pages.berita-detail')->name('berita.detail');
+Route::get('/berita', [FrontendController::class, 'berita'])->name('berita');
+Route::get('/berita/{post:slug}', [FrontendController::class, 'postDetail'])->name('berita.detail');
 
-Route::view('/artikel', 'pages.artikel')->name('artikel');
-Route::view('/artikel/detail', 'pages.artikel-detail')->name('artikel.detail');
+Route::get('/artikel', [FrontendController::class, 'artikel'])->name('artikel');
+Route::get('/artikel/{post:slug}', [FrontendController::class, 'postDetail'])->name('artikel.detail');
 
-Route::view('/acara', 'pages.acara')->name('acara');
-Route::view('/acara/detail', 'pages.acara-detail')->name('acara.detail');
+Route::get('/acara', [FrontendController::class, 'acara'])->name('acara');
+Route::get('/acara/{event:slug}', [FrontendController::class, 'eventDetail'])->name('acara.detail');
 
-Route::view('/riset', 'pages.riset')->name('riset');
-Route::view('/riset/kategori', 'pages.riset-kategori')->name('riset.kategori');
-Route::view('/riset/detail', 'pages.riset-detail')->name('riset.detail');
+Route::get('/riset', [FrontendController::class, 'riset'])->name('riset');
+Route::view('/riset/kategori', 'pages.riset-kategori')->name('riset.kategori'); // Nanti bisa disesuaikan jika perlu
+Route::get('/riset/{post:slug}', [FrontendController::class, 'postDetail'])->name('riset.detail');
 
-Route::view('/siaran-pers', 'pages.siaran-pers')->name('siaran-pers');
-Route::view('/siaran-pers/detail', 'pages.siaran-pers-detail')->name('siaran-pers.detail');
+Route::get('/siaran-pers', [FrontendController::class, 'siaranPers'])->name('siaran-pers');
+Route::get('/siaran-pers/{post:slug}', [FrontendController::class, 'postDetail'])->name('siaran-pers.detail');
 
-Route::view('/isu', 'pages.isu')->name('isu');
-Route::view('/isu/detail', 'pages.isu-detail')->name('isu.detail');
+Route::get('/isu', [FrontendController::class, 'isu'])->name('isu');
+Route::get('/isu/{issue:slug}', [FrontendController::class, 'issueDetail'])->name('isu.detail');
 
 Route::view('/kontak', 'pages.kontak')->name('kontak');
 
@@ -31,6 +33,16 @@ Route::view('/galeri/detail', 'pages.galeri-detail')->name('galeri.detail');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
+});
+
+// Admin Routes (Livewire)
+Route::prefix('admin')->name('admin.')->group(function () {
+    // We will apply auth middleware later, for development we can access directly or add later.
+    Route::get('/kategori', \App\Livewire\Admin\Category\CategoryIndex::class)->name('category.index');
+    Route::get('/tag', \App\Livewire\Admin\Tag\TagIndex::class)->name('tag.index');
+    Route::get('/isu', \App\Livewire\Admin\Issue\IssueIndex::class)->name('issue.index');
+    Route::get('/tulisan', \App\Livewire\Admin\Post\PostIndex::class)->name('post.index');
+    Route::get('/acara', \App\Livewire\Admin\Event\EventIndex::class)->name('event.index');
 });
 
 require __DIR__.'/settings.php';

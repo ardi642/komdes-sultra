@@ -8,98 +8,80 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         
         <!-- Breadcrumb -->
-        <nav class="flex text-sm text-zinc-500 mb-8" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-2">
-                <li class="inline-flex items-center">
-                    <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">Beranda</a>
-                </li>
-                <li>
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        <a href="{{ route('acara') }}" class="ml-1 md:ml-2 hover:text-primary-600 transition-colors">Acara</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        <span class="ml-1 md:ml-2 text-zinc-700 truncate max-w-[150px] sm:max-w-[300px]">Strategi Pengembangan Ekonomi...</span>
-                    </div>
-                </li>
-            </ol>
-        </nav>
-
-        <!-- Main Card -->
-        <div class="bg-white rounded-3xl shadow-sm border border-zinc-100 overflow-hidden">
-            
-            <!-- Poster Wrapper -->
-            <div class="w-full bg-zinc-900 flex justify-center relative border-b border-zinc-100">
-                <!-- Blurred background for aesthetics -->
-                <div class="absolute inset-0 opacity-40">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Background Blur" class="w-full h-full object-cover blur-xl">
+    <nav class="flex text-sm text-zinc-500 mb-8" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2">
+            <li class="inline-flex items-center">
+                <a href="{{ route('home') }}" class="hover:text-primary-600 transition-colors">Beranda</a>
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    <a href="{{ route('acara') }}" class="ml-1 md:ml-2 hover:text-primary-600 transition-colors">Acara</a>
                 </div>
-                <!-- Actual Poster (Constrained to natural aspect ratio) -->
-                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Poster Seminar Nasional" class="relative z-10 w-full max-w-2xl max-h-[600px] object-contain object-top">
+            </li>
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    <span class="ml-1 md:ml-2 text-zinc-700 truncate max-w-[150px] sm:max-w-[300px]">{{ Str::limit($event->title, 30) }}</span>
+                </div>
+            </li>
+        </ol>
+    </nav>
+
+    <!-- Main Card -->
+    <div class="bg-white rounded-3xl shadow-sm border border-zinc-100 overflow-hidden">
+        
+        <!-- Poster Wrapper -->
+        <div class="w-full bg-zinc-900 flex justify-center relative border-b border-zinc-100">
+            <!-- Blurred background for aesthetics -->
+            <div class="absolute inset-0 opacity-40">
+                <img src="{{ $event->cover_image ? asset($event->cover_image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' }}" alt="Background Blur" class="w-full h-full object-cover blur-xl">
+            </div>
+            <!-- Actual Poster (Constrained to natural aspect ratio) -->
+            <img src="{{ $event->cover_image ? asset($event->cover_image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $event->title }}" class="relative z-10 w-full max-w-2xl max-h-[600px] object-contain object-top">
+        </div>
+
+        <div class="p-8 md:p-12">
+            <!-- Title & Tags -->
+            <div class="mb-8">
+                <div class="flex gap-2 mb-4">
+                    <span class="text-xs font-bold text-secondary-600 bg-secondary-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Acara</span>
+                    @if($event->status === 'upcoming')
+                    <span class="text-xs font-bold text-green-600 bg-green-50 px-2.5 py-1 rounded-md flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Segera</span>
+                    @endif
+                </div>
+                <h1 class="text-3xl md:text-4xl font-heading font-bold text-zinc-900 leading-tight mb-4">{{ $event->title }}</h1>
             </div>
 
-            <div class="p-8 md:p-12">
-                <!-- Title & Tags -->
-                <div class="mb-8">
-                    <div class="flex gap-2 mb-4">
-                        <span class="text-xs font-bold text-secondary-600 bg-secondary-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Seminar</span>
-                        <span class="text-xs font-bold text-green-600 bg-green-50 px-2.5 py-1 rounded-md flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Segera</span>
+            <!-- Info Box (Date & Location) -->
+            <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-6 mb-10 flex flex-col sm:flex-row gap-6 sm:gap-12">
+                <div class="flex gap-4 items-start">
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-zinc-100 text-primary-500">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     </div>
-                    <h1 class="text-3xl md:text-4xl font-heading font-bold text-zinc-900 leading-tight mb-4">Strategi Pengembangan Ekonomi Sirkular di Wilayah Pedesaan</h1>
-                </div>
-
-                <!-- Info Box (Date & Location) -->
-                <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-6 mb-10 flex flex-col sm:flex-row gap-6 sm:gap-12">
-                    <div class="flex gap-4 items-start">
-                        <div class="bg-white p-3 rounded-xl shadow-sm border border-zinc-100 text-primary-500">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <div>
-                            <h4 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">Pelaksanaan</h4>
-                            <p class="text-zinc-900 font-semibold">Senin, 20 Mei 2024</p>
-                            <p class="text-zinc-500 text-sm">08:00 WITA - Selesai</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex gap-4 items-start">
-                        <div class="bg-white p-3 rounded-xl shadow-sm border border-zinc-100 text-primary-500">
-                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        </div>
-                        <div>
-                            <h4 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">Lokasi</h4>
-                            <p class="text-zinc-900 font-semibold">Hotel Claro, Kendari</p>
-                            <p class="text-zinc-500 text-sm">Offline (Tatap Muka)</p>
-                        </div>
+                    <div>
+                        <h4 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">Pelaksanaan</h4>
+                        <p class="text-zinc-900 font-semibold">{{ \Carbon\Carbon::parse($event->event_date)->translatedFormat('l, d F Y') }}</p>
+                        <p class="text-zinc-500 text-sm">{{ $event->time ?? 'Selesai' }}</p>
                     </div>
                 </div>
-
-                <!-- Description / Body Content -->
-                <div class="text-zinc-600 leading-relaxed space-y-6 text-lg">
-                    <p>Komdes Sultra mengundang seluruh pemangku kepentingan desa, aktivis lingkungan, dan masyarakat umum untuk menghadiri seminar nasional dengan tema "Strategi Pengembangan Ekonomi Sirkular di Wilayah Pedesaan".</p>
-                    
-                    <h3 class="font-heading font-bold text-2xl text-zinc-900 mt-10 mb-4">Latar Belakang</h3>
-                    <p>Pertumbuhan ekonomi desa tidak boleh mengabaikan daya dukung lingkungan. Model ekonomi sirkular menawarkan solusi di mana limbah desa (baik dari pertanian maupun rumah tangga) dapat dikelola dan dimanfaatkan kembali sebagai sumber daya baru yang memiliki nilai ekonomi.</p>
-                    
-                    <h3 class="font-heading font-bold text-2xl text-zinc-900 mt-10 mb-4">Materi yang Akan Dibahas</h3>
-                    <ul class="list-disc pl-6 space-y-2 mt-4">
-                        <li>Konsep dasar dan implementasi ekonomi sirkular di level desa.</li>
-                        <li>Studi kasus: Pemanfaatan limbah pertanian menjadi briket bioarang.</li>
-                        <li>Strategi pemasaran produk hasil olahan daur ulang.</li>
-                        <li>Akses pendanaan untuk inisiatif ramah lingkungan di pedesaan.</li>
-                    </ul>
-
-                    <h3 class="font-heading font-bold text-2xl text-zinc-900 mt-10 mb-4">Narasumber</h3>
-                    <ul class="list-disc pl-6 space-y-2 mt-4">
-                        <li><strong class="text-zinc-900">Dr. Ir. Budi Santoso</strong> - Pakar Ekonomi Lingkungan Universitas Halu Oleo</li>
-                        <li><strong class="text-zinc-900">Siti Aminah</strong> - Praktisi Desa Mandiri Energi</li>
-                        <li><strong class="text-zinc-900">Ketua Komdes Sultra</strong></li>
-                    </ul>
-
-                    <p class="mt-6 bg-primary-50 text-primary-900 p-4 rounded-xl border border-primary-100">Seminar ini tidak dipungut biaya (Gratis) dan terbuka untuk umum. Mengingat kapasitas ruangan yang terbatas, peserta diharapkan hadir 30 menit sebelum acara dimulai.</p>
+                
+                <div class="flex gap-4 items-start">
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-zinc-100 text-primary-500">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">Lokasi</h4>
+                        <p class="text-zinc-900 font-semibold">{{ $event->location ?? 'Virtual' }}</p>
+                        <p class="text-zinc-500 text-sm">Offline / Online</p>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Description / Body Content -->
+            <div class="text-zinc-600 leading-relaxed space-y-6 text-lg prose max-w-none">
+                {!! $event->content ?? $event->description !!}
+            </div>
 
                 <!-- Footer / CTA -->
                 <div class="mt-12 pt-8 border-t border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-4">

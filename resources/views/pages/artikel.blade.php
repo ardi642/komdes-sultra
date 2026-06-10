@@ -111,117 +111,55 @@
 
                 <!-- Horizontal Article Cards -->
                 <div class="space-y-6 mb-12">
-                    
-                    <!-- Article Item 1 -->
+                    @forelse($posts as $post)
+                    <!-- Article Item -->
                     <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row group">
                         <div class="relative md:w-2/5 h-64 md:h-auto overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1455390582262-044cdead2708?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Menulis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1455390582262-044cdead2708?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         </div>
                         <div class="p-6 md:p-8 flex flex-col justify-center md:w-3/5">
+                            @if($post->category)
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="bg-primary-50 text-primary-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Esai</span>
+                                <span class="bg-primary-50 text-primary-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">{{ $post->category->name }}</span>
                             </div>
+                            @endif
                             
-                            <!-- Isu Badge Mockup (Conditionally Rendered) -->
-                            <a href="{{ route('isu.detail') }}" class="inline-flex items-center gap-1.5 px-2.5 py-1 mb-2 rounded-lg bg-primary-50 text-primary-700 text-xs font-bold border border-primary-100 hover:bg-primary-100 transition-colors w-fit">
+                            @if($post->issues->isNotEmpty())
+                            <a href="{{ route('isu.detail', $post->issues->first()->slug) }}" class="inline-flex items-center gap-1.5 px-2.5 py-1 mb-2 rounded-lg bg-primary-50 text-primary-700 text-xs font-bold border border-primary-100 hover:bg-primary-100 transition-colors w-fit">
                                 <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
-                                Ekonomi Kreatif Pedesaan
+                                {{ $post->issues->first()->title }}
                             </a>
+                            @endif
 
-                            <a href="{{ route('artikel.detail') }}" class="block group-hover:text-primary-600 transition-colors">
-                                <h2 class="font-heading text-2xl font-bold text-zinc-900 mb-3 leading-snug">Membangun Kemandirian Ekonomi Desa Lewat Koperasi Modern</h2>
+                            <a href="{{ route('artikel.detail', $post->slug) }}" class="block group-hover:text-primary-600 transition-colors">
+                                <h2 class="font-heading text-2xl font-bold text-zinc-900 mb-3 leading-snug">{{ $post->title }}</h2>
                             </a>
-                            <p class="text-zinc-500 mb-6 line-clamp-3 text-sm leading-relaxed">Koperasi desa tidak lagi bisa hanya bergantung pada iuran anggota tradisional. Di era digital, inovasi dan digitalisasi pelayanan menjadi kunci utama kebangkitan ekonomi pedesaan.</p>
+                            <p class="text-zinc-500 mb-6 line-clamp-3 text-sm leading-relaxed">{{ Str::limit(strip_tags($post->content), 200) }}</p>
                             
                             <div class="flex items-center justify-between mt-auto">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-full bg-zinc-200 overflow-hidden">
-                                        <img src="https://ui-avatars.com/api/?name=Budi+Santoso&background=random" alt="Budi Santoso" class="w-full h-full object-cover">
+                                        <img src="https://ui-avatars.com/api/?name={{ urlencode($post->author->name ?? 'Admin') }}&background=random" alt="{{ $post->author->name ?? 'Admin' }}" class="w-full h-full object-cover">
                                     </div>
                                     <div class="text-sm">
-                                        <p class="font-semibold text-zinc-900">Budi Santoso</p>
-                                        <p class="text-zinc-500 text-xs">Peneliti Senior</p>
+                                        <p class="font-semibold text-zinc-900">{{ $post->author->name ?? 'Admin' }}</p>
+                                        <p class="text-zinc-500 text-xs">Penulis</p>
                                     </div>
                                 </div>
-                                <span class="text-xs text-zinc-400">14 Mei 2024</span>
+                                <span class="text-xs text-zinc-400">{{ $post->published_at->format('d M Y') }}</span>
                             </div>
                         </div>
                     </article>
-
-                    <!-- Article Item 2 -->
-                    <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row group">
-                        <div class="relative md:w-2/5 h-64 md:h-auto overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Analisis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        </div>
-                        <div class="p-6 md:p-8 flex flex-col justify-center md:w-3/5">
-                            <div class="flex items-center gap-3 mb-4">
-                                <span class="bg-primary-50 text-primary-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Opini</span>
-                            </div>
-                            <a href="{{ route('artikel.detail') }}" class="block group-hover:text-primary-600 transition-colors">
-                                <h2 class="font-heading text-2xl font-bold text-zinc-900 mb-3 leading-snug">Perempuan dan Akses Keadilan Ekologis di Pesisir Sultra</h2>
-                            </a>
-                            <p class="text-zinc-500 mb-6 line-clamp-3 text-sm leading-relaxed">Dampak perubahan iklim dirasakan secara tidak proporsional oleh perempuan pesisir. Sudah saatnya kebijakan mitigasi bencana melibatkan mereka dalam proses pengambilan keputusan strategis.</p>
-                            
-                            <div class="flex items-center justify-between mt-auto">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-zinc-200 overflow-hidden">
-                                        <img src="https://ui-avatars.com/api/?name=Siti+Aisyah&background=random" alt="Siti Aisyah" class="w-full h-full object-cover">
-                                    </div>
-                                    <div class="text-sm">
-                                        <p class="font-semibold text-zinc-900">Siti Aisyah</p>
-                                        <p class="text-zinc-500 text-xs">Aktivis HAM</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-zinc-400">10 Mei 2024</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Article Item 3 -->
-                    <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row group">
-                        <div class="relative md:w-2/5 h-64 md:h-auto overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Buku Panduan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        </div>
-                        <div class="p-6 md:p-8 flex flex-col justify-center md:w-3/5">
-                            <div class="flex items-center gap-3 mb-4">
-                                <span class="bg-primary-50 text-primary-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Panduan</span>
-                            </div>
-                            <a href="{{ route('artikel.detail') }}" class="block group-hover:text-primary-600 transition-colors">
-                                <h2 class="font-heading text-2xl font-bold text-zinc-900 mb-3 leading-snug">Langkah Taktis Menyusun RPJMDes yang Inklusif</h2>
-                            </a>
-                            <p class="text-zinc-500 mb-6 line-clamp-3 text-sm leading-relaxed">Panduan praktis bagi aparatur desa dan BPD dalam menyusun Rencana Pembangunan Jangka Menengah Desa yang mengakomodasi kepentingan penyandang disabilitas dan kelompok marginal.</p>
-                            
-                            <div class="flex items-center justify-between mt-auto">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-zinc-200 overflow-hidden">
-                                        <img src="https://ui-avatars.com/api/?name=Admin+Komdes&background=random" alt="Admin" class="w-full h-full object-cover">
-                                    </div>
-                                    <div class="text-sm">
-                                        <p class="font-semibold text-zinc-900">Divisi Advokasi</p>
-                                        <p class="text-zinc-500 text-xs">Komdes Sultra</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-zinc-400">05 Mei 2024</span>
-                            </div>
-                        </div>
-                    </article>
-                    
+                    @empty
+                    <div class="text-center py-12">
+                        <p class="text-zinc-500">Belum ada artikel yang diterbitkan.</p>
+                    </div>
+                    @endforelse
                 </div>
 
                 <!-- Pagination -->
-                <div class="flex justify-center mb-12">
-                    <nav class="inline-flex items-center gap-1 bg-white p-1 rounded-full border border-zinc-200 shadow-sm">
-                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 transition-colors">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                        </a>
-                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-primary-600 text-white font-bold shadow-sm">1</a>
-                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-700 hover:bg-zinc-100 transition-colors">2</a>
-                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-700 hover:bg-zinc-100 transition-colors">3</a>
-                        <span class="w-10 h-10 flex items-center justify-center text-zinc-400">...</span>
-                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 transition-colors">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </a>
-                    </nav>
+                <div class="mt-12">
+                    {{ $posts->links() }}
                 </div>
             </div>
 

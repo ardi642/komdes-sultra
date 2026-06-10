@@ -85,116 +85,48 @@
 <div class="py-28 lg:py-36 bg-white">
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
         
-        <!-- Category Section: Tata Kelola Desa -->
-        <section id="topik-tata-kelola" class="scroll-mt-10">
+        <!-- Semua Publikasi Section -->
+        <section id="semua-publikasi" class="scroll-mt-10">
             <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 border-b border-zinc-200 pb-4 gap-4">
-                <h2 class="font-heading font-bold text-2xl md:text-3xl text-[#165a3f] uppercase tracking-widest">Tata Kelola Desa</h2>
-                <a href="{{ route('riset.kategori') }}" class="font-bold text-sm text-zinc-600 hover:text-primary-600 transition-colors flex items-center gap-1 pb-1">
-                    Lihat semua publikasi <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
-                </a>
+                <h2 class="font-heading font-bold text-2xl md:text-3xl text-[#165a3f] uppercase tracking-widest">Semua Publikasi Riset</h2>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-                <!-- Card 1 -->
+                @forelse($posts as $post)
+                <!-- Card -->
                 <article class="flex flex-col group cursor-pointer h-full">
-                    <div class="relative w-full aspect-[4/3] overflow-hidden mb-4 bg-zinc-100">
-                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hutan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <p class="text-primary-600 font-bold text-xs uppercase tracking-wider mb-2">Policy Brief</p>
-                    <a href="{{ route('riset.detail') }}" class="block">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 leading-snug group-hover:text-primary-600 transition-colors mb-3">Deforestasi Lahan Kritis di Konawe Utara</h3>
-                    </a>
-                    <p class="text-zinc-600 text-sm line-clamp-3 mb-4 flex-grow">Analisis data satelit mengenai laju pembukaan lahan hutan yang berdampak pada krisis hidrologi dan mitigasi bencananya.</p>
-                    <div class="text-xs font-semibold text-zinc-500 pt-3">Divisi Lingkungan &bull; 12 Mei 2024</div>
-                </article>
-
-                <!-- Card 2 -->
-                <article class="flex flex-col group cursor-pointer h-full">
-                    <div class="relative w-full aspect-[4/3] overflow-hidden mb-4 bg-zinc-100">
-                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sungai" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <p class="text-primary-600 font-bold text-xs uppercase tracking-wider mb-2">Jurnal</p>
-                    <a href="{{ route('riset.detail') }}" class="block">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 leading-snug group-hover:text-primary-600 transition-colors mb-3">Kualitas Air Sungai Landawe Pasca Tambang</h3>
-                    </a>
-                    <p class="text-zinc-600 text-sm line-clamp-3 mb-4 flex-grow">Pengujian kadar logam berat di sepanjang aliran sungai yang menjadi tumpuan warga akibat resiko iklim ekstrem.</p>
-                    <div class="text-xs font-semibold text-zinc-500 pt-3">Tim Riset Independen &bull; 05 Apr 2024</div>
-                </article>
-
-                <!-- Card 3 -->
-                <article class="flex flex-col group cursor-pointer h-full">
-                    <div class="relative w-full aspect-[4/3] overflow-hidden mb-4 bg-zinc-100">
-                        <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kebakaran" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <p class="text-primary-600 font-bold text-xs uppercase tracking-wider mb-2">Laporan Tahunan</p>
-                    <a href="{{ route('riset.detail') }}" class="block">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 leading-snug group-hover:text-primary-600 transition-colors mb-3">Rekapitulasi Emisi Karbon Sultra 2023</h3>
-                    </a>
-                    <p class="text-zinc-600 text-sm line-clamp-3 mb-4 flex-grow">Perhitungan estimasi peningkatan emisi dari sektor ekstraktif di wilayah Sulawesi Tenggara dan dampaknya terhadap masyarakat lokal.</p>
-                    <div class="text-xs font-semibold text-zinc-500 pt-3">Komdes Sultra &bull; Jan 2024</div>
-                </article>
-
-                <!-- Card 4 -->
-                <article class="flex flex-col group cursor-pointer h-full">
-                    <div class="relative w-full aspect-[4/3] overflow-hidden mb-4 bg-zinc-100 flex items-center justify-center p-6 border border-zinc-200">
-                        <!-- Book Cover Mockup -->
-                        <div class="w-28 h-36 bg-white shadow-xl border border-zinc-200 flex flex-col p-2 group-hover:-translate-y-2 transition-transform duration-300">
-                            <div class="h-2.5 w-full bg-primary-200 mb-1.5"></div>
-                            <div class="h-2.5 w-2/3 bg-primary-200 mb-4"></div>
-                            <div class="w-full bg-zinc-50 flex-grow rounded flex items-center justify-center text-zinc-400">
-                                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    <div class="relative w-full aspect-[4/3] overflow-hidden mb-4 bg-zinc-100 {{ !$post->cover_image ? 'flex items-center justify-center p-6 border border-zinc-200' : '' }}">
+                        @if($post->cover_image)
+                            <img src="{{ asset($post->cover_image) }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        @else
+                            <!-- Book Cover Mockup if no image -->
+                            <div class="w-28 h-36 bg-white shadow-xl border border-zinc-200 flex flex-col p-2 group-hover:-translate-y-2 transition-transform duration-300">
+                                <div class="h-2.5 w-full bg-primary-200 mb-1.5"></div>
+                                <div class="h-2.5 w-2/3 bg-primary-200 mb-4"></div>
+                                <div class="w-full bg-zinc-50 flex-grow rounded flex items-center justify-center text-zinc-400">
+                                    <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
-                    <p class="text-primary-600 font-bold text-xs uppercase tracking-wider mb-2">Buku Panduan</p>
-                    <a href="{{ route('riset.detail') }}" class="block">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 leading-snug group-hover:text-primary-600 transition-colors mb-3">Mitigasi Bencana Berbasis Desa</h3>
+                    @if($post->category)
+                    <p class="text-primary-600 font-bold text-xs uppercase tracking-wider mb-2">{{ $post->category->name }}</p>
+                    @endif
+                    <a href="{{ route('riset.detail', $post->slug) }}" class="block">
+                        <h3 class="font-heading font-bold text-lg text-zinc-900 leading-snug group-hover:text-primary-600 transition-colors mb-3">{{ $post->title }}</h3>
                     </a>
-                    <p class="text-zinc-600 text-sm line-clamp-3 mb-4 flex-grow">Panduan lengkap bagi aparatur desa dalam memetakan potensi bencana hidrometeorologi secara komprehensif.</p>
-                    <div class="text-xs font-semibold text-zinc-500 pt-3">Divisi Pemberdayaan &bull; Okt 2023</div>
+                    <p class="text-zinc-600 text-sm line-clamp-3 mb-4 flex-grow">{{ Str::limit(strip_tags($post->content), 150) }}</p>
+                    <div class="text-xs font-semibold text-zinc-500 pt-3">{{ $post->author->name ?? 'Admin' }} &bull; {{ $post->published_at->format('M Y') }}</div>
                 </article>
+                @empty
+                <div class="col-span-1 sm:col-span-2 lg:col-span-4 text-center py-12">
+                    <p class="text-zinc-500">Belum ada riset dan publikasi yang diterbitkan.</p>
+                </div>
+                @endforelse
             </div>
-        </section>
 
-        <!-- Category Section: Lingkungan Hidup -->
-        <section id="topik-lingkungan" class="scroll-mt-10">
-            <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 border-b border-zinc-200 pb-4 gap-4">
-                <h2 class="font-heading font-bold text-2xl md:text-3xl text-[#165a3f] uppercase tracking-widest">Lingkungan Hidup</h2>
-                <a href="{{ route('riset.kategori') }}" class="font-bold text-sm text-zinc-600 hover:text-primary-600 transition-colors flex items-center gap-1 pb-1">
-                    Lihat semua publikasi <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
-                </a>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-                <!-- Card 1 -->
-                <article class="flex flex-col group cursor-pointer h-full">
-                    <div class="relative w-full aspect-[4/3] overflow-hidden mb-4 bg-zinc-100">
-                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Laut" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <p class="text-primary-600 font-bold text-xs uppercase tracking-wider mb-2">Jurnal</p>
-                    <a href="{{ route('riset.detail') }}" class="block">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 leading-snug group-hover:text-primary-600 transition-colors mb-3">Dampak Penambangan Pasir Laut terhadap Terumbu Karang Wawonii</h3>
-                    </a>
-                    <p class="text-zinc-600 text-sm line-clamp-3 mb-4 flex-grow">Investigasi menyeluruh atas berkurangnya tangkapan nelayan akibat sedimentasi pesisir yang merusak jaring rantai makanan.</p>
-                    <div class="text-xs font-semibold text-zinc-500 pt-3">Universitas Haluoleo &bull; Feb 2024</div>
-                </article>
-
-                <!-- Card 2 -->
-                <article class="flex flex-col group cursor-pointer h-full">
-                    <div class="relative w-full aspect-[4/3] overflow-hidden mb-4 bg-zinc-100">
-                        <img src="https://images.unsplash.com/photo-1574046664972-e565980fcbc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mangrove" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <p class="text-primary-600 font-bold text-xs uppercase tracking-wider mb-2">Policy Brief</p>
-                    <a href="{{ route('riset.detail') }}" class="block">
-                        <h3 class="font-heading font-bold text-lg text-zinc-900 leading-snug group-hover:text-primary-600 transition-colors mb-3">Strategi Perlindungan Hutan Mangrove Teluk Kendari</h3>
-                    </a>
-                    <p class="text-zinc-600 text-sm line-clamp-3 mb-4 flex-grow">Rekomendasi penetapan kawasan konservasi mangrove untuk mencegah intrusi air laut dan abrasi lahan warga.</p>
-                    <div class="text-xs font-semibold text-zinc-500 pt-3">Divisi Hukum & Advokasi &bull; Nov 2023</div>
-                </article>
-
-                <!-- Empty space to simulate partial row -->
-                <div class="hidden lg:block"></div>
-                <div class="hidden lg:block"></div>
+            <div class="mt-12">
+                {{ $posts->links() }}
             </div>
         </section>
 
