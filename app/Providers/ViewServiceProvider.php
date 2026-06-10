@@ -25,7 +25,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // View Composer untuk Sidebar di halaman publik (berita, artikel, riset, siaran_pers)
-        View::composer(['pages.berita', 'pages.artikel', 'pages.riset', 'pages.siaran-pers'], function ($view) {
+        View::composer(['pages.berita', 'pages.artikel', 'pages.riset', 'pages.siaran-pers', 'pages.berita-detail', 'pages.artikel-detail', 'pages.riset-detail', 'pages.siaran-pers-detail'], function ($view) {
             // 1. Kategori beserta jumlah postingan yang terpublikasi
             $categories = Category::withCount(['posts' => function ($query) {
                 $query->published();

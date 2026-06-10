@@ -1,9 +1,19 @@
+@php
+    $baseUrl = $searchRoute ?? request()->url();
+    $buildUrl = function($updates) use ($baseUrl) {
+        $query = array_merge(request()->query(), $updates);
+        $query = array_filter($query, function($value) {
+            return !is_null($value) && $value !== '';
+        });
+        return empty($query) ? $baseUrl : $baseUrl . '?' . http_build_query($query);
+    };
+@endphp
 <div class="sticky top-28 space-y-8">
     
     <!-- Search Widget -->
     <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
         <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Cari Tulisan</h3>
-        <form action="{{ request()->url() }}" method="GET" class="relative">
+        <form action="{{ $searchRoute ?? request()->url() }}" method="GET" class="relative">
             <!-- Pertahankan query string lainnya -->
             @foreach(request()->except('search', 'page') as $key => $value)
                 @if(is_array($value))
@@ -22,6 +32,26 @@
         </form>
     </div>
 
+    <!-- Related News Widget (Hanya untuk halaman detail) -->
+    @if(isset($relatedPosts) && $relatedPosts->count() > 0)
+    <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
+        <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Terkait</h3>
+        <div class="space-y-4">
+            @foreach($relatedPosts as $related)
+            <a href="{{ url(request()->segment(1) . '/' . $related->slug) }}" class="flex gap-4 group">
+                <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-zinc-100">
+                    <img src="{{ $related->cover_image ? asset($related->cover_image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80' }}" alt="{{ $related->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div>
+                    <h4 class="font-bold text-zinc-900 text-sm leading-snug line-clamp-2 group-hover:text-primary-600 transition-colors mb-1">{{ $related->title }}</h4>
+                    <span class="text-xs text-zinc-500">{{ $related->published_at->format('d M Y') }}</span>
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+    @endif
+
     <!-- Categories Widget -->
     @if($categories->count() > 0)
     <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
@@ -29,7 +59,7 @@
         <ul class="space-y-3">
             @foreach($categories as $cat)
             <li>
-                <a href="{{ request()->fullUrlWithQuery(['category' => $cat->slug, 'page' => null]) }}" class="flex items-center justify-between group">
+                <a href="{{ $buildUrl(['category' => $cat->slug, 'page' => null]) }}" class="flex items-center justify-between group">
                     <span class="text-sm transition-colors flex items-center gap-2 {{ request('category') == $cat->slug ? 'text-primary-600 font-bold' : 'text-zinc-600 group-hover:text-primary-600' }}">
                         <svg class="w-4 h-4 text-secondary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
                         {{ $cat->name }}
@@ -57,7 +87,7 @@
                     $isActive = in_array($tag->slug, $activeTags);
                     $newTags = $isActive ? array_diff($activeTags, [$tag->slug]) : array_merge($activeTags, [$tag->slug]);
                 @endphp
-                <a href="{{ request()->fullUrlWithQuery(['tags' => $newTags, 'page' => null]) }}" 
+                <a href="{{ $buildUrl(['tags' => $newTags, 'page' => null]) }}" 
                    class="px-3 py-1.5 text-xs rounded-lg transition-colors border {{ $isActive ? 'bg-primary-500 border-primary-500 text-white' : 'bg-zinc-50 border-zinc-200 text-zinc-600 hover:border-primary-500 hover:text-primary-600' }}"
                    @if($index >= 10) x-show="showAllTags" x-transition style="display: none;" @endif>
                     #{{ $tag->name }}
@@ -96,27 +126,23 @@
                      x-transition:enter-end="opacity-100 translate-y-0"
                      class="bg-white border-t border-zinc-100" style="display: {{ $isYearActive ? 'block' : 'none' }};">
                     <ul class="p-2 space-y-1">
-                        
-                        <!-- Semua Bulan untuk Tahun Ini -->
-                        <li>
-                            <a href="{{ request()->fullUrlWithQuery(['year' => $year, 'month' => null, 'page' => null]) }}" class="flex justify-between items-center px-3 py-2 text-sm {{ $isYearActive && !request('month') ? 'text-primary-600 bg-primary-50 font-bold' : 'text-zinc-600 hover:text-primary-600 hover:bg-primary-50' }} rounded-lg transition-colors group">
-                                <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full {{ $isYearActive && !request('month') ? 'bg-primary-500' : 'bg-zinc-300 group-hover:bg-primary-500' }} transition-colors"></span>Semua Bulan</span> 
-                                <span class="text-xs font-medium {{ $isYearActive && !request('month') ? 'bg-white text-primary-600' : 'bg-zinc-100 text-zinc-500 group-hover:bg-white group-hover:text-primary-600' }} px-2 py-0.5 rounded-full">{{ $months->sum('published') }}</span>
-                            </a>
-                        </li>
-
                         @foreach($months as $monthData)
                         @php
                             $monthName = \Carbon\Carbon::create()->month($monthData->month)->locale('id')->translatedFormat('F');
                             $isMonthActive = request('year') == $year && request('month') == str_pad($monthData->month, 2, '0', STR_PAD_LEFT);
                         @endphp
                         <li>
-                            <a href="{{ request()->fullUrlWithQuery(['year' => $year, 'month' => str_pad($monthData->month, 2, '0', STR_PAD_LEFT), 'page' => null]) }}" class="flex justify-between items-center px-3 py-2 text-sm {{ $isMonthActive ? 'text-primary-600 bg-primary-50 font-bold' : 'text-zinc-600 hover:text-primary-600 hover:bg-primary-50' }} rounded-lg transition-colors group">
+                            <a href="{{ $buildUrl(['year' => $year, 'month' => str_pad($monthData->month, 2, '0', STR_PAD_LEFT), 'page' => null]) }}" class="flex justify-between items-center px-3 py-2 text-sm {{ $isMonthActive ? 'text-primary-600 bg-primary-50 font-bold' : 'text-zinc-600 hover:text-primary-600 hover:bg-primary-50' }} rounded-lg transition-colors group">
                                 <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full {{ $isMonthActive ? 'bg-primary-500' : 'bg-zinc-300 group-hover:bg-primary-500' }} transition-colors"></span>{{ $monthName }}</span> 
                                 <span class="text-xs font-medium {{ $isMonthActive ? 'bg-white text-primary-600' : 'bg-zinc-100 text-zinc-500 group-hover:bg-white group-hover:text-primary-600' }} px-2 py-0.5 rounded-full">{{ $monthData->published }}</span>
                             </a>
                         </li>
                         @endforeach
+
+                        <!-- Lihat Semua Bulan untuk Tahun Ini -->
+                        <li>
+                            <a href="{{ $buildUrl(['year' => $year, 'month' => null, 'page' => null]) }}" class="w-full text-center block mt-2 text-xs font-semibold {{ $isYearActive && !request('month') ? 'text-primary-700 bg-primary-50 py-2 rounded-lg' : 'text-primary-600 hover:text-primary-700 py-2' }}">Lihat Semua Bulan Tahun {{ $year }}...</a>
+                        </li>
                     </ul>
                 </div>
             </div>
