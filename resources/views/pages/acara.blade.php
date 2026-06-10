@@ -106,7 +106,7 @@
                 <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
                     <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Acara Mendatang</h3>
                     <div class="space-y-4">
-                        <a href="{{ route('acara.detail') }}" class="flex gap-4 group">
+                        <a href="#" class="flex gap-4 group">
                             <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0">
                                 <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumbnail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                             </div>
@@ -115,7 +115,7 @@
                                 <p class="text-xs text-primary-600 font-medium">20 Mei 2024</p>
                             </div>
                         </a>
-                        <a href="{{ route('acara.detail') }}" class="flex gap-4 group">
+                        <a href="#" class="flex gap-4 group">
                             <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0">
                                 <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumbnail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                             </div>

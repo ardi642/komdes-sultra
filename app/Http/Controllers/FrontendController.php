@@ -24,25 +24,25 @@ class FrontendController extends Controller
 
     public function berita()
     {
-        $posts = Post::berita()->published()->latest('published_at')->paginate(9);
+        $posts = Post::berita()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(9)->withQueryString();
         return view('pages.berita', compact('posts'));
     }
 
     public function artikel()
     {
-        $posts = Post::artikel()->published()->latest('published_at')->paginate(9);
+        $posts = Post::artikel()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(9)->withQueryString();
         return view('pages.artikel', compact('posts'));
     }
 
     public function riset()
     {
-        $posts = Post::riset()->published()->latest('published_at')->paginate(9);
+        $posts = Post::riset()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(9)->withQueryString();
         return view('pages.riset', compact('posts'));
     }
 
     public function siaranPers()
     {
-        $posts = Post::siaranPers()->published()->latest('published_at')->paginate(9);
+        $posts = Post::siaranPers()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(9)->withQueryString();
         return view('pages.siaran-pers', compact('posts'));
     }
 

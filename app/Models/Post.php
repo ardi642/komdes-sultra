@@ -64,4 +64,36 @@ class Post extends Model
     {
         return $query->where('is_published', true)->whereNotNull('published_at')->where('published_at', '<=', now());
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                      ->orWhere('content', 'like', '%' . $search . '%');
+            });
+        });
+
+        $query->when($filters['category'] ?? false, function ($query, $category) {
+            $query->whereHas('category', function ($query) use ($category) {
+                $query->where('slug', $category);
+            });
+        });
+
+        $query->when($filters['year'] ?? false, function ($query, $year) {
+            $query->whereYear('published_at', $year);
+        });
+
+        $query->when($filters['month'] ?? false, function ($query, $month) {
+            $query->whereMonth('published_at', $month);
+        });
+
+        $query->when($filters['tags'] ?? false, function ($query, $tags) {
+            if (is_array($tags)) {
+                $query->whereHas('tags', function ($query) use ($tags) {
+                    $query->whereIn('slug', $tags);
+                });
+            }
+        });
+    }
 }
