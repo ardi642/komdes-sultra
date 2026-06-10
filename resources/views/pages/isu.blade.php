@@ -35,6 +35,8 @@
                 <div class="w-20 h-20 mb-5 text-[#165a3f] group-hover:scale-110 transition-transform duration-500 flex items-center justify-center">
                     @if($issue->cover_image)
                     <img src="{{ asset($issue->cover_image) }}" alt="{{ $issue->title }}" class="w-full h-full object-cover rounded-full">
+                    @elseif($issue->icon_svg)
+                    <div class="w-full h-full [&>svg]:w-full [&>svg]:h-full">{!! $issue->icon_svg !!}</div>
                     @else
                     <svg class="w-full h-full" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
                     @endif

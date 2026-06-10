@@ -97,7 +97,63 @@ class FrontendController extends Controller
             abort(404);
         }
         
-        $relatedPosts = $issue->posts()->published()->latest('published_at')->take(4)->get();
-        return view('pages.isu-detail', compact('issue', 'relatedPosts'));
+        $query = $issue->posts()->published();
+
+        // Tipe Konten
+        if (request()->filled('type')) {
+            $query->where('type', request('type'));
+        }
+
+        // Tahun
+        if (request()->filled('tahun')) {
+            $query->whereYear('published_at', request('tahun'));
+        }
+
+        // Pencarian Teks
+        if (request()->filled('search')) {
+            $search = request('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%");
+            });
+        }
+
+        // Tag (Multiple)
+        if (request()->filled('tags')) {
+            $tags = (array) request('tags');
+            $query->whereHas('tags', function ($q) use ($tags) {
+                $q->whereIn('slug', $tags);
+            });
+        }
+
+        $relatedPosts = $query->latest('published_at')->paginate(12)->withQueryString();
+
+        // Dynamic years for this issue's posts
+        $availableYears = $issue->posts()->published()
+            ->selectRaw('YEAR(published_at) as year')
+            ->groupBy('year')
+            ->orderBy('year', 'desc')
+            ->pluck('year');
+
+        // Dynamic tags for this issue's posts
+        $availableTags = \App\Models\Tag::whereHas('posts', function($q) use ($issue) {
+            $q->whereHas('issues', function($q2) use ($issue) {
+                $q2->where('issues.id', $issue->id);
+            })->published();
+        })->get();
+
+        // Type counts for tabs (unfiltered by current type, but filtered by other active filters to be accurate, or just total for the issue)
+        // Usually, tabs show the total counts for the issue regardless of current filter.
+        $typeCountsRaw = $issue->posts()->published()->selectRaw('type, count(*) as total')->groupBy('type')->pluck('total', 'type')->toArray();
+        $typeCounts = [
+            'semua' => array_sum($typeCountsRaw),
+            'berita' => $typeCountsRaw['berita'] ?? 0,
+            'artikel' => $typeCountsRaw['artikel'] ?? 0,
+            'riset' => $typeCountsRaw['riset'] ?? 0,
+            'siaran_pers' => $typeCountsRaw['siaran_pers'] ?? 0,
+            'acara' => $typeCountsRaw['acara'] ?? 0,
+        ];
+
+        return view('pages.isu-detail', compact('issue', 'relatedPosts', 'availableYears', 'availableTags', 'typeCounts'));
     }
 }
