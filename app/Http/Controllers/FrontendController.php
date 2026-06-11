@@ -25,8 +25,11 @@ class FrontendController extends Controller
 
     public function tentangKami()
     {
-        $members = Member::where('is_active', true)->orderBy('order_number')->get();
-        return view('pages.tentang-kami', compact('members'));
+        $members = \App\Models\Member::where('is_active', true)
+                                     ->orderBy('order_number')
+                                     ->get();
+        $about = \App\Models\About::first();
+        return view('pages.tentang-kami', compact('members', 'about'));
     }
 
     public function anggota()

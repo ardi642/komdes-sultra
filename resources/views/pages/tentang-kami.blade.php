@@ -33,7 +33,7 @@
                 <div class="w-32 h-[1px] bg-white mx-auto mb-6 opacity-50"></div>
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6 tracking-widest uppercase text-white drop-shadow-md">Tentang Kami</h1>
                 <p class="text-base md:text-lg text-white/90 leading-relaxed drop-shadow-sm font-light">
-                    Mengenal lebih dekat KOMUNITAS MASYARAKAT DESA-SULAWESI TENGGARA (Komdes Sultra) sebagai wadah kolaborasi untuk kelestarian alam dan kesejahteraan masyarakat pesisir.
+                    {{ $about?->hero_description ?? 'Mengenal lebih dekat KOMUNITAS MASYARAKAT DESA-SULAWESI TENGGARA (Komdes Sultra) sebagai wadah kolaborasi untuk kelestarian alam dan kesejahteraan masyarakat pesisir.' }}
                 </p>
             </div>
         </div>
@@ -51,8 +51,7 @@
                 <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest mb-8">Profil Singkat Komdes Sultra</h2>
                 
                 <div class="text-zinc-700 text-justify md:text-left space-y-6 leading-loose text-base md:text-lg font-light">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim.</p>
-                    <p>Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.</p>
+                    {!! nl2br(e($about?->profil_singkat ?? 'Belum ada profil singkat.')) !!}
                 </div>
             </div>
         </div>
@@ -68,8 +67,7 @@
                 <h2 class="text-xl md:text-2xl font-heading font-bold text-white uppercase tracking-widest mb-8">Mengapa Komdes Sultra</h2>
                 
                 <div class="text-white text-justify md:text-left space-y-6 leading-loose text-base md:text-lg font-light opacity-95">
-                    <p><strong class="font-bold">Kolaborasi</strong>, <strong class="font-bold">Keberlanjutan</strong>, dan <strong class="font-bold">Pemberdayaan</strong> adalah tiga pilar utama yang mendorong terbentuknya KOMUNITAS MASYARAKAT DESA-SULAWESI TENGGARA.</p>
-                    <p>Curabitur aliquet quam id dui posuere blandit. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla quis lorem ut libero malesuada feugiat. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+                    {!! nl2br(e($about?->mengapa_komdes ?? 'Belum ada penjelasan mengapa Komdes Sultra.')) !!}
                 </div>
             </div>
         </div>
@@ -90,22 +88,18 @@
                     <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest mb-6">Tujuan Komdes Sultra</h2>
                     
                     <p class="italic text-lg mb-6 font-medium text-primary-600">
-                        "Sebagai ruang belajar, berbagi ide dan pengetahuan serta melahirkan aksi dan produk belajar terkait pesisir dan pulau kecil di Sulawesi Tenggara"
+                        "{{ $about?->tujuan_quote ?? 'Sebagai ruang belajar, berbagi ide dan pengetahuan serta melahirkan aksi dan produk belajar terkait pesisir dan pulau kecil di Sulawesi Tenggara' }}"
                     </p>
                     
                     <ul class="space-y-4 text-zinc-700 text-base md:text-lg font-light md:max-w-3xl w-full">
-                        <li class="flex flex-row md:flex-row-reverse items-start gap-4">
-                            <svg class="w-6 h-6 mt-1 flex-shrink-0 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            <span class="text-justify md:text-right leading-loose flex-grow">Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta.</span>
-                        </li>
-                        <li class="flex flex-row md:flex-row-reverse items-start gap-4">
-                            <svg class="w-6 h-6 mt-1 flex-shrink-0 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            <span class="text-justify md:text-right leading-loose flex-grow">Vivamus suscipit tortor eget felis porttitor volutpat.</span>
-                        </li>
-                        <li class="flex flex-row md:flex-row-reverse items-start gap-4">
-                            <svg class="w-6 h-6 mt-1 flex-shrink-0 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            <span class="text-justify md:text-right leading-loose flex-grow">Pellentesque in ipsum id orci porta dapibus.</span>
-                        </li>
+                        @if($about && is_array($about->tujuan_list))
+                            @foreach($about->tujuan_list as $tujuan)
+                            <li class="flex flex-row md:flex-row-reverse items-start gap-4">
+                                <svg class="w-6 h-6 mt-1 flex-shrink-0 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-justify md:text-right leading-loose flex-grow">{{ $tujuan }}</span>
+                            </li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -120,22 +114,14 @@
                     <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest mb-8">Intensi Bersama Komdes Sultra</h2>
                     
                     <ul class="space-y-6 text-zinc-700 text-base md:text-lg font-light">
-                        <li class="flex items-start gap-4">
-                            <svg class="w-6 h-6 mt-1 flex-shrink-0 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            <span class="text-justify md:text-left leading-loose">Mengungkap fakta dan realitas kerentanan pesisir akibat perubahan iklim, pembangunan dan pemanfaatan sumberdaya alam ekstraktif.</span>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <svg class="w-6 h-6 mt-1 flex-shrink-0 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            <span class="text-justify md:text-left leading-loose">Belajar bersama praktek lokal terkait adaptasi, mitigasi dan risiliansi masyarakat pesisir terhadap perubahan untuk bisa diadopsi.</span>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <svg class="w-6 h-6 mt-1 flex-shrink-0 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            <span class="text-justify md:text-left leading-loose">Mengembangkan bersama mekanisme umpan balik dan keterlibatan aktif masyarakat dalam semua perencanaan pembangunan.</span>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <svg class="w-6 h-6 mt-1 flex-shrink-0 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            <span class="text-justify md:text-left leading-loose">Membangun dan mempromosikan aksi, produk, serta gerakan masyarakat pesisir untuk pengelolaan SDA yang lestari.</span>
-                        </li>
+                        @if($about && is_array($about->intensi_list))
+                            @foreach($about->intensi_list as $intensi)
+                            <li class="flex items-start gap-4">
+                                <svg class="w-6 h-6 mt-1 flex-shrink-0 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-justify md:text-left leading-loose">{{ $intensi }}</span>
+                            </li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -152,39 +138,20 @@
             <h2 class="text-xl md:text-2xl font-heading font-bold text-white uppercase tracking-widest mb-12">Sikap dan Deklarasi Komdes Sultra</h2>
             
             <div class="space-y-4 max-w-6xl">
-                <!-- Item 1 -->
-                <div class="flex flex-col md:flex-row">
-                    <div class="w-16 h-16 md:w-24 md:h-auto flex-shrink-0 border border-white flex items-center justify-center text-white font-bold text-2xl mr-4 md:mr-6 mb-4 md:mb-0">
-                        1.
+                @if($about && is_array($about->sikap_list))
+                    @foreach($about->sikap_list as $index => $sikap)
+                    <div class="flex flex-col md:flex-row">
+                        <div class="w-16 h-16 md:w-24 md:h-auto flex-shrink-0 border border-white flex items-center justify-center text-white font-bold text-2xl mr-4 md:mr-6 mb-4 md:mb-0">
+                            {{ $index + 1 }}.
+                        </div>
+                        <div class="bg-white p-6 md:p-8 flex-grow shadow-sm">
+                            <p class="text-base md:text-lg leading-loose text-justify md:text-left font-light text-primary-700">
+                                <strong class="font-bold">{{ $sikap['title'] ?? '' }}</strong> {{ $sikap['description'] ?? '' }}
+                            </p>
+                        </div>
                     </div>
-                    <div class="bg-white p-6 md:p-8 flex-grow shadow-sm">
-                        <p class="text-base md:text-lg leading-loose text-justify md:text-left font-light text-primary-700">
-                            <strong class="font-bold">Independen & Objektif.</strong> Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur arcu erat, accumsan id imperdiet et.
-                        </p>
-                    </div>
-                </div>
-                <!-- Item 2 -->
-                <div class="flex flex-col md:flex-row">
-                    <div class="w-16 h-16 md:w-24 md:h-auto flex-shrink-0 border border-white flex items-center justify-center text-white font-bold text-2xl mr-4 md:mr-6 mb-4 md:mb-0">
-                        2.
-                    </div>
-                    <div class="bg-white p-6 md:p-8 flex-grow shadow-sm">
-                        <p class="text-base md:text-lg leading-loose text-justify md:text-left font-light text-primary-700">
-                            <strong class="font-bold">Pro Masyarakat.</strong> Sed porttitor lectus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
-                        </p>
-                    </div>
-                </div>
-                <!-- Item 3 -->
-                <div class="flex flex-col md:flex-row">
-                    <div class="w-16 h-16 md:w-24 md:h-auto flex-shrink-0 border border-white flex items-center justify-center text-white font-bold text-2xl mr-4 md:mr-6 mb-4 md:mb-0">
-                        3.
-                    </div>
-                    <div class="bg-white p-6 md:p-8 flex-grow shadow-sm">
-                        <p class="text-base md:text-lg leading-loose text-justify md:text-left font-light text-primary-700">
-                            <strong class="font-bold">Pro Lingkungan Alam.</strong> Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </section>

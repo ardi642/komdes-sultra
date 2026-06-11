@@ -44,6 +44,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/tulisan', \App\Livewire\Admin\Post\PostIndex::class)->name('post.index');
     Route::get('/acara', \App\Livewire\Admin\Event\EventIndex::class)->name('event.index');
     Route::get('/anggota', \App\Livewire\Admin\Member\MemberIndex::class)->name('member.index');
+    Route::get('/tentang-kami', \App\Livewire\Admin\Setting\AboutIndex::class)->name('about.index');
 });
 
 require __DIR__.'/settings.php';
