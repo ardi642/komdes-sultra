@@ -73,25 +73,25 @@ class FrontendController extends Controller
 
     public function berita()
     {
-        $posts = Post::berita()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(9)->withQueryString();
+        $posts = Post::berita()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(8)->withQueryString();
         return view('pages.berita', compact('posts'));
     }
 
     public function artikel()
     {
-        $posts = Post::artikel()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(9)->withQueryString();
+        $posts = Post::artikel()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(8)->withQueryString();
         return view('pages.artikel', compact('posts'));
     }
 
     public function riset()
     {
-        $posts = Post::riset()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(9)->withQueryString();
+        $posts = Post::riset()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(8)->withQueryString();
         return view('pages.riset', compact('posts'));
     }
 
     public function siaranPers()
     {
-        $posts = Post::siaranPers()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(9)->withQueryString();
+        $posts = Post::siaranPers()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(8)->withQueryString();
         return view('pages.siaran-pers', compact('posts'));
     }
 
@@ -151,7 +151,7 @@ class FrontendController extends Controller
 
     public function isu()
     {
-        $issues = Issue::where('status', 'active')->paginate(12);
+        $issues = Issue::where('status', 'active')->paginate(9);
         return view('pages.isu', compact('issues'));
     }
 
@@ -260,7 +260,7 @@ class FrontendController extends Controller
 
         // Handle results based on type
         if (request('type') === 'acara') {
-            $relatedPosts = $eventQuery->latest('event_date')->paginate(12)->withQueryString();
+            $relatedPosts = $eventQuery->latest('event_date')->paginate(9)->withQueryString();
             
             $relatedPosts->getCollection()->transform(function ($item) {
                 $item->type = 'acara';
@@ -281,7 +281,7 @@ class FrontendController extends Controller
             $all = $posts->concat($events)->sortByDesc('published_at')->values();
 
             $page = \Illuminate\Pagination\Paginator::resolveCurrentPage() ?: 1;
-            $perPage = 12;
+            $perPage = 9;
             $relatedPosts = new \Illuminate\Pagination\LengthAwarePaginator(
                 $all->slice(($page - 1) * $perPage, $perPage)->values(),
                 $all->count(),
@@ -290,7 +290,7 @@ class FrontendController extends Controller
                 ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath(), 'query' => request()->query()]
             );
         } else {
-            $relatedPosts = $query->latest('published_at')->paginate(12)->withQueryString();
+            $relatedPosts = $query->latest('published_at')->paginate(9)->withQueryString();
         }
 
         // Dynamic years for this issue's posts (union with events for completeness)
