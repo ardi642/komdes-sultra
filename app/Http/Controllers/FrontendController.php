@@ -41,7 +41,28 @@ class FrontendController extends Controller
     public function kontak()
     {
         $members = Member::where('is_active', true)->orderBy('order_number')->get();
-        return view('pages.kontak', compact('members'));
+        $contactSetting = \App\Models\ContactSetting::first();
+        return view('pages.kontak', compact('members', 'contactSetting'));
+    }
+
+    public function kirimPesan(Request $request)
+    {
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'subjek' => 'nullable|string|max:255',
+            'pesan' => 'required|string',
+        ]);
+
+        \App\Models\Inbox::create([
+            'name' => $validated['nama'],
+            'email' => $validated['email'],
+            'subject' => $validated['subjek'],
+            'message' => $validated['pesan'],
+            'is_read' => false,
+        ]);
+
+        return redirect()->back()->with('success', 'Laporan/aduan Anda berhasil dikirim. Terima kasih!');
     }
 
     public function berita()

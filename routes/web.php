@@ -27,6 +27,7 @@ Route::get('/isu', [FrontendController::class, 'isu'])->name('isu');
 Route::get('/isu/{issue:slug}', [FrontendController::class, 'issueDetail'])->name('isu.detail');
 
 Route::get('/kontak', [FrontendController::class, 'kontak'])->name('kontak');
+Route::post('/kontak/kirim', [FrontendController::class, 'kirimPesan'])->name('kontak.kirim');
 
 Route::view('/galeri', 'pages.galeri')->name('galeri');
 Route::view('/galeri/detail', 'pages.galeri-detail')->name('galeri.detail');
@@ -45,6 +46,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/acara', \App\Livewire\Admin\Event\EventIndex::class)->name('event.index');
     Route::get('/anggota', \App\Livewire\Admin\Member\MemberIndex::class)->name('member.index');
     Route::get('/tentang-kami', \App\Livewire\Admin\Setting\AboutIndex::class)->name('about.index');
+    Route::get('/kontak', \App\Livewire\Admin\Setting\ContactIndex::class)->name('contact.index');
+    Route::get('/pesan-masuk', \App\Livewire\Admin\Inbox\InboxIndex::class)->name('inbox.index');
 });
 
 require __DIR__.'/settings.php';

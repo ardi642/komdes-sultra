@@ -30,21 +30,21 @@
                                 <div class="mt-1 text-primary-700 bg-primary-50 p-2 rounded-full">
                                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                                 </div>
-                                <div class="text-zinc-700 font-medium text-lg pt-1.5">082290533640</div>
+                                <div class="text-zinc-700 font-medium text-lg pt-1.5">{{ $contactSetting?->phone ?? 'Belum diatur' }}</div>
                             </div>
                             <!-- Email -->
                             <div class="flex items-start gap-4">
                                 <div class="mt-1 text-primary-700 bg-primary-50 p-2 rounded-full">
                                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                                 </div>
-                                <div class="text-zinc-700 font-medium text-lg pt-1.5">kantor@jaringnusa.id</div>
+                                <div class="text-zinc-700 font-medium text-lg pt-1.5">{{ $contactSetting?->email ?? 'Belum diatur' }}</div>
                             </div>
                             <!-- Website -->
                             <div class="flex items-start gap-4">
                                 <div class="mt-1 text-primary-700 bg-primary-50 p-2 rounded-full">
                                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
                                 </div>
-                                <div class="text-zinc-700 font-medium text-lg pt-1.5">jaringnusa.id</div>
+                                <div class="text-zinc-700 font-medium text-lg pt-1.5">{{ $contactSetting?->website ?? 'Belum diatur' }}</div>
                             </div>
                             <!-- Address -->
                             <div class="flex items-start gap-4">
@@ -52,7 +52,7 @@
                                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                                 </div>
                                 <div class="text-zinc-700 font-medium text-lg pt-1.5 leading-relaxed">
-                                    Perumahan Bumi Pesona Pelangi, Jl. Kuning No.15, Minasa Upa, Kec. Rappocini, Kota Makassar, Sulawesi Selatan, 90221
+                                    {{ $contactSetting?->address ?? 'Belum diatur' }}
                                 </div>
                             </div>
                         </div>
@@ -60,11 +60,15 @@
 
                     <!-- Kolom Kanan: Placeholder Logo -->
                     <div class="w-full lg:w-1/3 flex justify-center lg:justify-end">
-                        <div class="bg-primary-900 w-48 h-48 md:w-56 md:h-56 rounded-xl flex items-center justify-center p-6 shadow-inner border border-primary-700/50">
-                            <!-- Placeholder Logo -->
-                            <div class="text-white text-center">
-                                <div class="font-bold text-2xl tracking-widest border-2 border-white p-4 inline-block">JARING<br>NUSA</div>
-                            </div>
+                        <div class="bg-white/10 backdrop-blur-sm w-48 h-48 md:w-56 md:h-56 rounded-xl flex items-center justify-center p-6 shadow-inner border border-white/20">
+                            @if($contactSetting && $contactSetting->logo)
+                                <img src="{{ asset($contactSetting->logo) }}" alt="Logo Kontak" class="max-w-full max-h-full object-contain drop-shadow-md">
+                            @else
+                                <!-- Placeholder Logo -->
+                                <div class="text-white text-center">
+                                    <div class="font-bold text-2xl tracking-widest border-2 border-white p-4 inline-block">JARING<br>NUSA</div>
+                                </div>
+                            @endif
                         </div>
                     </div>
 
@@ -165,19 +169,29 @@
                 <p class="text-white/80 text-base md:text-lg font-light leading-relaxed">Sampaikan laporan, aduan atau pertanyaan Anda pada formulir di bawah ini, kami akan tindak lebih lanjut.</p>
             </div>
 
-            <form action="#" method="POST" class="space-y-4">
+            @if (session()->has('success'))
+                <div class="mb-6 bg-white/20 backdrop-blur-md border border-white/50 text-white px-6 py-4 rounded-lg shadow-sm font-medium">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <form action="{{ route('kontak.kirim') }}" method="POST" class="space-y-4">
                 @csrf
                 <div>
-                    <input type="text" name="nama" placeholder="Nama" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 border-0 shadow-sm transition-shadow">
+                    <input type="text" name="nama" required placeholder="Nama" value="{{ old('nama') }}" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 border-0 shadow-sm transition-shadow">
+                    @error('nama') <span class="text-red-200 text-sm mt-1 ml-1 block">{{ $message }}</span> @enderror
                 </div>
                 <div>
-                    <input type="email" name="email" placeholder="Email" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 border-0 shadow-sm transition-shadow">
+                    <input type="email" name="email" required placeholder="Email" value="{{ old('email') }}" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 border-0 shadow-sm transition-shadow">
+                    @error('email') <span class="text-red-200 text-sm mt-1 ml-1 block">{{ $message }}</span> @enderror
                 </div>
                 <div>
-                    <input type="text" name="subjek" placeholder="Subjek" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 border-0 shadow-sm transition-shadow">
+                    <input type="text" name="subjek" placeholder="Subjek" value="{{ old('subjek') }}" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 border-0 shadow-sm transition-shadow">
+                    @error('subjek') <span class="text-red-200 text-sm mt-1 ml-1 block">{{ $message }}</span> @enderror
                 </div>
                 <div>
-                    <textarea name="pesan" rows="6" placeholder="Pesan" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 resize-y border-0 shadow-sm transition-shadow"></textarea>
+                    <textarea name="pesan" required rows="6" placeholder="Pesan" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 resize-y border-0 shadow-sm transition-shadow">{{ old('pesan') }}</textarea>
+                    @error('pesan') <span class="text-red-200 text-sm mt-1 ml-1 block">{{ $message }}</span> @enderror
                 </div>
                 <div class="pt-4 text-center">
                     <button type="submit" class="inline-flex items-center px-8 py-3 border border-white text-white text-sm uppercase tracking-widest font-medium rounded-full hover:bg-white hover:text-[#165a3f] transition-all duration-300 w-full justify-center">
