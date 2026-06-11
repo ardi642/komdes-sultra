@@ -4,66 +4,6 @@
 
 @section('content')
 
-@php
-// Dummy data
-$galleries = [
-    [
-        'id' => 1,
-        'title' => 'Aksi Tanam Mangrove Serentak se-Sultra',
-        'type' => 'photo',
-        'count' => 12,
-        'date' => '15 April 2023',
-        'author' => 'Admin Komdes',
-        'thumbnail' => 'https://picsum.photos/seed/mangrove/800/600',
-    ],
-    [
-        'id' => 2,
-        'title' => 'Dokumenter: Kehidupan Nelayan Desa Wakatobi',
-        'type' => 'video',
-        'count' => 1,
-        'date' => '05 Juli 2023',
-        'author' => 'Tim Media',
-        'thumbnail' => 'https://picsum.photos/seed/nelayan/800/600',
-    ],
-    [
-        'id' => 3,
-        'title' => 'Diskusi Komunitas Nelayan Tradisional',
-        'type' => 'photo',
-        'count' => 8,
-        'date' => '22 Mei 2023',
-        'author' => 'Koordinator Lapangan',
-        'thumbnail' => 'https://picsum.photos/seed/diskusi/800/600',
-    ],
-    [
-        'id' => 4,
-        'title' => 'Pelatihan Pengelolaan Pesisir Berkelanjutan',
-        'type' => 'photo',
-        'count' => 25,
-        'date' => '12 Agustus 2023',
-        'author' => 'Admin Komdes',
-        'thumbnail' => 'https://picsum.photos/seed/pesisir/800/600',
-    ],
-    [
-        'id' => 5,
-        'title' => 'Webinar Perubahan Iklim & Dampaknya',
-        'type' => 'video',
-        'count' => 1,
-        'date' => '02 Maret 2023',
-        'author' => 'Humas',
-        'thumbnail' => 'https://picsum.photos/seed/iklim/800/600',
-    ],
-    [
-        'id' => 6,
-        'title' => 'Rapat Kerja Tahunan Jaring Nusa',
-        'type' => 'photo',
-        'count' => 15,
-        'date' => '10 Januari 2023',
-        'author' => 'Sekretariat',
-        'thumbnail' => 'https://picsum.photos/seed/rapat/800/600',
-    ]
-];
-@endphp
-
 <!-- Main Content Area -->
 <main class="w-full">
 
@@ -81,19 +21,93 @@ $galleries = [
         </div>
     </div>
 
-    <!-- 2. Grid Galeri (White Background) -->
-    <section class="py-28 lg:py-36 relative overflow-hidden bg-white">
+    <!-- 2. Grid Galeri & Filter (White Background) -->
+    <section class="py-16 lg:py-24 relative overflow-hidden bg-white">
         
         <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
+            <!-- Filters & Search Wrapper -->
+            <div class="mb-12" x-data="{ showFilter: {{ (request()->filled('q') || request()->filled('tahun')) ? 'true' : 'false' }} }">
+                
+                <!-- Toggle Button -->
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-zinc-900">Kumpulan Galeri</h2>
+                    
+                    <button @click="showFilter = !showFilter" type="button" class="inline-flex items-center gap-2 bg-white border border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-primary-600 font-medium rounded-full text-sm px-5 py-2.5 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                        <svg class="w-4 h-4 transition-transform duration-300" :class="showFilter ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                        <span x-text="showFilter ? 'Tutup Filter' : 'Cari & Filter'"></span>
+                    </button>
+                </div>
+
+                <!-- Filters Form -->
+                <div x-show="showFilter" 
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 -translate-y-4"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     x-transition:leave="transition ease-in duration-200"
+                     x-transition:leave-start="opacity-100 translate-y-0"
+                     x-transition:leave-end="opacity-0 -translate-y-4"
+                     class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-zinc-100/50 relative z-20 origin-top mb-8"
+                     style="display: none;">
+                    
+                    <form action="{{ route('galeri') }}" method="GET" class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto flex-grow max-w-2xl">
+                            <!-- Search Box -->
+                            <div class="relative w-full sm:max-w-md">
+                                <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari galeri kegiatan..." class="w-full bg-zinc-50 border border-zinc-200 text-zinc-800 text-sm rounded-xl focus:ring-primary-500 focus:border-primary-500 block pl-10 p-3 transition-colors">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg class="w-5 h-5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                </div>
+                            </div>
+
+                            <!-- Year Filter -->
+                            <div class="relative w-full sm:w-48">
+                                <select name="tahun" class="w-full bg-zinc-50 border border-zinc-200 text-zinc-800 text-sm rounded-xl focus:ring-primary-500 focus:border-primary-500 block p-3 appearance-none transition-colors">
+                                    <option value="">Semua Tahun</option>
+                                    @foreach($years as $year)
+                                        <option value="{{ $year }}" {{ request('tahun') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Search Button -->
+                        <div class="flex items-center gap-3 w-full sm:w-auto">
+                            @if(request()->filled('q') || request()->filled('tahun'))
+                                <a href="{{ route('galeri') }}" class="text-zinc-500 hover:text-red-500 text-sm font-medium transition-colors px-3">Reset</a>
+                            @endif
+                            <button type="submit" class="w-full sm:w-auto bg-[#165a3f] hover:bg-primary-700 text-white font-medium rounded-xl text-sm px-6 py-3 transition-colors shadow-sm whitespace-nowrap">
+                                Terapkan Filter
+                            </button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+
             <!-- Cards Grid -->
+            @if($galleries->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 mb-16">
                 @foreach($galleries as $item)
-                <a href="{{ route('galeri.detail') }}" class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col group">
+                <a href="{{ route('galeri.detail', $item->slug) }}" class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col group">
                     <!-- Thumbnail with overlay -->
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="{{ $item['thumbnail'] }}" alt="{{ $item['title'] }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="relative h-64 overflow-hidden bg-zinc-100">
+                        @if($item->thumbnail)
+                            <img src="{{ asset($item->thumbnail) }}" alt="{{ $item->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        @elseif($item->images->count() > 0)
+                            <img src="{{ asset($item->images->first()->image_path) }}" alt="{{ $item->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        @else
+                            <div class="w-full h-full flex items-center justify-center text-zinc-400">
+                                <svg class="w-16 h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L28 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            </div>
+                        @endif
                         
+
+
                         <!-- Overlay gradient on hover -->
                         <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/10 transition-colors duration-300"></div>
                     </div>
@@ -104,17 +118,17 @@ $galleries = [
                         <div class="flex items-center gap-4 text-sm text-zinc-500 mb-4 font-medium">
                             <span class="flex items-center gap-1.5">
                                 <svg class="w-4 h-4 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                {{ $item['date'] }}
+                                {{ $item->date->format('d M Y') }}
                             </span>
                             <span class="flex items-center gap-1.5">
-                                <svg class="w-4 h-4 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                                {{ $item['author'] }}
+                                <svg class="w-4 h-4 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L28 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                {{ $item->images->count() }} Foto
                             </span>
                         </div>
 
                         <!-- Title -->
                         <h2 class="font-heading text-xl md:text-2xl font-bold text-zinc-900 leading-snug mb-6 group-hover:text-primary-600 transition-colors duration-300">
-                            {{ $item['title'] }}
+                            {{ $item->title }}
                         </h2>
 
                         <!-- Spacer -->
@@ -129,22 +143,18 @@ $galleries = [
                 </a>
                 @endforeach
             </div>
+            @else
+            <!-- Empty State -->
+            <div class="text-center py-20">
+                <svg class="w-16 h-16 text-zinc-300 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                <h3 class="text-xl font-bold text-zinc-900 mb-2">Galeri Tidak Ditemukan</h3>
+                <p class="text-zinc-500">Belum ada galeri kegiatan untuk saat ini atau kata kunci pencarian tidak cocok.</p>
+            </div>
+            @endif
             
-            <!-- Pagination (Consistent with Berita) -->
+            <!-- Pagination -->
             <div class="flex justify-center mb-12">
-                <nav class="inline-flex items-center gap-1 bg-white p-1 rounded-full border border-zinc-200 shadow-sm">
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 transition-colors">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    </a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-primary-600 text-white font-bold shadow-sm">1</a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-700 hover:bg-zinc-100 transition-colors">2</a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-700 hover:bg-zinc-100 transition-colors">3</a>
-                    <span class="w-10 h-10 flex items-center justify-center text-zinc-400">...</span>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-700 hover:bg-zinc-100 transition-colors">8</a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 transition-colors">
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </a>
-                </nav>
+                {{ $galleries->links() }}
             </div>
             
         </div>

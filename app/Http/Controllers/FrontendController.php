@@ -89,6 +89,31 @@ class FrontendController extends Controller
         return view('pages.siaran-pers', compact('posts'));
     }
 
+    public function galeri(Request $request)
+    {
+        $query = \App\Models\Gallery::with('images');
+
+        if ($request->filled('q')) {
+            $query->where('title', 'like', '%' . $request->q . '%');
+        }
+
+        if ($request->filled('tahun')) {
+            $query->whereYear('date', $request->tahun);
+        }
+
+        $galleries = $query->latest('date')->paginate(9)->withQueryString();
+        
+        $years = \App\Models\Gallery::selectRaw('YEAR(date) as year')->distinct()->orderBy('year', 'desc')->pluck('year');
+
+        return view('pages.galeri', compact('galleries', 'years'));
+    }
+
+    public function galeriDetail($slug)
+    {
+        $gallery = \App\Models\Gallery::with('images')->where('slug', $slug)->firstOrFail();
+        return view('pages.galeri-detail', compact('gallery'));
+    }
+
     public function acara()
     {
         $events = Event::where('is_published', true)->orderBy('event_date', 'desc')->paginate(9);

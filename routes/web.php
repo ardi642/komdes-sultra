@@ -29,8 +29,8 @@ Route::get('/isu/{issue:slug}', [FrontendController::class, 'issueDetail'])->nam
 Route::get('/kontak', [FrontendController::class, 'kontak'])->name('kontak');
 Route::post('/kontak/kirim', [FrontendController::class, 'kirimPesan'])->name('kontak.kirim');
 
-Route::view('/galeri', 'pages.galeri')->name('galeri');
-Route::view('/galeri/detail', 'pages.galeri-detail')->name('galeri.detail');
+Route::get('/galeri', [FrontendController::class, 'galeri'])->name('galeri');
+Route::get('/galeri/{slug}', [FrontendController::class, 'galeriDetail'])->name('galeri.detail');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
@@ -44,6 +44,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/isu', \App\Livewire\Admin\Issue\IssueIndex::class)->name('issue.index');
     Route::get('/tulisan', \App\Livewire\Admin\Post\PostIndex::class)->name('post.index');
     Route::get('/acara', \App\Livewire\Admin\Event\EventIndex::class)->name('event.index');
+    Route::get('/galeri', \App\Livewire\Admin\Gallery\GalleryIndex::class)->name('gallery.index');
+    Route::get('/galeri/tambah', \App\Livewire\Admin\Gallery\GalleryForm::class)->name('gallery.create');
+    Route::get('/galeri/{id}/edit', \App\Livewire\Admin\Gallery\GalleryForm::class)->name('gallery.edit');
     Route::get('/anggota', \App\Livewire\Admin\Member\MemberIndex::class)->name('member.index');
     Route::get('/tentang-kami', \App\Livewire\Admin\Setting\AboutIndex::class)->name('about.index');
     Route::get('/kontak', \App\Livewire\Admin\Setting\ContactIndex::class)->name('contact.index');
