@@ -12,15 +12,21 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $issues = Issue::where('status', 'active')->take(6)->get();
+        $sliders = \App\Models\HeroSlider::where('is_active', true)->orderBy('order_number')->get();
+        $sliderSetting = \App\Models\HeroSliderSetting::first();
+        $homepageSetting = \App\Models\HomepageSetting::first();
+        $members = \App\Models\Member::where('is_active', true)->orderBy('order_number')->get();
+        $issues = Issue::where('status', 'active')->get();
         $events = Event::where('is_published', true)->orderBy('event_date', 'asc')->take(3)->get();
         
         $berita = Post::where('type', 'berita')->published()->latest('published_at')->take(3)->get();
         $artikel = Post::where('type', 'artikel')->published()->latest('published_at')->take(3)->get();
         $riset = Post::where('type', 'riset')->published()->latest('published_at')->take(3)->get();
-        $siaran = Post::where('type', 'siaran_pers')->published()->latest('published_at')->take(4)->get();
+        $siaran = Post::where('type', 'siaran_pers')->published()->latest('published_at')->take(3)->get();
+        
+        $galleries = \App\Models\Gallery::with('images')->latest('date')->take(3)->get();
 
-        return view('pages.home', compact('issues', 'events', 'berita', 'artikel', 'riset', 'siaran'));
+        return view('pages.home', compact('sliders', 'sliderSetting', 'homepageSetting', 'members', 'issues', 'events', 'berita', 'artikel', 'riset', 'siaran', 'galleries'));
     }
 
     public function tentangKami()

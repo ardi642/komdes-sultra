@@ -44,10 +44,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/isu', \App\Livewire\Admin\Issue\IssueIndex::class)->name('issue.index');
     Route::get('/tulisan', \App\Livewire\Admin\Post\PostIndex::class)->name('post.index');
     Route::get('/acara', \App\Livewire\Admin\Event\EventIndex::class)->name('event.index');
+
+
+    // Hero Slider
+    Route::get('/hero-slider', \App\Livewire\Admin\HeroSlider\HeroSliderIndex::class)->name('hero.index');
+    Route::get('/hero-slider/pengaturan', \App\Livewire\Admin\HeroSlider\HeroSliderSettingForm::class)->name('hero.setting');
+    Route::get('/hero-slider/tambah', \App\Livewire\Admin\HeroSlider\HeroSliderForm::class)->name('hero.create');
+    Route::get('/hero-slider/{id}/edit', \App\Livewire\Admin\HeroSlider\HeroSliderForm::class)->name('hero.edit');
+
+
     Route::get('/galeri', \App\Livewire\Admin\Gallery\GalleryIndex::class)->name('gallery.index');
     Route::get('/galeri/tambah', \App\Livewire\Admin\Gallery\GalleryForm::class)->name('gallery.create');
     Route::get('/galeri/{id}/edit', \App\Livewire\Admin\Gallery\GalleryForm::class)->name('gallery.edit');
     Route::get('/anggota', \App\Livewire\Admin\Member\MemberIndex::class)->name('member.index');
+    Route::get('/pengaturan-beranda', \App\Livewire\Admin\HomepageSetting\HomepageSettingForm::class)->name('homepage.setting');
     Route::get('/tentang-kami', \App\Livewire\Admin\Setting\AboutIndex::class)->name('about.index');
     Route::get('/kontak', \App\Livewire\Admin\Setting\ContactIndex::class)->name('contact.index');
     Route::get('/pesan-masuk', \App\Livewire\Admin\Inbox\InboxIndex::class)->name('inbox.index');
