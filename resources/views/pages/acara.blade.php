@@ -20,15 +20,12 @@
 <div class="relative bg-white py-28 lg:py-36 overflow-hidden">
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
     
-    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
+    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
         
         <!-- Main Content (Daftar Acara) -->
-        <div class="flex-1">
+        <div class="flex-1" x-data="{ showFilter: false }">
             
-            <div class="mb-10">
-                <div class="w-32 h-[1px] bg-[#165a3f] mb-4"></div>
-                <h2 class="font-heading font-bold text-xl md:text-2xl text-[#165a3f] uppercase tracking-widest">Semua Acara</h2>
-            </div>
+            @include('partials.post-filter', ['title' => 'Semua Acara'])
 
             <!-- Poster Grid (2 Columns on Desktop) -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -36,7 +33,7 @@
                 @forelse($events as $event)
                 <!-- Event Card -->
                 <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group relative">
-                    <div class="relative aspect-[4/5] overflow-hidden bg-zinc-100">
+                    <div class="relative h-56 overflow-hidden bg-zinc-100">
                         <img src="{{ $event->cover_image ? asset($event->cover_image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $event->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
@@ -89,46 +86,7 @@
 
         <!-- Sidebar (Widget) -->
         <div class="lg:w-[350px] flex-shrink-0">
-            <div class="sticky top-28 space-y-8">
-                
-                <!-- Search Widget -->
-                <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Cari Acara</h3>
-                    <form action="#" method="GET" class="relative">
-                        <input type="text" placeholder="Masukkan kata kunci..." class="w-full pl-4 pr-12 py-3 rounded-xl border border-zinc-200 bg-zinc-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-colors text-sm">
-                        <button type="submit" class="absolute right-2 top-1.5 bottom-1.5 aspect-square bg-primary-600 hover:bg-primary-500 text-white rounded-lg flex items-center justify-center transition-colors">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Acara Mendatang Widget -->
-                <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-                    <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Acara Mendatang</h3>
-                    <div class="space-y-4">
-                        <a href="#" class="flex gap-4 group">
-                            <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0">
-                                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumbnail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                            </div>
-                            <div>
-                                <h4 class="font-heading font-bold text-sm text-zinc-900 leading-snug group-hover:text-primary-600 transition-colors line-clamp-2 mb-1">Strategi Pengembangan Ekonomi Sirkular</h4>
-                                <p class="text-xs text-primary-600 font-medium">20 Mei 2024</p>
-                            </div>
-                        </a>
-                        <a href="#" class="flex gap-4 group">
-                            <div class="w-16 h-16 rounded-xl overflow-hidden shrink-0">
-                                <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Thumbnail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                            </div>
-                            <div>
-                                <h4 class="font-heading font-bold text-sm text-zinc-900 leading-snug group-hover:text-primary-600 transition-colors line-clamp-2 mb-1">Webinar: Tantangan Perubahan Iklim</h4>
-                                <p class="text-xs text-primary-600 font-medium">25 Mei 2024</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-
-            </div>
+            @include('partials.event-sidebar')
         </div>
 
     </div>

@@ -8,11 +8,11 @@
         return empty($query) ? $baseUrl : $baseUrl . '?' . http_build_query($query);
     };
 @endphp
-<div class="sticky top-28 space-y-8">
+<div class="space-y-8">
     
     <!-- Search Widget -->
-    <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-        <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Cari Tulisan</h3>
+    <div class="flex flex-col">
+        <h3 class="font-heading font-bold text-xl md:text-2xl text-[#165a3f] uppercase tracking-widest mb-6">Cari Tulisan</h3>
         <form action="{{ $searchRoute ?? request()->url() }}" method="GET" class="relative">
             <!-- Pertahankan query string lainnya -->
             @foreach(request()->except('search', 'page') as $key => $value)
@@ -25,8 +25,8 @@
                 @endif
             @endforeach
 
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="Masukkan kata kunci..." class="w-full pl-4 pr-12 py-3 rounded-xl border border-zinc-200 bg-zinc-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-colors text-sm">
-            <button type="submit" class="absolute right-2 top-1.5 bottom-1.5 aspect-square bg-primary-600 hover:bg-primary-500 text-white rounded-lg flex items-center justify-center transition-colors">
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="Masukkan kata kunci..." class="w-full pl-5 pr-14 py-4 rounded-2xl border border-zinc-200 bg-white shadow-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-colors text-sm">
+            <button type="submit" class="absolute right-2.5 top-2.5 bottom-2.5 aspect-square bg-primary-600 hover:bg-primary-500 text-white rounded-xl flex items-center justify-center transition-all shadow-sm hover:-translate-y-0.5">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </button>
         </form>

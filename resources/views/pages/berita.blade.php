@@ -23,7 +23,7 @@
     <div class="absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-30 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
 
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-        <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
+        <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
         
         <!-- Articles Grid (Left Content) -->
         <div class="flex-1" x-data="{ showFilter: false }">

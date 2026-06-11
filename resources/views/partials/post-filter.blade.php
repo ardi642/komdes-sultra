@@ -82,6 +82,7 @@
             <!-- Row 1: Basic Filters (Category, Year, Month) -->
             <div class="flex flex-col md:flex-row gap-4 w-full">
                 
+                @if($categories->count() > 0)
                 <!-- Kategori Dropdown -->
                 <div class="flex flex-col gap-2 w-full md:w-1/3">
                     <label class="text-[11px] font-bold text-zinc-400 uppercase tracking-widest pl-1">Kategori</label>
@@ -97,9 +98,10 @@
                         </div>
                     </div>
                 </div>
+                @endif
 
                 <!-- Arsip Waktu Dropdowns -->
-                <div class="flex flex-col gap-2 w-full md:w-2/3">
+                <div class="flex flex-col gap-2 w-full {{ $categories->count() > 0 ? 'md:w-2/3' : '' }}">
                     <label class="text-[11px] font-bold text-zinc-400 uppercase tracking-widest pl-1">Arsip Waktu</label>
                     <div class="flex flex-col sm:flex-row gap-4">
                         <!-- Tahun -->

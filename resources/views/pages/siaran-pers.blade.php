@@ -18,7 +18,7 @@
 <!-- Main Content Area -->
 <div class="bg-white py-28 lg:py-36 relative overflow-hidden">
 <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
+    <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
         
         <!-- Articles Grid (Left Content) -->
         <div class="flex-1" x-data="{ showFilter: false }">

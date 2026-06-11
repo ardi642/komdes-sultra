@@ -122,8 +122,28 @@ class FrontendController extends Controller
 
     public function acara()
     {
-        $events = Event::where('is_published', true)->orderBy('event_date', 'desc')->paginate(9);
-        return view('pages.acara', compact('events'));
+        $events = Event::where('is_published', true)
+                       ->filter(request(['search', 'year', 'month', 'tags']))
+                       ->orderBy('event_date', 'desc')
+                       ->paginate(9)
+                       ->withQueryString();
+        
+        $categories = collect(); // Acara tidak memiliki kategori
+        
+        $topTags = \App\Models\Tag::whereHas('events', function($q) {
+            $q->where('is_published', true);
+        })->withCount(['events' => function ($query) {
+            $query->where('is_published', true);
+        }])->orderBy('events_count', 'desc')->take(15)->get();
+
+        $archives = Event::where('is_published', true)
+            ->selectRaw('YEAR(event_date) year, MONTH(event_date) month, count(*) published')
+            ->groupBy('year', 'month')
+            ->orderByRaw('year DESC, month DESC')
+            ->get()
+            ->groupBy('year');
+
+        return view('pages.acara', compact('events', 'categories', 'topTags', 'archives'));
     }
 
     public function isu()

@@ -18,27 +18,29 @@
 <!-- Main Content Area -->
 <div class="bg-white relative overflow-hidden py-28 lg:py-36">
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-        <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
+        <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
             
             <!-- Articles List (Left Content) -->
             <div class="flex-1" x-data="{ showFilter: false }">
                 
                 @include('partials.post-filter', ['title' => 'Tulisan Terbaru'])
 
-                <!-- Horizontal Article Cards -->
-                <div class="space-y-6 mb-12">
+                <!-- Articles Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                     @forelse($posts as $post)
                     <!-- Article Item -->
-                    <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row group">
-                        <div class="relative md:w-2/5 h-64 md:h-auto overflow-hidden">
-                            <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1455390582262-044cdead2708?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        </div>
-                        <div class="p-6 md:p-8 flex flex-col justify-center md:w-3/5">
+                    <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1574046664972-e565980fcbc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                             @if($post->category)
-                            <div class="flex items-center gap-3 mb-4">
-                                <span class="bg-primary-50 text-primary-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">{{ $post->category->name }}</span>
-                            </div>
+                            <div class="absolute top-4 left-4 bg-primary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">{{ $post->category->name }}</div>
                             @endif
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="flex items-center text-sm text-zinc-500 mb-3 gap-4">
+                                <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> {{ $post->published_at->format('d M Y') }}</span>
+                                <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> {{ $post->author->name ?? 'Admin' }}</span>
+                            </div>
                             
                             @if($post->issues->isNotEmpty())
                             <a href="{{ route('isu.detail', $post->issues->first()->slug) }}" class="inline-flex items-center gap-1.5 px-2.5 py-1 mb-2 rounded-lg bg-primary-50 text-primary-700 text-xs font-bold border border-primary-100 hover:bg-primary-100 transition-colors w-fit">
@@ -48,22 +50,13 @@
                             @endif
 
                             <a href="{{ route('artikel.detail', $post->slug) }}" class="block group-hover:text-primary-600 transition-colors">
-                                <h2 class="font-heading text-2xl font-bold text-zinc-900 mb-3 leading-snug">{{ $post->title }}</h2>
+                                <h2 class="font-heading text-xl font-bold text-zinc-900 mb-3 leading-snug">{{ $post->title }}</h2>
                             </a>
-                            <p class="text-zinc-500 mb-6 line-clamp-3 text-sm leading-relaxed">{{ Str::limit(strip_tags($post->content), 200) }}</p>
-                            
-                            <div class="flex items-center justify-between mt-auto">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-full bg-zinc-200 overflow-hidden">
-                                        <img src="https://ui-avatars.com/api/?name={{ urlencode($post->author->name ?? 'Admin') }}&background=random" alt="{{ $post->author->name ?? 'Admin' }}" class="w-full h-full object-cover">
-                                    </div>
-                                    <div class="text-sm">
-                                        <p class="font-semibold text-zinc-900">{{ $post->author->name ?? 'Admin' }}</p>
-                                        <p class="text-zinc-500 text-xs">Penulis</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-zinc-400">{{ $post->published_at->format('d M Y') }}</span>
-                            </div>
+                            <p class="text-zinc-600 mb-6 line-clamp-3 text-sm flex-grow">{{ Str::limit(strip_tags($post->content), 150) }}</p>
+                            <a href="{{ route('artikel.detail', $post->slug) }}" class="inline-flex items-center text-primary-600 font-semibold text-sm group-hover:text-primary-700 mt-auto">
+                                Baca Selengkapnya
+                                <svg class="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
                         </div>
                     </article>
                     @empty

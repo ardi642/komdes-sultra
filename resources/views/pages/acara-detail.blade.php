@@ -46,11 +46,8 @@
             <div class="mb-8">
                 <div class="flex gap-2 mb-4">
                     <span class="text-xs font-bold text-secondary-600 bg-secondary-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Acara</span>
-                    @if($event->status === 'upcoming')
-                    <span class="text-xs font-bold text-green-600 bg-green-50 px-2.5 py-1 rounded-md flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Segera</span>
-                    @endif
                 </div>
-                <h1 class="text-3xl md:text-4xl font-heading font-bold text-zinc-900 leading-tight mb-4">{{ $event->title }}</h1>
+                <h1 class="text-2xl md:text-3xl font-heading font-bold text-zinc-900 leading-tight mb-4">{{ $event->title }}</h1>
             </div>
 
             <!-- Info Box (Date & Location) -->
@@ -61,8 +58,10 @@
                     </div>
                     <div>
                         <h4 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">Pelaksanaan</h4>
-                        <p class="text-zinc-900 font-semibold">{{ \Carbon\Carbon::parse($event->event_date)->translatedFormat('l, d F Y') }}</p>
-                        <p class="text-zinc-500 text-sm">{{ $event->time ?? 'Selesai' }}</p>
+                        <p class="text-zinc-900 font-semibold">{{ \Carbon\Carbon::parse($event->event_date)->locale('id')->translatedFormat('l, d F Y') }}</p>
+                        @if($event->time)
+                        <p class="text-zinc-500 text-sm">{{ $event->time }}</p>
+                        @endif
                     </div>
                 </div>
                 
@@ -73,13 +72,12 @@
                     <div>
                         <h4 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-1">Lokasi</h4>
                         <p class="text-zinc-900 font-semibold">{{ $event->location ?? 'Virtual' }}</p>
-                        <p class="text-zinc-500 text-sm">Offline / Online</p>
                     </div>
                 </div>
             </div>
 
             <!-- Description / Body Content -->
-            <div class="text-zinc-600 leading-relaxed space-y-6 text-lg prose max-w-none">
+            <div class="text-zinc-600 leading-relaxed space-y-6 prose max-w-none">
                 {!! $event->content ?? $event->description !!}
             </div>
 
