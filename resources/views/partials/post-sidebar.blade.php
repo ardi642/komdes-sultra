@@ -75,7 +75,7 @@
 
     <!-- Tags Widget -->
     @if($topTags->count() > 0)
-    <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm" x-data="{ showAllTags: false }">
+    <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm" x-data="{ showTagModal: false }">
         <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Tag Populer</h3>
         <div class="flex flex-wrap gap-2">
             @php
@@ -83,21 +83,81 @@
                 if(!is_array($activeTags)) $activeTags = [$activeTags];
             @endphp
             @foreach($topTags as $index => $tag)
-                @php
-                    $isActive = in_array($tag->slug, $activeTags);
-                    $newTags = $isActive ? array_diff($activeTags, [$tag->slug]) : array_merge($activeTags, [$tag->slug]);
-                @endphp
-                <a href="{{ $buildUrl(['tags' => $newTags, 'page' => null]) }}" 
-                   class="px-3 py-1.5 text-xs rounded-lg transition-colors border {{ $isActive ? 'bg-primary-500 border-primary-500 text-white' : 'bg-zinc-50 border-zinc-200 text-zinc-600 hover:border-primary-500 hover:text-primary-600' }}"
-                   @if($index >= 10) x-show="showAllTags" x-transition style="display: none;" @endif>
-                    #{{ $tag->name }}
-                </a>
+                @if($index < 15)
+                    @php
+                        $isActive = in_array($tag->slug, $activeTags);
+                        $newTags = $isActive ? array_diff($activeTags, [$tag->slug]) : array_merge($activeTags, [$tag->slug]);
+                    @endphp
+                    <a href="{{ $buildUrl(['tags' => $newTags, 'page' => null]) }}" 
+                       class="px-3 py-1.5 text-xs rounded-lg transition-colors border {{ $isActive ? 'bg-primary-500 border-primary-500 text-white' : 'bg-zinc-50 border-zinc-200 text-zinc-600 hover:border-primary-500 hover:text-primary-600' }}">
+                        #{{ $tag->name }}
+                    </a>
+                @endif
             @endforeach
         </div>
-        @if($topTags->count() > 10)
-        <button @click="showAllTags = !showAllTags" class="text-xs text-primary-600 hover:text-primary-800 font-semibold mt-4 block text-center w-full">
-            <span x-text="showAllTags ? 'Tampilkan Lebih Sedikit' : 'Lihat Semua Tag Populer'"></span>
+        
+        @if(isset($allTags) && $allTags->count() > 15)
+        <button @click="showTagModal = true" class="text-xs text-primary-600 hover:text-primary-800 font-semibold mt-4 block text-center w-full">
+            Lihat Semua {{ $allTags->count() }} Tag
         </button>
+
+        <!-- Tag Modal (Pop-up) -->
+        <template x-teleport="body">
+            <div x-show="showTagModal" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true" style="display: none;">
+                <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    <div x-show="showTagModal" 
+                         x-transition:enter="ease-out duration-300" 
+                         x-transition:enter-start="opacity-0" 
+                         x-transition:enter-end="opacity-100" 
+                         x-transition:leave="ease-in duration-200" 
+                         x-transition:leave-start="opacity-100" 
+                         x-transition:leave-end="opacity-0" 
+                         class="fixed inset-0 bg-zinc-900/40 backdrop-blur-sm transition-opacity" 
+                         @click="showTagModal = false" aria-hidden="true"></div>
+
+                    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+                    <div x-show="showTagModal" 
+                         x-transition:enter="ease-out duration-300" 
+                         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
+                         x-transition:leave="ease-in duration-200" 
+                         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
+                         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                         class="relative inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                        
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <div class="flex justify-between items-center mb-4 border-b border-zinc-100 pb-3">
+                                <h3 class="text-xl leading-6 font-bold text-zinc-900" id="modal-title">
+                                    Semua Tag Terkait
+                                </h3>
+                                <button @click="showTagModal = false" class="text-zinc-400 hover:text-zinc-500">
+                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                                </button>
+                            </div>
+                            
+                            <div class="max-h-[60vh] overflow-y-auto pr-2">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                                    @foreach($allTags as $tag)
+                                        @php
+                                            $isActive = in_array($tag->slug, $activeTags);
+                                            $newTags = $isActive ? array_diff($activeTags, [$tag->slug]) : array_merge($activeTags, [$tag->slug]);
+                                        @endphp
+                                        <a href="{{ $buildUrl(['tags' => $newTags, 'page' => null]) }}" 
+                                           class="flex items-center justify-between p-2 rounded-xl transition-colors border {{ $isActive ? 'bg-primary-50 border-primary-200' : 'bg-zinc-50 border-zinc-100 hover:border-primary-300 hover:bg-white' }}">
+                                            <span class="text-sm font-medium {{ $isActive ? 'text-primary-700' : 'text-zinc-700' }} truncate mr-2" title="{{ $tag->name }}">#{{ $tag->name }}</span>
+                                            <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none {{ $isActive ? 'text-primary-100 bg-primary-600' : 'text-zinc-500 bg-zinc-200' }} rounded-full">
+                                                {{ $tag->posts_count ?? $tag->events_count ?? 0 }}
+                                            </span>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
         @endif
     </div>
     @endif

@@ -62,9 +62,11 @@ class ViewServiceProvider extends ServiceProvider
                     $query->published();
                 }]);
             }
-            $topTags = $tagQuery->orderBy('posts_count', 'desc')
+            $topTags = (clone $tagQuery)->orderBy('posts_count', 'desc')
               ->take(15)
               ->get();
+
+            $allTags = (clone $tagQuery)->orderBy('name', 'asc')->get();
 
             // 3. Arsip Waktu (Tahun dan Bulan) dari postingan sesuai tipe
             $archiveQuery = Post::published();
@@ -78,7 +80,7 @@ class ViewServiceProvider extends ServiceProvider
                 ->get()
                 ->groupBy('year');
 
-            $view->with(compact('categories', 'topTags', 'archives'));
+            $view->with(compact('categories', 'topTags', 'allTags', 'archives'));
         });
     }
 }

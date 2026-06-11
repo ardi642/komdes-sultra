@@ -130,11 +130,14 @@ class FrontendController extends Controller
         
         $categories = collect(); // Acara tidak memiliki kategori
         
-        $topTags = \App\Models\Tag::whereHas('events', function($q) {
+        $baseTagQuery = \App\Models\Tag::whereHas('events', function($q) {
             $q->where('is_published', true);
         })->withCount(['events' => function ($query) {
             $query->where('is_published', true);
-        }])->orderBy('events_count', 'desc')->take(15)->get();
+        }]);
+        
+        $topTags = (clone $baseTagQuery)->orderBy('events_count', 'desc')->take(15)->get();
+        $allTags = (clone $baseTagQuery)->orderBy('name', 'asc')->get();
 
         $archives = Event::where('is_published', true)
             ->selectRaw('YEAR(event_date) year, MONTH(event_date) month, count(*) published')
@@ -143,7 +146,7 @@ class FrontendController extends Controller
             ->get()
             ->groupBy('year');
 
-        return view('pages.acara', compact('events', 'categories', 'topTags', 'archives'));
+        return view('pages.acara', compact('events', 'categories', 'topTags', 'allTags', 'archives'));
     }
 
     public function isu()
