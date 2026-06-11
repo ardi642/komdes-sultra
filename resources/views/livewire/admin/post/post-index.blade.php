@@ -39,7 +39,9 @@
                             <tr>
                                 <th scope="col" class="px-6 py-3 font-medium w-16">Cover</th>
                                 <th scope="col" class="px-6 py-3 font-medium min-w-[250px]">Judul</th>
+                                @if($filterType === 'berita')
                                 <th scope="col" class="px-6 py-3 font-medium">Kategori</th>
+                                @endif
                                 <th scope="col" class="px-6 py-3 font-medium">Status</th>
                                 <th scope="col" class="px-6 py-3 font-medium text-right">Aksi</th>
                             </tr>
@@ -65,9 +67,11 @@
                                         <span class="text-xs text-zinc-500">{{ $post->published_at ? $post->published_at->format('d M Y') : '-' }}</span>
                                     </div>
                                 </td>
+                                @if($filterType === 'berita')
                                 <td class="px-6 py-4 text-zinc-700">
                                     {{ $post->category ? $post->category->name : '-' }}
                                 </td>
+                                @endif
                                 <td class="px-6 py-4">
                                     @if($post->is_published)
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Publish</span>
@@ -82,7 +86,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" class="px-6 py-8 text-center text-zinc-500">Belum ada tulisan yang ditambahkan.</td>
+                                <td colspan="{{ $filterType === 'berita' ? '5' : '4' }}" class="px-6 py-8 text-center text-zinc-500">Belum ada tulisan yang ditambahkan.</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -150,7 +154,7 @@
                         </div>
 
                         <!-- Klasifikasi Panel -->
-                        @if(empty($filterType) || ($type !== 'siaran_pers' && $type !== 'acara'))
+                        @if(empty($filterType) || $type === 'berita')
                         <div class="bg-white p-5 rounded-xl shadow-sm border border-zinc-200 space-y-4">
                             <h3 class="font-semibold text-zinc-900 border-b border-zinc-100 pb-2">Klasifikasi</h3>
                             
@@ -166,7 +170,7 @@
                             </div>
                             @endif
 
-                            @if($type !== 'siaran_pers' && $type !== 'acara')
+                            @if($type === 'berita')
                                 <div>
                                     <x-label for="category_id" value="Kategori" />
                                     <select id="category_id" wire:model="category_id" class="border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2 px-3 text-zinc-900 text-sm">

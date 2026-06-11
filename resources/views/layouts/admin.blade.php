@@ -52,10 +52,7 @@
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                 Anggota
             </a>
-            <a href="{{ route('admin.category.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.category.*') ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                Kategori
-            </a>
+
             <a href="{{ route('admin.tag.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.tag.*') ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path></svg>
                 Tag Global
@@ -67,10 +64,27 @@
             <div class="pt-4 pb-2">
                 <p class="px-4 text-xs font-semibold tracking-wider text-zinc-400 uppercase">Konten Publikasi</p>
             </div>
-            <a href="{{ route('admin.post.index', ['filterType' => 'berita']) }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->query('filterType') === 'berita' ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
-                Berita
-            </a>
+            <div x-data="{ 
+                    expanded: {{ request()->query('filterType') === 'berita' || request()->routeIs('admin.category.*') ? 'true' : 'false' }} 
+                }" class="mb-1">
+                <button @click="expanded = !expanded" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl {{ request()->query('filterType') === 'berita' || request()->routeIs('admin.category.*') ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+                        Berita
+                    </div>
+                    <svg class="w-4 h-4 transition-transform duration-300" :class="expanded ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div x-show="expanded" x-collapse x-transition.duration.300ms class="pt-1 pb-2 space-y-1">
+                    <a href="{{ route('admin.post.index', ['filterType' => 'berita']) }}" class="flex items-center gap-3 pl-12 pr-4 py-2.5 rounded-xl {{ request()->query('filterType') === 'berita' ? 'text-primary-700 font-semibold' : 'text-zinc-500 hover:text-zinc-900 font-medium' }} transition-colors text-sm">
+                        <svg class="w-1.5 h-1.5 rounded-full {{ request()->query('filterType') === 'berita' ? 'bg-primary-600' : 'bg-zinc-400' }}" viewBox="0 0 2 2" aria-hidden="true"><circle cx="1" cy="1" r="1" /></svg>
+                        Semua Berita
+                    </a>
+                    <a href="{{ route('admin.category.index') }}" class="flex items-center gap-3 pl-12 pr-4 py-2.5 rounded-xl {{ request()->routeIs('admin.category.*') ? 'text-primary-700 font-semibold' : 'text-zinc-500 hover:text-zinc-900 font-medium' }} transition-colors text-sm">
+                        <svg class="w-1.5 h-1.5 rounded-full {{ request()->routeIs('admin.category.*') ? 'bg-primary-600' : 'bg-zinc-400' }}" viewBox="0 0 2 2" aria-hidden="true"><circle cx="1" cy="1" r="1" /></svg>
+                        Kategori Berita
+                    </a>
+                </div>
+            </div>
             <a href="{{ route('admin.post.index', ['filterType' => 'artikel']) }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->query('filterType') === 'artikel' ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 Artikel

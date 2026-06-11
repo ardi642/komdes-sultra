@@ -19,7 +19,6 @@
                 <thead class="text-xs text-zinc-700 uppercase bg-zinc-50 border-b border-zinc-200">
                     <tr>
                         <th scope="col" class="px-6 py-3 font-medium">Nama Kategori</th>
-                        <th scope="col" class="px-6 py-3 font-medium">Tipe</th>
                         <th scope="col" class="px-6 py-3 font-medium">Slug</th>
                         <th scope="col" class="px-6 py-3 font-medium text-right">Aksi</th>
                     </tr>
@@ -28,11 +27,6 @@
                     @forelse($categories as $category)
                     <tr class="hover:bg-zinc-50 transition-colors">
                         <td class="px-6 py-4 font-medium text-zinc-900">{{ $category->name }}</td>
-                        <td class="px-6 py-4">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 capitalize">
-                                {{ str_replace('_', ' ', $category->type) }}
-                            </span>
-                        </td>
                         <td class="px-6 py-4 text-zinc-500">{{ $category->slug }}</td>
                         <td class="px-6 py-4 text-right space-x-2">
                             <button wire:click="edit({{ $category->id }})" class="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
@@ -41,7 +35,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="4" class="px-6 py-8 text-center text-zinc-500">Belum ada kategori yang ditambahkan.</td>
+                        <td colspan="3" class="px-6 py-8 text-center text-zinc-500">Belum ada kategori yang ditambahkan.</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -79,16 +73,6 @@
                                 <x-label for="slug" value="Slug (Otomatis)" />
                                 <x-input id="slug" type="text" wire:model="slug" class="bg-zinc-100" readonly />
                                 @error('slug') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
-                            </div>
-
-                            <div>
-                                <x-label for="type" value="Digunakan Untuk (Tipe)" />
-                                <select id="type" wire:model="type" class="border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2.5 px-3 text-zinc-900">
-                                    <option value="berita">Berita</option>
-                                    <option value="artikel">Artikel</option>
-                                    <option value="riset">Publikasi Riset</option>
-                                </select>
-                                @error('type') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>
