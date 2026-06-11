@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
-Route::view('/tentang-kami', 'pages.tentang-kami')->name('tentang-kami');
-Route::view('/anggota', 'pages.anggota')->name('anggota');
+Route::get('/tentang-kami', [FrontendController::class, 'tentangKami'])->name('tentang-kami');
+Route::get('/anggota', [FrontendController::class, 'anggota'])->name('anggota');
 Route::get('/berita', [FrontendController::class, 'berita'])->name('berita');
 Route::get('/berita/{post:slug}', [FrontendController::class, 'postDetail'])->name('berita.detail');
 
@@ -26,7 +26,7 @@ Route::get('/siaran-pers/{post:slug}', [FrontendController::class, 'postDetail']
 Route::get('/isu', [FrontendController::class, 'isu'])->name('isu');
 Route::get('/isu/{issue:slug}', [FrontendController::class, 'issueDetail'])->name('isu.detail');
 
-Route::view('/kontak', 'pages.kontak')->name('kontak');
+Route::get('/kontak', [FrontendController::class, 'kontak'])->name('kontak');
 
 Route::view('/galeri', 'pages.galeri')->name('galeri');
 Route::view('/galeri/detail', 'pages.galeri-detail')->name('galeri.detail');
@@ -43,6 +43,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/isu', \App\Livewire\Admin\Issue\IssueIndex::class)->name('issue.index');
     Route::get('/tulisan', \App\Livewire\Admin\Post\PostIndex::class)->name('post.index');
     Route::get('/acara', \App\Livewire\Admin\Event\EventIndex::class)->name('event.index');
+    Route::get('/anggota', \App\Livewire\Admin\Member\MemberIndex::class)->name('member.index');
 });
 
 require __DIR__.'/settings.php';

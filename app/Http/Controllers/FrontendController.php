@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Event;
 use App\Models\Issue;
+use App\Models\Member;
 
 class FrontendController extends Controller
 {
@@ -20,6 +21,24 @@ class FrontendController extends Controller
         $siaran = Post::where('type', 'siaran_pers')->published()->latest('published_at')->take(4)->get();
 
         return view('pages.home', compact('issues', 'events', 'berita', 'artikel', 'riset', 'siaran'));
+    }
+
+    public function tentangKami()
+    {
+        $members = Member::where('is_active', true)->orderBy('order_number')->get();
+        return view('pages.tentang-kami', compact('members'));
+    }
+
+    public function anggota()
+    {
+        $members = Member::where('is_active', true)->orderBy('order_number')->get();
+        return view('pages.anggota', compact('members'));
+    }
+
+    public function kontak()
+    {
+        $members = Member::where('is_active', true)->orderBy('order_number')->get();
+        return view('pages.kontak', compact('members'));
     }
 
     public function berita()

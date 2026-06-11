@@ -5,69 +5,7 @@
 @section('content')
 
 @php
-// Dummy data for members based on the user's screenshot
-$members = [
-    [
-        'id' => 1,
-        'name' => 'Yayasan Bonebula',
-        'logo' => 'https://ui-avatars.com/api/?name=Bone+Bula&background=047857&color=fff&size=200&font-size=0.33',
-        'description' => 'Yayasan Bonebula adalah organisasi non pemerintah dan non profit yang didirikan di Donggala Sulawesi Tengah tanggal 18 Maret 2008 berdasarkan Akte Notaris No 70/2008. Embrio organisasi Bonebula sudah dimulai pada tahun 2005 sebagai sebuah kelompok studi lingkungan dan persoalan kaum miskin kota, khususnya di Kabupaten Donggala.',
-        'website' => '#',
-        'instagram' => '#',
-        'email' => 'mailto:info@bonebula.org',
-        'phone' => 'tel:+6281234567890'
-    ],
-    [
-        'id' => 2,
-        'name' => 'WALHI Sulawesi Selatan',
-        'logo' => 'https://ui-avatars.com/api/?name=WALHI+Sulsel&background=10B981&color=fff&size=200&font-size=0.33',
-        'description' => 'Wahana Lingkungan Hidup Indonesia (WALHI) Sulawesi Selatan adalah organisasi lingkungan hidup yang independen, non-profit dan merupakan forum kelompok masyarakat sipil yang terdiri dari organisasi non-pemerintah.',
-        'website' => '#',
-        'instagram' => '#',
-        'email' => 'mailto:sulsel@walhi.or.id',
-        'phone' => 'tel:+6281234567890'
-    ],
-    [
-        'id' => 3,
-        'name' => 'Japesda',
-        'logo' => 'https://ui-avatars.com/api/?name=Japesda&background=059669&color=fff&size=200&font-size=0.33',
-        'description' => 'Japesda (Jaring Advokasi Pengelolaan Sumber Daya Alam) fokus pada perlindungan lingkungan dan pemberdayaan masyarakat pesisir di kawasan Indonesia Timur.',
-        'website' => '#',
-        'instagram' => '#',
-        'email' => '',
-        'phone' => ''
-    ],
-    [
-        'id' => 4,
-        'name' => 'Blue Forests',
-        'logo' => 'https://ui-avatars.com/api/?name=Blue+Forests&background=1E40AF&color=fff&size=200&font-size=0.33',
-        'description' => 'Yayasan Hutan Biru (Blue Forests) berdedikasi pada upaya restorasi dan pelestarian ekosistem mangrove serta perbaikan taraf hidup masyarakat pesisir.',
-        'website' => '#',
-        'instagram' => '#',
-        'email' => '',
-        'phone' => ''
-    ],
-    [
-        'id' => 5,
-        'name' => 'Econusa',
-        'logo' => 'https://ui-avatars.com/api/?name=Econusa&background=0D9488&color=fff&size=200&font-size=0.33',
-        'description' => 'Yayasan EcoNusa adalah organisasi nirlaba yang bertujuan untuk meningkatkan inisiatif lokal di tingkat nasional dan internasional dalam upaya pengelolaan berkelanjutan sumber daya alam di Indonesia Timur.',
-        'website' => '#',
-        'instagram' => '#',
-        'email' => '',
-        'phone' => ''
-    ],
-    [
-        'id' => 6,
-        'name' => 'YKL Indonesia',
-        'logo' => 'https://ui-avatars.com/api/?name=YKL+Indonesia&background=16A34A&color=fff&size=200&font-size=0.33',
-        'description' => 'Yayasan Konservasi Laut Indonesia bergerak dalam bidang pelestarian laut dan ekosistem terumbu karang di kawasan Indonesia Tengah.',
-        'website' => '#',
-        'instagram' => '#',
-        'email' => '',
-        'phone' => ''
-    ]
-];
+
 @endphp
 
 <!-- Page Content wrapped in Alpine for Modal State -->
@@ -111,15 +49,22 @@ $members = [
         <!-- Members Grid -->
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 gap-y-12 sm:gap-y-8">
             <template x-for="member in members" :key="member.id">
-                <button @click="openModal(member.id)" 
-                        class="relative overflow-hidden bg-transparent rounded-3xl flex flex-col items-center justify-center p-6 border border-transparent hover:bg-white hover:shadow-2xl hover:shadow-primary-500/10 hover:border-primary-100 transition-all duration-500 group focus:outline-none focus:ring-4 focus:ring-primary-500/20 hover:-translate-y-2 h-full w-full aspect-[4/5] sm:aspect-square">
+                <button @click="openModal(member.id)" :title="member.name"
+                        class="relative bg-transparent rounded-3xl flex flex-col items-center justify-start p-6 border border-transparent hover:bg-white hover:shadow-2xl hover:shadow-primary-500/10 hover:border-primary-100 transition-all duration-500 group focus:outline-none focus:ring-4 focus:ring-primary-500/20 hover:-translate-y-2 w-full h-full">
                     
                     <!-- Decorative background glow -->
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-50/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
                     <!-- Logo Container -->
-                    <div class="relative w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-500 ease-out">
-                        <img :src="member.logo" :alt="member.name" class="max-w-full max-h-full object-contain filter grayscale opacity-75 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">
+                    <div class="relative w-36 h-36 sm:w-48 sm:h-48 flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-500 ease-out">
+                        <template x-if="member.logo">
+                            <img :src="member.logo.startsWith('http') ? member.logo : `{{ rtrim(asset(''), '/') }}${member.logo}`" :alt="member.name" class="max-w-full max-h-full object-contain transition-all duration-500 hover:scale-105">
+                        </template>
+                        <template x-if="!member.logo">
+                            <div class="w-full h-full flex items-center justify-center bg-zinc-200 rounded-full text-zinc-500 font-bold border border-zinc-300">
+                                <span class="text-xs text-center px-2 leading-tight" x-text="member.name"></span>
+                            </div>
+                        </template>
                     </div>
                     
                     <!-- Member Name -->
@@ -149,7 +94,7 @@ $members = [
              @click="closeModal"></div>
 
         <!-- Modal Panel -->
-        <div class="flex min-h-screen items-center justify-center p-4 text-center sm:p-0">
+        <div class="flex min-h-screen items-center justify-center p-4 text-center sm:p-0" @click="closeModal">
             <div x-show="isOpen"
                  x-transition:enter="ease-out duration-300"
                  x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -157,7 +102,7 @@ $members = [
                  x-transition:leave="ease-in duration-200"
                  x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                  x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                 class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md border border-zinc-200"
+                 class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-2xl border border-zinc-200"
                  @click.stop>
                 
                 <!-- Close Button -->
@@ -169,9 +114,14 @@ $members = [
                     <template x-if="selectedMember">
                         <div class="flex flex-col items-center">
                             <!-- Logo -->
-                            <div class="w-28 h-28 mb-6 flex items-center justify-center">
-                                <img :src="selectedMember.logo" :alt="selectedMember.name" class="max-w-full max-h-full object-contain">
+                            <div class="w-48 h-48 md:w-56 md:h-56 mb-6 flex items-center justify-center">
+                                <template x-if="selectedMember.logo">
+                                    <img :src="selectedMember.logo.startsWith('http') ? selectedMember.logo : `{{ rtrim(asset(''), '/') }}${selectedMember.logo}`" :alt="selectedMember.name" class="max-w-full max-h-full object-contain">
+                                </template>
                             </div>
+                            
+                            <!-- Member Name -->
+                            <h3 class="text-xl md:text-2xl font-bold mb-4 text-center text-[#165a3f] uppercase tracking-wide" x-text="selectedMember.name"></h3>
                             
                             <!-- Description -->
                             <p class="text-sm text-zinc-500 text-center leading-relaxed mb-8" x-text="selectedMember.description"></p>
