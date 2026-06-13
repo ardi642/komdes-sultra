@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Page Header / Issue Overview -->
-<div class="relative pt-40 pb-32 overflow-hidden bg-[#165a3f]">
+<div class="relative pt-56 pb-40 overflow-hidden bg-[#165a3f]">
     <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center gap-12">
         <!-- Logo -->

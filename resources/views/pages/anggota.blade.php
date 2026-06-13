@@ -42,7 +42,7 @@
         
         <!-- Header -->
         <div class="text-center mb-16 mt-10" data-aos="fade-up">
-            <div class="w-32 h-[1px] bg-[#165a3f] mx-auto mb-6 opacity-50"></div>
+
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-[#165a3f] mb-4 tracking-widest uppercase">Anggota Jaring Komdes Sultra</h1>
         </div>
 

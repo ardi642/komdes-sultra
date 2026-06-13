@@ -4,11 +4,11 @@
 
 @section('content')
 <!-- Hero Section -->
-<div class="relative pt-40 pb-32 overflow-hidden bg-[#165a3f]">
+<div class="relative pt-56 pb-40 overflow-hidden bg-[#165a3f]">
     <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center" data-aos="fade-up">
-            <div class="w-32 h-[1px] bg-white mx-auto mb-6 opacity-50"></div>
+
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white uppercase tracking-widest mb-6 drop-shadow-md">Riset dan Publikasi</h1>
             <p class="text-white/90 text-base md:text-lg font-light leading-relaxed drop-shadow-sm max-w-2xl mx-auto">Kerja advokasi Komdes Sultra selalu berdasarkan pada temuan hasil investigasi, pemetaan lapangan, dan riset ilmiah. Berikut ini adalah kumpulan publikasi yang menjadi panduan dan referensi dalam perjuangan kami.</p>
         </div>
