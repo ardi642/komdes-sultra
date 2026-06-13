@@ -5,7 +5,7 @@
 @section('content')
 
 <!-- Page Header / Hero -->
-<div class="relative pt-56 pb-40 overflow-hidden bg-[#165a3f]">
+<div class="relative pt-64 pb-48 overflow-hidden bg-[#165a3f]">
     <div class="absolute right-0 bottom-0 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 translate-y-1/4 bg-white"></div>
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" data-aos="fade-up">
 
