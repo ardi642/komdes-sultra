@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Services\ImageService;
 
 class Event extends Model
 {
@@ -20,6 +21,25 @@ class Event extends Model
         'published_at' => 'datetime',
         'is_published' => 'boolean',
     ];
+
+    protected static function booted()
+    {
+        static::updating(function ($event) {
+            $imageService = new ImageService();
+            if ($event->isDirty('content')) {
+                $imageService->cleanRemovedImagesFromHtml($event->getOriginal('content'), $event->content);
+            }
+            if ($event->isDirty('description')) {
+                $imageService->cleanRemovedImagesFromHtml($event->getOriginal('description'), $event->description);
+            }
+        });
+
+        static::deleting(function ($event) {
+            $imageService = new ImageService();
+            $imageService->cleanRemovedImagesFromHtml($event->content, null);
+            $imageService->cleanRemovedImagesFromHtml($event->description, null);
+        });
+    }
 
     public function tags()
     {

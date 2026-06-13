@@ -16,21 +16,107 @@
                 </div>
             @endif
 
-            <!-- Filter -->
-            @if(empty($filterType))
-            <div class="flex items-center space-x-4 bg-white p-4 rounded-xl shadow-sm border border-zinc-200">
-                <div class="flex items-center gap-2">
-                    <span class="text-sm font-medium text-zinc-700">Filter Tipe:</span>
-                    <select wire:model.live="filterType" class="text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-1.5 pl-3 pr-8 text-zinc-900">
-                        <option value="">Semua Tulisan</option>
-                        <option value="berita">Berita</option>
-                        <option value="artikel">Artikel</option>
-                        <option value="riset">Publikasi Riset</option>
-                        <option value="siaran_pers">Siaran Pers</option>
-                    </select>
+            <!-- Top Action Bar (Search & Filters) -->
+            <div x-data="{ showFilters: false }" class="bg-white rounded-xl shadow-sm border border-zinc-200 overflow-hidden mb-6">
+                
+                <!-- Main Bar: Search, Per Page, Toggle -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4">
+                    
+                    <!-- Left: Search -->
+                    <div class="w-full sm:max-w-xs relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-4 w-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari tulisan..." class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm block w-full pl-9 py-2 transition-colors">
+                    </div>
+
+                    <!-- Right: Per Page & Filter Toggle -->
+                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-medium text-zinc-600 hidden sm:inline">Tampil:</span>
+                            <select wire:model.live="perPage" class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 pl-3 pr-8 text-zinc-900 transition-colors">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                        
+                        <button @click="showFilters = !showFilters" type="button" class="inline-flex items-center px-4 py-2 bg-white border border-zinc-300 rounded-lg font-medium text-sm text-zinc-700 hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors shadow-sm gap-2">
+                            <svg class="w-4 h-4 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                            Filter Lanjutan
+                            <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': showFilters}" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Expanded Filters Drawer -->
+                <div x-show="showFilters" x-collapse>
+                    <div class="p-4 bg-zinc-50 border-t border-zinc-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        
+                        @if(empty($filterType))
+                        <div>
+                            <label class="block text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">Tipe Tulisan</label>
+                            <select wire:model.live="filterType" class="w-full bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 px-3 text-zinc-900">
+                                <option value="">Semua Tulisan</option>
+                                <option value="berita">Berita</option>
+                                <option value="artikel">Artikel</option>
+                                <option value="riset">Publikasi Riset</option>
+                                <option value="siaran_pers">Siaran Pers</option>
+                            </select>
+                        </div>
+                        @endif
+
+                        <div>
+                            <label class="block text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">Status</label>
+                            <select wire:model.live="filterStatus" class="w-full bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 px-3 text-zinc-900">
+                                <option value="">Semua Status</option>
+                                <option value="published">Publish</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+
+                        @if($filterType === 'berita')
+                        <div>
+                            <label class="block text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">Kategori</label>
+                            <select wire:model.live="filterCategory" class="w-full bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 px-3 text-zinc-900">
+                                <option value="">Semua Kategori</option>
+                                @foreach($categories as $cat)
+                                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @endif
+
+                        <div>
+                            <label class="block text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">Waktu (Bulan / Tahun)</label>
+                            <div class="flex gap-2">
+                                <select wire:model.live="filterMonth" class="w-1/2 bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 px-3 text-zinc-900">
+                                    <option value="">Bulan</option>
+                                    @for($i=1; $i<=12; $i++)
+                                        <option value="{{ $i }}">{{ date('F', mktime(0, 0, 0, $i, 10)) }}</option>
+                                    @endfor
+                                </select>
+                                <select wire:model.live="filterYear" class="w-1/2 bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 px-3 text-zinc-900">
+                                    <option value="">Tahun</option>
+                                    @for($i=date('Y'); $i>=2020; $i--)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-2 lg:col-span-{{ empty($filterType) ? '1' : '2' }}">
+                            <label class="block text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">Saring Berdasarkan Tag</label>
+                            <x-tom-select wire:model.live="filterTag" :multiple="true" placeholder="Pilih tag..." class="w-full bg-white text-sm border-zinc-300 rounded-lg">
+                                @foreach($allTags as $tag)
+                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </x-tom-select>
+                        </div>
+                    </div>
                 </div>
             </div>
-            @endif
 
             <div class="bg-white rounded-xl shadow-sm border border-zinc-200 overflow-hidden">
                 <div class="overflow-x-auto">
@@ -39,6 +125,7 @@
                             <tr>
                                 <th scope="col" class="px-6 py-3 font-medium w-16">Cover</th>
                                 <th scope="col" class="px-6 py-3 font-medium min-w-[250px]">Judul</th>
+                                <th scope="col" class="px-6 py-3 font-medium">Dibuat Pada</th>
                                 @if($filterType === 'berita')
                                 <th scope="col" class="px-6 py-3 font-medium">Kategori</th>
                                 @endif
@@ -64,8 +151,10 @@
                                         <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-primary-100 text-primary-800 uppercase tracking-wider">
                                             {{ str_replace('_', ' ', $post->type) }}
                                         </span>
-                                        <span class="text-xs text-zinc-500">{{ $post->published_at ? $post->published_at->format('d M Y') : '-' }}</span>
                                     </div>
+                                </td>
+                                <td class="px-6 py-4 text-zinc-700 whitespace-nowrap">
+                                    {{ $post->created_at ? $post->created_at->format('d M Y, H:i') : '-' }}
                                 </td>
                                 @if($filterType === 'berita')
                                 <td class="px-6 py-4 text-zinc-700">
@@ -80,6 +169,7 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 text-right space-x-2 whitespace-nowrap">
+                                    <a href="{{ url('/' . str_replace('_', '-', $post->type) . '/' . $post->slug) }}" target="_blank" class="text-primary-600 hover:text-primary-900 font-medium mr-2">Lihat</a>
                                     <button wire:click="edit({{ $post->id }})" class="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
                                     <button wire:click="delete({{ $post->id }})" onclick="confirm('Apakah Anda yakin ingin menghapus tulisan ini?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-900 font-medium">Hapus</button>
                                 </td>
@@ -140,7 +230,7 @@
                             <h3 class="font-semibold text-zinc-900 border-b border-zinc-100 pb-2">Status Publikasi</h3>
                             
                             <div>
-                                <select wire:model="is_published" class="border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2 px-3 text-zinc-900">
+                                <select wire:model="is_published" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2 px-3 text-zinc-900 transition-colors">
                                     <option value="1">Publish (Tampil)</option>
                                     <option value="0">Draft (Simpan Sementara)</option>
                                 </select>
@@ -150,6 +240,9 @@
                                 <x-button type="submit" class="w-full justify-center">
                                     Simpan Tulisan
                                 </x-button>
+                                <button type="button" wire:click="savePreview" class="w-full inline-flex justify-center items-center px-4 py-2 bg-white border border-primary-300 rounded-lg font-semibold text-xs text-primary-700 uppercase tracking-widest shadow-sm hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150 mt-2">
+                                    Lihat Live Preview
+                                </button>
                             </div>
                         </div>
 
@@ -161,7 +254,7 @@
                             @if(empty($filterType))
                             <div>
                                 <x-label for="type" value="Jenis Konten" />
-                                <select id="type" wire:model.live="type" class="border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2 px-3 text-zinc-900 text-sm">
+                                <select id="type" wire:model.live="type" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2 px-3 text-zinc-900 text-sm transition-colors">
                                     <option value="berita">Berita</option>
                                     <option value="artikel">Artikel</option>
                                     <option value="riset">Publikasi Riset</option>
@@ -173,7 +266,7 @@
                             @if($type === 'berita')
                                 <div>
                                     <x-label for="category_id" value="Kategori" />
-                                    <select id="category_id" wire:model="category_id" class="border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2 px-3 text-zinc-900 text-sm">
+                                    <select id="category_id" wire:model="category_id" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2 px-3 text-zinc-900 text-sm transition-colors">
                                         <option value="">-- Pilih Kategori --</option>
                                         @foreach($categories as $cat)
                                             <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -190,33 +283,27 @@
                             <h3 class="font-semibold text-zinc-900 border-b border-zinc-100 pb-2">Kaitan</h3>
                             
                             <div>
-                                <x-label value="Fokus Isu" />
-                                <div class="max-h-32 overflow-y-auto space-y-2 border border-zinc-200 rounded p-2 bg-zinc-50">
+                                <x-label value="Fokus Isu" class="mb-1" />
+                                <x-tom-select wire:model="selectedIssues" :multiple="true" placeholder="Pilih Fokus Isu..." class="w-full text-sm">
                                     @foreach($allIssues as $issue)
-                                        <label class="flex items-center text-sm text-zinc-700 hover:bg-zinc-100 p-1 rounded cursor-pointer transition-colors">
-                                            <input type="checkbox" wire:model="selectedIssues" value="{{ $issue->id }}" class="rounded border-zinc-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 mr-2">
-                                            {{ $issue->title }}
-                                        </label>
+                                        <option value="{{ $issue->id }}">{{ $issue->title }}</option>
                                     @endforeach
-                                    @if($allIssues->isEmpty())
-                                        <span class="text-xs text-zinc-400">Belum ada isu yang aktif.</span>
-                                    @endif
-                                </div>
+                                </x-tom-select>
+                                @if($allIssues->isEmpty())
+                                    <span class="text-xs text-zinc-400 mt-1 block">Belum ada isu yang aktif.</span>
+                                @endif
                             </div>
 
                             <div>
-                                <x-label value="Tag Global" />
-                                <div class="max-h-40 overflow-y-auto space-y-2 border border-zinc-200 rounded p-2 bg-zinc-50">
+                                <x-label value="Tag Global" class="mb-1" />
+                                <x-tom-select wire:model="selectedTags" :multiple="true" placeholder="Cari atau pilih tag..." class="w-full text-sm">
                                     @foreach($allTags as $tag)
-                                        <label class="flex items-center text-sm text-zinc-700 hover:bg-zinc-100 p-1 rounded cursor-pointer transition-colors">
-                                            <input type="checkbox" wire:model="selectedTags" value="{{ $tag->id }}" class="rounded border-zinc-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 mr-2">
-                                            {{ $tag->name }}
-                                        </label>
+                                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                     @endforeach
-                                    @if($allTags->isEmpty())
-                                        <span class="text-xs text-zinc-400">Belum ada tag global.</span>
-                                    @endif
-                                </div>
+                                </x-tom-select>
+                                @if($allTags->isEmpty())
+                                    <span class="text-xs text-zinc-400 mt-1 block">Belum ada tag global.</span>
+                                @endif
                             </div>
                         </div>
 
@@ -246,4 +333,12 @@
             </form>
         </div>
     @endif
+
+    @script
+    <script>
+        $wire.on('open-preview-tab', () => {
+            window.open('{{ route('preview-live') }}', '_blank');
+        });
+    </script>
+    @endscript
 </div>

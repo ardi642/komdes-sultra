@@ -26,13 +26,69 @@ class EventIndex extends Component
     // Many-to-Many relations
     public $selectedTags = [];
     public $selectedIssues = [];
+    
+    #[\Livewire\Attributes\Url]
+    public $search = '';
+    
+    #[\Livewire\Attributes\Url]
+    public $filterStatus = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterTag = [];
+    
+    #[\Livewire\Attributes\Url]
+    public $filterYear = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterMonth = '';
+
+    public $perPage = 10;
+
+    public function updatedFilterStatus() { $this->resetPage(); }
+    public function updatedFilterTag() { $this->resetPage(); }
+    public function updatedFilterYear() { $this->resetPage(); }
+    public function updatedFilterMonth() { $this->resetPage(); }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingPerPage()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
         $query = Event::with(['tags', 'issues'])->latest();
+        
+        if ($this->search) {
+            $query->where('title', 'like', '%' . $this->search . '%');
+        }
+
+        if ($this->filterStatus === 'published') {
+            $query->where('is_published', true);
+        } elseif ($this->filterStatus === 'draft') {
+            $query->where('is_published', false);
+        }
+
+        if (!empty($this->filterTag)) {
+            $query->whereHas('tags', function($q) {
+                $q->whereIn('tags.id', $this->filterTag);
+            });
+        }
+
+        if ($this->filterYear) {
+            $query->whereYear('created_at', $this->filterYear);
+        }
+
+        if ($this->filterMonth) {
+            $query->whereMonth('created_at', $this->filterMonth);
+        }
 
         return view('livewire.admin.event.event-index', [
-            'events' => $query->paginate(10),
+            'events' => $query->paginate($this->perPage),
             'allTags' => Tag::orderBy('name')->get(),
             'allIssues' => Issue::where('status', 'active')->orderBy('title')->get(),
         ])->layout('layouts.admin');
@@ -144,5 +200,29 @@ class EventIndex extends Component
 
         $event->delete();
         session()->flash('message', 'Agenda Acara berhasil dihapus.');
+    }
+
+    public function savePreview()
+    {
+        $coverImageUrl = null;
+        if ($this->new_cover_image) {
+            try {
+                $coverImageUrl = $this->new_cover_image->temporaryUrl();
+            } catch (\Exception $e) {}
+        } elseif ($this->cover_image) {
+            $coverImageUrl = $this->cover_image;
+        }
+
+        session(['preview_post_data' => [
+            'title' => $this->title,
+            'type' => 'acara',
+            'content' => $this->description,
+            'event_date' => $this->event_date,
+            'time' => $this->time,
+            'location' => $this->location,
+            'cover_image' => $coverImageUrl,
+        ]]);
+
+        $this->dispatch('open-preview-tab');
     }
 }

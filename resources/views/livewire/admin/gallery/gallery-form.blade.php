@@ -21,26 +21,26 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Judul Galeri <span class="text-red-500">*</span></label>
-                            <input type="text" wire:model="title" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: Penanaman Mangrove 2026">
+                            <input type="text" wire:model="title" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: Penanaman Mangrove 2026">
                             @error('title') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Kegiatan <span class="text-red-500">*</span></label>
-                            <input type="date" wire:model="date" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
+                            <input type="date" wire:model="date" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
                             @error('date') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Kegiatan (Opsional)</label>
-                        <textarea wire:model="description" rows="4" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Ceritakan sedikit tentang kegiatan ini..."></textarea>
+                        <textarea wire:model="description" rows="4" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Ceritakan sedikit tentang kegiatan ini..."></textarea>
                         @error('description') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">URL / Embed Video Youtube (Opsional)</label>
-                        <input type="text" wire:model="video_url" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder='https://www.youtube.com/watch?v=... atau kode <iframe...'>
+                        <input type="text" wire:model="video_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder='https://www.youtube.com/watch?v=... atau kode <iframe...'>
                         <p class="text-xs text-gray-500 mt-1">Anda dapat memasukkan Link Video biasa atau menempelkan langsung kode <code class="bg-gray-100 px-1 rounded">&lt;iframe&gt;</code> yang didapat dari menu <b>Share &gt; Embed</b> YouTube.</p>
                         @error('video_url') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                     </div>

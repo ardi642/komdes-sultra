@@ -47,4 +47,50 @@ class ImageService
 
         return false;
     }
+
+    /**
+     * Extract image paths from HTML content.
+     *
+     * @param string|null $html
+     * @return array
+     */
+    public function extractImagesFromHtml(?string $html): array
+    {
+        if (!$html) {
+            return [];
+        }
+
+        $images = [];
+        preg_match_all('/<img[^>]+src=(?:\"|\')([^\"\']+)(?:\"|\')[^>]*>/i', $html, $matches);
+        
+        if (!empty($matches[1])) {
+            foreach ($matches[1] as $src) {
+                // Only track local storage images
+                if (str_contains($src, '/storage/')) {
+                    $images[] = $src;
+                }
+            }
+        }
+
+        return $images;
+    }
+
+    /**
+     * Compare old and new HTML content, and delete removed images.
+     *
+     * @param string|null $oldHtml
+     * @param string|null $newHtml
+     * @return void
+     */
+    public function cleanRemovedImagesFromHtml(?string $oldHtml, ?string $newHtml): void
+    {
+        $oldImages = $this->extractImagesFromHtml($oldHtml);
+        $newImages = $this->extractImagesFromHtml($newHtml);
+
+        $removedImages = array_diff($oldImages, $newImages);
+
+        foreach ($removedImages as $image) {
+            $this->delete($image);
+        }
+    }
 }

@@ -13,6 +13,21 @@ class InboxIndex extends Component
     public $selectedMessage = null;
     public $isModalOpen = false;
 
+    #[\Livewire\Attributes\Url]
+    public $search = '';
+    
+    public $perPage = 10;
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingPerPage()
+    {
+        $this->resetPage();
+    }
+
     public function viewMessage($id)
     {
         $message = Inbox::findOrFail($id);
@@ -45,8 +60,18 @@ class InboxIndex extends Component
 
     public function render()
     {
+        $query = Inbox::latest();
+        
+        if ($this->search) {
+            $query->where(function($q) {
+                $q->where('name', 'like', '%' . $this->search . '%')
+                  ->orWhere('email', 'like', '%' . $this->search . '%')
+                  ->orWhere('subject', 'like', '%' . $this->search . '%');
+            });
+        }
+
         return view('livewire.admin.inbox.inbox-index', [
-            'messages' => Inbox::latest()->paginate(15),
+            'messages' => $query->paginate($this->perPage),
         ])->layout('layouts.admin');
     }
 }

@@ -21,10 +21,58 @@ class MemberIndex extends Component
     public $is_active = true;
     public $logo, $new_logo;
     
+    #[\Livewire\Attributes\Url]
+    public $search = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterStatus = '';
+    
+    #[\Livewire\Attributes\Url]
+    public $filterYear = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterMonth = '';
+    
+    public $perPage = 10;
+
+    public function updatedFilterStatus() { $this->resetPage(); }
+    public function updatedFilterYear() { $this->resetPage(); }
+    public function updatedFilterMonth() { $this->resetPage(); }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingPerPage()
+    {
+        $this->resetPage();
+    }
+    
     public function render()
     {
+        $query = Member::orderBy('order_number');
+        
+        if ($this->search) {
+            $query->where('name', 'like', '%' . $this->search . '%');
+        }
+
+        if ($this->filterStatus === 'active') {
+            $query->where('is_active', true);
+        } elseif ($this->filterStatus === 'inactive') {
+            $query->where('is_active', false);
+        }
+
+        if ($this->filterYear) {
+            $query->whereYear('created_at', $this->filterYear);
+        }
+
+        if ($this->filterMonth) {
+            $query->whereMonth('created_at', $this->filterMonth);
+        }
+
         return view('livewire.admin.member.member-index', [
-            'members' => Member::orderBy('order_number')->paginate(10),
+            'members' => $query->paginate($this->perPage),
         ])->layout('layouts.admin');
     }
 

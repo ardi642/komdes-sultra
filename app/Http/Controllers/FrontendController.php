@@ -157,7 +157,7 @@ class FrontendController extends Controller
 
     public function postDetail(Post $post)
     {
-        if (!$post->is_published) {
+        if (!$post->is_published && !auth()->check()) {
             abort(404);
         }
         $post->increment('views');
@@ -180,9 +180,66 @@ class FrontendController extends Controller
         return view($viewMap[$post->type], compact('post', 'relatedPosts'));
     }
 
+    public function previewLive(Request $request)
+    {
+        // if (!auth()->check()) {
+        //     abort(403);
+        // }
+        
+        $data = session('preview_post_data');
+        if (!$data) {
+            return "Tidak ada data preview yang ditemukan. Silakan tutup tab ini dan klik 'Lihat Live Preview' kembali dari editor.";
+        }
+
+        $post = new Post([
+            'title' => $data['title'] ?? 'Judul Preview',
+            'type' => $data['type'] ?? 'berita',
+            'content' => $data['content'] ?? '<p>Konten kosong.</p>',
+        ]);
+        $post->published_at = now();
+        $post->is_published = true;
+        $post->views = 0;
+        
+        // Mock category for view if needed
+        if (!empty($data['category_id'])) {
+            $post->setRelation('category', \App\Models\Category::find($data['category_id']));
+        }
+        
+        // Mock cover image if needed (using placeholder or uploaded temp)
+        if (!empty($data['cover_image'])) {
+            $post->cover_image = $data['cover_image'];
+        }
+        
+        $relatedPosts = collect();
+        $viewMap = [
+            'berita' => 'pages.berita-detail',
+            'artikel' => 'pages.artikel-detail',
+            'riset' => 'pages.riset-detail',
+            'siaran_pers' => 'pages.siaran-pers-detail',
+            'acara' => 'pages.acara-detail',
+        ];
+        
+        if ($post->type === 'acara') {
+            $event = new Event([
+                'title' => $data['title'] ?? 'Judul Preview',
+                'description' => $data['content'] ?? '<p>Konten kosong.</p>',
+                'event_date' => $data['event_date'] ?? now(),
+                'time' => $data['time'] ?? null,
+                'location' => $data['location'] ?? 'Preview Location',
+                'is_published' => true,
+            ]);
+            if (!empty($data['cover_image'])) {
+                $event->cover_image = $data['cover_image'];
+            }
+            return view($viewMap[$post->type], compact('event'));
+        }
+
+        return view($viewMap[$post->type] ?? 'pages.berita-detail', compact('post', 'relatedPosts'));
+    }
+
     public function eventDetail(Event $event)
     {
-        if (!$event->is_published) {
+        if (!$event->is_published && !auth()->check()) {
             abort(404);
         }
         return view('pages.acara-detail', compact('event'));

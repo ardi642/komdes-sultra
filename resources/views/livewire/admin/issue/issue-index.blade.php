@@ -13,6 +13,75 @@
         </div>
     @endif
 
+    <!-- Top Action Bar (Search & Filters) -->
+    <div x-data="{ showFilters: false }" class="bg-white rounded-xl shadow-sm border border-zinc-200 overflow-hidden mb-6">
+        
+        <!-- Main Bar: Search, Per Page, Toggle -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4">
+            
+            <!-- Left: Search -->
+            <div class="w-full sm:max-w-xs relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="h-4 w-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari isu..." class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm block w-full pl-9 py-2 transition-colors">
+            </div>
+
+            <!-- Right: Per Page & Filter Toggle -->
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-medium text-zinc-600 hidden sm:inline">Tampil:</span>
+                    <select wire:model.live="perPage" class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 pl-3 pr-8 text-zinc-900 transition-colors">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                
+                <button @click="showFilters = !showFilters" type="button" class="inline-flex items-center px-4 py-2 bg-white border border-zinc-300 rounded-lg font-medium text-sm text-zinc-700 hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors shadow-sm gap-2">
+                    <svg class="w-4 h-4 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                    Filter Lanjutan
+                    <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': showFilters}" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Expanded Filters Drawer -->
+        <div x-show="showFilters" x-collapse>
+            <div class="p-4 bg-zinc-50 border-t border-zinc-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                <div>
+                    <label class="block text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">Status</label>
+                    <select wire:model.live="filterStatus" class="w-full bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 px-3 text-zinc-900">
+                        <option value="">Semua Status</option>
+                        <option value="active">Aktif</option>
+                        <option value="inactive">Nonaktif</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">Waktu (Bulan / Tahun)</label>
+                    <div class="flex gap-2">
+                        <select wire:model.live="filterMonth" class="w-1/2 bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 px-3 text-zinc-900">
+                            <option value="">Bulan</option>
+                            @for($i=1; $i<=12; $i++)
+                                <option value="{{ $i }}">{{ date('F', mktime(0, 0, 0, $i, 10)) }}</option>
+                            @endfor
+                        </select>
+                        <select wire:model.live="filterYear" class="w-1/2 bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 px-3 text-zinc-900">
+                            <option value="">Tahun</option>
+                            @for($i=date('Y'); $i>=2020; $i--)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="bg-white rounded-xl shadow-sm border border-zinc-200 overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left text-zinc-600">
@@ -20,6 +89,7 @@
                     <tr>
                         <th scope="col" class="px-6 py-3 font-medium w-16">Cover</th>
                         <th scope="col" class="px-6 py-3 font-medium">Judul Isu</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Dibuat Pada</th>
                         <th scope="col" class="px-6 py-3 font-medium">Status</th>
                         <th scope="col" class="px-6 py-3 font-medium text-right">Aksi</th>
                     </tr>
@@ -40,6 +110,9 @@
                             <div class="font-medium text-zinc-900">{{ $issue->title }}</div>
                             <div class="text-xs text-zinc-500 mt-1">{{ $issue->slug }}</div>
                         </td>
+                        <td class="px-6 py-4 text-zinc-700 whitespace-nowrap">
+                            {{ $issue->created_at ? $issue->created_at->format('d M Y, H:i') : '-' }}
+                        </td>
                         <td class="px-6 py-4">
                             @if($issue->status === 'active')
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Aktif</span>
@@ -48,17 +121,21 @@
                             @endif
                         </td>
                         <td class="px-6 py-4 text-right space-x-2">
+                            <a href="{{ url('/isu/' . $issue->slug) }}" target="_blank" class="text-primary-600 hover:text-primary-900 font-medium mr-2">Lihat</a>
                             <button wire:click="edit({{ $issue->id }})" class="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
                             <button wire:click="delete({{ $issue->id }})" onclick="confirm('Apakah Anda yakin ingin menghapus isu ini?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-900 font-medium">Hapus</button>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="4" class="px-6 py-8 text-center text-zinc-500">Belum ada isu kampanye yang ditambahkan.</td>
+                        <td colspan="5" class="px-6 py-8 text-center text-zinc-500">Belum ada isu kampanye yang ditambahkan.</td>
                     </tr>
                     @endforelse
                 </tbody>
             </table>
+        </div>
+        <div class="px-6 py-4 border-t border-zinc-200">
+            {{ $issues->links() }}
         </div>
     </div>
 
@@ -100,7 +177,7 @@
                                 
                                 <div>
                                     <x-label for="status" value="Status Tampilan" />
-                                    <select id="status" wire:model="status" class="border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2.5 px-3 text-zinc-900">
+                                    <select id="status" wire:model="status" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2.5 px-3 text-zinc-900 transition-colors">
                                         <option value="active">Aktif (Tampil di Web)</option>
                                         <option value="inactive">Nonaktif (Sembunyikan)</option>
                                     </select>
@@ -135,13 +212,13 @@
                             <div class="space-y-4 md:col-span-2">
                                 <div>
                                     <x-label for="description" value="Deskripsi Singkat" />
-                                    <textarea id="description" wire:model="description" rows="3" class="border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2.5 px-3 text-zinc-900" placeholder="Jelaskan secara singkat mengenai isu ini..."></textarea>
+                                    <textarea id="description" wire:model="description" rows="3" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2.5 px-3 text-zinc-900 transition-colors" placeholder="Jelaskan secara singkat mengenai isu ini..."></textarea>
                                     @error('description') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                                 </div>
                                 
                                 <div>
                                     <x-label for="icon_svg" value="Icon SVG (Opsional, untuk desain spesifik)" />
-                                    <textarea id="icon_svg" wire:model="icon_svg" rows="2" class="border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2.5 px-3 text-zinc-900 font-mono text-sm" placeholder="<svg>...</svg>"></textarea>
+                                    <textarea id="icon_svg" wire:model="icon_svg" rows="2" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2.5 px-3 text-zinc-900 font-mono text-sm transition-colors" placeholder="<svg>...</svg>"></textarea>
                                     <p class="text-xs text-zinc-500 mt-1">Anda bisa menempelkan kode SVG dari Heroicons atau ikon lainnya.</p>
                                     @error('icon_svg') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                                 </div>

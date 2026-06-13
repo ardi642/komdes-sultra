@@ -3,19 +3,43 @@
 namespace App\Livewire\Admin\Category;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\Category;
 use Illuminate\Support\Str;
 
 class CategoryIndex extends Component
 {
-    public $categories, $name, $slug, $type = 'berita', $category_id;
+    use WithPagination;
+
+    public $name, $slug, $type = 'berita', $category_id;
     public $isModalOpen = false;
+
+    #[\Livewire\Attributes\Url]
+    public $search = '';
+    
+    public $perPage = 10;
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingPerPage()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
-        $this->categories = Category::all();
-        return view('livewire.admin.category.category-index')
-            ->layout('layouts.admin');
+        $query = Category::query();
+        
+        if ($this->search) {
+            $query->where('name', 'like', '%' . $this->search . '%');
+        }
+
+        return view('livewire.admin.category.category-index', [
+            'categories' => $query->paginate($this->perPage),
+        ])->layout('layouts.admin');
     }
 
     public function create()

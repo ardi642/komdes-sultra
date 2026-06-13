@@ -28,9 +28,45 @@ class PostIndex extends Component
     public $selectedTags = [];
     public $selectedIssues = [];
 
-    // Filters for list
     #[\Livewire\Attributes\Url]
     public $filterType = '';
+    
+    #[\Livewire\Attributes\Url]
+    public $search = '';
+    
+    #[\Livewire\Attributes\Url]
+    public $filterStatus = ''; // 'published' or 'draft'
+    
+    #[\Livewire\Attributes\Url]
+    public $filterCategory = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterTag = [];
+    
+    #[\Livewire\Attributes\Url]
+    public $filterYear = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterMonth = '';
+
+    public $perPage = 10;
+
+    public function updatedFilterType() { $this->resetPage(); }
+    public function updatedFilterStatus() { $this->resetPage(); }
+    public function updatedFilterCategory() { $this->resetPage(); }
+    public function updatedFilterTag() { $this->resetPage(); }
+    public function updatedFilterYear() { $this->resetPage(); }
+    public function updatedFilterMonth() { $this->resetPage(); }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingPerPage()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
@@ -39,9 +75,37 @@ class PostIndex extends Component
         if ($this->filterType) {
             $query->where('type', $this->filterType);
         }
+        
+        if ($this->search) {
+            $query->where('title', 'like', '%' . $this->search . '%');
+        }
+        
+        if ($this->filterStatus === 'published') {
+            $query->where('is_published', true);
+        } elseif ($this->filterStatus === 'draft') {
+            $query->where('is_published', false);
+        }
+
+        if ($this->filterCategory) {
+            $query->where('category_id', $this->filterCategory);
+        }
+
+        if (!empty($this->filterTag)) {
+            $query->whereHas('tags', function($q) {
+                $q->whereIn('tags.id', $this->filterTag);
+            });
+        }
+
+        if ($this->filterYear) {
+            $query->whereYear('created_at', $this->filterYear);
+        }
+
+        if ($this->filterMonth) {
+            $query->whereMonth('created_at', $this->filterMonth);
+        }
 
         return view('livewire.admin.post.post-index', [
-            'posts' => $query->paginate(10),
+            'posts' => $query->paginate($this->perPage),
             'categories' => Category::where('type', $this->type)->get(),
             'allTags' => Tag::orderBy('name')->get(),
             'allIssues' => Issue::where('status', 'active')->orderBy('title')->get(),
@@ -160,5 +224,27 @@ class PostIndex extends Component
 
         $post->delete();
         session()->flash('message', 'Publikasi berhasil dihapus.');
+    }
+
+    public function savePreview()
+    {
+        $coverImageUrl = null;
+        if ($this->new_cover_image) {
+            try {
+                $coverImageUrl = $this->new_cover_image->temporaryUrl();
+            } catch (\Exception $e) {}
+        } elseif ($this->cover_image) {
+            $coverImageUrl = $this->cover_image;
+        }
+
+        session(['preview_post_data' => [
+            'title' => $this->title,
+            'type' => $this->type,
+            'content' => $this->content,
+            'category_id' => $this->category_id,
+            'cover_image' => $coverImageUrl,
+        ]]);
+
+        $this->dispatch('open-preview-tab');
     }
 }

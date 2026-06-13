@@ -7,22 +7,69 @@ use Livewire\WithFileUploads;
 use App\Models\Issue;
 use App\Services\ImageService;
 use Illuminate\Support\Str;
+use Livewire\WithPagination;
 
 class IssueIndex extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, WithPagination;
 
-    public $issues, $issue_id;
+    public $issue_id;
     public $title, $slug, $description, $icon_svg, $status = 'active';
     public $cover_image, $new_cover_image;
     
     public $isModalOpen = false;
 
+    #[\Livewire\Attributes\Url]
+    public $search = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterStatus = '';
+    
+    #[\Livewire\Attributes\Url]
+    public $filterYear = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterMonth = '';
+    
+    public $perPage = 10;
+
+    public function updatedFilterStatus() { $this->resetPage(); }
+    public function updatedFilterYear() { $this->resetPage(); }
+    public function updatedFilterMonth() { $this->resetPage(); }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingPerPage()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
-        $this->issues = Issue::latest()->get();
-        return view('livewire.admin.issue.issue-index')
-            ->layout('layouts.admin');
+        $query = Issue::latest();
+        
+        if ($this->search) {
+            $query->where('title', 'like', '%' . $this->search . '%');
+        }
+
+        if ($this->filterStatus) {
+            $query->where('status', $this->filterStatus);
+        }
+
+        if ($this->filterYear) {
+            $query->whereYear('created_at', $this->filterYear);
+        }
+
+        if ($this->filterMonth) {
+            $query->whereMonth('created_at', $this->filterMonth);
+        }
+
+        return view('livewire.admin.issue.issue-index', [
+            'issues' => $query->paginate($this->perPage),
+        ])->layout('layouts.admin');
     }
 
     public function create()

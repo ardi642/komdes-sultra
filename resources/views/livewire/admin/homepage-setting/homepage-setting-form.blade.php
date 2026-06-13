@@ -19,13 +19,13 @@
             <div class="space-y-4">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-zinc-700">Deskripsi Utama</label>
-                    <textarea wire:model="about_description" rows="5" class="w-full px-4 py-2 text-sm border-zinc-200 rounded-xl focus:ring-primary-500 focus:border-primary-500" placeholder="Masukkan deskripsi tentang Komdes Sultra..."></textarea>
+                    <textarea wire:model="about_description" rows="5" class="w-full px-4 py-2 text-sm bg-zinc-100 border-zinc-200 rounded-xl focus:bg-white focus:ring-primary-500 focus:border-primary-500 transition-colors" placeholder="Masukkan deskripsi tentang Komdes Sultra..."></textarea>
                     @error('about_description') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label class="block mb-2 text-sm font-medium text-zinc-700">Tipe Media Pendamping</label>
-                    <select wire:model.live="about_media_type" class="w-full px-4 py-2 text-sm border-zinc-200 rounded-xl focus:ring-primary-500 focus:border-primary-500">
+                    <select wire:model.live="about_media_type" class="w-full px-4 py-2 text-sm bg-zinc-100 border-zinc-200 rounded-xl focus:bg-white focus:ring-primary-500 focus:border-primary-500 transition-colors">
                         <option value="none">Tidak Ada (Teks Melebar Penuh)</option>
                         <option value="image">Gambar/Foto</option>
                         <option value="youtube">Video YouTube</option>
@@ -55,7 +55,7 @@
                 <div>
                     <label class="block mb-2 text-sm font-medium text-zinc-700">Link / Embed YouTube</label>
                     <p class="mb-2 text-xs text-zinc-500">Anda dapat memasukkan Link Video biasa atau menempelkan langsung kode &lt;iframe&gt; yang didapat dari menu Share > Embed YouTube.</p>
-                    <textarea wire:model="about_youtube_url" rows="3" class="w-full px-4 py-2 text-sm border-zinc-200 rounded-xl focus:ring-primary-500 focus:border-primary-500" placeholder="https://www.youtube.com/watch?v=... atau <iframe src=..."></textarea>
+                    <textarea wire:model="about_youtube_url" rows="3" class="w-full px-4 py-2 text-sm bg-zinc-100 border-zinc-200 rounded-xl focus:bg-white focus:ring-primary-500 focus:border-primary-500 transition-colors" placeholder="https://www.youtube.com/watch?v=... atau <iframe src=..."></textarea>
                     @error('about_youtube_url') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                 </div>
                 @endif
@@ -67,11 +67,11 @@
                         <div class="space-y-3">
                             <div>
                                 <label class="block mb-1 text-xs font-medium text-zinc-600">Teks Tombol</label>
-                                <input type="text" wire:model="about_btn1_text" class="w-full px-3 py-2 text-sm border-zinc-200 rounded-lg focus:ring-primary-500 focus:border-primary-500" placeholder="Misal: Tentang Kami (Kosongkan jika tidak ingin ditampilkan)">
+                                <input type="text" wire:model="about_btn1_text" class="w-full px-3 py-2 text-sm bg-zinc-100 border-zinc-200 rounded-lg focus:bg-white focus:ring-primary-500 focus:border-primary-500 transition-colors" placeholder="Misal: Tentang Kami (Kosongkan jika tidak ingin ditampilkan)">
                             </div>
                             <div>
                                 <label class="block mb-1 text-xs font-medium text-zinc-600">Link / URL Tombol</label>
-                                <input type="text" wire:model="about_btn1_url" class="w-full px-3 py-2 text-sm border-zinc-200 rounded-lg focus:ring-primary-500 focus:border-primary-500" placeholder="Misal: /tentang-kami">
+                                <input type="text" wire:model="about_btn1_url" class="w-full px-3 py-2 text-sm bg-zinc-100 border-zinc-200 rounded-lg focus:bg-white focus:ring-primary-500 focus:border-primary-500 transition-colors" placeholder="Misal: /tentang-kami">
                             </div>
                         </div>
                     </div>
@@ -82,11 +82,11 @@
                         <div class="space-y-3">
                             <div>
                                 <label class="block mb-1 text-xs font-medium text-zinc-600">Teks Tombol</label>
-                                <input type="text" wire:model="about_btn2_text" class="w-full px-3 py-2 text-sm border-zinc-200 rounded-lg focus:ring-primary-500 focus:border-primary-500" placeholder="Misal: Hubungi Kami (Kosongkan jika tidak ingin ditampilkan)">
+                                <input type="text" wire:model="about_btn2_text" class="w-full px-3 py-2 text-sm bg-zinc-100 border-zinc-200 rounded-lg focus:bg-white focus:ring-primary-500 focus:border-primary-500 transition-colors" placeholder="Misal: Hubungi Kami (Kosongkan jika tidak ingin ditampilkan)">
                             </div>
                             <div>
                                 <label class="block mb-1 text-xs font-medium text-zinc-600">Link / URL Tombol</label>
-                                <input type="text" wire:model="about_btn2_url" class="w-full px-3 py-2 text-sm border-zinc-200 rounded-lg focus:ring-primary-500 focus:border-primary-500" placeholder="Misal: /kontak">
+                                <input type="text" wire:model="about_btn2_url" class="w-full px-3 py-2 text-sm bg-zinc-100 border-zinc-200 rounded-lg focus:bg-white focus:ring-primary-500 focus:border-primary-500 transition-colors" placeholder="Misal: /kontak">
                             </div>
                         </div>
                     </div>
@@ -102,31 +102,31 @@
             <div class="space-y-4">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-zinc-700">Anggota Jejaring</label>
-                    <input type="text" wire:model="network_subtitle" class="w-full px-4 py-2 text-sm border-zinc-200 rounded-xl focus:ring-primary-500 focus:border-primary-500" placeholder="Jejaring komunitas dan organisasi lokal...">
+                    <input type="text" wire:model="network_subtitle" class="w-full px-4 py-2 text-sm bg-zinc-100 border-zinc-200 rounded-xl focus:bg-white focus:ring-primary-500 focus:border-primary-500 transition-colors" placeholder="Jejaring komunitas dan organisasi lokal...">
                     @error('network_subtitle') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                 </div>
                 
                 <div>
                     <label class="block mb-2 text-sm font-medium text-zinc-700">Fokus Isu</label>
-                    <input type="text" wire:model="issue_subtitle" class="w-full px-4 py-2 text-sm border-zinc-200 rounded-xl focus:ring-primary-500 focus:border-primary-500" placeholder="Isu strategis yang menjadi fokus...">
+                    <input type="text" wire:model="issue_subtitle" class="w-full px-4 py-2 text-sm bg-zinc-100 border-zinc-200 rounded-xl focus:bg-white focus:ring-primary-500 focus:border-primary-500 transition-colors" placeholder="Isu strategis yang menjadi fokus...">
                     @error('issue_subtitle') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                 </div>
                 
                 <div>
                     <label class="block mb-2 text-sm font-medium text-zinc-700">Agenda Acara</label>
-                    <input type="text" wire:model="agenda_subtitle" class="w-full px-4 py-2 text-sm border-zinc-200 rounded-xl focus:ring-primary-500 focus:border-primary-500" placeholder="Ikuti berbagai kegiatan edukasi...">
+                    <input type="text" wire:model="agenda_subtitle" class="w-full px-4 py-2 text-sm bg-zinc-100 border-zinc-200 rounded-xl focus:bg-white focus:ring-primary-500 focus:border-primary-500 transition-colors" placeholder="Ikuti berbagai kegiatan edukasi...">
                     @error('agenda_subtitle') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                 </div>
                 
                 <div>
                     <label class="block mb-2 text-sm font-medium text-zinc-700">Pusat Publikasi</label>
-                    <input type="text" wire:model="publication_subtitle" class="w-full px-4 py-2 text-sm border-zinc-200 rounded-xl focus:ring-primary-500 focus:border-primary-500" placeholder="Kabar terbaru, artikel opini...">
+                    <input type="text" wire:model="publication_subtitle" class="w-full px-4 py-2 text-sm bg-zinc-100 border-zinc-200 rounded-xl focus:bg-white focus:ring-primary-500 focus:border-primary-500 transition-colors" placeholder="Kabar terbaru, artikel opini...">
                     @error('publication_subtitle') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                 </div>
                 
                 <div>
                     <label class="block mb-2 text-sm font-medium text-zinc-700">Galeri Kegiatan</label>
-                    <input type="text" wire:model="gallery_subtitle" class="w-full px-4 py-2 text-sm border-zinc-200 rounded-xl focus:ring-primary-500 focus:border-primary-500" placeholder="Dokumentasi aksi lapangan...">
+                    <input type="text" wire:model="gallery_subtitle" class="w-full px-4 py-2 text-sm bg-zinc-100 border-zinc-200 rounded-xl focus:bg-white focus:ring-primary-500 focus:border-primary-500 transition-colors" placeholder="Dokumentasi aksi lapangan...">
                     @error('gallery_subtitle') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
                 </div>
             </div>

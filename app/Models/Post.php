@@ -19,6 +19,22 @@ class Post extends Model
         'is_published' => 'boolean',
     ];
 
+    protected static function booted()
+    {
+        static::updating(function ($post) {
+            if ($post->isDirty('content')) {
+                $imageService = new ImageService();
+                $imageService->cleanRemovedImagesFromHtml($post->getOriginal('content'), $post->content);
+            }
+        });
+
+        static::deleting(function ($post) {
+            $imageService = new ImageService();
+            // Pass the original content and null for new content so it deletes all extracted images
+            $imageService->cleanRemovedImagesFromHtml($post->content, null);
+        });
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

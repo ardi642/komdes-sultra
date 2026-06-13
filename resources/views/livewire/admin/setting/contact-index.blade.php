@@ -18,25 +18,25 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
-                    <input type="text" wire:model="phone" class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: 082290533640">
+                    <input type="text" wire:model="phone" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: 082290533640">
                     @error('phone') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Alamat Email</label>
-                    <input type="email" wire:model="email" class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: kantor@jaringnusa.id">
+                    <input type="email" wire:model="email" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: kantor@jaringnusa.id">
                     @error('email') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium text-gray-700 mb-1">Website URL</label>
-                    <input type="text" wire:model="website" class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: jaringnusa.id">
+                    <input type="text" wire:model="website" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: jaringnusa.id">
                     @error('website') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium text-gray-700 mb-1">Alamat Lengkap</label>
-                    <textarea wire:model="address" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Masukkan alamat lengkap..."></textarea>
+                    <textarea wire:model="address" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Masukkan alamat lengkap..."></textarea>
                     @error('address') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 

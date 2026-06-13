@@ -3,19 +3,43 @@
 namespace App\Livewire\Admin\Tag;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\Tag;
 use Illuminate\Support\Str;
 
 class TagIndex extends Component
 {
-    public $tags, $name, $slug, $tag_id;
+    use WithPagination;
+
+    public $name, $slug, $tag_id;
     public $isModalOpen = false;
+
+    #[\Livewire\Attributes\Url]
+    public $search = '';
+    
+    public $perPage = 10;
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingPerPage()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
-        $this->tags = Tag::all();
-        return view('livewire.admin.tag.tag-index')
-            ->layout('layouts.admin');
+        $query = Tag::query();
+        
+        if ($this->search) {
+            $query->where('name', 'like', '%' . $this->search . '%');
+        }
+
+        return view('livewire.admin.tag.tag-index', [
+            'tags' => $query->paginate($this->perPage),
+        ])->layout('layouts.admin');
     }
 
     public function create()
