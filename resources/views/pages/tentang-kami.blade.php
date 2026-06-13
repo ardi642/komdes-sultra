@@ -29,7 +29,7 @@
     <div class="relative pt-40 pb-32 overflow-hidden bg-[#165a3f]">
         <div class="absolute right-0 bottom-0 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 translate-y-1/4 bg-white"></div>
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
-            <div class="text-center mt-10 mb-8 max-w-6xl mx-auto">
+            <div class="text-center mt-10 mb-8 max-w-6xl mx-auto" data-aos="fade-up">
                 <div class="w-32 h-[1px] bg-white mx-auto mb-6 opacity-50"></div>
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6 tracking-widest uppercase text-white drop-shadow-md">Tentang Kami</h1>
                 <p class="text-base md:text-lg text-white/90 leading-relaxed drop-shadow-sm font-light">
@@ -46,7 +46,7 @@
         <div class="absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-30 -translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
 
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
-            <div class="max-w-6xl">
+            <div class="max-w-6xl" data-aos="fade-up">
                 <div class="w-32 h-[1px] bg-primary-600 mb-4"></div>
                 <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest mb-8">Profil Singkat Komdes Sultra</h2>
                 
@@ -62,7 +62,7 @@
         <!-- Ambient Glow Putih -->
         <div class="absolute left-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 -translate-x-1/3 -translate-y-1/4 bg-white"></div>
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
-            <div class="max-w-6xl">
+            <div class="max-w-6xl" data-aos="fade-up">
                 <div class="w-32 h-[1px] bg-white mb-4"></div>
                 <h2 class="text-xl md:text-2xl font-heading font-bold text-white uppercase tracking-widest mb-8">Mengapa Komdes Sultra</h2>
                 
@@ -82,7 +82,7 @@
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             
             <!-- Tujuan (Right Aligned to the container bounds) -->
-            <div class="mb-32 flex justify-end">
+            <div class="mb-32 flex justify-end" data-aos="fade-left">
                 <div class="max-w-6xl w-full flex flex-col md:items-end text-left md:text-right">
                     <div class="w-32 h-[1px] bg-primary-600 mb-4"></div>
                     <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest mb-6">Tujuan Komdes Sultra</h2>
@@ -108,7 +108,7 @@
             <div class="h-20 md:h-32 w-full block" style="height: 6rem;"></div>
 
             <!-- Intensi (Left Aligned to the container bounds) -->
-            <div class="flex justify-start">
+            <div class="flex justify-start" data-aos="fade-right">
                 <div class="max-w-7xl w-full">
                     <div class="w-32 h-[1px] bg-primary-600 mb-4"></div>
                     <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest mb-8">Intensi Bersama Komdes Sultra</h2>
@@ -134,13 +134,13 @@
         <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
 
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
-            <div class="w-32 h-[1px] bg-white mb-4"></div>
-            <h2 class="text-xl md:text-2xl font-heading font-bold text-white uppercase tracking-widest mb-12">Sikap dan Deklarasi Komdes Sultra</h2>
+            <div class="w-32 h-[1px] bg-white mb-4" data-aos="fade-up"></div>
+            <h2 class="text-xl md:text-2xl font-heading font-bold text-white uppercase tracking-widest mb-12" data-aos="fade-up">Sikap dan Deklarasi Komdes Sultra</h2>
             
             <div class="space-y-4 max-w-6xl">
                 @if($about && is_array($about->sikap_list))
                     @foreach($about->sikap_list as $index => $sikap)
-                    <div class="flex flex-col md:flex-row">
+                    <div class="flex flex-col md:flex-row" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                         <div class="w-16 h-16 md:w-24 md:h-auto flex-shrink-0 border border-white flex items-center justify-center text-white font-bold text-2xl mr-4 md:mr-6 mb-4 md:mb-0">
                             {{ $index + 1 }}.
                         </div>
@@ -162,13 +162,13 @@
         <div class="absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-40 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
         
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
-            <div class="mb-16 flex flex-col md:items-end text-left md:text-right">
+            <div class="mb-16 flex flex-col md:items-end text-left md:text-right" data-aos="fade-up">
                 <div class="w-32 h-[1px] bg-primary-600 mb-4"></div>
                 <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest">Profil Anggota Komdes Sultra</h2>
             </div>
 
             <!-- Clean grid, no borders, just logos -->
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 items-center justify-items-center relative z-20">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 items-center justify-items-center relative z-20" data-aos="zoom-in" data-aos-delay="200">
                 <template x-for="member in members" :key="member.id">
                     <button @click="openModal(member.id)" :title="member.name" class="group focus:outline-none flex flex-col items-center h-full">
                         <template x-if="member.logo">

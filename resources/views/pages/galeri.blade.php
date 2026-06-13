@@ -11,7 +11,7 @@
     <div class="relative pt-40 pb-32 overflow-hidden bg-[#165a3f]">
         <div class="absolute right-0 bottom-0 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 translate-y-1/4 bg-white"></div>
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
-            <div class="text-center mt-10 mb-8 max-w-4xl mx-auto">
+            <div class="text-center mt-10 mb-8 max-w-4xl mx-auto" data-aos="fade-up">
                 <div class="w-32 h-[1px] bg-white mx-auto mb-6 opacity-50"></div>
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6 tracking-widest uppercase text-white drop-shadow-md">Galeri Kegiatan</h1>
                 <p class="text-base md:text-lg text-white/90 leading-relaxed drop-shadow-sm font-light">
@@ -27,7 +27,7 @@
         <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
             <!-- Filters & Search Wrapper -->
-            <div class="mb-12" x-data="{ showFilter: {{ (request()->filled('q') || request()->filled('tahun')) ? 'true' : 'false' }} }">
+            <div class="mb-12" x-data="{ showFilter: {{ (request()->filled('q') || request()->filled('tahun')) ? 'true' : 'false' }} }" data-aos="fade-up">
                 
                 <!-- Toggle Button -->
                 <div class="flex justify-between items-center mb-6">
@@ -93,7 +93,7 @@
             @if($galleries->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 mb-16">
                 @foreach($galleries as $item)
-                <a href="{{ route('galeri.detail', $item->slug) }}" class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col group">
+                <a href="{{ route('galeri.detail', $item->slug) }}" class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col group" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                     <!-- Thumbnail with overlay -->
                     <div class="relative h-64 overflow-hidden bg-zinc-100">
                         @if($item->thumbnail)

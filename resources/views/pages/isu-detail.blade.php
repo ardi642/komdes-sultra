@@ -8,7 +8,7 @@
     <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center gap-12">
         <!-- Logo -->
-        <div class="w-32 h-32 md:w-40 md:h-40 flex-shrink-0 bg-white/10 rounded-2xl shadow-sm border border-white/20 flex items-center justify-center text-white backdrop-blur-sm overflow-hidden">
+        <div class="w-32 h-32 md:w-40 md:h-40 flex-shrink-0 bg-white/10 rounded-2xl shadow-sm border border-white/20 flex items-center justify-center text-white backdrop-blur-sm overflow-hidden" data-aos="fade-right">
             @if($issue->cover_image)
             <img src="{{ asset($issue->cover_image) }}" alt="{{ $issue->title }}" class="w-full h-full object-cover">
             @elseif($issue->icon_svg)
@@ -19,7 +19,7 @@
         </div>
         
         <!-- Text -->
-        <div>
+        <div data-aos="fade-left" data-aos-delay="100">
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-4 uppercase tracking-widest drop-shadow-md">
                 {{ $issue->title }}
             </h1>
@@ -35,7 +35,7 @@
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         
         <!-- Search & Filter Toggle Area -->
-        <div x-data="{ showFilter: false }" class="relative z-10 mb-6">
+        <div x-data="{ showFilter: false }" class="relative z-10 mb-6" data-aos="fade-up">
             
             <div class="flex flex-col md:flex-row justify-between items-end gap-4">
                 
@@ -238,7 +238,7 @@
         </div>
 
         <!-- Tabs Navigation for Content Type -->
-        <div class="border-b border-zinc-200 mb-8 overflow-x-auto hide-scrollbar">
+        <div class="border-b border-zinc-200 mb-8 overflow-x-auto hide-scrollbar" data-aos="fade-up">
             <ul class="flex space-x-8 min-w-max px-1">
                 @php
                     $activeType = request('type', 'semua');
@@ -287,7 +287,7 @@
         </div>
 
         <!-- Posts Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="200">
             @forelse($relatedPosts as $post)
             <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
                 <div class="relative h-56 overflow-hidden">

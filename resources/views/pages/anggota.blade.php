@@ -41,13 +41,13 @@
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <!-- Header -->
-        <div class="text-center mb-16 mt-10">
+        <div class="text-center mb-16 mt-10" data-aos="fade-up">
             <div class="w-32 h-[1px] bg-[#165a3f] mx-auto mb-6 opacity-50"></div>
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-[#165a3f] mb-4 tracking-widest uppercase">Anggota Jaring Komdes Sultra</h1>
         </div>
 
         <!-- Members Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 gap-y-12 sm:gap-y-8">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 gap-y-12 sm:gap-y-8" data-aos="zoom-in" data-aos-delay="200">
             <template x-for="member in members" :key="member.id">
                 <button @click="openModal(member.id)" :title="member.name"
                         class="relative bg-transparent rounded-3xl flex flex-col items-center justify-start p-6 border border-transparent hover:bg-white hover:shadow-2xl hover:shadow-primary-500/10 hover:border-primary-100 transition-all duration-500 group focus:outline-none focus:ring-4 focus:ring-primary-500/20 hover:-translate-y-2 w-full h-full">

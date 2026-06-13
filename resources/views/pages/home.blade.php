@@ -175,14 +175,14 @@
             <!-- Teks Kiri -->
             <div class="{{ (!$homepageSetting || $homepageSetting->about_media_type !== 'none') ? 'lg:w-7/12' : 'w-full' }}">
                 <!-- Aksen Garis & Judul Elegan -->
-                <div class="mb-10">
+                <div class="mb-10" data-aos="fade-up">
                     <div class="w-32 h-[1px] bg-white mb-4"></div>
                     <h2 class="text-xl md:text-2xl font-heading font-bold text-white uppercase tracking-widest">
                         Tentang Komdes Sultra
                     </h2>
                 </div>
 
-                <div class="text-white/90 text-base md:text-lg font-light leading-loose space-y-6">
+                <div class="text-white/90 text-base md:text-lg font-light leading-loose space-y-6" data-aos="fade-up" data-aos-delay="200">
                     @if($homepageSetting && $homepageSetting->about_description)
                         {!! nl2br(e($homepageSetting->about_description)) !!}
                     @else
@@ -195,7 +195,7 @@
                     @endif
                 </div>
                 
-                <div class="mt-12 flex flex-wrap gap-4">
+                <div class="mt-12 flex flex-wrap gap-4" data-aos="fade-up" data-aos-delay="400">
                     @if($homepageSetting)
                         @if($homepageSetting->about_btn1_text)
                             <a href="{{ $homepageSetting->about_btn1_url ?? '#' }}" class="inline-flex items-center px-8 py-3 bg-white border border-white text-[#165a3f] text-sm uppercase tracking-widest font-bold rounded-full hover:bg-zinc-100 transition-all duration-300 shadow-lg">
@@ -221,19 +221,19 @@
             <!-- Media Kanan -->
             @if($homepageSetting && $homepageSetting->about_media_type === 'image' && $homepageSetting->about_image_path)
                 <div class="lg:w-5/12 w-full">
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-video group border-4 border-white/10 bg-black/20">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-video group border-4 border-white/10 bg-black/20" data-aos="fade-left" data-aos-delay="300">
                         <img src="{{ asset($homepageSetting->about_image_path) }}" alt="Kegiatan Komdes Sultra" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-in-out">
                     </div>
                 </div>
             @elseif($homepageSetting && $homepageSetting->about_media_type === 'youtube' && $homepageSetting->about_youtube_url)
                 <div class="lg:w-5/12 w-full">
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-video group border-4 border-white/10 bg-black/20">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-video group border-4 border-white/10 bg-black/20" data-aos="fade-left" data-aos-delay="300">
                         <iframe src="{{ $homepageSetting->about_youtube_url }}" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             @elseif(!$homepageSetting || $homepageSetting->about_media_type === 'image')
                 <div class="lg:w-5/12 w-full">
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-video group border-4 border-white/10 bg-black/20">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-video group border-4 border-white/10 bg-black/20" data-aos="fade-left" data-aos-delay="300">
                         <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Kegiatan Komdes Sultra" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-in-out">
                     </div>
                 </div>
@@ -249,7 +249,7 @@
 
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10" x-data="{ modalOpen: false, selectedMember: null }">
         
-        <div class="mb-20 text-center lg:text-left">
+        <div class="mb-20 text-center lg:text-left" data-aos="fade-up">
             <div class="w-32 h-[1px] bg-primary-600 mx-auto lg:mx-0 mb-4"></div>
             <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest mb-4">
                 Anggota Jaring Komdes Sultra
@@ -257,7 +257,7 @@
             <p class="text-zinc-500 text-base md:text-lg font-light">{{ $homepageSetting->network_subtitle ?? 'Jejaring komunitas dan organisasi lokal yang bergerak bersama kami.' }}</p>
         </div>
         
-        <div class="flex flex-wrap justify-center lg:justify-start gap-6 lg:gap-10 items-center mb-20">
+        <div class="flex flex-wrap justify-center lg:justify-start gap-6 lg:gap-10 items-center mb-20" data-aos="zoom-in" data-aos-delay="200">
             @foreach($members as $member)
             <div @click="selectedMember = {{ json_encode(['name' => $member->name, 'description' => $member->description, 'logo' => asset($member->logo), 'website' => $member->website, 'instagram' => $member->instagram, 'email' => $member->email, 'phone' => $member->phone]) }}; modalOpen = true" 
                  class="w-40 h-40 md:w-48 md:h-48 p-2 flex flex-col items-center justify-center transition-all duration-300 hover:scale-110 relative z-20 cursor-pointer group"
@@ -341,7 +341,7 @@
     
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div class="mb-20 text-center lg:text-left">
+        <div class="mb-20 text-center lg:text-left" data-aos="fade-up">
             <div class="w-32 h-[1px] bg-white mb-4 mx-auto lg:mx-0"></div>
             <h2 class="text-xl md:text-2xl font-heading font-bold text-white uppercase tracking-widest mb-4">
                 Fokus Isu
@@ -351,7 +351,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 mb-20 justify-items-center lg:justify-items-start">
             @foreach($issues as $issue)
-            <a href="{{ route('isu.detail', $issue->slug) }}" class="group flex flex-col items-center text-center w-full max-w-xs">
+            <a href="{{ route('isu.detail', $issue->slug) }}" class="group flex flex-col items-center text-center w-full max-w-xs" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                 <div class="w-48 h-48 rounded-2xl overflow-hidden mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300 bg-white flex items-center justify-center">
                     @if($issue->cover_image)
                         <img src="{{ asset($issue->cover_image) }}" alt="{{ $issue->title }}" class="w-full h-full object-cover">
@@ -375,7 +375,7 @@
 
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div class="mb-16 text-center">
+        <div class="mb-16 text-center" data-aos="fade-up">
             <div class="w-32 h-[1px] bg-primary-600 mx-auto mb-4"></div>
             <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest mb-4">
                 Pusat Publikasi
@@ -384,7 +384,7 @@
         </div>
         
         <!-- Tab Navigation -->
-        <div class="flex flex-wrap justify-center gap-3 mb-16 overflow-x-auto pb-4 scrollbar-hide">
+        <div class="flex flex-wrap justify-center gap-3 mb-16 overflow-x-auto pb-4 scrollbar-hide" data-aos="fade-up" data-aos-delay="200">
             <button @click="activeTab = 'berita'" :class="{ 'bg-primary-600 text-white shadow-lg': activeTab === 'berita', 'bg-transparent text-primary-700 border border-primary-200 hover:bg-primary-50': activeTab !== 'berita' }" class="px-6 py-2.5 rounded-full font-medium text-sm transition-all whitespace-nowrap uppercase tracking-widest">Berita</button>
             <button @click="activeTab = 'artikel'" :class="{ 'bg-primary-600 text-white shadow-lg': activeTab === 'artikel', 'bg-transparent text-primary-700 border border-primary-200 hover:bg-primary-50': activeTab !== 'artikel' }" class="px-6 py-2.5 rounded-full font-medium text-sm transition-all whitespace-nowrap uppercase tracking-widest">Artikel</button>
             <button @click="activeTab = 'riset'" :class="{ 'bg-primary-600 text-white shadow-lg': activeTab === 'riset', 'bg-transparent text-primary-700 border border-primary-200 hover:bg-primary-50': activeTab !== 'riset' }" class="px-6 py-2.5 rounded-full font-medium text-sm transition-all whitespace-nowrap uppercase tracking-widest">Riset</button>
@@ -392,7 +392,7 @@
         </div>
 
         <!-- Tab Contents -->
-        <div class="relative min-h-[350px] mb-20">
+        <div class="relative min-h-[350px] mb-20" data-aos="fade-up" data-aos-delay="400">
             <!-- Berita -->
             <div x-show="activeTab === 'berita'" class="absolute inset-0 z-10" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -472,7 +472,7 @@
             </div>
         </div>
 
-        <div class="text-center">
+        <div class="text-center" data-aos="zoom-in">
             <a :href="activeTab === 'berita' ? '{{ route('berita') }}' : (activeTab === 'artikel' ? '{{ route('artikel') }}' : (activeTab === 'riset' ? '{{ route('riset') }}' : '{{ route('siaran-pers') }}'))" 
                class="inline-flex items-center px-8 py-3 border border-primary-600 text-primary-600 text-sm uppercase tracking-widest font-medium rounded-full hover:bg-primary-600 hover:text-white transition-all duration-300">
                 Lihat Selengkapnya
@@ -488,7 +488,7 @@
     
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div class="mb-20 text-center lg:text-left">
+        <div class="mb-20 text-center lg:text-left" data-aos="fade-up">
             <div class="w-32 h-[1px] bg-white mb-4 mx-auto lg:mx-0"></div>
             <h2 class="text-xl md:text-2xl font-heading font-bold text-white uppercase tracking-widest mb-4">
                 Agenda Acara
@@ -498,7 +498,7 @@
 
         <div class="flex flex-wrap justify-center lg:justify-start gap-10 mb-20 relative z-20">
             @foreach($events as $event)
-            <article class="w-full sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.666rem)] bg-white rounded-[2rem] overflow-hidden border border-zinc-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group relative">
+            <article class="w-full sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.666rem)] bg-white rounded-[2rem] overflow-hidden border border-zinc-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group relative" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 150 }}">
                 <div class="relative aspect-video overflow-hidden bg-zinc-100">
                     <img src="{{ $event->cover_image ? asset($event->cover_image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $event->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     <div class="absolute inset-0 bg-primary-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
@@ -526,7 +526,7 @@
             @endforeach
         </div>
         
-        <div class="text-center relative z-20">
+        <div class="text-center relative z-20" data-aos="zoom-in">
             <!-- Tombol Outline Putih -->
             <a href="{{ route('acara') }}" class="inline-flex items-center px-8 py-3 border border-white text-white text-sm uppercase tracking-widest font-medium rounded-full hover:bg-white hover:text-[#165a3f] transition-all duration-300">
                 Lihat Selengkapnya
@@ -542,7 +542,7 @@
 
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div class="mb-20 text-center lg:text-left">
+        <div class="mb-20 text-center lg:text-left" data-aos="fade-up">
             <div class="w-32 h-[1px] bg-primary-600 mb-4 mx-auto lg:mx-0"></div>
             <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest mb-4">
                 Galeri Kegiatan
@@ -553,7 +553,7 @@
         <div class="flex flex-wrap justify-center lg:justify-start gap-10 mb-20 relative z-20">
             @foreach($galleries as $gallery)
             <!-- Galeri Card -->
-            <a href="{{ route('galeri.detail', $gallery->slug) }}" class="w-full sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.666rem)] bg-white rounded-[2rem] overflow-hidden border border-zinc-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group">
+            <a href="{{ route('galeri.detail', $gallery->slug) }}" class="w-full sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.666rem)] bg-white rounded-[2rem] overflow-hidden border border-zinc-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 150 }}">
                 <div class="relative aspect-video overflow-hidden">
                     <img src="{{ $gallery->thumbnail ? asset($gallery->thumbnail) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $gallery->title }}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
                     <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/10 transition-colors duration-300"></div>
@@ -574,7 +574,7 @@
             </a>
             @endforeach
         </div>
-        <div class="text-center relative z-20">
+        <div class="text-center relative z-20" data-aos="zoom-in">
             <!-- Tombol Outline Hijau -->
             <a href="{{ route('galeri') }}" class="inline-flex items-center px-8 py-3 border border-primary-600 text-primary-600 text-sm uppercase tracking-widest font-medium rounded-full hover:bg-primary-600 hover:text-white transition-all duration-300">
                 Lihat Selengkapnya

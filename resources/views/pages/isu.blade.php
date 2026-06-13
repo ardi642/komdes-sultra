@@ -7,7 +7,7 @@
 <!-- Page Header / Hero -->
 <div class="relative pt-32 pb-24 overflow-hidden bg-[#0d3b29]">
     <div class="absolute right-0 bottom-0 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 translate-y-1/4 bg-white"></div>
-    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" data-aos="fade-up">
         <div class="w-32 h-[1px] bg-white mx-auto mb-6 opacity-50"></div>
         <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white uppercase tracking-widest mb-6 drop-shadow-md">
             Fokus Isu
@@ -27,7 +27,7 @@
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <!-- Grid of Issues -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6" data-aos="fade-up" data-aos-delay="200">
             
             @forelse($issues as $issue)
             <!-- Issue Card -->

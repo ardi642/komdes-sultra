@@ -7,7 +7,7 @@
 <div class="relative pt-40 pb-32 overflow-hidden bg-[#165a3f]">
     <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center">
+        <div class="text-center" data-aos="fade-up">
             <div class="w-32 h-[1px] bg-white mx-auto mb-6 opacity-50"></div>
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white uppercase tracking-widest mb-6 drop-shadow-md">Riset dan Publikasi</h1>
             <p class="text-white/90 text-base md:text-lg font-light leading-relaxed drop-shadow-sm max-w-2xl mx-auto">Kerja advokasi Komdes Sultra selalu berdasarkan pada temuan hasil investigasi, pemetaan lapangan, dan riset ilmiah. Berikut ini adalah kumpulan publikasi yang menjadi panduan dan referensi dalam perjuangan kami.</p>
@@ -29,7 +29,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                     @forelse($posts as $post)
                     <!-- Article Item -->
-                    <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
+                    <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                         <div class="relative h-56 overflow-hidden">
                             <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         </div>
@@ -70,7 +70,7 @@
             </div>
 
             <!-- Sidebar (Right Content) -->
-            <div class="lg:w-[350px] flex-shrink-0">
+            <div class="lg:w-[350px] flex-shrink-0" data-aos="fade-left" data-aos-delay="200">
                 @include('partials.post-sidebar')
             </div>
             

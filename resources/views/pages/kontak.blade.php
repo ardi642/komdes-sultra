@@ -13,11 +13,11 @@
         <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
         <div class="max-w-[90rem] mx-auto px-6 md:px-10 lg:px-12 relative z-10">
             <!-- Judul -->
-            <div class="w-32 h-[1px] bg-white mb-6 opacity-50"></div>
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold uppercase mb-10 tracking-widest drop-shadow-md">Kontak Komdes Sultra</h1>
+            <div class="w-32 h-[1px] bg-white mb-6 opacity-50" data-aos="fade-up"></div>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold uppercase mb-10 tracking-widest drop-shadow-md" data-aos="fade-up">Kontak Komdes Sultra</h1>
 
             <!-- Card Info Utama -->
-            <div class="bg-white rounded-2xl shadow-xl p-8 lg:p-12 border border-zinc-100">
+            <div class="bg-white rounded-2xl shadow-xl p-8 lg:p-12 border border-zinc-100" data-aos="fade-up">
                 <div class="flex flex-col lg:flex-row gap-8 items-center justify-between">
                     
                     <!-- Kolom Kiri: Info -->
@@ -85,13 +85,13 @@
 
         <div class="max-w-[90rem] mx-auto px-6 md:px-10 lg:px-12 relative z-10">
             <!-- Judul -->
-            <div class="text-left mb-12">
+            <div class="text-left mb-12" data-aos="fade-up">
                 <div class="w-32 h-[1px] bg-primary-600 mb-4"></div>
                 <h2 class="text-xl md:text-2xl font-heading font-bold uppercase tracking-widest text-primary-700">Kontak Anggota Komdes Sultra</h2>
             </div>
 
             <!-- List Card Anggota (3 Kolom) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10" data-aos="fade-up" data-aos-delay="200">
                 @foreach($members as $member)
                 <div class="group bg-white rounded-[2rem] shadow-sm border border-zinc-100 p-8 hover:shadow-2xl hover:shadow-primary-900/5 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full relative overflow-hidden">
                     
@@ -163,7 +163,7 @@
         <div class="absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 -translate-x-1/4 translate-y-1/4 bg-white"></div>
         <div class="max-w-4xl mx-auto px-6 md:px-10 lg:px-12 relative z-10">
             
-            <div class="mb-10">
+            <div class="mb-10" data-aos="fade-up">
                 <div class="w-32 h-[1px] bg-white mb-4"></div>
                 <h2 class="text-xl md:text-2xl font-heading font-bold text-white uppercase tracking-widest mb-3">Laporan / Aduan</h2>
                 <p class="text-white/80 text-base md:text-lg font-light leading-relaxed">Sampaikan laporan, aduan atau pertanyaan Anda pada formulir di bawah ini, kami akan tindak lebih lanjut.</p>
@@ -175,7 +175,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('kontak.kirim') }}" method="POST" class="space-y-4">
+            <form action="{{ route('kontak.kirim') }}" method="POST" class="space-y-4" data-aos="fade-up" data-aos-delay="200">
                 @csrf
                 <div>
                     <input type="text" name="nama" required placeholder="Nama" value="{{ old('nama') }}" class="w-full bg-white text-zinc-800 px-5 py-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-primary-500/30 placeholder:text-zinc-400 border-0 shadow-sm transition-shadow">
