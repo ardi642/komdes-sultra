@@ -1,12 +1,30 @@
 <div>
+    @php
+        $pageTitle = 'Manajemen Publikasi';
+        $btnText = 'Tulis Baru';
+        if ($filterType === 'berita') {
+            $pageTitle = 'Manajemen Berita';
+            $btnText = 'Tulis Berita';
+        } elseif ($filterType === 'artikel') {
+            $pageTitle = 'Manajemen Artikel';
+            $btnText = 'Tulis Artikel';
+        } elseif ($filterType === 'riset') {
+            $pageTitle = 'Publikasi Riset';
+            $btnText = 'Tambah Riset';
+        } elseif ($filterType === 'siaran_pers') {
+            $pageTitle = 'Siaran Pers';
+            $btnText = 'Tambah Siaran Pers';
+        }
+    @endphp
+
     @if(!$isFormOpen)
         <!-- LIST VIEW -->
         <div class="space-y-6">
             <div class="flex items-center justify-between">
-                <h1 class="text-2xl font-bold text-zinc-900">Manajemen Publikasi</h1>
+                <h1 class="text-2xl font-bold text-zinc-900">{{ $pageTitle }}</h1>
                 <button wire:click="create" class="inline-flex items-center px-4 py-2 bg-primary-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-700 focus:bg-primary-700 active:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-sm">
                     <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    Tulis Baru
+                    {{ $btnText }}
                 </button>
             </div>
 
@@ -191,7 +209,7 @@
         <!-- FORM VIEW -->
         <div class="space-y-6">
             <div class="flex items-center justify-between">
-                <h1 class="text-2xl font-bold text-zinc-900">{{ $post_id ? 'Edit Tulisan' : 'Tulis Baru' }}</h1>
+                <h1 class="text-2xl font-bold text-zinc-900">{{ $post_id ? 'Edit ' . $pageTitle : $btnText }}</h1>
                 <button wire:click="closeForm" class="text-zinc-500 hover:text-zinc-700 font-medium flex items-center gap-1">
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                     Kembali
