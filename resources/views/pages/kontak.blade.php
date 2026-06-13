@@ -12,9 +12,16 @@
         <!-- Ambient Glow Putih -->
         <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
         <div class="max-w-[90rem] mx-auto px-6 md:px-10 lg:px-12 relative z-10">
-            <!-- Judul -->
-
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold uppercase mb-10 tracking-widest drop-shadow-md" data-aos="fade-up">Kontak Komdes Sultra</h1>
+            <!-- Judul & Link Aduan -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6" data-aos="fade-up">
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold uppercase tracking-widest drop-shadow-md m-0">Kontak Komdes Sultra</h1>
+                
+                <!-- Link Aduan Solid -->
+                <a href="#aduan" class="inline-flex items-center text-sm font-bold text-[#165a3f] hover:text-[#0f3d2a] bg-[#FFD700] hover:bg-[#F0C800] px-6 py-3 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all group">
+                    Sampaikan laporan, aduan, atau pertanyaan
+                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                </a>
+            </div>
 
             <!-- Card Info Utama -->
             <div class="bg-white rounded-2xl shadow-xl p-8 lg:p-12 border border-zinc-100" data-aos="fade-up">
@@ -158,7 +165,7 @@
     </section>
 
     <!-- 3. Section: Formulir Laporan / Aduan -->
-    <section class="py-28 lg:py-36 relative overflow-hidden bg-[#165a3f]">
+    <section id="aduan" class="py-28 lg:py-36 relative overflow-hidden bg-[#165a3f]">
         <!-- Ambient Glow Putih -->
         <div class="absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 -translate-x-1/4 translate-y-1/4 bg-white"></div>
         <div class="max-w-4xl mx-auto px-6 md:px-10 lg:px-12 relative z-10">

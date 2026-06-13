@@ -5,7 +5,7 @@
 @section('content')
 
 <!-- 1. HERO SECTION (Carousel Horizontal dengan Ken Burns & Smart Hover) -->
-<section class="relative h-[92vh] min-h-[600px] bg-[#0d3b29] overflow-hidden group" 
+<section class="relative h-[96vh] min-h-[650px] bg-[#0d3b29] overflow-hidden group" 
     x-data="{ 
         activeSlide: 0, 
         slides: {{ $sliders->count() > 0 ? $sliders->count() : 1 }},
