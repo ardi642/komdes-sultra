@@ -26,7 +26,7 @@
         // Halaman anggota dan beranda butuh background solid sejak awal agar teks terbaca jelas
         $useSolidNav = request()->routeIs('anggota', 'home');
     @endphp
-    <header :class="scrolled ? 'bg-[#165a3f]/95 backdrop-blur-md shadow-md border-white/10' : '{{ $useSolidNav ? 'bg-[#165a3f]' : 'bg-transparent' }} border-transparent shadow-none'" class="fixed w-full top-0 z-50 border-b transition-all duration-300" x-data="{ mobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
+    <header x-data="{ mobileMenuOpen: false, scrolled: false }" x-init="scrolled = (window.pageYOffset > 20)" @scroll.window="scrolled = (window.pageYOffset > 20)" :class="scrolled ? 'bg-[#165a3f] bg-opacity-95 backdrop-blur-md shadow-md border-white/10' : '{{ $useSolidNav ? 'bg-[#165a3f]' : 'bg-transparent' }} border-transparent shadow-none'" class="fixed w-full top-0 z-50 border-b border-transparent {{ $useSolidNav ? 'bg-[#165a3f]' : '' }} transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-24 items-center">
                 <!-- Logo -->
