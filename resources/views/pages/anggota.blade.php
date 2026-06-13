@@ -56,7 +56,7 @@
                     <div class="absolute inset-0 bg-gradient-to-br from-primary-50/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
                     <!-- Logo Container -->
-                    <div class="relative w-36 h-36 sm:w-48 sm:h-48 flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-500 ease-out">
+                    <div class="relative w-24 h-24 sm:w-32 sm:h-32 flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-500 ease-out">
                         <template x-if="member.logo">
                             <img :src="member.logo.startsWith('http') ? member.logo : `{{ rtrim(asset(''), '/') }}${member.logo}`" :alt="member.name" class="max-w-full max-h-full object-contain transition-all duration-500 hover:scale-105">
                         </template>
