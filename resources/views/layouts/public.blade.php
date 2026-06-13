@@ -22,24 +22,28 @@
 <body class="bg-zinc-50 text-zinc-900 antialiased font-sans flex flex-col min-h-screen">
 
     <!-- Header / Navbar -->
-    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-zinc-100 shadow-sm transition-all duration-300" x-data="{ mobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
+    @php
+        // Halaman anggota dan beranda butuh background solid sejak awal agar teks terbaca jelas
+        $useSolidNav = request()->routeIs('anggota', 'home');
+    @endphp
+    <header :class="scrolled ? 'bg-[#165a3f]/95 backdrop-blur-md shadow-md border-white/10' : '{{ $useSolidNav ? 'bg-[#165a3f]' : 'bg-transparent' }} border-transparent shadow-none'" class="fixed w-full top-0 z-50 border-b transition-all duration-300" x-data="{ mobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-24 items-center">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
+                <div class="flex-shrink-0 flex items-center bg-white px-5 py-2 rounded-full shadow-sm border border-zinc-100">
                     <a href="/" class="flex items-center gap-3 group">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo Komdes Sultra" class="h-14 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
-                        <span class="font-heading font-bold text-xl md:text-2xl tracking-tight text-[#165a3f] transition-colors">Komdes <span class="text-[#FFD700]">Sultra</span></span>
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo Komdes Sultra" class="h-10 md:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+                        <span class="font-heading font-bold text-lg md:text-xl tracking-tight text-[#165a3f] transition-colors">Komdes <span class="text-[#FFD700]">Sultra</span></span>
                     </a>
                 </div>
 
                 <nav class="hidden md:flex space-x-1 lg:space-x-3 items-center">
-                    <a href="{{ route('home') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('home') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Beranda</a>
-                    <a href="{{ route('tentang-kami') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('tentang-kami') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Tentang Kami</a>
-                    <a href="{{ route('anggota') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('anggota') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Anggota</a>
+                    <a href="{{ route('home') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('home') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }} transition-colors">Beranda</a>
+                    <a href="{{ route('tentang-kami') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('tentang-kami') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }} transition-colors">Tentang Kami</a>
+                    <a href="{{ route('anggota') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('anggota') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }} transition-colors">Anggota</a>
                     <!-- Dropdown Berita -->
                     <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                        <a href="{{ route('berita') }}" class="flex items-center px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('berita', 'berita.*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors focus:outline-none">
+                        <a href="{{ route('berita') }}" class="flex items-center px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('berita', 'berita.*') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }} transition-colors focus:outline-none">
                             <span>Berita</span>
                             <button @click.prevent="open = !open" class="ml-1.5 focus:outline-none">
                                 <svg class="w-4 h-4 transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -68,7 +72,7 @@
                     
                     <!-- Dropdown Publikasi -->
                     <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                        <button @click="open = !open" class="flex items-center px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('acara*', 'artikel*', 'riset*', 'siaran-pers*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors focus:outline-none">
+                        <button @click="open = !open" class="flex items-center px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('acara*', 'artikel*', 'riset*', 'siaran-pers*') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }} transition-colors focus:outline-none">
                             <span>Publikasi</span>
                             <svg class="ml-1.5 w-4 h-4 transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -138,15 +142,15 @@
                         </div>
                     </div>
                     
-                    <a href="{{ route('isu') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('isu', 'isu.*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Isu</a>
-                    <a href="{{ route('galeri') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('galeri', 'galeri.*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-50' }} transition-colors">Galeri</a>
+                    <a href="{{ route('isu') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('isu', 'isu.*') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }} transition-colors">Isu</a>
+                    <a href="{{ route('galeri') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('galeri', 'galeri.*') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }} transition-colors">Galeri</a>
                     
-                    <a href="{{ route('kontak') }}" class="ml-6 px-7 py-3 rounded-full text-base font-medium text-white bg-primary-600 hover:bg-primary-500 shadow-md shadow-primary-500/20 hover:shadow-lg hover:shadow-primary-500/30 hover:-translate-y-0.5 transition-all duration-300">Kontak</a>
+                    <a href="{{ route('kontak') }}" class="ml-6 px-7 py-3 rounded-full text-base font-medium text-[#165a3f] bg-white hover:bg-zinc-100 shadow-md shadow-white/10 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 transition-all duration-300">Kontak</a>
                 </nav>
 
                 <!-- Mobile menu button -->
                 <div class="flex items-center md:hidden">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-zinc-400 hover:text-zinc-500 hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" aria-expanded="false">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-white/80 hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white/50" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
                         <svg x-show="!mobileMenuOpen" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
