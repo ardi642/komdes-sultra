@@ -32,9 +32,9 @@
             @forelse($issues as $issue)
             <!-- Issue Card -->
             <a href="{{ route('isu.detail', $issue->slug) }}" class="group bg-white rounded-xl p-6 border border-zinc-100 hover:border-[#165a3f] hover:shadow-2xl transition-all duration-500 flex flex-col items-center text-center h-full">
-                <div class="w-20 h-20 mb-5 text-[#165a3f] group-hover:scale-110 transition-transform duration-500 flex items-center justify-center">
+                <div class="w-40 h-40 mb-6 text-[#165a3f] group-hover:scale-110 transition-transform duration-500 flex items-center justify-center">
                     @if($issue->cover_image)
-                    <img src="{{ asset($issue->cover_image) }}" alt="{{ $issue->title }}" class="w-full h-full object-cover rounded-full">
+                    <img src="{{ asset($issue->cover_image) }}" alt="{{ $issue->title }}" class="w-full h-full object-cover rounded-2xl shadow-sm">
                     @elseif($issue->icon_svg)
                     <div class="w-full h-full [&>svg]:w-full [&>svg]:h-full">{!! $issue->icon_svg !!}</div>
                     @else
