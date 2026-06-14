@@ -119,7 +119,7 @@ class EventIndex extends Component
         $this->content = '';
         $this->event_date = '';
         $this->location = '';
-        $this->is_published = true;
+        $this->is_published = '1';
         $this->cover_image = null;
         $this->new_cover_image = null;
         $this->selectedTags = [];
@@ -144,11 +144,11 @@ class EventIndex extends Component
             'content' => $this->content,
             'event_date' => $this->event_date,
             'location' => $this->location,
-            'is_published' => $this->is_published,
+            'is_published' => $this->is_published === '1',
         ];
 
         // Set published_at if publishing for the first time
-        if ($this->is_published && !$this->event_id) {
+        if ($this->is_published === '1' && !$this->event_id) {
             $eventData['published_at'] = now();
         }
 
@@ -181,7 +181,7 @@ class EventIndex extends Component
         $this->content = $event->content;
         $this->event_date = $event->event_date->format('Y-m-d\TH:i');
         $this->location = $event->location;
-        $this->is_published = (bool) $event->is_published;
+        $this->is_published = $event->is_published ? '1' : '0';
         $this->cover_image = $event->cover_image;
         
         $this->selectedTags = $event->tags->pluck('id')->map(fn($id) => (string)$id)->toArray();
@@ -200,6 +200,19 @@ class EventIndex extends Component
 
         $event->delete();
         session()->flash('message', 'Agenda Acara berhasil dihapus.');
+    }
+
+    public function removeCoverImage(ImageService $imageService)
+    {
+        if ($this->event_id) {
+            $event = Event::findOrFail($this->event_id);
+            if ($event->cover_image) {
+                $imageService->delete($event->cover_image);
+                $event->update(['cover_image' => null]);
+            }
+        }
+        $this->cover_image = null;
+        $this->new_cover_image = null;
     }
 
     public function savePreview()

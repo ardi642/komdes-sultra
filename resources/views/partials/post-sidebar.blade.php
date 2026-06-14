@@ -32,25 +32,7 @@
         </form>
     </div>
 
-    <!-- Related News Widget (Hanya untuk halaman detail) -->
-    @if(isset($relatedPosts) && $relatedPosts->count() > 0)
-    <div class="bg-white rounded-2xl p-6 border border-zinc-100 shadow-sm">
-        <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Terkait</h3>
-        <div class="space-y-4">
-            @foreach($relatedPosts as $related)
-            <a href="{{ url(request()->segment(1) . '/' . $related->slug) }}" class="flex gap-4 group">
-                <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-zinc-100">
-                    <img src="{{ $related->cover_image ? asset($related->cover_image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80' }}" alt="{{ $related->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                </div>
-                <div>
-                    <h4 class="font-bold text-zinc-900 text-sm leading-snug line-clamp-2 group-hover:text-primary-600 transition-colors mb-1">{{ $related->title }}</h4>
-                    <span class="text-xs text-zinc-500">{{ $related->published_at->format('d M Y') }}</span>
-                </div>
-            </a>
-            @endforeach
-        </div>
-    </div>
-    @endif
+
 
     <!-- Categories Widget -->
     @if($categories->count() > 0)

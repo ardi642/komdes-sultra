@@ -45,6 +45,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/kategori', \App\Livewire\Admin\Category\CategoryIndex::class)->name('category.index');
     Route::get('/tag', \App\Livewire\Admin\Tag\TagIndex::class)->name('tag.index');
     Route::get('/isu', \App\Livewire\Admin\Issue\IssueIndex::class)->name('issue.index');
+    Route::get('/isu/{id}/konten', \App\Livewire\Admin\Issue\IssueShow::class)->name('issue.show');
     Route::get('/tulisan', \App\Livewire\Admin\Post\PostIndex::class)->name('post.index');
     Route::get('/acara', \App\Livewire\Admin\Event\EventIndex::class)->name('event.index');
 

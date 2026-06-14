@@ -15,17 +15,23 @@ class InboxIndex extends Component
 
     #[\Livewire\Attributes\Url]
     public $search = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterYear = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterMonth = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterStatus = '';
     
     public $perPage = 10;
 
-    public function updatingSearch()
+    public function updated($property)
     {
-        $this->resetPage();
-    }
-
-    public function updatingPerPage()
-    {
-        $this->resetPage();
+        if (in_array($property, ['search', 'filterYear', 'filterMonth', 'filterStatus', 'perPage'])) {
+            $this->resetPage();
+        }
     }
 
     public function viewMessage($id)
@@ -70,8 +76,27 @@ class InboxIndex extends Component
             });
         }
 
+        if ($this->filterYear) {
+            $query->whereYear('created_at', $this->filterYear);
+        }
+
+        if ($this->filterMonth) {
+            $query->whereMonth('created_at', $this->filterMonth);
+        }
+
+        if ($this->filterStatus !== '') {
+            $query->where('is_read', $this->filterStatus);
+        }
+
+        // Get available years for filter
+        $availableYears = Inbox::selectRaw('YEAR(created_at) as year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->pluck('year');
+
         return view('livewire.admin.inbox.inbox-index', [
             'messages' => $query->paginate($this->perPage),
+            'availableYears' => $availableYears,
         ])->layout('layouts.admin');
     }
 }

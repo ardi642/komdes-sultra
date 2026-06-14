@@ -63,15 +63,16 @@
             <!-- Main Article Content (Left) -->
             <div class="flex-1">
                 <article class="-mt-24 relative z-20">
-                    <!-- Cover Image Mengambang -->
-                    @if($post->cover_image)
-                    <div class="rounded-2xl overflow-hidden mb-10 shadow-2xl bg-zinc-100 border-4 border-white">
-                        <img src="{{ asset($post->cover_image) }}" alt="{{ $post->title }}" class="w-full h-auto object-cover aspect-[16/9]">
-                    </div>
-                    @endif
-                    
-                    <div class="bg-white rounded-2xl p-6 md:p-10 border border-zinc-100 shadow-sm mt-0">
-                        <!-- Article Text (Prose) -->
+                    <div class="bg-white rounded-2xl border border-zinc-100 shadow-sm overflow-hidden">
+                        <!-- Cover Image -->
+                        @if($post->cover_image)
+                        <div class="w-full bg-zinc-100 border-b border-zinc-100">
+                            <img src="{{ asset($post->cover_image) }}" alt="{{ $post->title }}" class="w-full max-h-[600px] object-contain">
+                        </div>
+                        @endif
+                        
+                        <div class="p-6 md:p-10">
+                            <!-- Article Text (Prose) -->
                         <div class="text-zinc-700 leading-relaxed space-y-6 prose max-w-none">
                             {!! $post->content !!}
                         </div>
@@ -82,7 +83,7 @@
                                 <span class="text-sm font-semibold text-zinc-900">Tags:</span>
                                 <div class="flex flex-wrap gap-2">
                                     @foreach($post->tags as $tag)
-                                    <a href="#" class="px-3 py-1 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-600 hover:text-white transition-colors">#{{ $tag->name }}</a>
+                                    <a href="{{ route('artikel', ['tags' => [$tag->slug]]) }}" class="px-3 py-1 bg-zinc-100 text-zinc-600 text-xs rounded-lg hover:bg-primary-600 hover:text-white transition-colors">#{{ $tag->name }}</a>
                                     @endforeach
                                 </div>
                             </div>

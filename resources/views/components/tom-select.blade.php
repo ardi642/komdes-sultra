@@ -17,13 +17,20 @@
             });
             
             this.tomSelectInstance.on('change', (val) => {
-                this.value = val;
+                // Convert to raw array/value to avoid Proxy issues
+                let rawVal = JSON.parse(JSON.stringify(val));
+                if (JSON.stringify(this.value) !== JSON.stringify(rawVal)) {
+                    this.value = rawVal;
+                }
             });
             
             this.$watch('value', (val) => {
                 if (this.tomSelectInstance) {
-                    // Update TomSelect if Livewire changes the value externally
-                    this.tomSelectInstance.setValue(val, true); // true = silent to prevent loop
+                    let currentVal = this.tomSelectInstance.getValue();
+                    let rawVal = JSON.parse(JSON.stringify(val));
+                    if (JSON.stringify(currentVal) !== JSON.stringify(rawVal)) {
+                        this.tomSelectInstance.setValue(rawVal, true);
+                    }
                 }
             });
             

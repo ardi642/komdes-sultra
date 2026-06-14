@@ -12,7 +12,7 @@
         @endif
 
         <!-- Top Action Bar (Search & Filters) -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
+        <div x-data="{ showFilters: false }" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4">
                 
                 <!-- Left: Search -->
@@ -23,7 +23,7 @@
                     <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari pesan..." class="bg-gray-100 focus:bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm block w-full pl-9 py-2 transition-colors">
                 </div>
 
-                <!-- Right: Per Page -->
+                <!-- Right: Per Page & Toggle Filter -->
                 <div class="flex items-center gap-3 w-full sm:w-auto">
                     <div class="flex items-center gap-2">
                         <span class="text-sm font-medium text-gray-600 hidden sm:inline">Tampil:</span>
@@ -32,6 +32,53 @@
                             <option value="25">25</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
+                        </select>
+                    </div>
+                    
+                    <button @click="showFilters = !showFilters" type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg font-medium text-sm text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors shadow-sm gap-2">
+                        <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                        Filter Lanjutan
+                        <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': showFilters}" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Expanded Filters Drawer -->
+            <div x-show="showFilters" x-collapse>
+                <div class="p-4 bg-gray-50 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Tahun</label>
+                        <select wire:model.live="filterYear" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-2 px-3 text-gray-900">
+                            <option value="">Semua Tahun</option>
+                            @foreach($availableYears as $year)
+                                <option value="{{ $year }}">{{ $year }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Bulan</label>
+                        <select wire:model.live="filterMonth" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-2 px-3 text-gray-900">
+                            <option value="">Semua Bulan</option>
+                            <option value="1">Januari</option>
+                            <option value="2">Februari</option>
+                            <option value="3">Maret</option>
+                            <option value="4">April</option>
+                            <option value="5">Mei</option>
+                            <option value="6">Juni</option>
+                            <option value="7">Juli</option>
+                            <option value="8">Agustus</option>
+                            <option value="9">September</option>
+                            <option value="10">Oktober</option>
+                            <option value="11">November</option>
+                            <option value="12">Desember</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Status</label>
+                        <select wire:model.live="filterStatus" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-2 px-3 text-gray-900">
+                            <option value="">Semua Status</option>
+                            <option value="0">Belum Dibaca (Baru)</option>
+                            <option value="1">Sudah Dibaca</option>
                         </select>
                     </div>
                 </div>

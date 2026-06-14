@@ -143,7 +143,7 @@ class PostIndex extends Component
         $this->content = '';
         $this->type = $this->filterType ?: 'berita';
         $this->category_id = '';
-        $this->is_published = true;
+        $this->is_published = '1';
         $this->cover_image = null;
         $this->new_cover_image = null;
         $this->selectedTags = [];
@@ -168,11 +168,11 @@ class PostIndex extends Component
             'content' => $this->content,
             'type' => $this->type,
             'category_id' => $this->category_id ?: null,
-            'is_published' => $this->is_published,
+            'is_published' => $this->is_published === '1',
         ];
 
         // Set published_at if publishing for the first time
-        if ($this->is_published && !$this->post_id) {
+        if ($this->is_published === '1' && !$this->post_id) {
             $postData['published_at'] = now();
         }
 
@@ -205,7 +205,7 @@ class PostIndex extends Component
         $this->content = $post->content;
         $this->type = $post->type;
         $this->category_id = $post->category_id;
-        $this->is_published = (bool) $post->is_published;
+        $this->is_published = $post->is_published ? '1' : '0';
         $this->cover_image = $post->cover_image;
         
         $this->selectedTags = $post->tags->pluck('id')->map(fn($id) => (string)$id)->toArray();
@@ -224,6 +224,19 @@ class PostIndex extends Component
 
         $post->delete();
         session()->flash('message', 'Publikasi berhasil dihapus.');
+    }
+
+    public function removeCoverImage(ImageService $imageService)
+    {
+        if ($this->post_id) {
+            $post = Post::findOrFail($this->post_id);
+            if ($post->cover_image) {
+                $imageService->delete($post->cover_image);
+                $post->update(['cover_image' => null]);
+            }
+        }
+        $this->cover_image = null;
+        $this->new_cover_image = null;
     }
 
     public function savePreview()

@@ -56,6 +56,11 @@ class Event extends Model
         return $query->where('status', 'upcoming');
     }
 
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', true);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {

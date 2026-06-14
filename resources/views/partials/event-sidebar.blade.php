@@ -31,7 +31,7 @@
     <h3 class="font-heading font-bold text-lg text-[#165a3f] uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">Acara Mendatang</h3>
     <div class="space-y-4">
         @php
-            $upcomingEvents = \App\Models\Event::upcoming()->orderBy('event_date', 'asc')->take(5)->get();
+            $upcomingEvents = \App\Models\Event::published()->upcoming()->orderBy('event_date', 'asc')->take(5)->get();
         @endphp
         @forelse($upcomingEvents as $upcoming)
         <a href="{{ route('acara.detail', $upcoming->slug) }}" class="flex gap-4 group">
