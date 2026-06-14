@@ -25,6 +25,7 @@
                         'quickbars', 'codesample', 'nonbreaking'
                         {{ $autoresize ? ", 'autoresize'" : "" }}
                     ],
+                    convert_urls: false,
                     toolbar: 'undo redo | fontfamily fontsize blocks | ' +
                         'bold italic underline strikethrough forecolor backcolor | ' +
                         'alignleft aligncenter alignright alignjustify | ' +
