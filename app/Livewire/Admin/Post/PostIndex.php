@@ -154,7 +154,14 @@ class PostIndex extends Component
     {
         $this->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:posts,slug,' . $this->post_id,
+            'slug' => [
+                'required',
+                'string',
+                'max:255',
+                \Illuminate\Validation\Rule::unique('posts', 'slug')
+                    ->where('type', $this->type)
+                    ->ignore($this->post_id)
+            ],
             'content' => 'required|string',
             'type' => 'required|in:berita,artikel,riset,siaran_pers',
             'category_id' => 'nullable|exists:categories,id',
