@@ -12,6 +12,8 @@ class Inbox extends Model
         'subject',
         'message',
         'is_read',
+        'status',
+        'admin_notes',
     ];
 
     protected $casts = [

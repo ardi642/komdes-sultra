@@ -47,15 +47,6 @@
             <div x-show="showFilters" x-collapse>
                 <div class="p-4 bg-gray-50 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Tahun</label>
-                        <select wire:model.live="filterYear" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-2 px-3 text-gray-900">
-                            <option value="">Semua Tahun</option>
-                            @foreach($availableYears as $year)
-                                <option value="{{ $year }}">{{ $year }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div>
                         <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Bulan</label>
                         <select wire:model.live="filterMonth" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-2 px-3 text-gray-900">
                             <option value="">Semua Bulan</option>
@@ -74,11 +65,22 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Status</label>
+                        <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Tahun</label>
+                        <select wire:model.live="filterYear" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-2 px-3 text-gray-900">
+                            <option value="">Semua Tahun</option>
+                            @foreach($availableYears as $year)
+                                <option value="{{ $year }}">{{ $year }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Status Progres</label>
                         <select wire:model.live="filterStatus" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-2 px-3 text-gray-900">
                             <option value="">Semua Status</option>
-                            <option value="0">Belum Dibaca (Baru)</option>
-                            <option value="1">Sudah Dibaca</option>
+                            <option value="menunggu">Menunggu</option>
+                            <option value="diproses">Diproses</option>
+                            <option value="selesai">Selesai</option>
+                            <option value="ditolak">Ditolak / Spam</option>
                         </select>
                     </div>
                 </div>
@@ -111,13 +113,21 @@
                                     {{ $message->subject ?: '(Tanpa Subjek)' }}
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    @if(!$message->is_read)
+                                    @if($message->status === 'menunggu')
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                            {{ !$message->is_read ? 'Belum Dibaca' : 'Menunggu' }}
+                                        </span>
+                                    @elseif($message->status === 'diproses')
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                            Diproses
+                                        </span>
+                                    @elseif($message->status === 'selesai')
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            Baru
+                                            Selesai
                                         </span>
                                     @else
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
-                                            Dibaca
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                            Ditolak
                                         </span>
                                     @endif
                                 </td>
@@ -189,6 +199,40 @@
                     <div class="mt-4">
                         <h4 class="text-sm font-medium text-gray-500 mb-2">Isi Pesan:</h4>
                         <div class="text-gray-800 bg-white border border-gray-200 rounded-lg p-4 min-h-[150px] whitespace-pre-wrap">{{ $selectedMessage->message }}</div>
+                    </div>
+                    
+                    <!-- Admin Progress Section -->
+                    <div class="mt-6 border-t border-gray-200 pt-4">
+                        <h4 class="text-base font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                            </svg>
+                            Tindak Lanjut Admin
+                        </h4>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="sm:col-span-1">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Status Progres</label>
+                                <select wire:model="progressStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
+                                    <option value="menunggu">⏳ Menunggu</option>
+                                    <option value="diproses">⚙️ Diproses</option>
+                                    <option value="selesai">✅ Selesai</option>
+                                    <option value="ditolak">❌ Ditolak / Spam</option>
+                                </select>
+                            </div>
+                            
+                            <div class="sm:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Catatan Internal (Opsional)</label>
+                                <textarea wire:model="adminNotes" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="Tambahkan catatan untuk admin lain..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 flex justify-end">
+                            <button wire:click="saveProgress" type="button" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150 gap-2">
+                                <span wire:loading.remove wire:target="saveProgress">Simpan Progres</span>
+                                <span wire:loading wire:target="saveProgress">Menyimpan...</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t border-gray-200">

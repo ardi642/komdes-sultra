@@ -13,6 +13,10 @@ class InboxIndex extends Component
     public $selectedMessage = null;
     public $isModalOpen = false;
 
+    // Form fields for progress
+    public $progressStatus = '';
+    public $adminNotes = '';
+
     #[\Livewire\Attributes\Url]
     public $search = '';
 
@@ -43,13 +47,34 @@ class InboxIndex extends Component
         }
 
         $this->selectedMessage = $message;
+        $this->progressStatus = $message->status ?? 'menunggu';
+        $this->adminNotes = $message->admin_notes ?? '';
         $this->isModalOpen = true;
+    }
+
+    public function saveProgress()
+    {
+        $this->validate([
+            'progressStatus' => 'required|in:menunggu,diproses,selesai,ditolak',
+            'adminNotes' => 'nullable|string'
+        ]);
+
+        if ($this->selectedMessage) {
+            $this->selectedMessage->update([
+                'status' => $this->progressStatus,
+                'admin_notes' => $this->adminNotes
+            ]);
+
+            session()->flash('message', 'Progres penanganan berhasil disimpan.');
+        }
     }
 
     public function closeModal()
     {
         $this->isModalOpen = false;
         $this->selectedMessage = null;
+        $this->progressStatus = '';
+        $this->adminNotes = '';
     }
 
     public function deleteMessage($id)
@@ -85,7 +110,7 @@ class InboxIndex extends Component
         }
 
         if ($this->filterStatus !== '') {
-            $query->where('is_read', $this->filterStatus);
+            $query->where('status', $this->filterStatus);
         }
 
         // Get available years for filter
