@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasEditorImages;
 
 class Gallery extends Model
 {
+    use HasEditorImages;
+
     protected $fillable = [
         'title',
         'slug',
@@ -18,6 +21,11 @@ class Gallery extends Model
     protected $casts = [
         'date' => 'date',
     ];
+
+    public function getEditorContentAttributeNames()
+    {
+        return ['description'];
+    }
 
     public function images()
     {

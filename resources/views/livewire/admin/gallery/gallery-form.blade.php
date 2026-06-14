@@ -34,7 +34,7 @@
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Kegiatan (Opsional)</label>
-                        <textarea wire:model="description" rows="4" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Ceritakan sedikit tentang kegiatan ini..."></textarea>
+                        <x-rich-text-editor wire:model="description" />
                         @error('description') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                     </div>
 
