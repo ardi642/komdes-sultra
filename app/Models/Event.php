@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Services\ImageService;
 
+use App\Traits\HasEditorImages;
+
 class Event extends Model
 {
-    use HasFactory;
+    use HasFactory, HasEditorImages;
 
     protected $fillable = [
         'title', 'slug', 'description', 'content', 
@@ -22,23 +24,14 @@ class Event extends Model
         'is_published' => 'boolean',
     ];
 
+    public function getEditorContentAttributeNames()
+    {
+        return ['content', 'description'];
+    }
+
     protected static function booted()
     {
-        static::updating(function ($event) {
-            $imageService = new ImageService();
-            if ($event->isDirty('content')) {
-                $imageService->cleanRemovedImagesFromHtml($event->getOriginal('content'), $event->content);
-            }
-            if ($event->isDirty('description')) {
-                $imageService->cleanRemovedImagesFromHtml($event->getOriginal('description'), $event->description);
-            }
-        });
-
-        static::deleting(function ($event) {
-            $imageService = new ImageService();
-            $imageService->cleanRemovedImagesFromHtml($event->content, null);
-            $imageService->cleanRemovedImagesFromHtml($event->description, null);
-        });
+        // Trait HasEditorImages handles the image sync on save and delete.
     }
 
     public function tags()

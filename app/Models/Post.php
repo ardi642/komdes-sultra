@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Traits\HasEditorImages;
+
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, HasEditorImages;
 
     protected $fillable = [
         'type', 'title', 'slug', 'content', 'cover_image', 
@@ -21,18 +23,7 @@ class Post extends Model
 
     protected static function booted()
     {
-        static::updating(function ($post) {
-            if ($post->isDirty('content')) {
-                $imageService = new ImageService();
-                $imageService->cleanRemovedImagesFromHtml($post->getOriginal('content'), $post->content);
-            }
-        });
-
-        static::deleting(function ($post) {
-            $imageService = new ImageService();
-            // Pass the original content and null for new content so it deletes all extracted images
-            $imageService->cleanRemovedImagesFromHtml($post->content, null);
-        });
+        // Trait HasEditorImages handles the image sync on save and delete.
     }
 
     public function category()

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
 
+use App\Models\EditorImage;
+
 class UploadController extends Controller
 {
     public function uploadImage(Request $request, ImageService $imageService)
@@ -16,6 +18,12 @@ class UploadController extends Controller
 
         try {
             $path = $imageService->upload($request->file('file'), 'editor');
+            
+            // Simpan jejak gambar ke database
+            EditorImage::create([
+                'file_path' => asset($path)
+            ]);
+
             return response()->json(['location' => asset($path)]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

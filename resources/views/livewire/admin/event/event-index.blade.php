@@ -201,7 +201,7 @@
 
                             <div wire:ignore>
                                 <x-label value="Deskripsi Acara" />
-                                <x-quill-editor wire:model="content" />
+                                <x-rich-text-editor wire:model="content" />
                             </div>
                             @error('content') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                         </div>

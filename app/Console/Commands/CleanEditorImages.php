@@ -4,11 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Post;
-use App\Models\Event;
-use App\Models\About;
+use App\Models\EditorImage;
 use Carbon\Carbon;
-use App\Services\ImageService;
 
 class CleanEditorImages extends Command
 {
@@ -29,64 +26,35 @@ class CleanEditorImages extends Command
     /**
      * Execute the console command.
      */
-    public function handle(ImageService $imageService)
+    public function handle()
     {
         $this->info('Starting editor images cleanup...');
 
         $hours = $this->option('hours');
-        $directory = 'uploads/editor';
-
-        if (!Storage::disk('public')->exists($directory)) {
-            $this->info("Directory {$directory} does not exist. Nothing to clean.");
-            return;
-        }
-
-        $files = Storage::disk('public')->files($directory);
         $deletedCount = 0;
         
-        // Combine all HTML contents from tables that use the editor
-        $allContents = '';
-        
-        $posts = Post::select('content')->get();
-        foreach ($posts as $post) {
-            $allContents .= $post->content . ' ';
-        }
-        
-        $events = Event::select('description', 'content')->get();
-        foreach ($events as $event) {
-            $allContents .= $event->description . ' ' . $event->content . ' ';
-        }
-        
-        $abouts = About::first();
-        if ($abouts) {
-            // Include fields that might contain HTML/Images, mostly profil_singkat or mengapa_komdes if they ever use editor
-            // Just append it if it exists
-            $allContents .= $abouts->profil_singkat . ' ' . $abouts->mengapa_komdes . ' ';
-        }
+        $orphanedImages = EditorImage::whereNull('imageable_id')
+            ->where('created_at', '<', Carbon::now()->subHours($hours))
+            ->get();
 
-        $activeImages = $imageService->extractImagesFromHtml($allContents);
-        
-        // Convert active image URLs to pure basenames for easier comparison
-        $activeBasenames = array_map(function($url) {
-            return basename(parse_url($url, PHP_URL_PATH));
-        }, $activeImages);
-
-        $now = Carbon::now();
-
-        foreach ($files as $file) {
-            $lastModified = Carbon::createFromTimestamp(Storage::disk('public')->lastModified($file));
+        foreach ($orphanedImages as $image) {
+            // Determine relative path for Storage disk
+            // Example $image->file_path: "http://domain.com/storage/uploads/editor/xyz.jpg" or "/storage/uploads/editor/xyz.jpg"
+            $parsedUrl = parse_url($image->file_path, PHP_URL_PATH);
             
-            // Only check files older than X hours
-            if ($now->diffInHours($lastModified) >= $hours) {
-                $filename = basename($file);
-                
-                // If the file is not found in the active images list
-                if (!in_array($filename, $activeBasenames)) {
-                    Storage::disk('public')->delete($file);
-                    $this->line("Deleted orphaned image: {$filename}");
-                    $deletedCount++;
-                }
+            // Remove '/storage/' prefix to get the relative path inside storage/app/public
+            $relativePath = preg_replace('#^/?storage/#', '', $parsedUrl);
+            
+            // Delete the physical file if it exists
+            if (Storage::disk('public')->exists($relativePath)) {
+                Storage::disk('public')->delete($relativePath);
+                $this->line("Deleted physical file: {$relativePath}");
             }
+            
+            // Always delete the database record
+            $image->delete();
+            $this->line("Deleted DB record for orphaned image ID: {$image->id}");
+            $deletedCount++;
         }
 
         $this->info("Cleanup completed. Deleted {$deletedCount} orphaned images.");

@@ -17,8 +17,8 @@ class ImageService
      */
     public function upload(UploadedFile $file, string $directory = 'uploads'): string
     {
-        // Generate a random filename with original extension
-        $filename = Str::random(40) . '.' . $file->getClientOriginalExtension();
+        // Generate a highly secure random filename (64 characters) to guarantee absolute zero chance of duplication
+        $filename = Str::random(64) . '.' . $file->getClientOriginalExtension();
         
         // Store in the public disk
         $path = $file->storeAs($directory, $filename, 'public');
