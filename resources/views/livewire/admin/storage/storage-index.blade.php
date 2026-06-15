@@ -97,12 +97,12 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4">
-                                <a href="{{ asset($item->image_path) }}" target="_blank">
-                                    <img src="{{ asset($item->image_path) }}" alt="img" class="w-10 h-10 object-cover rounded shadow-sm border border-zinc-200 hover:opacity-80 transition-opacity">
+                                <a href="{{ asset($item->image_path ?? $item->file_path) }}" target="_blank">
+                                    <img src="{{ asset($item->image_path ?? $item->file_path) }}" alt="img" class="w-10 h-10 object-cover rounded shadow-sm border border-zinc-200 hover:opacity-80 transition-opacity">
                                 </a>
                             </td>
                             <td class="px-6 py-4">
-                                <div class="font-mono text-xs text-zinc-500 break-all bg-zinc-100 p-1.5 rounded">{{ $item->image_path }}</div>
+                                <div class="font-mono text-xs text-zinc-500 break-all bg-zinc-100 p-1.5 rounded">{{ parse_url($item->image_path ?? $item->file_path, PHP_URL_PATH) }}</div>
                             </td>
                             <td class="px-6 py-4 text-zinc-700 whitespace-nowrap">
                                 {{ $item->updated_at->locale('id')->diffForHumans() }}

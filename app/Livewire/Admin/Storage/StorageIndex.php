@@ -54,8 +54,7 @@ class StorageIndex extends Component
     public function updatedSelectAllGallery($value)
     {
         if ($value) {
-            $this->selectedGalleryImages = GalleryImage::whereNull('gallery_id')
-                ->pluck('id')
+            $this->selectedGalleryImages = $this->galleryTrash->pluck('id')
                 ->map(fn($id) => (string) $id)
                 ->toArray();
         } else {
@@ -66,8 +65,7 @@ class StorageIndex extends Component
     public function updatedSelectAllEditor($value)
     {
         if ($value) {
-            $this->selectedEditorImages = EditorImage::whereNull('imageable_id')
-                ->pluck('id')
+            $this->selectedEditorImages = $this->editorTrash->pluck('id')
                 ->map(fn($id) => (string) $id)
                 ->toArray();
         } else {
@@ -156,7 +154,7 @@ class StorageIndex extends Component
             $images = EditorImage::whereIn('id', $currentChunk)->get();
             foreach ($images as $image) {
                 try {
-                    $relativePath = str_replace('/storage/', '', $image->image_path);
+                    $relativePath = str_replace('/storage/', '', $image->file_path);
                     Storage::disk('public')->delete($relativePath);
                     $image->delete();
                     $this->deleteSuccess++;
