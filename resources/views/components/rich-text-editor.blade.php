@@ -7,8 +7,18 @@
         content: @entangle($attributes->wire('model')),
         editor: null,
         isUpdating: false,
+        destroy() {
+            if (this.editor) {
+                tinymce.remove(this.editor);
+            }
+        },
         init() {
             try {
+                // Pre-cleanup just in case
+                if (this.$refs.editor.id && tinymce.get(this.$refs.editor.id)) {
+                    tinymce.remove(tinymce.get(this.$refs.editor.id));
+                }
+                
                 tinymce.init({
                     target: this.$refs.editor,
                     ui_container: this.$refs.editor.parentElement,
@@ -104,7 +114,7 @@
                             }
                         });
 
-                        editor.on('change keyup', () => {
+                        editor.on('change keyup blur', () => {
                             this.isUpdating = true;
                             this.content = editor.getContent();
                             this.$nextTick(() => { this.isUpdating = false; });
