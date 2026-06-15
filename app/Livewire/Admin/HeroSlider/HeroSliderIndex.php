@@ -31,4 +31,13 @@ class HeroSliderIndex extends Component
         
         $slider->delete();
     }
+
+    public function updateOrder($orderedIds)
+    {
+        foreach ($orderedIds as $index => $id) {
+            HeroSlider::where('id', $id)->update(['order_number' => $index + 1]);
+        }
+        
+        session()->flash('message', 'Urutan slider berhasil diperbarui.');
+    }
 }

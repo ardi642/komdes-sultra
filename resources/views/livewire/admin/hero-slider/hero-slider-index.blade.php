@@ -23,18 +23,53 @@
         <table class="w-full text-left border-collapse">
             <thead>
                 <tr class="bg-zinc-50 border-b border-zinc-200">
-                    <th class="p-4 font-semibold text-zinc-600 text-sm w-16">Urutan</th>
+                    <th class="p-4 font-semibold text-zinc-600 text-sm w-16 text-center">Geser</th>
+                    <th class="p-4 font-semibold text-zinc-600 text-sm w-16 text-center">Urutan</th>
                     <th class="p-4 font-semibold text-zinc-600 text-sm">Preview</th>
                     <th class="p-4 font-semibold text-zinc-600 text-sm">Konten</th>
                     <th class="p-4 font-semibold text-zinc-600 text-sm">Status</th>
                     <th class="p-4 font-semibold text-zinc-600 text-sm w-32 text-right">Aksi</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-zinc-100">
+            <tbody class="divide-y divide-zinc-100"
+                x-data="{
+                    init() {
+                        Sortable.create(this.$el, {
+                            handle: '.drag-handle',
+                            animation: 150,
+                            ghostClass: 'bg-primary-50',
+                            onEnd: (evt) => {
+                                let order = [];
+                                this.$el.querySelectorAll('tr[data-id]').forEach((el) => {
+                                    order.push(el.dataset.id);
+                                });
+                                $wire.updateOrder(order);
+                            }
+                        });
+                    }
+                }"
+            >
+                @php $activeCounter = 1; @endphp
                 @forelse($sliders as $slider)
-                    <tr class="hover:bg-zinc-50 transition-colors">
-                        <td class="p-4 text-sm text-zinc-600 font-medium text-center">
-                            {{ $slider->order_number }}
+                    <tr class="hover:bg-zinc-50 transition-colors bg-white group" data-id="{{ $slider->id }}" wire:key="slider-{{ $slider->id }}">
+                        <td class="p-4 text-center">
+                            <button type="button" class="drag-handle cursor-grab active:cursor-grabbing p-2 bg-zinc-100 text-zinc-500 rounded-lg border border-zinc-200 hover:bg-zinc-200 hover:text-primary-700 transition-colors shadow-sm" title="Geser untuk mengubah urutan">
+                                <svg class="w-5 h-5 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="9" cy="5" r="1.5"/>
+                                    <circle cx="15" cy="5" r="1.5"/>
+                                    <circle cx="9" cy="12" r="1.5"/>
+                                    <circle cx="15" cy="12" r="1.5"/>
+                                    <circle cx="9" cy="19" r="1.5"/>
+                                    <circle cx="15" cy="19" r="1.5"/>
+                                </svg>
+                            </button>
+                        </td>
+                        <td class="p-4 text-sm text-zinc-600 font-bold text-center">
+                            @if($slider->is_active)
+                                <span class="bg-primary-50 text-primary-700 py-1 px-2.5 rounded-md">{{ $activeCounter++ }}</span>
+                            @else
+                                <span class="text-zinc-300" title="Slider nonaktif tidak memiliki urutan tayang">-</span>
+                            @endif
                         </td>
                         <td class="p-4">
                             <img src="{{ asset($slider->image_path) }}" class="w-32 h-20 object-cover rounded-lg border border-zinc-200" alt="Slider">
@@ -61,7 +96,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="p-8 text-center text-zinc-500">Belum ada slider beranda.</td>
+                        <td colspan="6" class="p-8 text-center text-zinc-500">Belum ada slider beranda.</td>
                     </tr>
                 @endforelse
             </tbody>

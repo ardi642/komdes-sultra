@@ -74,11 +74,6 @@
                         </div>
                     </div>
 
-                    <div class="w-1/3 pt-4 border-t border-zinc-100">
-                        <label class="block text-sm font-semibold text-zinc-700 mb-1">Nomor Urut</label>
-                        <input type="number" wire:model="order_number" class="w-full rounded-lg border-zinc-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
-                        @error('order_number') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
-                    </div>
                 </div>
             </div>
 
