@@ -24,13 +24,16 @@ class GalleryForm extends Component
     public $existing_thumbnail;
     
     // For multiple photos upload
-    public $photos = [];
+    public $galleryImages = [];
+    public $deletedImages = [];
     public $existing_photos = [];
 
     public function mount($id = null)
     {
         if ($id) {
-            $gallery = Gallery::with('images')->findOrFail($id);
+            $gallery = Gallery::with(['images' => function($q) {
+                $q->orderBy('order_column', 'asc');
+            }])->findOrFail($id);
             $this->galleryId = $gallery->id;
             $this->title = $gallery->title;
             $this->date = $gallery->date->format('Y-m-d');
@@ -48,21 +51,20 @@ class GalleryForm extends Component
         // Auto-generate slug could be done here if needed
     }
 
-    public function removeExistingPhoto($imageId)
+    public function removeThumbnail()
     {
-        $image = GalleryImage::findOrFail($imageId);
-        app(ImageService::class)->delete($image->image_path);
-        $image->delete();
-
-        // Remove from array
-        $this->existing_photos = collect($this->existing_photos)->reject(function ($photo) use ($imageId) {
-            return $photo['id'] === $imageId;
-        })->toArray();
+        if ($this->existing_thumbnail) {
+            app(ImageService::class)->delete($this->existing_thumbnail);
+            if ($this->galleryId) {
+                Gallery::where('id', $this->galleryId)->update(['thumbnail' => null]);
+            }
+            $this->existing_thumbnail = null;
+        }
     }
 
-    public function removeNewPhoto($index)
+    public function removeExistingPhoto($imageId)
     {
-        array_splice($this->photos, $index, 1);
+        // Now handled by AlpineJS via deletedImages array
     }
 
     public function save()
@@ -78,7 +80,8 @@ class GalleryForm extends Component
             'description' => 'nullable|string',
             'video_url' => 'nullable|url|max:255',
             'thumbnail' => 'nullable|image|max:2048',
-            'photos.*' => 'image|max:2048', // 2MB max per image
+            'galleryImages' => 'array',
+            'deletedImages' => 'array',
         ]);
 
         $slug = Str::slug($this->title);
@@ -111,25 +114,25 @@ class GalleryForm extends Component
             ]
         );
 
-        // Upload new photos
-        if (!empty($this->photos)) {
-            foreach ($this->photos as $photo) {
-                $path = $imageService->upload($photo, 'galleries/photos');
-                $gallery->images()->create([
-                    'image_path' => $path
+        // Update new and existing photos
+        if (!empty($this->galleryImages)) {
+            foreach ($this->galleryImages as $index => $imageId) {
+                GalleryImage::where('id', $imageId)->update([
+                    'gallery_id' => $gallery->id,
+                    'order_column' => $index,
                 ]);
             }
         }
 
-        // If no thumbnail was provided, but we have images, automatically set the first image as thumbnail
-        if (!$gallery->thumbnail && $gallery->images()->count() > 0) {
-            $firstImage = $gallery->images()->first();
-            $gallery->update([
-                'thumbnail' => $firstImage->image_path
+        // Unlink explicitly deleted images
+        if (!empty($this->deletedImages)) {
+            GalleryImage::whereIn('id', $this->deletedImages)->update([
+                'gallery_id' => null,
             ]);
         }
 
-        session()->flash('message', 'Galeri berhasil disimpan.');
+        $messageText = $this->galleryId ? 'Galeri berhasil diperbarui.' : 'Galeri berhasil ditambahkan.';
+        session()->flash('message', $messageText);
         return redirect()->route('admin.gallery.index');
     }
 

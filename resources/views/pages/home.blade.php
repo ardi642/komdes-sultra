@@ -555,7 +555,7 @@
             <!-- Galeri Card -->
             <a href="{{ route('galeri.detail', $gallery->slug) }}" class="w-full sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.666rem)] bg-white rounded-[2rem] overflow-hidden border border-zinc-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 150 }}">
                 <div class="relative aspect-video overflow-hidden">
-                    <img src="{{ $gallery->thumbnail ? asset($gallery->thumbnail) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $gallery->title }}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105">
+                    <img src="{{ asset($gallery->thumbnail ?? ($gallery->images->first()->image_path ?? 'images/placeholder-gallery.jpg')) }}" alt="{{ $gallery->title }}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
                     <div class="absolute inset-0 bg-primary-900/0 group-hover:bg-primary-900/10 transition-colors duration-300"></div>
                 </div>
 

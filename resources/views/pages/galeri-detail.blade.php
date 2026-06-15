@@ -56,7 +56,7 @@
             @if($gallery->description)
             <div class="max-w-4xl mb-10">
                 <div class="text-zinc-700 leading-relaxed text-base md:text-lg">
-                    {!! nl2br(e($gallery->description)) !!}
+                    {!! $gallery->description !!}
                 </div>
             </div>
             @endif

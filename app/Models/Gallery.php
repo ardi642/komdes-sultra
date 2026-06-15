@@ -31,4 +31,19 @@ class Gallery extends Model
     {
         return $this->hasMany(GalleryImage::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($gallery) {
+            if ($gallery->thumbnail) {
+                try {
+                    app(\App\Services\ImageService::class)->delete($gallery->thumbnail);
+                } catch (\Exception $e) {
+                    \Illuminate\Support\Facades\Log::error('Failed to delete gallery thumbnail: ' . $e->getMessage());
+                }
+            }
+        });
+    }
 }

@@ -8,3 +8,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 \Illuminate\Support\Facades\Schedule::command('clean:editor-images --hours=24')->dailyAt('02:00');
+\Illuminate\Support\Facades\Schedule::command('clean:gallery-images --hours=24')->dailyAt('02:30');

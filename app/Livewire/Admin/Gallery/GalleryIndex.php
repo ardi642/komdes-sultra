@@ -38,21 +38,9 @@ class GalleryIndex extends Component
     {
         $gallery = Gallery::findOrFail($id);
         
-        // Let Model boot/event or ImageService handle actual file deletion later if needed.
-        // For now cascadeOnDelete drops the DB rows.
-        // Ideally we delete images from disk too. We can do that via ImageService.
+        // The database will now handle ON DELETE SET NULL for gallery_images
+        // and the CleanGalleryImages scheduler will clean up physical files later.
         
-        $images = $gallery->images;
-        $imageService = app(\App\Services\ImageService::class);
-        
-        if ($gallery->thumbnail) {
-            $imageService->delete($gallery->thumbnail);
-        }
-
-        foreach ($images as $img) {
-            $imageService->delete($img->image_path);
-        }
-
         $gallery->delete();
 
         session()->flash('message', 'Galeri berhasil dihapus.');

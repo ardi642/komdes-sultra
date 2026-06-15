@@ -131,6 +131,10 @@
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                 Kontak Utama
             </a>
+            <a href="{{ route('admin.storage.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.storage.*') ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                Tempat Sampah Gambar
+            </a>
         </nav>
     </aside>
 
@@ -160,6 +164,77 @@
         </main>
     </div>
 
+    <!-- Global Confirmation Modal -->
+    <div x-data="{ 
+            isOpen: false, 
+            title: '', 
+            message: '', 
+            confirmText: 'Ya, Hapus', 
+            cancelText: 'Batal',
+            onConfirm: null 
+        }" 
+        @open-confirm-modal.window="
+            isOpen = true;
+            title = $event.detail.title;
+            message = $event.detail.message;
+            confirmText = $event.detail.confirmText || 'Ya, Hapus';
+            cancelText = $event.detail.cancelText || 'Batal';
+            onConfirm = $event.detail.onConfirm;
+        "
+        x-show="isOpen" 
+        style="display: none;"
+        class="relative z-[100]" 
+        aria-labelledby="modal-title" 
+        role="dialog" 
+        aria-modal="true">
+        
+        <!-- Backdrop -->
+        <div x-show="isOpen" 
+             x-transition:enter="ease-out duration-300" 
+             x-transition:enter-start="opacity-0" 
+             x-transition:enter-end="opacity-100" 
+             x-transition:leave="ease-in duration-200" 
+             x-transition:leave-start="opacity-100" 
+             x-transition:leave-end="opacity-0" 
+             class="fixed inset-0 bg-zinc-900/40 backdrop-blur-sm transition-opacity"></div>
+      
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <!-- Modal Panel -->
+            <div x-show="isOpen" 
+                 @click.away="isOpen = false"
+                 x-transition:enter="ease-out duration-300" 
+                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
+                 x-transition:leave="ease-in duration-200" 
+                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
+                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                 class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg border border-zinc-100">
+              <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                  <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                  </div>
+                  <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                    <h3 class="text-lg font-semibold leading-6 text-zinc-900" id="modal-title" x-text="title">Konfirmasi</h3>
+                    <div class="mt-2">
+                      <p class="text-sm text-zinc-500 leading-relaxed" x-html="message"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-zinc-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 border-t border-zinc-100">
+                <button type="button" @click="isOpen = false; if(onConfirm) onConfirm();" class="inline-flex w-full justify-center rounded-xl bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-red-500 transition-colors sm:ml-3 sm:w-auto" x-text="confirmText"></button>
+                <button type="button" @click="isOpen = false" class="mt-3 inline-flex w-full justify-center rounded-xl bg-white px-4 py-2 text-sm font-medium text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-50 transition-colors sm:mt-0 sm:w-auto" x-text="cancelText"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
     @livewireScripts
+    @stack('scripts')
 </body>
 </html>

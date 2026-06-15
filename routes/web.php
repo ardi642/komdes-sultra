@@ -41,6 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     // We will apply auth middleware later, for development we can access directly or add later.
     Route::post('/upload-image', [\App\Http\Controllers\Admin\UploadController::class, 'uploadImage'])->name('upload.image');
+    Route::post('/upload-gallery-image', [\App\Http\Controllers\Admin\UploadController::class, 'uploadGalleryImage'])->name('upload.gallery.image');
     
     Route::get('/kategori', \App\Livewire\Admin\Category\CategoryIndex::class)->name('category.index');
     Route::get('/tag', \App\Livewire\Admin\Tag\TagIndex::class)->name('tag.index');
@@ -65,6 +66,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/tentang-kami', \App\Livewire\Admin\Setting\AboutIndex::class)->name('about.index');
     Route::get('/kontak', \App\Livewire\Admin\Setting\ContactIndex::class)->name('contact.index');
     Route::get('/pesan-masuk', \App\Livewire\Admin\Inbox\InboxIndex::class)->name('inbox.index');
+    
+    // Storage Management
+    Route::get('/tempat-sampah', \App\Livewire\Admin\Storage\StorageIndex::class)->name('storage.index');
 });
 
 require __DIR__.'/settings.php';
