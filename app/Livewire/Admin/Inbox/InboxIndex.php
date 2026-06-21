@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Inbox;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Inbox;
+use Illuminate\Support\Facades\DB;
 
 class InboxIndex extends Component
 {
@@ -16,6 +17,12 @@ class InboxIndex extends Component
     // Form fields for progress
     public $progressStatus = '';
     public $adminNotes = '';
+
+    // Bulk Actions Properties
+    public $selectedItems = [];
+    public $selectAll = false;
+    public $isBulkEditModalOpen = false;
+    public $bulkSelectedStatus = '';
 
     #[\Livewire\Attributes\Url]
     public $search = '';
@@ -89,7 +96,8 @@ class InboxIndex extends Component
         }
     }
 
-    public function render()
+    #[\Livewire\Attributes\Computed]
+    public function inboxMessages()
     {
         $query = Inbox::latest();
         
@@ -113,6 +121,63 @@ class InboxIndex extends Component
             $query->where('status', $this->filterStatus);
         }
 
+        return $query->paginate($this->perPage);
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if ($value) {
+            $this->selectedItems = $this->inboxMessages()->pluck('id')->map(fn($id) => (string) $id)->toArray();
+        } else {
+            $this->selectedItems = [];
+        }
+    }
+
+    public function cancelBatchDelete()
+    {
+        $this->selectedItems = [];
+        $this->selectAll = false;
+        $this->isBulkEditModalOpen = false;
+        $this->bulkSelectedStatus = '';
+    }
+
+    public function openBulkEditModal()
+    {
+        $this->isBulkEditModalOpen = true;
+    }
+
+    public function executeBulkEdit()
+    {
+        $this->validate([
+            'bulkSelectedStatus' => 'required|in:menunggu,diproses,selesai,ditolak'
+        ]);
+
+        DB::transaction(function () {
+            Inbox::whereIn('id', $this->selectedItems)->update([
+                'status' => $this->bulkSelectedStatus
+            ]);
+        });
+
+        session()->flash('message', count($this->selectedItems) . ' laporan berhasil diupdate statusnya.');
+        $this->dispatch('close-bulk-edit-modal'); // If we need an event, or just rely on Alpine state
+        $this->cancelBatchDelete();
+    }
+
+    public function bulkDelete()
+    {
+        $count = count($this->selectedItems);
+        
+        DB::transaction(function () {
+            Inbox::whereIn('id', $this->selectedItems)->delete();
+        });
+
+        session()->flash('message', $count . ' laporan berhasil dihapus secara massal.');
+        $this->cancelBatchDelete();
+    }
+
+    public function render()
+    {
+
         // Get available years for filter
         $availableYears = Inbox::selectRaw('YEAR(created_at) as year')
             ->distinct()
@@ -120,7 +185,6 @@ class InboxIndex extends Component
             ->pluck('year');
 
         return view('livewire.admin.inbox.inbox-index', [
-            'messages' => $query->paginate($this->perPage),
             'availableYears' => $availableYears,
         ])->layout('layouts.admin');
     }

@@ -1,8 +1,16 @@
-<div>
+<div x-data="{ selectionMode: false }">
     <div class="space-y-6">
         <div class="flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-gray-800">Laporan & Aduan</h1>
-            <p class="text-gray-600 text-sm">Pesan masuk dari pengunjung website.</p>
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800">Laporan & Aduan</h1>
+                <p class="text-gray-600 text-sm">Pesan masuk dari pengunjung website.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button @click="selectionMode = !selectionMode; if(!selectionMode) { $wire.cancelBatchDelete() }" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 transition shadow-sm" :class="{'bg-green-50 border-green-300 text-green-700': selectionMode}">
+                    <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    <span x-text="selectionMode ? 'Batal Pilih' : 'Pilih Banyak'"></span>
+                </button>
+            </div>
         </div>
 
         @if (session()->has('message'))
@@ -92,6 +100,11 @@
                 <table class="w-full text-sm text-left text-gray-600">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b border-gray-200">
                         <tr>
+                            <th scope="col" class="p-4 w-4" x-show="selectionMode" x-transition>
+                                <div class="flex items-center">
+                                    <input type="checkbox" wire:model.live="selectAll" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 cursor-pointer">
+                                </div>
+                            </th>
                             <th scope="col" class="px-6 py-4 font-medium">Tanggal</th>
                             <th scope="col" class="px-6 py-4 font-medium">Pengirim</th>
                             <th scope="col" class="px-6 py-4 font-medium">Subjek</th>
@@ -100,8 +113,13 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                        @forelse($messages as $message)
-                            <tr class="hover:bg-gray-50 transition-colors {{ !$message->is_read ? 'bg-green-50/30' : '' }}">
+                        @forelse($this->inboxMessages as $message)
+                            <tr wire:key="msg-{{ $message->id }}" class="hover:bg-gray-50 transition-colors {{ in_array((string)$message->id, $selectedItems) ? 'bg-green-50/50' : (!$message->is_read ? 'bg-green-50/30' : '') }}">
+                                <td class="p-4 w-4" x-show="selectionMode" x-transition>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" wire:model.live="selectedItems" value="{{ $message->id }}" class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 cursor-pointer">
+                                    </div>
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap {{ !$message->is_read ? 'font-semibold text-gray-900' : 'text-gray-500' }}">
                                     {{ $message->created_at->format('d M Y, H:i') }}
                                 </td>
@@ -141,8 +159,8 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr>
-                                <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                            <tr wire:key="empty-row">
+                                <td colspan="10" class="px-6 py-8 text-center text-gray-500">
                                     Belum ada pesan yang masuk.
                                 </td>
                             </tr>
@@ -152,9 +170,36 @@
             </div>
             
             <div class="px-6 py-4 border-t border-gray-200">
-                {{ $messages->links() }}
+                {{ $this->inboxMessages->links() }}
             </div>
         </div>
+
+        <!-- Floating Action Bar for Bulk Actions -->
+        @if(count($selectedItems) > 0)
+        <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40 bg-gray-900 rounded-full shadow-2xl border border-gray-700 p-2 pl-4 pr-2 flex justify-between items-center transition-all duration-300">
+            <div class="text-sm font-medium text-white flex items-center gap-3 mr-6">
+                <span class="bg-green-500 text-white py-0.5 px-2 rounded-md font-bold">{{ count($selectedItems) }}</span> item
+            </div>
+            <div class="flex items-center gap-2">
+                <button wire:click="openBulkEditModal" class="inline-flex items-center justify-center p-2 bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white rounded-full transition" title="Edit Status Massal">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                </button>
+                <button @click="$dispatch('open-confirm-modal', {
+                        title: 'Konfirmasi Hapus',
+                        message: 'Hapus {{ count($selectedItems) }} laporan/aduan terpilih? Data tidak dapat dikembalikan.',
+                        confirmText: 'Hapus',
+                        onConfirm: () => $wire.bulkDelete()
+                    })" 
+                    wire:loading.attr="disabled" class="inline-flex items-center justify-center p-2 bg-red-600 hover:bg-red-500 text-white rounded-full transition shadow-sm disabled:opacity-50" title="Hapus Terpilih">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </button>
+                <div class="h-6 w-px bg-gray-700 mx-1"></div>
+                <button @click="selectionMode = false; $wire.cancelBatchDelete()" class="inline-flex items-center justify-center p-2 hover:bg-gray-800 text-gray-400 hover:text-white rounded-full transition" title="Batal">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+        </div>
+        @endif
     </div>
 
     <!-- Modal Detail Pesan -->
@@ -250,4 +295,71 @@
         </div>
     </div>
     @endif
+
+    <!-- Bulk Edit Modal -->
+    <div x-data="{ show: @entangle('isBulkEditModalOpen') }"
+         x-show="show"
+         x-cloak
+         class="fixed inset-0 z-50 overflow-y-auto"
+         aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div x-show="show"
+                 x-transition:enter="ease-out duration-300"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="ease-in duration-200"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm transition-opacity"
+                 @click="show = false"
+                 aria-hidden="true"></div>
+
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div x-show="show"
+                 x-transition:enter="ease-out duration-300"
+                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave="ease-in duration-200"
+                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                 class="relative z-10 inline-block align-bottom bg-white rounded-2xl text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
+                
+                <form wire:submit.prevent="executeBulkEdit">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            </div>
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                                <h3 class="text-lg leading-6 font-bold text-gray-900" id="modal-title">
+                                    Edit Status Massal (<span x-text="$wire.selectedItems.length"></span> Laporan)
+                                </h3>
+                                <div class="mt-4 space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Status Progres Baru</label>
+                                        <select wire:model="bulkSelectedStatus" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
+                                            <option value="">-- Pilih Status --</option>
+                                            <option value="menunggu">⏳ Menunggu</option>
+                                            <option value="diproses">⚙️ Diproses</option>
+                                            <option value="selesai">✅ Selesai</option>
+                                            <option value="ditolak">❌ Ditolak / Spam</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-2xl">
+                        <button type="submit" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm transition-colors">
+                            Simpan Perubahan
+                        </button>
+                        <button type="button" @click="show = false" class="mt-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm transition-colors">
+                            Batal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

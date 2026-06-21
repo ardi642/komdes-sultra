@@ -19,6 +19,15 @@ class IssueIndex extends Component
     
     public $isModalOpen = false;
 
+    // Batch Delete Properties
+    public $selectedItems = [];
+    public $selectAll = false;
+    public $isDeleting = false;
+    public $deleteTotal = 0;
+    public $deleteProcessed = 0;
+    public $deleteSuccess = 0;
+    public $deleteFailed = 0;
+
     #[\Livewire\Attributes\Url]
     public $search = '';
 
@@ -160,6 +169,11 @@ class IssueIndex extends Component
     {
         $issue = Issue::findOrFail($id);
         
+        if ($issue->posts()->exists() || $issue->events()->exists()) {
+            session()->flash('error', 'Gagal menghapus: Isu Kampanye ini masih digunakan pada publikasi atau acara.');
+            return;
+        }
+
         // Delete the image file from storage
         if ($issue->cover_image) {
             $imageService->delete($issue->cover_image);
@@ -167,5 +181,71 @@ class IssueIndex extends Component
 
         $issue->delete();
         session()->flash('message', 'Isu Kampanye berhasil dihapus.');
+    }
+
+    // Batch Delete Methods
+    public function updatedSelectAll($value)
+    {
+        if ($value) {
+            $this->selectedItems = Issue::pluck('id')->map(fn($id) => (string)$id)->toArray();
+        } else {
+            $this->selectedItems = [];
+        }
+    }
+
+    public function startBatchDelete()
+    {
+        if (empty($this->selectedItems)) return;
+        
+        $this->isDeleting = true;
+        $this->deleteTotal = count($this->selectedItems);
+        $this->deleteProcessed = 0;
+        $this->deleteSuccess = 0;
+        $this->deleteFailed = 0;
+        
+        $this->dispatch('batch-delete-started');
+    }
+
+    public function processNextChunk(ImageService $imageService)
+    {
+        if (!$this->isDeleting) return;
+
+        $chunkSize = 10;
+        $itemsToProcess = array_slice($this->selectedItems, $this->deleteProcessed, $chunkSize);
+
+        if (empty($itemsToProcess)) {
+            $this->isDeleting = false;
+            $this->selectedItems = [];
+            $this->selectAll = false;
+            
+            $this->dispatch('batch-delete-finished');
+            return;
+        }
+
+        foreach ($itemsToProcess as $id) {
+            $issue = Issue::find($id);
+            if ($issue) {
+                if ($issue->posts()->exists() || $issue->events()->exists()) {
+                    $this->deleteFailed++;
+                } else {
+                    if ($issue->cover_image) {
+                        $imageService->delete($issue->cover_image);
+                    }
+                    $issue->delete();
+                    $this->deleteSuccess++;
+                }
+            }
+        }
+
+        $this->deleteProcessed += count($itemsToProcess);
+        
+        $this->dispatch('chunk-processed');
+    }
+
+    public function cancelBatchDelete()
+    {
+        $this->isDeleting = false;
+        $this->selectedItems = [];
+        $this->selectAll = false;
     }
 }

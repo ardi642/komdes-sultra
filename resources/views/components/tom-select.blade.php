@@ -1,4 +1,4 @@
-@props(['options' => [], 'multiple' => false, 'placeholder' => 'Pilih...'])
+@props(['options' => [], 'multiple' => false, 'placeholder' => 'Pilih...', 'dropdownParent' => 'body'])
 
 <div wire:ignore x-data="{
         value: @entangle($attributes->wire('model')),
@@ -13,7 +13,9 @@
                 placeholder: '{{ $placeholder }}',
                 maxOptions: 50,
                 hideSelected: true,
-                dropdownParent: 'body',
+                @if($dropdownParent)
+                dropdownParent: '{{ $dropdownParent }}',
+                @endif
             });
             
             this.tomSelectInstance.on('change', (val) => {

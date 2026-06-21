@@ -14,6 +14,15 @@ class TagIndex extends Component
     public $name, $slug, $tag_id;
     public $isModalOpen = false;
 
+    // Batch Delete Properties
+    public $selectedItems = [];
+    public $selectAll = false;
+    public $isDeleting = false;
+    public $deleteTotal = 0;
+    public $deleteProcessed = 0;
+    public $deleteSuccess = 0;
+    public $deleteFailed = 0;
+
     #[\Livewire\Attributes\Url]
     public $search = '';
     
@@ -100,7 +109,75 @@ class TagIndex extends Component
 
     public function delete($id)
     {
-        Tag::find($id)->delete();
+        $tag = Tag::find($id);
+        if ($tag->posts()->exists() || $tag->events()->exists()) {
+            session()->flash('error', 'Gagal menghapus: Tag ini masih digunakan pada publikasi atau acara.');
+            return;
+        }
+        $tag->delete();
         session()->flash('message', 'Tag berhasil dihapus.');
+    }
+
+    // Batch Delete Methods
+    public function updatedSelectAll($value)
+    {
+        if ($value) {
+            $this->selectedItems = Tag::pluck('id')->map(fn($id) => (string)$id)->toArray();
+        } else {
+            $this->selectedItems = [];
+        }
+    }
+
+    public function startBatchDelete()
+    {
+        if (empty($this->selectedItems)) return;
+        
+        $this->isDeleting = true;
+        $this->deleteTotal = count($this->selectedItems);
+        $this->deleteProcessed = 0;
+        $this->deleteSuccess = 0;
+        $this->deleteFailed = 0;
+        
+        $this->dispatch('batch-delete-started');
+    }
+
+    public function processNextChunk()
+    {
+        if (!$this->isDeleting) return;
+
+        $chunkSize = 10;
+        $itemsToProcess = array_slice($this->selectedItems, $this->deleteProcessed, $chunkSize);
+
+        if (empty($itemsToProcess)) {
+            $this->isDeleting = false;
+            $this->selectedItems = [];
+            $this->selectAll = false;
+            
+            $this->dispatch('batch-delete-finished');
+            return;
+        }
+
+        foreach ($itemsToProcess as $id) {
+            $tag = Tag::find($id);
+            if ($tag) {
+                if ($tag->posts()->exists() || $tag->events()->exists()) {
+                    $this->deleteFailed++;
+                } else {
+                    $tag->delete();
+                    $this->deleteSuccess++;
+                }
+            }
+        }
+
+        $this->deleteProcessed += count($itemsToProcess);
+        
+        $this->dispatch('chunk-processed');
+    }
+
+    public function cancelBatchDelete()
+    {
+        $this->isDeleting = false;
+        $this->selectedItems = [];
+        $this->selectAll = false;
     }
 }

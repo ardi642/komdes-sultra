@@ -14,6 +14,15 @@ class CategoryIndex extends Component
     public $name, $slug, $type = 'berita', $category_id;
     public $isModalOpen = false;
 
+    // Batch Delete Properties
+    public $selectedItems = [];
+    public $selectAll = false;
+    public $isDeleting = false;
+    public $deleteTotal = 0;
+    public $deleteProcessed = 0;
+    public $deleteSuccess = 0;
+    public $deleteFailed = 0;
+
     #[\Livewire\Attributes\Url]
     public $search = '';
     
@@ -104,7 +113,75 @@ class CategoryIndex extends Component
 
     public function delete($id)
     {
-        Category::find($id)->delete();
+        $category = Category::find($id);
+        if ($category->posts()->exists()) {
+            session()->flash('error', 'Gagal menghapus: Kategori ini masih digunakan pada publikasi berita.');
+            return;
+        }
+        $category->delete();
         session()->flash('message', 'Kategori berhasil dihapus.');
+    }
+
+    // Batch Delete Methods
+    public function updatedSelectAll($value)
+    {
+        if ($value) {
+            $this->selectedItems = Category::pluck('id')->map(fn($id) => (string)$id)->toArray();
+        } else {
+            $this->selectedItems = [];
+        }
+    }
+
+    public function startBatchDelete()
+    {
+        if (empty($this->selectedItems)) return;
+        
+        $this->isDeleting = true;
+        $this->deleteTotal = count($this->selectedItems);
+        $this->deleteProcessed = 0;
+        $this->deleteSuccess = 0;
+        $this->deleteFailed = 0;
+        
+        $this->dispatch('batch-delete-started');
+    }
+
+    public function processNextChunk()
+    {
+        if (!$this->isDeleting) return;
+
+        $chunkSize = 10;
+        $itemsToProcess = array_slice($this->selectedItems, $this->deleteProcessed, $chunkSize);
+
+        if (empty($itemsToProcess)) {
+            $this->isDeleting = false;
+            $this->selectedItems = [];
+            $this->selectAll = false;
+            
+            $this->dispatch('batch-delete-finished');
+            return;
+        }
+
+        foreach ($itemsToProcess as $id) {
+            $category = Category::find($id);
+            if ($category) {
+                if ($category->posts()->exists()) {
+                    $this->deleteFailed++;
+                } else {
+                    $category->delete();
+                    $this->deleteSuccess++;
+                }
+            }
+        }
+
+        $this->deleteProcessed += count($itemsToProcess);
+        
+        $this->dispatch('chunk-processed');
+    }
+
+    public function cancelBatchDelete()
+    {
+        $this->isDeleting = false;
+        $this->selectedItems = [];
+        $this->selectAll = false;
     }
 }

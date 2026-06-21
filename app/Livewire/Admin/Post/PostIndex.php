@@ -19,6 +19,27 @@ class PostIndex extends Component
     public $isFormOpen = false;
     public $post_id;
     
+    // Batch Selection
+    public $selectAll = false;
+    public $selectedItems = [];
+    
+    // Orchestrator state for batch deletion
+    public $isDeleting = false;
+    public $deleteTotal = 0;
+    public $deleteProcessed = 0;
+    public $deleteSuccess = 0;
+    public $deleteFailed = 0;
+    public $chunkIds = [];
+
+    protected $listeners = ['startBatchDelete', 'processNextChunk', 'cancelBatchDelete'];
+
+    // Bulk Edit Form
+    public $isBulkEditModalOpen = false;
+    public $bulkEditAction = 'append'; // 'append' or 'replace'
+    public $bulkSelectedTags = [];
+    public $bulkSelectedIssues = '';
+    public $bulkSelectedCategory = '';
+    
     // Form fields
     public $title, $slug, $content, $type = 'berita', $category_id;
     public $is_published = true;
@@ -26,7 +47,7 @@ class PostIndex extends Component
     
     // Many-to-Many relations
     public $selectedTags = [];
-    public $selectedIssues = [];
+    public $selectedIssues = '';
 
     #[\Livewire\Attributes\Url]
     public $filterType = '';
@@ -61,11 +82,21 @@ class PostIndex extends Component
     public function updatingSearch()
     {
         $this->resetPage();
+        $this->selectAll = false;
+        $this->selectedItems = [];
     }
 
     public function updatingPerPage()
     {
         $this->resetPage();
+        $this->selectAll = false;
+        $this->selectedItems = [];
+    }
+    
+    public function updatedPage()
+    {
+        $this->selectAll = false;
+        $this->selectedItems = [];
     }
 
     public function render()
@@ -104,12 +135,35 @@ class PostIndex extends Component
             $query->whereMonth('created_at', $this->filterMonth);
         }
 
+        $posts = $query->paginate($this->perPage);
+
         return view('livewire.admin.post.post-index', [
-            'posts' => $query->paginate($this->perPage),
-            'categories' => Category::where('type', $this->type)->get(),
+            'posts' => $posts,
+            'categories' => Category::where('type', $this->filterType ?: 'berita')->get(),
             'allTags' => Tag::orderBy('name')->get(),
             'allIssues' => Issue::where('status', 'active')->orderBy('title')->get(),
         ])->layout('layouts.admin');
+    }
+    
+    public function updatedSelectAll($value)
+    {
+        if ($value) {
+            $query = Post::latest();
+            if ($this->filterType) $query->where('type', $this->filterType);
+            if ($this->search) $query->where('title', 'like', '%' . $this->search . '%');
+            if ($this->filterStatus === 'published') $query->where('is_published', true);
+            elseif ($this->filterStatus === 'draft') $query->where('is_published', false);
+            if ($this->filterCategory) $query->where('category_id', $this->filterCategory);
+            if (!empty($this->filterTag)) $query->whereHas('tags', fn($q) => $q->whereIn('tags.id', $this->filterTag));
+            if ($this->filterYear) $query->whereYear('created_at', $this->filterYear);
+            if ($this->filterMonth) $query->whereMonth('created_at', $this->filterMonth);
+            
+            $this->selectedItems = $query->paginate($this->perPage)->pluck('id')
+                ->map(fn($id) => (string) $id)
+                ->toArray();
+        } else {
+            $this->selectedItems = [];
+        }
     }
 
     public function updatedType()
@@ -147,7 +201,7 @@ class PostIndex extends Component
         $this->cover_image = null;
         $this->new_cover_image = null;
         $this->selectedTags = [];
-        $this->selectedIssues = [];
+        $this->selectedIssues = '';
     }
 
     public function store(ImageService $imageService)
@@ -195,7 +249,7 @@ class PostIndex extends Component
 
         // Sync Tags and Issues
         $post->tags()->sync($this->selectedTags);
-        $post->issues()->sync($this->selectedIssues);
+        $post->issues()->sync($this->selectedIssues ? [$this->selectedIssues] : []);
 
         session()->flash('message', $this->post_id ? 'Publikasi berhasil diperbarui.' : 'Publikasi berhasil ditambahkan.');
 
@@ -216,7 +270,7 @@ class PostIndex extends Component
         $this->cover_image = $post->cover_image;
         
         $this->selectedTags = $post->tags->pluck('id')->map(fn($id) => (string)$id)->toArray();
-        $this->selectedIssues = $post->issues->pluck('id')->map(fn($id) => (string)$id)->toArray();
+        $this->selectedIssues = $post->issues->first()?->id ?? '';
         
         $this->isFormOpen = true;
     }
@@ -231,6 +285,123 @@ class PostIndex extends Component
 
         $post->delete();
         session()->flash('message', 'Publikasi berhasil dihapus.');
+    }
+
+    public function bulkDelete()
+    {
+        if (empty($this->selectedItems)) return;
+
+        $this->isDeleting = true;
+        $this->deleteTotal = count($this->selectedItems);
+        $this->deleteProcessed = 0;
+        $this->deleteSuccess = 0;
+        $this->deleteFailed = 0;
+        
+        $this->chunkIds = array_chunk($this->selectedItems, 10);
+        
+        $this->dispatch('batch-delete-started');
+    }
+
+    public function processNextChunk(ImageService $imageService)
+    {
+        if (empty($this->chunkIds)) {
+            $this->isDeleting = false;
+            $this->dispatch('batch-delete-finished', [
+                'success' => $this->deleteSuccess,
+                'failed' => $this->deleteFailed
+            ]);
+            $this->selectedItems = [];
+            $this->selectAll = false;
+            return;
+        }
+
+        $currentChunk = array_shift($this->chunkIds);
+        
+        $posts = Post::whereIn('id', $currentChunk)->get();
+        foreach ($posts as $post) {
+            try {
+                if ($post->cover_image) {
+                    $imageService->delete($post->cover_image);
+                }
+                $post->delete();
+                $this->deleteSuccess++;
+            } catch (\Exception $e) {
+                $this->deleteFailed++;
+            }
+            $this->deleteProcessed++;
+        }
+
+        $this->dispatch('chunk-processed', [
+            'processed' => $this->deleteProcessed,
+            'total' => $this->deleteTotal
+        ]);
+    }
+
+    public function cancelBatchDelete()
+    {
+        $this->chunkIds = [];
+        $this->isDeleting = false;
+        
+        $this->dispatch('batch-delete-cancelled', [
+            'success' => $this->deleteSuccess,
+            'failed' => $this->deleteFailed
+        ]);
+        
+        $this->selectedItems = [];
+        $this->selectAll = false;
+    }
+
+    public function openBulkEditModal()
+    {
+        if (empty($this->selectedItems)) return;
+        
+        $this->bulkEditAction = 'append';
+        $this->bulkSelectedTags = [];
+        $this->bulkSelectedIssues = '';
+        $this->bulkSelectedCategory = '';
+        $this->isBulkEditModalOpen = true;
+    }
+
+    public function closeBulkEditModal()
+    {
+        $this->isBulkEditModalOpen = false;
+    }
+
+    public function executeBulkEdit()
+    {
+        if (empty($this->selectedItems)) return;
+
+        \Illuminate\Support\Facades\DB::transaction(function () {
+            $posts = Post::whereIn('id', $this->selectedItems)->get();
+
+            foreach ($posts as $post) {
+                // Category Update
+                if (!empty($this->bulkSelectedCategory)) {
+                    $post->update(['category_id' => $this->bulkSelectedCategory]);
+                }
+
+                // Tags Update
+                if (!empty($this->bulkSelectedTags)) {
+                    if ($this->bulkEditAction === 'replace') {
+                        $post->tags()->sync($this->bulkSelectedTags);
+                    } else {
+                        $post->tags()->syncWithoutDetaching($this->bulkSelectedTags);
+                    }
+                } elseif ($this->bulkEditAction === 'replace') {
+                    $post->tags()->detach();
+                }
+
+                // Issues Update
+                if (!empty($this->bulkSelectedIssues)) {
+                    $post->issues()->sync([$this->bulkSelectedIssues]);
+                }
+            }
+        });
+
+        $this->selectedItems = [];
+        $this->selectAll = false;
+        $this->closeBulkEditModal();
+        session()->flash('message', 'Label pada tulisan terpilih berhasil diperbarui.');
     }
 
     public function removeCoverImage(ImageService $imageService)
