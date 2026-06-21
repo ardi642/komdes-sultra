@@ -33,6 +33,11 @@
                 @if($post->category)
                 <span class="bg-secondary-500 text-zinc-900 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">{{ $post->category->name }}</span>
                 @endif
+                @if($post->issues && $post->issues->count() > 0)
+                    @foreach($post->issues as $issue)
+                        <span class="bg-white/20 text-white border border-white/30 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide backdrop-blur-sm">Isu {{ $issue->title }}</span>
+                    @endforeach
+                @endif
                 <span class="text-sm text-white/80 flex items-center gap-1.5">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> 
                     {{ $post->published_at->format('d M Y') }}
@@ -46,7 +51,7 @@
                     <img src="https://ui-avatars.com/api/?name={{ urlencode($post->author->name ?? 'Admin') }}&background=random" alt="Penulis" class="w-10 h-10 rounded-full shadow-sm border border-white/20">
                     <div class="text-left">
                         <p class="font-bold text-white">{{ $post->author->name ?? 'Admin' }}</p>
-                        <p class="text-xs text-white/70">Tim Redaksi</p>
+                        <p class="text-xs text-white/70">{{ $post->author->posisi ?? 'Tim Redaksi' }}</p>
                     </div>
                 </div>
             </div>

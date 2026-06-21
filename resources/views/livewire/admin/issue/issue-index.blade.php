@@ -143,9 +143,11 @@
                         </td>
                         <td class="px-6 py-4 text-right space-x-2">
                             <a href="{{ url('/isu/' . $issue->slug) }}" target="_blank" class="text-zinc-600 hover:text-zinc-900 font-medium mr-2" title="Lihat di Web">Web</a>
-                            <a href="{{ route('admin.issue.show', $issue->id) }}" class="text-primary-600 hover:text-primary-900 font-medium mr-2">Kelola Konten</a>
-                            <button wire:click="edit({{ $issue->id }})" class="text-blue-600 hover:text-blue-900 font-medium mr-2">Edit</button>
-                            <button wire:click="delete({{ $issue->id }})" onclick="confirm('Apakah Anda yakin ingin menghapus isu ini?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-900 font-medium">Hapus</button>
+                            @if(!auth()->user()->hasRole('Mitra Media') || $issue->user_id === auth()->id())
+                                <a href="{{ route('admin.issue.show', $issue->id) }}" class="text-primary-600 hover:text-primary-900 font-medium mr-2">Kelola Konten</a>
+                                <button wire:click="edit({{ $issue->id }})" class="text-blue-600 hover:text-blue-900 font-medium mr-2">Edit</button>
+                                <button wire:click="delete({{ $issue->id }})" onclick="confirm('Apakah Anda yakin ingin menghapus isu ini?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-900 font-medium">Hapus</button>
+                            @endif
                         </td>
                     </tr>
                     @empty

@@ -16,6 +16,7 @@ class Gallery extends Model
         'description',
         'video_url',
         'thumbnail',
+        'user_id',
     ];
 
     protected $casts = [
@@ -30,6 +31,11 @@ class Gallery extends Model
     public function images()
     {
         return $this->hasMany(GalleryImage::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     protected static function boot()

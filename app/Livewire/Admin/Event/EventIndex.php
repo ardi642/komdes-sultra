@@ -200,6 +200,10 @@ class EventIndex extends Component
             'is_published' => $this->is_published === '1',
         ];
 
+        if (!$this->event_id) {
+            $eventData['user_id'] = auth()->id();
+        }
+
         // Set published_at if publishing for the first time
         if ($this->is_published === '1' && !$this->event_id) {
             $eventData['published_at'] = now();
@@ -228,6 +232,11 @@ class EventIndex extends Component
     {
         $event = Event::with(['tags', 'issues'])->findOrFail($id);
         
+        if (auth()->user()->hasRole('Mitra Media') && $event->user_id !== auth()->id()) {
+            session()->flash('error', 'Anda tidak memiliki hak untuk mengubah agenda ini.');
+            return;
+        }
+        
         $this->event_id = $event->id;
         $this->title = $event->title;
         $this->slug = $event->slug;
@@ -246,6 +255,11 @@ class EventIndex extends Component
     public function delete($id, ImageService $imageService)
     {
         $event = Event::findOrFail($id);
+        
+        if (auth()->user()->hasRole('Mitra Media') && $event->user_id !== auth()->id()) {
+            session()->flash('error', 'Anda tidak memiliki hak untuk menghapus agenda ini.');
+            return;
+        }
         
         if ($event->cover_image) {
             $imageService->delete($event->cover_image);
@@ -288,6 +302,12 @@ class EventIndex extends Component
         $events = Event::whereIn('id', $currentChunk)->get();
         foreach ($events as $event) {
             try {
+                if (auth()->user()->hasRole('Mitra Media') && $event->user_id !== auth()->id()) {
+                    $this->deleteFailed++;
+                    $this->deleteProcessed++;
+                    continue;
+                }
+
                 if ($event->cover_image) {
                     $imageService->delete($event->cover_image);
                 }
@@ -342,6 +362,10 @@ class EventIndex extends Component
             $events = Event::whereIn('id', $this->selectedItems)->get();
 
             foreach ($events as $event) {
+                if (auth()->user()->hasRole('Mitra Media') && $event->user_id !== auth()->id()) {
+                    continue;
+                }
+
                 // Tags Update
                 if (!empty($this->bulkSelectedTags)) {
                     if ($this->bulkEditAction === 'replace') {

@@ -175,16 +175,18 @@
                                 </td>
                                 <td class="px-6 py-4 text-right space-x-2 whitespace-nowrap">
                                     <a href="{{ url('/acara/' . $event->slug) }}" target="_blank" class="text-primary-600 hover:text-primary-900 font-medium mr-2">Lihat</a>
-                                    <button wire:click="edit({{ $event->id }})" class="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
-                                    <button @click="$dispatch('open-confirm-modal', {
-                                            title: 'Konfirmasi Penghapusan',
-                                            message: 'Data agenda acara akan dihapus secara permanen. File media sisipan teks akan dialihkan ke menu <b>Tempat Sampah</b> dan dibersihkan secara otomatis oleh sistem dalam waktu 1x24 jam. Pembersihan manual juga dapat dilakukan sewaktu-waktu melalui menu tersebut. Lanjutkan proses penghapusan?',
-                                            confirmText: 'Ya, Hapus Acara',
-                                            onConfirm: () => $wire.delete({{ $event->id }})
-                                        })" 
-                                        class="text-red-600 hover:text-red-900 font-medium">
-                                        Hapus
-                                    </button>
+                                    @if(!auth()->user()->hasRole('Mitra Media') || $event->user_id === auth()->id())
+                                        <button wire:click="edit({{ $event->id }})" class="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
+                                        <button @click="$dispatch('open-confirm-modal', {
+                                                title: 'Konfirmasi Penghapusan',
+                                                message: 'Data agenda acara akan dihapus secara permanen. File media sisipan teks akan dialihkan ke menu <b>Tempat Sampah</b> dan dibersihkan secara otomatis oleh sistem dalam waktu 1x24 jam. Pembersihan manual juga dapat dilakukan sewaktu-waktu melalui menu tersebut. Lanjutkan proses penghapusan?',
+                                                confirmText: 'Ya, Hapus Acara',
+                                                onConfirm: () => $wire.delete({{ $event->id }})
+                                            })" 
+                                            class="text-red-600 hover:text-red-900 font-medium">
+                                            Hapus
+                                        </button>
+                                    @endif
                                 </td>
                             </tr>
                             @empty

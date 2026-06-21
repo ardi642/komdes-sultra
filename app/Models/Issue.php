@@ -9,7 +9,7 @@ class Issue extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'description', 'icon_svg', 'cover_image', 'status'];
+    protected $fillable = ['title', 'slug', 'description', 'icon_svg', 'cover_image', 'status', 'user_id'];
 
     public function posts()
     {

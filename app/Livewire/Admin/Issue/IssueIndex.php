@@ -134,6 +134,10 @@ class IssueIndex extends Component
             'status' => $this->status,
         ];
 
+        if (!$this->issue_id) {
+            $issueData['user_id'] = auth()->id();
+        }
+
         // Handle Image Upload
         if ($this->new_cover_image) {
             // Delete old image if updating
@@ -154,6 +158,12 @@ class IssueIndex extends Component
     public function edit($id)
     {
         $issue = Issue::findOrFail($id);
+        
+        if (auth()->user()->hasRole('Mitra Media') && $issue->user_id !== auth()->id()) {
+            session()->flash('error', 'Anda tidak memiliki hak untuk mengubah isu kampanye ini.');
+            return;
+        }
+
         $this->issue_id = $id;
         $this->title = $issue->title;
         $this->slug = $issue->slug;
@@ -168,6 +178,11 @@ class IssueIndex extends Component
     public function delete($id, ImageService $imageService)
     {
         $issue = Issue::findOrFail($id);
+        
+        if (auth()->user()->hasRole('Mitra Media') && $issue->user_id !== auth()->id()) {
+            session()->flash('error', 'Anda tidak memiliki hak untuk menghapus isu kampanye ini.');
+            return;
+        }
         
         if ($issue->posts()->exists() || $issue->events()->exists()) {
             session()->flash('error', 'Gagal menghapus: Isu Kampanye ini masih digunakan pada publikasi atau acara.');
@@ -225,6 +240,11 @@ class IssueIndex extends Component
         foreach ($itemsToProcess as $id) {
             $issue = Issue::find($id);
             if ($issue) {
+                if (auth()->user()->hasRole('Mitra Media') && $issue->user_id !== auth()->id()) {
+                    $this->deleteFailed++;
+                    continue;
+                }
+
                 if ($issue->posts()->exists() || $issue->events()->exists()) {
                     $this->deleteFailed++;
                 } else {

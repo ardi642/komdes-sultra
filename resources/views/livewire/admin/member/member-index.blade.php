@@ -90,17 +90,50 @@
                     <table class="w-full text-sm text-left text-zinc-600">
                         <thead class="text-xs text-zinc-700 uppercase bg-zinc-50 border-b border-zinc-200">
                             <tr>
+                                <th scope="col" class="p-4 w-16 text-center">Geser</th>
+                                <th scope="col" class="px-6 py-3 font-medium w-16 text-center">Urutan</th>
                                 <th scope="col" class="px-6 py-3 font-medium w-16">Logo</th>
                                 <th scope="col" class="px-6 py-3 font-medium min-w-[200px]">Nama Anggota</th>
                                 <th scope="col" class="px-6 py-3 font-medium">Dibuat Pada</th>
-                                <th scope="col" class="px-6 py-3 font-medium">Urutan</th>
                                 <th scope="col" class="px-6 py-3 font-medium">Status</th>
                                 <th scope="col" class="px-6 py-3 font-medium text-right">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-zinc-200">
+                        <tbody class="divide-y divide-zinc-200"
+                            x-data="{
+                                init() {
+                                    Sortable.create(this.$el, {
+                                        handle: '.drag-handle',
+                                        animation: 150,
+                                        ghostClass: 'bg-primary-50',
+                                        onEnd: (evt) => {
+                                            let order = [];
+                                            this.$el.querySelectorAll('tr[data-id]').forEach((el) => {
+                                                order.push(el.dataset.id);
+                                            });
+                                            $wire.updateOrder(order);
+                                        }
+                                    });
+                                }
+                            }"
+                        >
                             @forelse($members as $member)
-                            <tr class="hover:bg-zinc-50 transition-colors">
+                            <tr class="hover:bg-zinc-50 transition-colors bg-white" data-id="{{ $member->id }}" wire:key="member-{{ $member->id }}">
+                                <td class="p-4 text-center">
+                                    <button type="button" class="drag-handle cursor-grab active:cursor-grabbing p-2 bg-zinc-100 text-zinc-500 rounded-lg border border-zinc-200 hover:bg-zinc-200 hover:text-primary-700 transition-colors shadow-sm" title="Geser untuk mengubah urutan">
+                                        <svg class="w-5 h-5 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                                            <circle cx="9" cy="5" r="1.5"/>
+                                            <circle cx="15" cy="5" r="1.5"/>
+                                            <circle cx="9" cy="12" r="1.5"/>
+                                            <circle cx="15" cy="12" r="1.5"/>
+                                            <circle cx="9" cy="19" r="1.5"/>
+                                            <circle cx="15" cy="19" r="1.5"/>
+                                        </svg>
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-zinc-100 bg-zinc-600 rounded-full">{{ $member->order_number }}</span>
+                                </td>
                                 <td class="px-6 py-4">
                                     @if($member->logo)
                                         <img src="{{ asset($member->logo) }}" alt="{{ $member->name }}" class="w-12 h-12 rounded object-contain bg-white border border-zinc-200 p-1">
@@ -117,9 +150,6 @@
                                 <td class="px-6 py-4 text-zinc-700 whitespace-nowrap">
                                     {{ $member->created_at ? $member->created_at->format('d M Y, H:i') : '-' }}
                                 </td>
-                                <td class="px-6 py-4 text-zinc-700">
-                                    <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-zinc-100 bg-zinc-600 rounded-full">{{ $member->order_number }}</span>
-                                </td>
                                 <td class="px-6 py-4">
                                     @if($member->is_active)
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Aktif</span>
@@ -134,7 +164,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="px-6 py-8 text-center text-zinc-500">Belum ada data anggota.</td>
+                                <td colspan="7" class="px-6 py-8 text-center text-zinc-500">Belum ada data anggota.</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -222,13 +252,6 @@
                                     <option value="1">Aktif (Tampil)</option>
                                     <option value="0">Tidak Aktif (Sembunyikan)</option>
                                 </select>
-                            </div>
-
-                            <div>
-                                <x-label for="order_number" value="Nomor Urut Tampil" />
-                                <x-input id="order_number" type="number" wire:model="order_number" class="w-full mt-1" min="0" />
-                                <span class="text-xs text-zinc-500 mt-1 block">Semakin kecil angkanya, semakin awal ditampilkan.</span>
-                                @error('order_number') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                             </div>
 
                             <div class="pt-2">

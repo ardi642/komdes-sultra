@@ -34,6 +34,11 @@ class GalleryForm extends Component
             $gallery = Gallery::with(['images' => function($q) {
                 $q->orderBy('order_column', 'asc');
             }])->findOrFail($id);
+            if (auth()->user()->hasRole('Mitra Media') && $gallery->user_id !== auth()->id()) {
+                session()->flash('error', 'Anda tidak memiliki hak untuk mengubah galeri ini.');
+                return redirect()->route('admin.gallery.index');
+            }
+
             $this->galleryId = $gallery->id;
             $this->title = $gallery->title;
             $this->date = $gallery->date->format('Y-m-d');
@@ -102,16 +107,22 @@ class GalleryForm extends Component
             $thumbnailPath = $imageService->upload($this->thumbnail, 'galleries/thumbnails');
         }
 
+        $galleryData = [
+            'title' => $this->title,
+            'slug' => $slug,
+            'date' => $this->date,
+            'description' => $this->description,
+            'video_url' => $this->video_url,
+            'thumbnail' => $thumbnailPath,
+        ];
+
+        if (!$this->galleryId) {
+            $galleryData['user_id'] = auth()->id();
+        }
+
         $gallery = Gallery::updateOrCreate(
             ['id' => $this->galleryId],
-            [
-                'title' => $this->title,
-                'slug' => $slug,
-                'date' => $this->date,
-                'description' => $this->description,
-                'video_url' => $this->video_url,
-                'thumbnail' => $thumbnailPath,
-            ]
+            $galleryData
         );
 
         // Update new and existing photos

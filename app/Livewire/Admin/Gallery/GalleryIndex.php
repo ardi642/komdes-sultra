@@ -62,6 +62,11 @@ class GalleryIndex extends Component
     {
         $gallery = Gallery::findOrFail($id);
         
+        if (auth()->user()->hasRole('Mitra Media') && $gallery->user_id !== auth()->id()) {
+            session()->flash('error', 'Anda tidak memiliki hak untuk menghapus galeri ini.');
+            return;
+        }
+
         // The database will now handle ON DELETE SET NULL for gallery_images
         // and the CleanGalleryImages scheduler will clean up physical files later.
         
@@ -125,6 +130,12 @@ class GalleryIndex extends Component
         $galleries = Gallery::whereIn('id', $currentChunk)->get();
         foreach ($galleries as $gallery) {
             try {
+                if (auth()->user()->hasRole('Mitra Media') && $gallery->user_id !== auth()->id()) {
+                    $this->deleteFailed++;
+                    $this->deleteProcessed++;
+                    continue;
+                }
+
                 $gallery->delete();
                 $this->deleteSuccess++;
             } catch (\Exception $e) {

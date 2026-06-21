@@ -87,10 +87,16 @@ class TagIndex extends Component
             'slug' => 'required|string|max:255|unique:tags,slug,' . $this->tag_id,
         ]);
 
-        Tag::updateOrCreate(['id' => $this->tag_id], [
+        $data = [
             'name' => $this->name,
             'slug' => $this->slug,
-        ]);
+        ];
+
+        if (!$this->tag_id) {
+            $data['user_id'] = auth()->id();
+        }
+
+        Tag::updateOrCreate(['id' => $this->tag_id], $data);
 
         session()->flash('message', $this->tag_id ? 'Tag berhasil diperbarui.' : 'Tag berhasil ditambahkan.');
 
@@ -100,6 +106,12 @@ class TagIndex extends Component
     public function edit($id)
     {
         $tag = Tag::findOrFail($id);
+        
+        if (auth()->user()->hasRole('Mitra Media') && $tag->user_id !== auth()->id()) {
+            session()->flash('error', 'Anda tidak memiliki hak untuk mengubah tag ini.');
+            return;
+        }
+
         $this->tag_id = $id;
         $this->name = $tag->name;
         $this->slug = $tag->slug;
@@ -110,6 +122,12 @@ class TagIndex extends Component
     public function delete($id)
     {
         $tag = Tag::find($id);
+        
+        if (auth()->user()->hasRole('Mitra Media') && $tag->user_id !== auth()->id()) {
+            session()->flash('error', 'Anda tidak memiliki hak untuk menghapus tag ini.');
+            return;
+        }
+
         if ($tag->posts()->exists() || $tag->events()->exists()) {
             session()->flash('error', 'Gagal menghapus: Tag ini masih digunakan pada publikasi atau acara.');
             return;
@@ -160,6 +178,11 @@ class TagIndex extends Component
         foreach ($itemsToProcess as $id) {
             $tag = Tag::find($id);
             if ($tag) {
+                if (auth()->user()->hasRole('Mitra Media') && $tag->user_id !== auth()->id()) {
+                    $this->deleteFailed++;
+                    continue;
+                }
+                
                 if ($tag->posts()->exists() || $tag->events()->exists()) {
                     $this->deleteFailed++;
                 } else {

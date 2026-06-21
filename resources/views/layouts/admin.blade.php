@@ -32,7 +32,7 @@
         <div class="flex items-center justify-between h-20 px-6 border-b border-zinc-100">
             <a href="#" class="flex items-center gap-3">
                 <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10">
-                <span class="font-bold text-lg text-primary-900 tracking-tight">Admin Panel</span>
+                <span class="font-bold text-lg text-primary-900 tracking-tight">Komdes Sultra</span>
             </a>
             <button @click="sidebarOpen = false" class="lg:hidden p-2 text-zinc-400 hover:text-zinc-600">
                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -46,14 +46,10 @@
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                 Dashboard
             </a>
+
             <div class="pt-4 pb-2">
                 <p class="px-4 text-xs font-semibold tracking-wider text-zinc-400 uppercase">Master Data</p>
             </div>
-            <a href="{{ route('admin.member.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.member.*') ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                Anggota
-            </a>
-
             <a href="{{ route('admin.tag.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.tag.*') ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path></svg>
                 Tag Global
@@ -106,6 +102,7 @@
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 Agenda Acara
             </a>
+            @hasanyrole('Super Admin|Admin')
             <div class="pt-4 pb-2">
                 <p class="px-4 text-xs font-semibold tracking-wider text-zinc-400 uppercase">Interaksi</p>
             </div>
@@ -129,6 +126,10 @@
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 Tentang Kami
             </a>
+            <a href="{{ route('admin.member.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.member.*') ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                Anggota
+            </a>
             <a href="{{ route('admin.contact.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.contact.*') ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                 Kontak Utama
@@ -137,6 +138,28 @@
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                 Tempat Sampah Gambar
             </a>
+            <div class="pt-4 pb-2">
+                <p class="px-4 text-xs font-semibold tracking-wider text-zinc-400 uppercase">Manajemen Pengguna</p>
+            </div>
+            <a href="{{ route('admin.user.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.user.*') ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                Manajemen Akun
+            </a>
+            @endhasanyrole
+            <div class="pt-4 pb-2">
+                <p class="px-4 text-xs font-semibold tracking-wider text-zinc-400 uppercase">Akun Saya</p>
+            </div>
+            <a href="{{ route('admin.profile.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->routeIs('admin.profile.*') ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                Profil Saya
+            </a>
+            <form method="POST" action="{{ route('logout') }}" class="mt-1 pb-4">
+                @csrf
+                <button type="submit" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 font-medium transition-colors">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    Keluar
+                </button>
+            </form>
         </nav>
     </aside>
 
@@ -147,22 +170,75 @@
         <header class="sticky top-0 z-30 flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-zinc-200">
             <div class="flex items-center">
                 <!-- Mobile menu button -->
-                <button @click="sidebarOpen = true" class="lg:hidden p-2 -ml-2 text-zinc-500 hover:text-zinc-700">
+                <button @click="sidebarOpen = true" class="lg:hidden p-2 -ml-2 mr-2 text-zinc-500 hover:text-zinc-700">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
+
+                <!-- Role Badge -->
+                <div class="hidden sm:flex items-center pl-2">
+                    @if(auth()->user() && auth()->user()->roles->isNotEmpty())
+                        @php
+                            $roleName = auth()->user()->roles->first()->name;
+                            $badgeColor = match($roleName) {
+                                'Super Admin' => 'bg-red-50 text-red-700 border-red-100',
+                                'Admin' => 'bg-primary-50 text-primary-700 border-primary-100',
+                                'Mitra Media' => 'bg-blue-50 text-blue-700 border-blue-100',
+                                default => 'bg-zinc-50 text-zinc-700 border-zinc-100'
+                            };
+                        @endphp
+                        <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full border {{ $badgeColor }}">
+                            {{ $roleName }}
+                        </span>
+                    @endif
+                </div>
             </div>
             
             <div class="flex items-center gap-4">
-                <span class="text-sm font-medium text-zinc-700 hidden sm:block">Admin Komdes</span>
-                <img src="https://ui-avatars.com/api/?name=Admin&background=165a3f&color=fff" alt="Avatar" class="w-10 h-10 rounded-full border-2 border-zinc-100 shadow-sm">
+                <div class="relative group">
+                    <div class="flex items-center gap-3 p-1.5 rounded-xl hover:bg-zinc-50 transition-colors cursor-default">
+                        <div class="hidden sm:flex flex-col text-right">
+                            <span class="text-sm font-semibold text-zinc-700 group-hover:text-primary-700 transition-colors">{{ auth()->user()->name ?? 'Guest' }}</span>
+                        </div>
+                        <img src="{{ auth()->user() && auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name ?? 'User') . '&background=165a3f&color=fff' }}" alt="Avatar" class="w-10 h-10 rounded-full border-2 border-primary-100 shadow-sm object-cover group-hover:ring-2 group-hover:ring-primary-500 group-hover:ring-offset-2 transition-all">
+                    </div>
+                    
+                    <!-- Dropdown on Hover -->
+                    <div class="absolute right-0 top-full pt-1 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <div class="bg-white rounded-xl shadow-lg border border-zinc-100 py-1 overflow-hidden">
+                            <a href="{{ route('admin.profile.index') }}" class="block px-4 py-2.5 text-sm font-medium text-zinc-700 hover:bg-zinc-50 hover:text-primary-600 transition-colors">
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    Profil Saya
+                                </div>
+                            </a>
+                            <div class="border-t border-zinc-100 my-1"></div>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="w-full text-left px-4 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors">
+                                    <div class="flex items-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                        Keluar
+                                    </div>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
 
         <!-- Main Content -->
-        <main class="flex-1 p-4 sm:p-6 lg:p-8">
-            <div class="max-w-7xl mx-auto">
+        <main class="flex-1 p-4 sm:p-6 lg:p-8 flex flex-col">
+            <div class="max-w-7xl mx-auto w-full flex-1">
                 {{ $slot }}
             </div>
+
+            <!-- Footer -->
+            <footer class="mt-8 pt-4 border-t border-zinc-200 text-center">
+                <p class="text-sm font-medium text-zinc-500">
+                    &copy; {{ date('Y') }} Komdes Sultra.
+                </p>
+            </footer>
         </main>
     </div>
 

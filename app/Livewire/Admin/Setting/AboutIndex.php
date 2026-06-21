@@ -84,6 +84,14 @@ class AboutIndex extends Component
         ]);
 
         session()->flash('message', 'Pengaturan Tentang Kami berhasil disimpan.');
+        $this->dispatch('scroll-to-top');
+    }
+
+    public function resetForm()
+    {
+        $this->mount();
+        session()->flash('info', 'Formulir telah dikembalikan ke data terakhir yang tersimpan.');
+        $this->dispatch('scroll-to-top');
     }
 
     public function render()

@@ -77,8 +77,10 @@
                         <td class="px-6 py-4 font-medium text-zinc-900">#{{ $tag->name }}</td>
                         <td class="px-6 py-4 text-zinc-500">{{ $tag->slug }}</td>
                         <td class="px-6 py-4 text-right space-x-2">
-                            <button wire:click="edit({{ $tag->id }})" class="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
-                            <button wire:click="delete({{ $tag->id }})" onclick="confirm('Apakah Anda yakin ingin menghapus tag ini?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-900 font-medium">Hapus</button>
+                            @if(!auth()->user()->hasRole('Mitra Media') || $tag->user_id === auth()->id())
+                                <button wire:click="edit({{ $tag->id }})" class="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
+                                <button wire:click="delete({{ $tag->id }})" onclick="confirm('Apakah Anda yakin ingin menghapus tag ini?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-900 font-medium">Hapus</button>
+                            @endif
                         </td>
                     </tr>
                     @empty

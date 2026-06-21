@@ -14,8 +14,9 @@ class Event extends Model
 
     protected $fillable = [
         'title', 'slug', 'description', 'content', 
-        'event_date', 'time', 'location', 'cover_image', 
-        'registration_url', 'status', 'is_published', 'published_at'
+        'event_date', 'time', 'location', 'cover_image',
+        'registration_url', 'status', 'is_published', 'published_at',
+        'user_id'
     ];
 
     protected $casts = [
@@ -42,6 +43,11 @@ class Event extends Model
     public function issues()
     {
         return $this->belongsToMany(Issue::class, 'issue_event');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function scopeUpcoming($query)

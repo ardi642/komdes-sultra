@@ -114,7 +114,6 @@ class MemberIndex extends Component
             'phone' => 'nullable|string|max:255',
             'website' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
-            'order_number' => 'required|integer',
             'is_active' => 'boolean',
             'new_logo' => 'nullable|image|max:2048', // max 2MB
         ]);
@@ -127,7 +126,6 @@ class MemberIndex extends Component
             'phone' => $this->phone,
             'website' => $this->website,
             'instagram' => $this->instagram,
-            'order_number' => $this->order_number,
             'is_active' => $this->is_active,
         ];
 
@@ -137,6 +135,10 @@ class MemberIndex extends Component
                 $imageService->delete($this->logo);
             }
             $data['logo'] = $imageService->upload($this->new_logo, 'members');
+        }
+
+        if (!$this->member_id) {
+            $data['order_number'] = Member::max('order_number') + 1;
         }
 
         Member::updateOrCreate(['id' => $this->member_id], $data);
@@ -175,5 +177,16 @@ class MemberIndex extends Component
 
         $member->delete();
         session()->flash('message', 'Anggota berhasil dihapus.');
+    }
+
+    public function updateOrder($orderedIds)
+    {
+        $startOrder = ($this->getPage() - 1) * $this->perPage + 1;
+        
+        foreach ($orderedIds as $index => $id) {
+            Member::where('id', $id)->update(['order_number' => $startOrder + $index]);
+        }
+        
+        session()->flash('message', 'Urutan anggota berhasil diperbarui.');
     }
 }

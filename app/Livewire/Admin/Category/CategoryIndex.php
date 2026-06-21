@@ -89,11 +89,17 @@ class CategoryIndex extends Component
             'type' => 'required|string|in:berita,artikel,riset,siaran_pers',
         ]);
 
-        Category::updateOrCreate(['id' => $this->category_id], [
+        $data = [
             'name' => $this->name,
             'slug' => $this->slug,
             'type' => $this->type,
-        ]);
+        ];
+
+        if (!$this->category_id) {
+            $data['user_id'] = auth()->id();
+        }
+
+        Category::updateOrCreate(['id' => $this->category_id], $data);
 
         session()->flash('message', $this->category_id ? 'Kategori berhasil diperbarui.' : 'Kategori berhasil ditambahkan.');
 
@@ -103,6 +109,12 @@ class CategoryIndex extends Component
     public function edit($id)
     {
         $category = Category::findOrFail($id);
+        
+        if (auth()->user()->hasRole('Mitra Media') && $category->user_id !== auth()->id()) {
+            session()->flash('error', 'Anda tidak memiliki hak untuk mengubah kategori ini.');
+            return;
+        }
+
         $this->category_id = $id;
         $this->name = $category->name;
         $this->slug = $category->slug;
@@ -114,6 +126,12 @@ class CategoryIndex extends Component
     public function delete($id)
     {
         $category = Category::find($id);
+        
+        if (auth()->user()->hasRole('Mitra Media') && $category->user_id !== auth()->id()) {
+            session()->flash('error', 'Anda tidak memiliki hak untuk menghapus kategori ini.');
+            return;
+        }
+
         if ($category->posts()->exists()) {
             session()->flash('error', 'Gagal menghapus: Kategori ini masih digunakan pada publikasi berita.');
             return;
@@ -164,6 +182,11 @@ class CategoryIndex extends Component
         foreach ($itemsToProcess as $id) {
             $category = Category::find($id);
             if ($category) {
+                if (auth()->user()->hasRole('Mitra Media') && $category->user_id !== auth()->id()) {
+                    $this->deleteFailed++;
+                    continue;
+                }
+
                 if ($category->posts()->exists()) {
                     $this->deleteFailed++;
                 } else {

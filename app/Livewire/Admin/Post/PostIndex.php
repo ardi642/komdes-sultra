@@ -232,6 +232,10 @@ class PostIndex extends Component
             'is_published' => $this->is_published === '1',
         ];
 
+        if (!$this->post_id) {
+            $postData['author_id'] = auth()->id();
+        }
+
         // Set published_at if publishing for the first time
         if ($this->is_published === '1' && !$this->post_id) {
             $postData['published_at'] = now();
@@ -260,6 +264,11 @@ class PostIndex extends Component
     {
         $post = Post::with(['tags', 'issues'])->findOrFail($id);
         
+        if (auth()->user()->hasRole('Mitra Media') && $post->author_id !== auth()->id()) {
+            session()->flash('error', 'Anda tidak memiliki hak untuk mengubah tulisan ini.');
+            return;
+        }
+        
         $this->post_id = $post->id;
         $this->title = $post->title;
         $this->slug = $post->slug;
@@ -278,6 +287,11 @@ class PostIndex extends Component
     public function delete($id, ImageService $imageService)
     {
         $post = Post::findOrFail($id);
+        
+        if (auth()->user()->hasRole('Mitra Media') && $post->author_id !== auth()->id()) {
+            session()->flash('error', 'Anda tidak memiliki hak untuk menghapus tulisan ini.');
+            return;
+        }
         
         if ($post->cover_image) {
             $imageService->delete($post->cover_image);
@@ -320,6 +334,12 @@ class PostIndex extends Component
         $posts = Post::whereIn('id', $currentChunk)->get();
         foreach ($posts as $post) {
             try {
+                if (auth()->user()->hasRole('Mitra Media') && $post->author_id !== auth()->id()) {
+                    $this->deleteFailed++;
+                    $this->deleteProcessed++;
+                    continue;
+                }
+                
                 if ($post->cover_image) {
                     $imageService->delete($post->cover_image);
                 }
@@ -375,6 +395,10 @@ class PostIndex extends Component
             $posts = Post::whereIn('id', $this->selectedItems)->get();
 
             foreach ($posts as $post) {
+                if (auth()->user()->hasRole('Mitra Media') && $post->author_id !== auth()->id()) {
+                    continue;
+                }
+
                 // Category Update
                 if (!empty($this->bulkSelectedCategory)) {
                     $post->update(['category_id' => $this->bulkSelectedCategory]);

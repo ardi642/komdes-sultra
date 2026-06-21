@@ -147,18 +147,20 @@
                                     <a href="{{ url('/galeri/' . $item->slug) }}" target="_blank" class="text-green-600 hover:text-green-900 mx-2">
                                         Lihat
                                     </a>
-                                    <a href="{{ route('admin.gallery.edit', $item->id) }}" class="text-blue-600 hover:text-blue-900 mx-2">
-                                        Edit
-                                    </a>
-                                    <button @click="$dispatch('open-confirm-modal', {
-                                            title: 'Konfirmasi Penghapusan',
-                                            message: 'Data galeri akan dihapus secara permanen. File foto terkait akan dialihkan ke menu <b>Tempat Sampah</b> dan dibersihkan secara otomatis oleh sistem dalam waktu 1x24 jam. Pembersihan manual juga dapat dilakukan sewaktu-waktu melalui menu tersebut. Lanjutkan proses penghapusan?',
-                                            confirmText: 'Ya, Hapus Galeri',
-                                            onConfirm: () => $wire.delete({{ $item->id }})
-                                        })" 
-                                        class="text-red-600 hover:text-red-900">
-                                        Hapus
-                                    </button>
+                                    @if(!auth()->user()->hasRole('Mitra Media') || $item->user_id === auth()->id())
+                                        <a href="{{ route('admin.gallery.edit', $item->id) }}" class="text-blue-600 hover:text-blue-900 mx-2">
+                                            Edit
+                                        </a>
+                                        <button @click="$dispatch('open-confirm-modal', {
+                                                title: 'Konfirmasi Penghapusan',
+                                                message: 'Data galeri akan dihapus secara permanen. File foto terkait akan dialihkan ke menu <b>Tempat Sampah</b> dan dibersihkan secara otomatis oleh sistem dalam waktu 1x24 jam. Pembersihan manual juga dapat dilakukan sewaktu-waktu melalui menu tersebut. Lanjutkan proses penghapusan?',
+                                                confirmText: 'Ya, Hapus Galeri',
+                                                onConfirm: () => $wire.delete({{ $item->id }})
+                                            })" 
+                                            class="text-red-600 hover:text-red-900">
+                                            Hapus
+                                        </button>
+                                    @endif
                                 </td>
                             </tr>
                         @empty
