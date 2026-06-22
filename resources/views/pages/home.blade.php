@@ -387,7 +387,7 @@
         <!-- Tab Contents -->
         <div class="relative min-h-[350px] mb-20" data-aos="fade-up" data-aos-delay="400">
             <!-- Berita -->
-            <div x-show="activeTab === 'berita'" class="absolute inset-0 z-10" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
+            <div x-show="activeTab === 'berita'" class="z-10" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     @forelse($berita as $post)
                     <a href="{{ route('berita.detail', $post->slug) }}" class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100 relative">
@@ -406,7 +406,7 @@
             </div>
 
             <!-- Artikel -->
-            <div x-show="activeTab === 'artikel'" class="absolute inset-0 z-10" style="display: none;" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
+            <div x-show="activeTab === 'artikel'" class="z-10" style="display: none;" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     @forelse($artikel as $post)
                     <a href="{{ route('artikel.detail', $post->slug) }}" class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100">
@@ -425,7 +425,7 @@
             </div>
 
             <!-- Riset -->
-            <div x-show="activeTab === 'riset'" class="absolute inset-0 z-10" style="display: none;" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
+            <div x-show="activeTab === 'riset'" class="z-10" style="display: none;" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     @forelse($riset as $post)
                     <a href="{{ route('riset.detail', $post->slug) }}" class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100 relative">
@@ -444,7 +444,7 @@
             </div>
 
             <!-- Siaran Pers -->
-            <div x-show="activeTab === 'siaran'" class="absolute inset-0 z-10" style="display: none;" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
+            <div x-show="activeTab === 'siaran'" class="z-10" style="display: none;" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     @forelse($siaran as $post)
                     <a href="{{ route('siaran-pers.detail', $post->slug) }}" class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100 relative">
