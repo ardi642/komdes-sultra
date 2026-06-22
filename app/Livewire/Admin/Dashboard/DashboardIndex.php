@@ -42,7 +42,7 @@ class DashboardIndex extends Component
             $stats['total_events'] = Event::where('user_id', $user->id)->count();
             
             $draftPosts = Post::where('author_id', $user->id)
-                            ->where('status', 'draft')
+                            ->where('is_published', false)
                             ->latest()
                             ->take(5)
                             ->get();

@@ -89,7 +89,7 @@
                                 <div class="flex-1 min-w-0">
                                     <h3 class="font-medium text-zinc-900 line-clamp-1">{{ $post->title }}</h3>
                                     <div class="flex items-center gap-2 mt-1">
-                                        @if($post->status === 'published')
+                                        @if($post->is_published)
                                             <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-green-100 text-green-800">Publish</span>
                                         @else
                                             <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-zinc-100 text-zinc-800">Draft</span>
@@ -180,7 +180,7 @@
                         <div class="space-y-5">
                             @foreach($latestActivities as $post)
                             <div class="flex items-start gap-4">
-                                <div class="w-2 h-2 mt-1.5 rounded-full {{ $post->status === 'published' ? 'bg-green-500' : 'bg-zinc-300' }} shrink-0"></div>
+                                <div class="w-2 h-2 mt-1.5 rounded-full {{ $post->is_published ? 'bg-green-500' : 'bg-zinc-300' }} shrink-0"></div>
                                 <div class="flex-1 min-w-0">
                                     <h3 class="font-medium text-sm text-zinc-900 line-clamp-1">{{ $post->title }}</h3>
                                     <div class="flex items-center justify-between mt-1">
