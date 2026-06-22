@@ -8,7 +8,10 @@
 
     <!-- Session Status -->
     @if (session('status'))
-        <div class="mb-6 p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 text-sm font-medium text-center shadow-sm">
+        <div x-data="{ show: true }" x-show="show" x-transition.opacity class="mb-6 p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 text-sm font-medium text-center shadow-sm relative">
+            <button @click="show = false" type="button" class="absolute top-2 right-2 text-green-500 hover:text-green-700 hover:bg-green-100 p-1.5 rounded-lg transition-colors shrink-0">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
             {{ session('status') }}
             @if(session('reset_email'))
                 <br>ke email: <span class="font-bold">{{ session('reset_email') }}</span>

@@ -14,8 +14,13 @@
     </div>
 
     @if (session()->has('message'))
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm" role="alert">
-            <p>{{ session('message') }}</p>
+        <div x-data="{ show: true }" x-show="show" x-transition.opacity class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm flex items-center justify-between" role="alert">
+            <div class="flex items-center gap-2">
+                <p>{{ session('message') }}</p>
+            </div>
+            <button @click="show = false" type="button" class="text-green-600 hover:text-green-800 hover:bg-green-200 p-1.5 rounded-lg transition-colors ml-4 shrink-0">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
         </div>
     @endif
 
@@ -94,7 +99,7 @@
                         <td class="px-6 py-4 text-right space-x-2">
                             @if(!auth()->user()->hasRole('Mitra Media') || $tag->user_id === auth()->id())
                                 <button wire:click="edit({{ $tag->id }})" class="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
-                                <button wire:click="delete({{ $tag->id }})" onclick="confirm('Apakah Anda yakin ingin menghapus tag ini?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-900 font-medium">Hapus</button>
+                                <button type="button" @click="$dispatch('open-confirm-modal', { title: 'Konfirmasi Tindakan', message: 'Apakah Anda yakin ingin menghapus tag ini?', confirmText: 'Ya, Lanjutkan', onConfirm: () => @this.delete({{ $tag->id }}) })" class="text-red-600 hover:text-red-900 font-medium">Hapus</button>
                             @endif
                         </td>
                     </tr>

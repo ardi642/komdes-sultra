@@ -11,8 +11,13 @@
     </div>
 
     @if (session()->has('message'))
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm">
-            <p>{{ session('message') }}</p>
+        <div x-data="{ show: true }" x-show="show" x-transition.opacity class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <p>{{ session('message') }}</p>
+            </div>
+            <button @click="show = false" type="button" class="text-green-600 hover:text-green-800 hover:bg-green-200 p-1.5 rounded-lg transition-colors ml-4 shrink-0">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
         </div>
     @endif
 
@@ -65,7 +70,7 @@
                             @endif
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <button wire:click="detachPost({{ $post->id }})" onclick="confirm('Keluarkan publikasi ini dari Isu?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-900 font-medium">Keluarkan dari Isu</button>
+                            <button type="button" @click="$dispatch('open-confirm-modal', { title: 'Konfirmasi Tindakan', message: 'Keluarkan publikasi ini dari Isu?', confirmText: 'Ya, Lanjutkan', onConfirm: () => @this.detachPost({{ $post->id }}) })" class="text-red-600 hover:text-red-900 font-medium">Keluarkan dari Isu</button>
                         </td>
                     </tr>
                     @empty
@@ -125,7 +130,7 @@
                             <div class="text-zinc-700">{{ $event->location }}</div>
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <button wire:click="detachEvent({{ $event->id }})" onclick="confirm('Keluarkan acara ini dari Isu?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-900 font-medium">Keluarkan dari Isu</button>
+                            <button type="button" @click="$dispatch('open-confirm-modal', { title: 'Konfirmasi Tindakan', message: 'Keluarkan acara ini dari Isu?', confirmText: 'Ya, Lanjutkan', onConfirm: () => @this.detachEvent({{ $event->id }}) })" class="text-red-600 hover:text-red-900 font-medium">Keluarkan dari Isu</button>
                         </td>
                     </tr>
                     @empty

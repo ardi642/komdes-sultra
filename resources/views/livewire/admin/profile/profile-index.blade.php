@@ -16,9 +16,14 @@
                 
                 <form wire:submit="updateProfile" class="p-6">
                     @if (session('profile_message'))
-                        <div class="mb-4 p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 flex items-center gap-3">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span class="text-sm font-medium">{{ session('profile_message') }}</span>
+                        <div x-data="{ show: true }" x-show="show" x-transition.opacity class="mb-4 p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-sm font-medium">{{ session('profile_message') }}</span>
+                            </div>
+                            <button @click="show = false" type="button" class="text-green-500 hover:text-green-700 hover:bg-green-100 p-1.5 rounded-lg transition-colors ml-4 shrink-0">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
                         </div>
                     @endif
 
@@ -105,9 +110,14 @@
                 
                 <form wire:submit="updatePassword" class="p-6">
                     @if (session('password_message'))
-                        <div class="mb-4 p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 flex items-center gap-3">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span class="text-sm font-medium">{{ session('password_message') }}</span>
+                        <div x-data="{ show: true }" x-show="show" x-transition.opacity class="mb-4 p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-sm font-medium">{{ session('password_message') }}</span>
+                            </div>
+                            <button @click="show = false" type="button" class="text-green-500 hover:text-green-700 hover:bg-green-100 p-1.5 rounded-lg transition-colors ml-4 shrink-0">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
                         </div>
                     @endif
 

@@ -1,8 +1,13 @@
 <div>
 
     @if (session()->has('message'))
-        <div class="p-4 mb-6 text-sm text-green-700 bg-green-100 rounded-xl" role="alert">
-            <span class="font-medium">Berhasil!</span> {{ session('message') }}
+        <div x-data="{ show: true }" x-show="show" x-transition.opacity class="p-4 mb-6 text-sm text-green-700 bg-green-100 rounded-xl flex items-center justify-between" role="alert">
+            <div>
+                <span class="font-medium">Berhasil!</span> {{ session('message') }}
+            </div>
+            <button @click="show = false" type="button" class="text-green-600 hover:text-green-800 hover:bg-green-200 p-1.5 rounded-lg transition-colors ml-4 shrink-0">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
         </div>
     @endif
 

@@ -14,10 +14,15 @@
         </div>
 
         @if (session()->has('message'))
-            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm">
+        <div x-data="{ show: true }" x-show="show" x-transition.opacity class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm flex items-center justify-between">
+            <div class="flex items-center gap-2">
                 <p>{{ session('message') }}</p>
             </div>
-        @endif
+            <button @click="show = false" type="button" class="text-green-600 hover:text-green-800 hover:bg-green-200 p-1.5 rounded-lg transition-colors ml-4 shrink-0">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    @endif
 
         <!-- Top Action Bar (Search & Filters) -->
         <div x-data="{ showFilters: false }" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
@@ -159,7 +164,7 @@
                                     <button wire:click="viewMessage({{ $message->id }})" class="text-blue-600 hover:text-blue-900 mx-2">
                                         Lihat Detail
                                     </button>
-                                    <button wire:click="deleteMessage({{ $message->id }})" onclick="confirm('Yakin ingin menghapus pesan ini?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-900">
+                                    <button type="button" @click="$dispatch('open-confirm-modal', { title: 'Konfirmasi Tindakan', message: 'Yakin ingin menghapus pesan ini?', confirmText: 'Ya, Lanjutkan', onConfirm: () => @this.deleteMessage({{ $message->id }}) })" class="text-red-600 hover:text-red-900">
                                         Hapus
                                     </button>
                                 </td>
@@ -293,7 +298,7 @@
                     <a href="mailto:{{ $selectedMessage->email }}?subject=Balasan: {{ $selectedMessage->subject }}" class="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                         Balas via Email
                     </a>
-                    <button wire:click="deleteMessage({{ $selectedMessage->id }})" onclick="confirm('Yakin ingin menghapus pesan ini?') || event.stopImmediatePropagation()" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 sm:mt-0 sm:w-auto sm:text-sm">
+                    <button type="button" @click="$dispatch('open-confirm-modal', { title: 'Konfirmasi Tindakan', message: 'Yakin ingin menghapus pesan ini?', confirmText: 'Ya, Lanjutkan', onConfirm: () => @this.deleteMessage({{ $selectedMessage->id }}) })" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 sm:mt-0 sm:w-auto sm:text-sm">
                         Hapus Pesan
                     </button>
                 </div>
