@@ -62,9 +62,9 @@
                 <p class="px-4 text-xs font-semibold tracking-wider text-zinc-400 uppercase">Konten Publikasi</p>
             </div>
             <div x-data="{ 
-                    expanded: {{ request()->query('filterType') === 'berita' || request()->routeIs('admin.category.*') ? 'true' : 'false' }} 
+                    expanded: {{ request()->route('filterType') === 'berita' || request()->routeIs('admin.category.*') ? 'true' : 'false' }} 
                 }" class="mb-1">
-                <button @click="expanded = !expanded" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl {{ request()->query('filterType') === 'berita' || request()->routeIs('admin.category.*') ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
+                <button @click="expanded = !expanded" class="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl {{ request()->route('filterType') === 'berita' || request()->routeIs('admin.category.*') ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
                     <div class="flex items-center gap-3">
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
                         Berita
@@ -72,8 +72,8 @@
                     <svg class="w-4 h-4 transition-transform duration-300" :class="expanded ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 <div x-show="expanded" x-collapse x-transition.duration.300ms class="pt-1 pb-2 space-y-1">
-                    <a href="{{ route('admin.post.index', ['filterType' => 'berita']) }}" class="flex items-center gap-3 pl-12 pr-4 py-2.5 rounded-xl {{ request()->query('filterType') === 'berita' ? 'text-primary-700 font-semibold' : 'text-zinc-500 hover:text-zinc-900 font-medium' }} transition-colors text-sm">
-                        <svg class="w-1.5 h-1.5 rounded-full {{ request()->query('filterType') === 'berita' ? 'bg-primary-600' : 'bg-zinc-400' }}" viewBox="0 0 2 2" aria-hidden="true"><circle cx="1" cy="1" r="1" /></svg>
+                    <a href="{{ route('admin.post.index', ['filterType' => 'berita']) }}" class="flex items-center gap-3 pl-12 pr-4 py-2.5 rounded-xl {{ request()->route('filterType') === 'berita' ? 'text-primary-700 font-semibold' : 'text-zinc-500 hover:text-zinc-900 font-medium' }} transition-colors text-sm">
+                        <svg class="w-1.5 h-1.5 rounded-full {{ request()->route('filterType') === 'berita' ? 'bg-primary-600' : 'bg-zinc-400' }}" viewBox="0 0 2 2" aria-hidden="true"><circle cx="1" cy="1" r="1" /></svg>
                         Semua Berita
                     </a>
                     <a href="{{ route('admin.category.index') }}" class="flex items-center gap-3 pl-12 pr-4 py-2.5 rounded-xl {{ request()->routeIs('admin.category.*') ? 'text-primary-700 font-semibold' : 'text-zinc-500 hover:text-zinc-900 font-medium' }} transition-colors text-sm">
@@ -82,15 +82,15 @@
                     </a>
                 </div>
             </div>
-            <a href="{{ route('admin.post.index', ['filterType' => 'artikel']) }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->query('filterType') === 'artikel' ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
+            <a href="{{ route('admin.post.index', ['filterType' => 'artikel']) }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->route('filterType') === 'artikel' ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                 Artikel
             </a>
-            <a href="{{ route('admin.post.index', ['filterType' => 'riset']) }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->query('filterType') === 'riset' ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
+            <a href="{{ route('admin.post.index', ['filterType' => 'riset']) }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->route('filterType') === 'riset' ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 Publikasi Riset
             </a>
-            <a href="{{ route('admin.post.index', ['filterType' => 'siaran_pers']) }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->query('filterType') === 'siaran_pers' ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
+            <a href="{{ route('admin.post.index', ['filterType' => 'siaran-pers']) }}" class="flex items-center gap-3 px-4 py-3 rounded-xl {{ request()->route('filterType') === 'siaran-pers' ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 font-medium' }} transition-colors">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
                 Siaran Pers
             </a>

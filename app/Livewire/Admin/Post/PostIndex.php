@@ -53,7 +53,6 @@ class PostIndex extends Component
     public $selectedTags = [];
     public $selectedIssues = '';
 
-    #[\Livewire\Attributes\Url]
     public $filterType = '';
     
     #[\Livewire\Attributes\Url]
@@ -79,7 +78,12 @@ class PostIndex extends Component
 
     public $perPage = 10;
 
-    public function updatedFilterType() { $this->resetPage(); }
+    public function mount($filterType = 'berita')
+    {
+        // Ubah siaran-pers menjadi siaran_pers untuk kecocokan ke database
+        $this->filterType = str_replace('-', '_', $filterType);
+    }
+
     public function updatedFilterStatus() { $this->resetPage(); }
     public function updatedFilterCategory() { $this->resetPage(); }
     public function updatedFilterAuthor() { $this->resetPage(); }

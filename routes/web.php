@@ -43,7 +43,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/upload-image', [\App\Http\Controllers\Admin\UploadController::class, 'uploadImage'])->name('upload.image');
     Route::post('/upload-gallery-image', [\App\Http\Controllers\Admin\UploadController::class, 'uploadGalleryImage'])->name('upload.gallery.image');
     
-    Route::get('/tulisan', \App\Livewire\Admin\Post\PostIndex::class)->name('post.index');
+    Route::redirect('/tulisan', '/admin/tulisan/berita');
+    Route::get('/tulisan/{filterType}', \App\Livewire\Admin\Post\PostIndex::class)->name('post.index');
     Route::get('/acara', \App\Livewire\Admin\Event\EventIndex::class)->name('event.index');
     Route::get('/galeri', \App\Livewire\Admin\Gallery\GalleryIndex::class)->name('gallery.index');
     Route::get('/galeri/tambah', \App\Livewire\Admin\Gallery\GalleryForm::class)->name('gallery.create');
