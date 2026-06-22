@@ -95,6 +95,15 @@
                                 @endforeach
                             </x-tom-select>
                         </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">Pembuat</label>
+                            <x-tom-select wire:model.live="filterAuthor" :multiple="false" placeholder="Semua Pembuat" class="w-full bg-white text-sm border-zinc-300 rounded-lg">
+                                @foreach($authors as $author)
+                                    <option value="{{ $author->id }}">{{ $author->name }}</option>
+                                @endforeach
+                            </x-tom-select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -111,6 +120,7 @@
                                 </th>
                                 <th scope="col" class="px-6 py-3 font-medium w-16">Cover</th>
                                 <th scope="col" class="px-6 py-3 font-medium min-w-[250px]">Detail Acara</th>
+                                <th scope="col" class="px-6 py-3 font-medium">Pembuat</th>
                                 <th scope="col" class="px-6 py-3 font-medium">Dibuat Pada</th>
                                 <th scope="col" class="px-6 py-3 font-medium">Jadwal</th>
                                 <th scope="col" class="px-6 py-3 font-medium">Tag & Isu</th>
@@ -141,6 +151,9 @@
                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                                         {{ $event->location }}
                                     </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-zinc-500 font-medium">
+                                    {{ $event->user?->name ?? 'Sistem' }}
                                 </td>
                                 <td class="px-6 py-4 text-zinc-700 whitespace-nowrap">
                                     {{ $event->created_at ? $event->created_at->format('d M Y, H:i') : '-' }}

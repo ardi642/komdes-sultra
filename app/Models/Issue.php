@@ -11,6 +11,11 @@ class Issue extends Model
 
     protected $fillable = ['title', 'slug', 'description', 'icon_svg', 'cover_image', 'status', 'user_id'];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function posts()
     {
         return $this->belongsToMany(Post::class);

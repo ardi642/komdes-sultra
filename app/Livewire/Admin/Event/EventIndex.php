@@ -67,12 +67,16 @@ class EventIndex extends Component
     #[\Livewire\Attributes\Url]
     public $filterMonth = '';
 
+    #[\Livewire\Attributes\Url]
+    public $filterAuthor = '';
+
     public $perPage = 10;
 
     public function updatedFilterStatus() { $this->resetPage(); }
     public function updatedFilterTag() { $this->resetPage(); }
     public function updatedFilterYear() { $this->resetPage(); }
     public function updatedFilterMonth() { $this->resetPage(); }
+    public function updatedFilterAuthor() { $this->resetPage(); }
 
     public function updatingSearch()
     {
@@ -96,7 +100,7 @@ class EventIndex extends Component
 
     public function render()
     {
-        $query = Event::with(['tags', 'issues'])->latest();
+        $query = Event::with(['tags', 'issues', 'user'])->latest();
         
         if ($this->search) {
             $query->where('title', 'like', '%' . $this->search . '%');
@@ -122,29 +126,33 @@ class EventIndex extends Component
             $query->whereMonth('created_at', $this->filterMonth);
         }
 
+        if ($this->filterAuthor) {
+            $query->where('user_id', $this->filterAuthor);
+        }
+
         $events = $query->paginate($this->perPage);
 
         return view('livewire.admin.event.event-index', [
             'events' => $events,
             'allTags' => Tag::orderBy('name')->get(),
             'allIssues' => Issue::where('status', 'active')->orderBy('title')->get(),
+            'authors' => \App\Models\User::orderBy('name')->get(),
         ])->layout('layouts.admin');
     }
     
     public function updatedSelectAll($value)
     {
         if ($value) {
-            $query = Event::latest();
+            $query = Event::query();
             if ($this->search) $query->where('title', 'like', '%' . $this->search . '%');
             if ($this->filterStatus === 'published') $query->where('is_published', true);
             elseif ($this->filterStatus === 'draft') $query->where('is_published', false);
             if (!empty($this->filterTag)) $query->whereHas('tags', fn($q) => $q->whereIn('tags.id', $this->filterTag));
             if ($this->filterYear) $query->whereYear('created_at', $this->filterYear);
             if ($this->filterMonth) $query->whereMonth('created_at', $this->filterMonth);
+            if ($this->filterAuthor) $query->where('user_id', $this->filterAuthor);
             
-            $this->selectedItems = $query->paginate($this->perPage)->pluck('id')
-                ->map(fn($id) => (string) $id)
-                ->toArray();
+            $this->selectedItems = $query->latest()->pluck('id')->map(fn($id) => (string)$id)->toArray();
         } else {
             $this->selectedItems = [];
         }

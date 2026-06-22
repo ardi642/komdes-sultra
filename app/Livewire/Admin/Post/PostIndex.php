@@ -66,6 +66,9 @@ class PostIndex extends Component
     public $filterCategory = '';
 
     #[\Livewire\Attributes\Url]
+    public $filterAuthor = '';
+
+    #[\Livewire\Attributes\Url]
     public $filterTag = [];
     
     #[\Livewire\Attributes\Url]
@@ -79,6 +82,7 @@ class PostIndex extends Component
     public function updatedFilterType() { $this->resetPage(); }
     public function updatedFilterStatus() { $this->resetPage(); }
     public function updatedFilterCategory() { $this->resetPage(); }
+    public function updatedFilterAuthor() { $this->resetPage(); }
     public function updatedFilterTag() { $this->resetPage(); }
     public function updatedFilterYear() { $this->resetPage(); }
     public function updatedFilterMonth() { $this->resetPage(); }
@@ -105,7 +109,7 @@ class PostIndex extends Component
 
     public function render()
     {
-        $query = Post::with(['category', 'tags', 'issues'])->latest();
+        $query = Post::with(['category', 'tags', 'issues', 'author'])->latest();
         
         if ($this->filterType) {
             $query->where('type', $this->filterType);
@@ -123,6 +127,10 @@ class PostIndex extends Component
 
         if ($this->filterCategory) {
             $query->where('category_id', $this->filterCategory);
+        }
+
+        if ($this->filterAuthor) {
+            $query->where('author_id', $this->filterAuthor);
         }
 
         if (!empty($this->filterTag)) {
@@ -146,6 +154,7 @@ class PostIndex extends Component
             'categories' => Category::where('type', $this->filterType ?: 'berita')->get(),
             'allTags' => Tag::orderBy('name')->get(),
             'allIssues' => Issue::where('status', 'active')->orderBy('title')->get(),
+            'authors' => \App\Models\User::orderBy('name')->get(),
         ])->layout('layouts.admin');
     }
     
@@ -158,6 +167,7 @@ class PostIndex extends Component
             if ($this->filterStatus === 'published') $query->where('is_published', true);
             elseif ($this->filterStatus === 'draft') $query->where('is_published', false);
             if ($this->filterCategory) $query->where('category_id', $this->filterCategory);
+            if ($this->filterAuthor) $query->where('author_id', $this->filterAuthor);
             if (!empty($this->filterTag)) $query->whereHas('tags', fn($q) => $q->whereIn('tags.id', $this->filterTag));
             if ($this->filterYear) $query->whereYear('created_at', $this->filterYear);
             if ($this->filterMonth) $query->whereMonth('created_at', $this->filterMonth);

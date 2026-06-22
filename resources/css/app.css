@@ -92,3 +92,14 @@ select:focus[data-flux-control] {
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */
+
+/* Fix TomSelect single mode background color and border to match multi */
+.ts-wrapper.single .ts-control {
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: inherit;
+    box-shadow: none !important;
+}
+.ts-wrapper.single.input-active .ts-control {
+    background-color: transparent !important;
+}

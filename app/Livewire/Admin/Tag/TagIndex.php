@@ -25,10 +25,18 @@ class TagIndex extends Component
 
     #[\Livewire\Attributes\Url]
     public $search = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterAuthor = '';
     
     public $perPage = 10;
 
     public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedFilterAuthor()
     {
         $this->resetPage();
     }
@@ -40,14 +48,19 @@ class TagIndex extends Component
 
     public function render()
     {
-        $query = Tag::query();
+        $query = Tag::with('user');
         
         if ($this->search) {
             $query->where('name', 'like', '%' . $this->search . '%');
         }
 
+        if ($this->filterAuthor) {
+            $query->where('user_id', $this->filterAuthor);
+        }
+
         return view('livewire.admin.tag.tag-index', [
             'tags' => $query->paginate($this->perPage),
+            'authors' => \App\Models\User::orderBy('name')->get(),
         ])->layout('layouts.admin');
     }
 
@@ -140,7 +153,11 @@ class TagIndex extends Component
     public function updatedSelectAll($value)
     {
         if ($value) {
-            $this->selectedItems = Tag::pluck('id')->map(fn($id) => (string)$id)->toArray();
+            $query = Tag::query();
+            if ($this->search) $query->where('name', 'like', '%' . $this->search . '%');
+            if ($this->filterAuthor) $query->where('user_id', $this->filterAuthor);
+            
+            $this->selectedItems = $query->pluck('id')->map(fn($id) => (string)$id)->toArray();
         } else {
             $this->selectedItems = [];
         }

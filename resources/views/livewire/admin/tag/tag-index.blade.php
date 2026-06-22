@@ -36,8 +36,15 @@
                 <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari tag..." class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm block w-full pl-9 py-2 transition-colors">
             </div>
 
-            <!-- Right: Per Page -->
+            <!-- Right: Filters & Per Page -->
             <div class="flex items-center gap-3 w-full sm:w-auto">
+                <div class="w-full sm:w-auto">
+                    <x-tom-select wire:model.live="filterAuthor" :multiple="false" placeholder="Semua Pembuat" class="w-full bg-white text-sm border-zinc-300 rounded-lg">
+                        @foreach($authors as $author)
+                            <option value="{{ $author->id }}">{{ $author->name }}</option>
+                        @endforeach
+                    </x-tom-select>
+                </div>
                 <div class="flex items-center gap-2">
                     <span class="text-sm font-medium text-zinc-600 hidden sm:inline">Tampil:</span>
                     <select wire:model.live="perPage" class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 pl-3 pr-8 text-zinc-900 transition-colors">
@@ -63,6 +70,7 @@
                         </th>
                         <th scope="col" class="px-6 py-3 font-medium">Nama Tag</th>
                         <th scope="col" class="px-6 py-3 font-medium">Slug</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Pembuat</th>
                         <th scope="col" class="px-6 py-3 font-medium text-right">Aksi</th>
                     </tr>
                 </thead>
@@ -74,8 +82,9 @@
                                 <input type="checkbox" wire:model.live="selectedItems" value="{{ $tag->id }}" class="w-4 h-4 text-primary-600 bg-zinc-100 border-zinc-300 rounded focus:ring-primary-500 focus:ring-2 cursor-pointer">
                             </div>
                         </td>
-                        <td class="px-6 py-4 font-medium text-zinc-900">#{{ $tag->name }}</td>
+                        <td class="px-6 py-4 font-medium text-zinc-900">{{ $tag->name }}</td>
                         <td class="px-6 py-4 text-zinc-500">{{ $tag->slug }}</td>
+                        <td class="px-6 py-4 text-zinc-500 font-medium">{{ $tag->user?->name ?? 'Sistem' }}</td>
                         <td class="px-6 py-4 text-right space-x-2">
                             @if(!auth()->user()->hasRole('Mitra Media') || $tag->user_id === auth()->id())
                                 <button wire:click="edit({{ $tag->id }})" class="text-blue-600 hover:text-blue-900 font-medium">Edit</button>

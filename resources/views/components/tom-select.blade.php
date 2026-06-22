@@ -6,13 +6,20 @@
         init() {
             this.tomSelectInstance = new window.TomSelect(this.$refs.select, {
                 plugins: {
+                    @if($multiple)
                     remove_button: {
                         title: 'Hapus ini',
                     }
+                    @else
+                    clear_button: {
+                        title: 'Bersihkan',
+                    }
+                    @endif
                 },
                 placeholder: '{{ $placeholder }}',
                 maxOptions: 50,
                 hideSelected: true,
+                allowEmptyOption: true,
                 @if($dropdownParent)
                 dropdownParent: '{{ $dropdownParent }}',
                 @endif

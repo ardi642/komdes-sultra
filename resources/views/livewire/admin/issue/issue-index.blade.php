@@ -73,6 +73,15 @@
                 </div>
 
                 <div>
+                    <label class="block text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">Pembuat</label>
+                    <x-tom-select wire:model.live="filterAuthor" :multiple="false" placeholder="Semua Pembuat" class="w-full bg-white text-sm border-zinc-300 rounded-lg">
+                        @foreach($authors as $author)
+                            <option value="{{ $author->id }}">{{ $author->name }}</option>
+                        @endforeach
+                    </x-tom-select>
+                </div>
+
+                <div>
                     <label class="block text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">Waktu (Bulan / Tahun)</label>
                     <div class="flex gap-2">
                         <select wire:model.live="filterMonth" class="w-1/2 bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 px-3 text-zinc-900">
@@ -106,6 +115,8 @@
                         </th>
                         <th scope="col" class="px-6 py-3 font-medium w-16">Cover</th>
                         <th scope="col" class="px-6 py-3 font-medium min-w-[200px]">Detail Isu</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Pembuat</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Dibuat Pada</th>
                         <th scope="col" class="px-6 py-3 font-medium">Status</th>
                         <th scope="col" class="px-6 py-3 font-medium text-right">Aksi</th>
                     </tr>
@@ -130,6 +141,9 @@
                         <td class="px-6 py-4">
                             <div class="font-medium text-zinc-900">{{ $issue->title }}</div>
                             <div class="text-xs text-zinc-500 mt-1">{{ $issue->slug }}</div>
+                        </td>
+                        <td class="px-6 py-4 text-zinc-500 font-medium whitespace-nowrap">
+                            {{ $issue->user?->name ?? 'Sistem' }}
                         </td>
                         <td class="px-6 py-4 text-zinc-700 whitespace-nowrap">
                             {{ $issue->created_at ? $issue->created_at->format('d M Y, H:i') : '-' }}

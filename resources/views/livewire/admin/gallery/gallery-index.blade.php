@@ -81,6 +81,15 @@
                             </div>
                         </div>
 
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Pembuat</label>
+                            <x-tom-select wire:model.live="filterAuthor" :multiple="false" placeholder="Semua Pembuat" class="w-full bg-white text-sm border-gray-300 rounded-lg">
+                                @foreach($authors as $author)
+                                    <option value="{{ $author->id }}">{{ $author->name }}</option>
+                                @endforeach
+                            </x-tom-select>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -96,6 +105,7 @@
                             </th>
                             <th scope="col" class="px-6 py-4 font-medium w-16">Thumbnail</th>
                             <th scope="col" class="px-6 py-4 font-medium">Judul Galeri</th>
+                            <th scope="col" class="px-6 py-4 font-medium">Pembuat</th>
                             <th scope="col" class="px-6 py-4 font-medium">Dibuat Pada</th>
                             <th scope="col" class="px-6 py-4 font-medium">Tanggal Kegiatan</th>
                             <th scope="col" class="px-6 py-4 font-medium">Jumlah Foto</th>
@@ -132,7 +142,10 @@
                                     </div>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-gray-700">
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-500 font-medium">
+                                    {{ $item->user?->name ?? 'Sistem' }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-500">
                                     {{ $item->created_at ? $item->created_at->format('d M Y, H:i') : '-' }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">

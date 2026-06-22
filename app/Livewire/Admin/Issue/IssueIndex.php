@@ -33,6 +33,9 @@ class IssueIndex extends Component
 
     #[\Livewire\Attributes\Url]
     public $filterStatus = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterAuthor = '';
     
     #[\Livewire\Attributes\Url]
     public $filterYear = '';
@@ -43,6 +46,7 @@ class IssueIndex extends Component
     public $perPage = 10;
 
     public function updatedFilterStatus() { $this->resetPage(); }
+    public function updatedFilterAuthor() { $this->resetPage(); }
     public function updatedFilterYear() { $this->resetPage(); }
     public function updatedFilterMonth() { $this->resetPage(); }
 
@@ -58,10 +62,14 @@ class IssueIndex extends Component
 
     public function render()
     {
-        $query = Issue::latest();
+        $query = Issue::with('user')->latest();
         
         if ($this->search) {
             $query->where('title', 'like', '%' . $this->search . '%');
+        }
+
+        if ($this->filterAuthor) {
+            $query->where('user_id', $this->filterAuthor);
         }
 
         if ($this->filterStatus) {
@@ -78,6 +86,7 @@ class IssueIndex extends Component
 
         return view('livewire.admin.issue.issue-index', [
             'issues' => $query->paginate($this->perPage),
+            'authors' => \App\Models\User::orderBy('name')->get(),
         ])->layout('layouts.admin');
     }
 
@@ -202,7 +211,14 @@ class IssueIndex extends Component
     public function updatedSelectAll($value)
     {
         if ($value) {
-            $this->selectedItems = Issue::pluck('id')->map(fn($id) => (string)$id)->toArray();
+            $query = Issue::latest();
+            if ($this->search) $query->where('title', 'like', '%' . $this->search . '%');
+            if ($this->filterStatus) $query->where('status', $this->filterStatus);
+            if ($this->filterAuthor) $query->where('user_id', $this->filterAuthor);
+            if ($this->filterYear) $query->whereYear('created_at', $this->filterYear);
+            if ($this->filterMonth) $query->whereMonth('created_at', $this->filterMonth);
+            
+            $this->selectedItems = $query->pluck('id')->map(fn($id) => (string)$id)->toArray();
         } else {
             $this->selectedItems = [];
         }

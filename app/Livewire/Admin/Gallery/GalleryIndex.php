@@ -18,6 +18,9 @@ class GalleryIndex extends Component
 
     #[\Livewire\Attributes\Url]
     public $filterMonth = '';
+
+    #[\Livewire\Attributes\Url]
+    public $filterAuthor = '';
     
     public $perPage = 10;
 
@@ -37,6 +40,7 @@ class GalleryIndex extends Component
 
     public function updatedFilterYear() { $this->resetPage(); $this->selectAll = false; $this->selectedItems = []; }
     public function updatedFilterMonth() { $this->resetPage(); $this->selectAll = false; $this->selectedItems = []; }
+    public function updatedFilterAuthor() { $this->resetPage(); $this->selectAll = false; $this->selectedItems = []; }
 
     public function updatingSearch()
     {
@@ -87,6 +91,9 @@ class GalleryIndex extends Component
                 })
                 ->when($this->filterMonth, function($q) {
                     $q->whereMonth('date', $this->filterMonth);
+                })
+                ->when($this->filterAuthor, function($q) {
+                    $q->where('user_id', $this->filterAuthor);
                 });
                 
             $this->selectedItems = $query->latest('date')->paginate($this->perPage)->pluck('id')
@@ -178,11 +185,16 @@ class GalleryIndex extends Component
             ->when($this->filterMonth, function($q) {
                 $q->whereMonth('date', $this->filterMonth);
             })
+            ->when($this->filterAuthor, function($q) {
+                $q->where('user_id', $this->filterAuthor);
+            })
+            ->with('user')
             ->latest('date')
             ->paginate($this->perPage);
 
         return view('livewire.admin.gallery.gallery-index', [
-            'galleries' => $galleries
+            'galleries' => $galleries,
+            'authors' => \App\Models\User::orderBy('name')->get(),
         ])->layout('layouts.admin');
     }
 }
