@@ -37,15 +37,8 @@
                     @else
                         <img src="{{ asset('images/logo.png') }}" alt="Logo Komdes Sultra" class="h-16 w-auto drop-shadow-sm">
                     @endif
-                    <span class="text-base font-bold tracking-wide mt-1 drop-shadow-sm">
-                        @if(isset($siteSetting) && !empty($siteSetting->site_name_segments))
-                            @foreach($siteSetting->site_name_segments as $segment)
-                                <span style="color: {{ $segment['color'] ?? '#ffffff' }}">{{ $segment['text'] }}</span>
-                            @endforeach
-                        @else
-                            <span style="color: #ffffff">Komdes</span>
-                            <span style="color: #FFD700">Sultra</span>
-                        @endif
+                    <span class="text-xl font-bold tracking-wide mt-1 text-primary-600">
+                        {{ $siteSetting->site_name ?? 'Komdes Sultra' }}
                     </span>
                 </a>
             </div>
