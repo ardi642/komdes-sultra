@@ -34,7 +34,7 @@ Route::get('/galeri', [FrontendController::class, 'galeri'])->name('galeri');
 Route::get('/galeri/{slug}', [FrontendController::class, 'galeriDetail'])->name('galeri.detail');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::redirect('dashboard', '/admin/tulisan')->name('dashboard');
+    Route::get('dashboard', \App\Livewire\Admin\Dashboard\DashboardIndex::class)->name('dashboard');
 });
 
 // Admin Routes (Livewire)
