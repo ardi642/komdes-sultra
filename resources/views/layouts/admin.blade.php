@@ -26,7 +26,7 @@
 
     <!-- Sidebar -->
     <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-           class="fixed inset-y-0 left-0 z-50 flex flex-col w-72 bg-white border-r border-zinc-200 transition-transform duration-300 lg:translate-x-0">
+           class="fixed inset-y-0 left-0 z-50 flex flex-col w-full sm:w-80 lg:w-72 bg-white border-r border-zinc-200 transition-transform duration-300 lg:translate-x-0">
         
         <div class="flex items-center justify-between h-20 px-6 border-b border-zinc-100">
             <a href="#" class="flex items-center gap-3">
