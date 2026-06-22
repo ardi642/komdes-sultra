@@ -79,7 +79,12 @@
                         <td class="px-6 py-4 text-right space-x-2">
                             @if(!auth()->user()->hasRole('Mitra Media') || $category->user_id === auth()->id())
                                 <button wire:click="edit({{ $category->id }})" class="text-blue-600 hover:text-blue-900 font-medium">Edit</button>
-                                <button wire:click="delete({{ $category->id }})" onclick="confirm('Apakah Anda yakin ingin menghapus kategori ini?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-900 font-medium">Hapus</button>
+                                <button @click="$dispatch('open-confirm-modal', {
+                                    title: 'Konfirmasi Hapus',
+                                    message: 'Apakah Anda yakin ingin menghapus kategori ini?',
+                                    confirmText: 'Hapus',
+                                    onConfirm: () => $wire.delete({{ $category->id }})
+                                })" class="text-red-600 hover:text-red-900 font-medium">Hapus</button>
                             @endif
                         </td>
                     </tr>
