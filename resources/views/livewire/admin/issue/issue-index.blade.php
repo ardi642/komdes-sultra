@@ -124,12 +124,13 @@
                                 <input id="checkbox-all" type="checkbox" wire:model.live="selectAll" class="w-4 h-4 text-primary-600 bg-zinc-100 border-zinc-300 rounded focus:ring-primary-500 focus:ring-2 cursor-pointer">
                             </div>
                         </th>
+                                <th scope="col" class="px-6 py-3 font-medium w-16 text-center">No</th>
                         <th scope="col" class="px-6 py-3 font-medium w-16">Cover</th>
                         <th scope="col" class="px-6 py-3 font-medium min-w-[200px]">Detail Isu</th>
                         <th scope="col" class="px-6 py-3 font-medium">Pembuat</th>
                         <th scope="col" class="px-6 py-3 font-medium">Dibuat Pada</th>
                         <th scope="col" class="px-6 py-3 font-medium">Status</th>
-                        <th scope="col" class="px-6 py-3 font-medium text-right">Aksi</th>
+                        <th scope="col" class="px-6 py-3 font-medium text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-zinc-200">
@@ -140,6 +141,7 @@
                                 <input type="checkbox" wire:model.live="selectedItems" value="{{ $issue->id }}" class="w-4 h-4 text-primary-600 bg-zinc-100 border-zinc-300 rounded focus:ring-primary-500 focus:ring-2 cursor-pointer">
                             </div>
                         </td>
+                                <td class="px-6 py-4 text-center font-medium text-zinc-500">{{ ($issues->currentPage() - 1) * $issues->perPage() + $loop->iteration }}</td>
                         <td class="px-6 py-4">
                             @if($issue->cover_image)
                                 <img src="{{ asset($issue->cover_image) }}" alt="{{ $issue->title }}" class="w-12 h-12 rounded object-cover border border-zinc-200">
@@ -166,13 +168,23 @@
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 text-zinc-800">Nonaktif</span>
                             @endif
                         </td>
-                        <td class="px-6 py-4 text-right space-x-2">
-                            <a href="{{ url('/isu/' . $issue->slug) }}" target="_blank" class="text-zinc-600 hover:text-zinc-900 font-medium mr-2" title="Lihat di Web">Web</a>
-                            @if(!auth()->user()->hasRole('Mitra Media') || $issue->user_id === auth()->id())
-                                <a href="{{ route('admin.issue.show', $issue->id) }}" class="text-primary-600 hover:text-primary-900 font-medium mr-2">Kelola Konten</a>
-                                <button wire:click="edit({{ $issue->id }})" class="text-blue-600 hover:text-blue-900 font-medium mr-2">Edit</button>
-                                <button type="button" @click="$dispatch('open-confirm-modal', { title: 'Konfirmasi Tindakan', message: 'Apakah Anda yakin ingin menghapus isu ini?', confirmText: 'Ya, Lanjutkan', onConfirm: () => @this.delete({{ $issue->id }}) })" class="text-red-600 hover:text-red-900 font-medium">Hapus</button>
-                            @endif
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center justify-center gap-1">
+                                <a href="{{ url('/isu/' . $issue->slug) }}" target="_blank" class="p-1.5 text-zinc-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors" title="Lihat di Web">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                </a>
+                                @if(!auth()->user()->hasRole('Mitra Media') || $issue->user_id === auth()->id())
+                                    <a href="{{ route('admin.issue.show', $issue->id) }}" class="p-1.5 text-zinc-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors" title="Kelola Konten">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                    </a>
+                                    <button wire:click="edit({{ $issue->id }})" class="p-1.5 text-zinc-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="Edit">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                    </button>
+                                    <button type="button" @click="$dispatch('open-confirm-modal', { title: 'Konfirmasi Tindakan', message: 'Apakah Anda yakin ingin menghapus isu ini?', confirmText: 'Ya, Lanjutkan', onConfirm: () => @this.delete({{ $issue->id }}) })" class="p-1.5 text-zinc-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Hapus">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                    </button>
+                                @endif
+                            </div>
                         </td>
                     </tr>
                     @empty
