@@ -325,6 +325,23 @@
                                 </select>
                             </div>
 
+                            <div class="pt-2 border-t border-zinc-100 mt-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm font-medium text-zinc-700">Atur Tanggal Arsip (Manual)</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" wire:model.live="is_manual_archive" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-zinc-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                    </label>
+                                </div>
+
+                                @if($is_manual_archive)
+                                <div class="mt-3">
+                                    <input type="datetime-local" wire:model="archive_date" max="{{ now()->format('Y-m-d\TH:i') }}" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2 px-3 text-sm text-zinc-900 transition-colors">
+                                    @error('archive_date') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                                </div>
+                                @endif
+                            </div>
+
                             <div class="pt-2">
                                 <x-button type="submit" class="w-full justify-center">
                                     Simpan Tulisan

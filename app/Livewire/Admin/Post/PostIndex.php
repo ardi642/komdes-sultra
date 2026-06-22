@@ -45,6 +45,10 @@ class PostIndex extends Component
     public $is_published = true;
     public $cover_image, $new_cover_image;
     
+    // Manual Archive Date
+    public $is_manual_archive = false;
+    public $archive_date;
+
     // Many-to-Many relations
     public $selectedTags = [];
     public $selectedIssues = '';
@@ -200,6 +204,8 @@ class PostIndex extends Component
         $this->is_published = '1';
         $this->cover_image = null;
         $this->new_cover_image = null;
+        $this->is_manual_archive = false;
+        $this->archive_date = null;
         $this->selectedTags = [];
         $this->selectedIssues = '';
     }
@@ -251,6 +257,15 @@ class PostIndex extends Component
 
         $post = Post::updateOrCreate(['id' => $this->post_id], $postData);
 
+        // Update created_at and published_at if manual archive is active
+        if ($this->is_manual_archive && $this->archive_date) {
+            $post->created_at = $this->archive_date;
+            if ($post->is_published) {
+                $post->published_at = $this->archive_date;
+            }
+            $post->save(['timestamps' => false]);
+        }
+
         // Sync Tags and Issues
         $post->tags()->sync($this->selectedTags);
         $post->issues()->sync($this->selectedIssues ? [$this->selectedIssues] : []);
@@ -277,6 +292,9 @@ class PostIndex extends Component
         $this->category_id = $post->category_id;
         $this->is_published = $post->is_published ? '1' : '0';
         $this->cover_image = $post->cover_image;
+        
+        $this->is_manual_archive = false;
+        $this->archive_date = $post->created_at ? $post->created_at->format('Y-m-d\TH:i') : null;
         
         $this->selectedTags = $post->tags->pluck('id')->map(fn($id) => (string)$id)->toArray();
         $this->selectedIssues = $post->issues->first()?->id ?? '';

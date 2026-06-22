@@ -44,6 +44,10 @@ class EventIndex extends Component
     public $is_published = true;
     public $cover_image, $new_cover_image;
     
+    // Manual Archive Date
+    public $is_manual_archive = false;
+    public $archive_date;
+    
     // Many-to-Many relations
     public $selectedTags = [];
     public $selectedIssues = '';
@@ -175,6 +179,8 @@ class EventIndex extends Component
         $this->is_published = '1';
         $this->cover_image = null;
         $this->new_cover_image = null;
+        $this->is_manual_archive = false;
+        $this->archive_date = null;
         $this->selectedTags = [];
         $this->selectedIssues = '';
     }
@@ -219,6 +225,15 @@ class EventIndex extends Component
 
         $event = Event::updateOrCreate(['id' => $this->event_id], $eventData);
 
+        // Update created_at and published_at if manual archive is active
+        if ($this->is_manual_archive && $this->archive_date) {
+            $event->created_at = $this->archive_date;
+            if ($event->is_published) {
+                $event->published_at = $this->archive_date;
+            }
+            $event->save(['timestamps' => false]);
+        }
+
         // Sync Tags and Issues
         $event->tags()->sync($this->selectedTags);
         $event->issues()->sync($this->selectedIssues ? [$this->selectedIssues] : []);
@@ -245,6 +260,9 @@ class EventIndex extends Component
         $this->location = $event->location;
         $this->is_published = $event->is_published ? '1' : '0';
         $this->cover_image = $event->cover_image;
+        
+        $this->is_manual_archive = false;
+        $this->archive_date = $event->created_at ? $event->created_at->format('Y-m-d\TH:i') : null;
         
         $this->selectedTags = $event->tags->pluck('id')->map(fn($id) => (string)$id)->toArray();
         $this->selectedIssues = $event->issues->first()?->id ?? '';
