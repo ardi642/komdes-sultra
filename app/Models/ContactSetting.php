@@ -16,6 +16,13 @@ class ContactSetting extends Model
         'website',
         'address',
         'map_embed',
+        'footer_description',
+        'facebook_url',
+        'instagram_url',
+        'twitter_url',
+        'tiktok_url',
+        'youtube_url',
+        'linkedin_url',
     ];
 
     protected $casts = [

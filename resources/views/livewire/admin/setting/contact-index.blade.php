@@ -126,6 +126,57 @@
                     </div>
                 </div>
             </div>
+            
+            <hr class="my-8 border-gray-200">
+            
+            <div class="mb-4">
+                <h3 class="text-lg font-bold text-gray-900 border-l-4 border-primary-500 pl-3">Pengaturan Footer & Media Sosial</h3>
+                <p class="text-sm text-gray-500 mt-1 pl-4">Atur teks deskripsi dan tautan media sosial yang akan muncul di bagian bawah website.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50/50 p-6 rounded-xl border border-gray-100">
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Footer</label>
+                    <textarea wire:model="footer_description" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Masukkan deskripsi singkat lembaga..."></textarea>
+                    @error('footer_description') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tautan Facebook</label>
+                    <input type="url" wire:model="facebook_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="https://facebook.com/...">
+                    @error('facebook_url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tautan Instagram</label>
+                    <input type="url" wire:model="instagram_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="https://instagram.com/...">
+                    @error('instagram_url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tautan Twitter/X</label>
+                    <input type="url" wire:model="twitter_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="https://twitter.com/...">
+                    @error('twitter_url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tautan TikTok</label>
+                    <input type="url" wire:model="tiktok_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="https://tiktok.com/@...">
+                    @error('tiktok_url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tautan YouTube</label>
+                    <input type="url" wire:model="youtube_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="https://youtube.com/...">
+                    @error('youtube_url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tautan LinkedIn</label>
+                    <input type="url" wire:model="linkedin_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="https://linkedin.com/in/...">
+                    @error('linkedin_url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                </div>
+            </div>
 
             <div class="mt-8 flex justify-end gap-4 border-t border-gray-100 pt-6">
                 <button type="button" @click="$dispatch('open-confirm-modal', {

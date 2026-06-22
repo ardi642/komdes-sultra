@@ -22,6 +22,14 @@ class ContactIndex extends Component
     public $address;
     public $logo;
     public $new_logo;
+    
+    public $footer_description;
+    public $facebook_url;
+    public $instagram_url;
+    public $twitter_url;
+    public $tiktok_url;
+    public $youtube_url;
+    public $linkedin_url;
 
     public function mount()
     {
@@ -36,6 +44,7 @@ class ContactIndex extends Component
             'website' => 'jaringnusa.id',
             'address' => 'Perumahan Bumi Pesona Pelangi, Jl. Kuning No.15, Minasa Upa, Kec. Rappocini, Kota Makassar, Sulawesi Selatan, 90221',
             'logo' => null,
+            'footer_description' => 'Lembaga Swadaya Masyarakat yang berdedikasi untuk pemberdayaan komunitas desa di Sulawesi Tenggara melalui advokasi, riset, dan program berkelanjutan.',
         ]);
 
         $this->setting_id = $setting->id;
@@ -50,6 +59,13 @@ class ContactIndex extends Component
         $this->website = $setting->website;
         $this->address = $setting->address;
         $this->logo = $setting->logo;
+        $this->footer_description = $setting->footer_description;
+        $this->facebook_url = $setting->facebook_url;
+        $this->instagram_url = $setting->instagram_url;
+        $this->twitter_url = $setting->twitter_url;
+        $this->tiktok_url = $setting->tiktok_url;
+        $this->youtube_url = $setting->youtube_url;
+        $this->linkedin_url = $setting->linkedin_url;
     }
 
     public function addSegment()
@@ -76,6 +92,13 @@ class ContactIndex extends Component
             'address' => 'nullable|string',
             'new_logo' => 'nullable|image|max:2048', // max 2MB
             'new_favicon' => 'nullable|image|max:1024', // max 1MB
+            'footer_description' => 'nullable|string',
+            'facebook_url' => 'nullable|url|max:255',
+            'instagram_url' => 'nullable|url|max:255',
+            'twitter_url' => 'nullable|url|max:255',
+            'tiktok_url' => 'nullable|url|max:255',
+            'youtube_url' => 'nullable|url|max:255',
+            'linkedin_url' => 'nullable|url|max:255',
         ]);
 
         $setting = ContactSetting::find($this->setting_id);
@@ -87,6 +110,13 @@ class ContactIndex extends Component
             'email' => $this->email,
             'website' => $this->website,
             'address' => $this->address,
+            'footer_description' => $this->footer_description,
+            'facebook_url' => $this->facebook_url,
+            'instagram_url' => $this->instagram_url,
+            'twitter_url' => $this->twitter_url,
+            'tiktok_url' => $this->tiktok_url,
+            'youtube_url' => $this->youtube_url,
+            'linkedin_url' => $this->linkedin_url,
         ];
 
         // Handle Logo Upload
