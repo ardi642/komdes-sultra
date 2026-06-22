@@ -220,13 +220,13 @@
 
                             <div>
                                 <x-label for="description" value="Deskripsi Singkat (Muncul di Pop-up)" />
-                                <textarea id="description" wire:model="description" rows="4" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full mt-1 px-4 py-3 text-zinc-900 transition-colors"></textarea>
+                                <textarea id="description" wire:model="description" rows="4" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full mt-1 px-4 py-3 text-zinc-900 transition-colors" placeholder="Masukkan deskripsi mengenai anggota..."></textarea>
                                 @error('description') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                             </div>
 
                             <div>
                                 <x-label for="address" value="Alamat Lengkap" />
-                                <textarea id="address" wire:model="address" rows="3" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full mt-1 px-4 py-3 text-zinc-900 transition-colors"></textarea>
+                                <textarea id="address" wire:model="address" rows="3" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full mt-1 px-4 py-3 text-zinc-900 transition-colors" placeholder="Masukkan alamat lengkap anggota..."></textarea>
                                 @error('address') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                             </div>
                         </div>

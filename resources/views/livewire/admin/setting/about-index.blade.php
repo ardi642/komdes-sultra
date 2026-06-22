@@ -32,13 +32,13 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Profil Singkat</label>
-                    <textarea wire:model="profil_singkat" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 p-3"></textarea>
+                    <textarea wire:model="profil_singkat" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 p-3" placeholder="Tuliskan profil singkat organisasi..."></textarea>
                     @error('profil_singkat') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Mengapa Komdes Sultra</label>
-                    <textarea wire:model="mengapa_komdes" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 p-3"></textarea>
+                    <textarea wire:model="mengapa_komdes" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 p-3" placeholder="Tuliskan alasan mengapa harus memilih Komdes..."></textarea>
                     @error('mengapa_komdes') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
             </div>

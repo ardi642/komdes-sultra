@@ -29,13 +29,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="name" class="block text-sm font-medium text-zinc-700">Nama Lengkap <span class="text-red-500">*</span></label>
-                    <input type="text" id="name" wire:model="name" class="mt-1 block w-full py-3 px-4 rounded-xl border-zinc-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm transition-colors">
+                    <input type="text" id="name" wire:model="name" class="mt-1 block w-full py-3 px-4 rounded-xl border-zinc-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm transition-colors" placeholder="Masukkan nama lengkap pengguna">
                     @error('name') <span class="text-xs text-red-500 mt-1 block">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label for="email" class="block text-sm font-medium text-zinc-700">Alamat Email <span class="text-red-500">*</span></label>
-                    <input type="email" id="email" wire:model="email" class="mt-1 block w-full py-3 px-4 rounded-xl border-zinc-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm transition-colors">
+                    <input type="email" id="email" wire:model="email" class="mt-1 block w-full py-3 px-4 rounded-xl border-zinc-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm transition-colors" placeholder="Masukkan alamat email pengguna">
                     @error('email') <span class="text-xs text-red-500 mt-1 block">{{ $message }}</span> @enderror
                 </div>
 
