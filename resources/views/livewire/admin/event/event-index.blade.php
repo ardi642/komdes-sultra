@@ -110,13 +110,13 @@
 
             <div class="bg-white rounded-xl shadow-sm border border-zinc-200 overflow-hidden">
                 <div class="overflow-x-auto relative">
-                    <div wire:loading.flex class="absolute inset-0 z-20 flex items-center justify-center bg-white/50 backdrop-blur-sm rounded-lg">
+                    <div wire:loading.flex wire:target="search, perPage, gotoPage, nextPage, previousPage, filterType, filterStatus, filterCategory, filterAuthor, filterMonth, filterYear, filterTag" class="absolute inset-0 z-20 flex items-center justify-center bg-white/50 backdrop-blur-sm rounded-lg">
                         <svg class="animate-spin h-8 w-8 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                     </div>
-                    <table wire:loading.class="opacity-50 pointer-events-none" class="w-full text-sm text-left text-zinc-600">
+                    <table wire:loading.class="opacity-50 pointer-events-none" wire:target="search, perPage, gotoPage, nextPage, previousPage, filterType, filterStatus, filterCategory, filterAuthor, filterMonth, filterYear, filterTag" class="w-full text-sm text-left text-zinc-600">
                         <thead class="text-xs text-zinc-700 uppercase bg-zinc-50 border-b border-zinc-200">
                             <tr>
                                 <th scope="col" class="p-4 w-4" x-show="selectionMode" x-transition>
@@ -328,7 +328,7 @@
                             </div>
 
                             <div class="pt-2">
-                                <x-button type="submit" class="w-full justify-center">
+                                <x-button target="store" type="submit" class="w-full justify-center">
                                     Simpan Acara
                                 </x-button>
                                 <button type="button" wire:click="savePreview" class="w-full inline-flex justify-center items-center px-4 py-2 bg-white border border-primary-300 rounded-lg font-semibold text-xs text-primary-700 uppercase tracking-widest shadow-sm hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150 mt-2">
@@ -482,9 +482,7 @@
                         </div>
                     </div>
                     <div class="bg-zinc-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-2xl">
-                        <button type="submit" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:ml-3 sm:w-auto sm:text-sm transition-colors">
-                            Simpan Perubahan
-                        </button>
+                        <x-button target="executeBulkEdit" type="submit" class="w-full sm:w-auto justify-center sm:ml-3 rounded-xl sm:text-sm">Simpan Perubahan</x-button>
                         <button type="button" @click="show = false" class="mt-3 w-full inline-flex justify-center rounded-xl border border-zinc-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-zinc-700 hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm transition-colors">
                             Batal
                         </button>
