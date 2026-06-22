@@ -138,7 +138,12 @@
                     Batal
                 </button>
 
-                <button wire:click="store" class="px-6 py-2 bg-primary-600 text-white font-semibold rounded-lg shadow-md hover:bg-primary-700 flex items-center gap-2 transition-colors">
+                <button type="button" @click="$dispatch('open-confirm-modal', {
+                    title: 'Simpan Pengaturan?',
+                    message: 'Apakah Anda yakin ingin menyimpan perubahan pada halaman Identitas & Kontak?',
+                    confirmText: 'Ya, Simpan',
+                    onConfirm: () => $wire.store()
+                })" class="px-6 py-2 bg-primary-600 text-white font-semibold rounded-lg shadow-md hover:bg-primary-700 flex items-center gap-2 transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                     Simpan Pengaturan
                 </button>
