@@ -218,7 +218,7 @@ class IssueIndex extends Component
             if ($this->filterYear) $query->whereYear('created_at', $this->filterYear);
             if ($this->filterMonth) $query->whereMonth('created_at', $this->filterMonth);
             
-            $this->selectedItems = $query->pluck('id')->map(fn($id) => (string)$id)->toArray();
+            $this->selectedItems = $query->paginate($this->perPage)->pluck('id')->map(fn($id) => (string)$id)->toArray();
         } else {
             $this->selectedItems = [];
         }

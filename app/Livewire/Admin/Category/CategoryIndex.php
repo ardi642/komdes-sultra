@@ -144,7 +144,11 @@ class CategoryIndex extends Component
     public function updatedSelectAll($value)
     {
         if ($value) {
-            $this->selectedItems = Category::pluck('id')->map(fn($id) => (string)$id)->toArray();
+            $query = Category::query();
+            if ($this->search) {
+                $query->where('name', 'like', '%' . $this->search . '%');
+            }
+            $this->selectedItems = $query->paginate($this->perPage)->pluck('id')->map(fn($id) => (string)$id)->toArray();
         } else {
             $this->selectedItems = [];
         }

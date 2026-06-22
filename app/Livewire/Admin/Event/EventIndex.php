@@ -152,7 +152,7 @@ class EventIndex extends Component
             if ($this->filterMonth) $query->whereMonth('created_at', $this->filterMonth);
             if ($this->filterAuthor) $query->where('user_id', $this->filterAuthor);
             
-            $this->selectedItems = $query->latest()->pluck('id')->map(fn($id) => (string)$id)->toArray();
+            $this->selectedItems = $query->latest()->paginate($this->perPage)->pluck('id')->map(fn($id) => (string)$id)->toArray();
         } else {
             $this->selectedItems = [];
         }

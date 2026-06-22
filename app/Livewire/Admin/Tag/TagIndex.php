@@ -157,7 +157,7 @@ class TagIndex extends Component
             if ($this->search) $query->where('name', 'like', '%' . $this->search . '%');
             if ($this->filterAuthor) $query->where('user_id', $this->filterAuthor);
             
-            $this->selectedItems = $query->pluck('id')->map(fn($id) => (string)$id)->toArray();
+            $this->selectedItems = $query->paginate($this->perPage)->pluck('id')->map(fn($id) => (string)$id)->toArray();
         } else {
             $this->selectedItems = [];
         }
