@@ -67,13 +67,13 @@ return [
     | Home Path
     |--------------------------------------------------------------------------
     |
-    | Here you may configure the path where users will get redirected during
-    | authentication or password reset when the operations are successful
-    | and the user is authenticated. You are free to change this value.
+    | Here you may configure the path where users will redirect after login.
+    | This path is used by the authentication controllers to redirect the
+    | users after they successfully authenticate with the application.
     |
     */
 
-    'home' => '/admin/tulisan',
+    'home' => '/dashboard',
 
     /*
     |--------------------------------------------------------------------------
