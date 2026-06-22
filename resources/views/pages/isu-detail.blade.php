@@ -72,7 +72,7 @@
                         @if(request('tahun')) <input type="hidden" name="tahun" value="{{ request('tahun') }}"> @endif
                         @if(request('tag')) <input type="hidden" name="tag" value="{{ request('tag') }}"> @endif
                         
-                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari tulisan..." class="w-full pl-4 pr-12 py-2.5 rounded-xl border border-zinc-200 bg-zinc-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-colors text-sm shadow-sm">
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari tulisan..." class="w-full pl-4 pr-12 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-colors text-sm shadow-sm">
                         <button type="submit" class="absolute right-1 top-1 bottom-1 px-3 bg-white hover:bg-zinc-100 text-zinc-500 rounded-lg flex items-center justify-center transition-colors border border-transparent hover:border-zinc-200">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                         </button>

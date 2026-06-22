@@ -33,14 +33,14 @@
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
-                    <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari pesan..." class="bg-gray-100 focus:bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm block w-full pl-9 py-2 transition-colors">
+                    <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari pesan..." class="bg-gray-100 focus:bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm block w-full pl-9 py-3 transition-colors">
                 </div>
 
                 <!-- Right: Per Page & Toggle Filter -->
                 <div class="flex items-center gap-3 w-full sm:w-auto">
                     <div class="flex items-center gap-2">
                         <span class="text-sm font-medium text-gray-600 hidden sm:inline">Tampil:</span>
-                        <select wire:model.live="perPage" class="bg-gray-100 focus:bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-2 pl-3 pr-8 text-gray-900 transition-colors">
+                        <select wire:model.live="perPage" class="bg-gray-100 focus:bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-3 pl-3 pr-8 text-gray-900 transition-colors">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
@@ -61,7 +61,7 @@
                 <div class="p-4 bg-gray-50 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Bulan</label>
-                        <select wire:model.live="filterMonth" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-2 px-3 text-gray-900">
+                        <select wire:model.live="filterMonth" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-3 px-4 text-gray-900">
                             <option value="">Semua Bulan</option>
                             <option value="1">Januari</option>
                             <option value="2">Februari</option>
@@ -79,7 +79,7 @@
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Tahun</label>
-                        <select wire:model.live="filterYear" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-2 px-3 text-gray-900">
+                        <select wire:model.live="filterYear" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-3 px-4 text-gray-900">
                             <option value="">Semua Tahun</option>
                             @foreach($availableYears as $year)
                                 <option value="{{ $year }}">{{ $year }}</option>
@@ -88,7 +88,7 @@
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Status Progres</label>
-                        <select wire:model.live="filterStatus" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-2 px-3 text-gray-900">
+                        <select wire:model.live="filterStatus" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-3 px-4 text-gray-900">
                             <option value="">Semua Status</option>
                             <option value="menunggu">Menunggu</option>
                             <option value="diproses">Diproses</option>
@@ -283,7 +283,7 @@
                             
                             <div class="sm:col-span-2">
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Catatan Internal (Opsional)</label>
-                                <textarea wire:model="adminNotes" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="Tambahkan catatan untuk admin lain..."></textarea>
+                                <textarea wire:model="adminNotes" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-3" placeholder="Tambahkan catatan untuk admin lain..."></textarea>
                             </div>
                         </div>
 

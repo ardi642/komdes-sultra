@@ -17,7 +17,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-b border-gray-100 pb-8">
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium text-gray-700 mb-1">Nama Situs Utama (Teks Biasa)</label>
-                    <input type="text" wire:model="site_name" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: Komdes Sultra">
+                    <input type="text" wire:model="site_name" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 py-3 px-4" placeholder="Contoh: Komdes Sultra">
                     <p class="text-xs text-gray-500 mt-1">Digunakan untuk judul tab browser dan teks SEO.</p>
                     @error('site_name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
@@ -32,7 +32,7 @@
                         <div>
                             <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-lg border border-gray-200">
                                 <span class="font-bold text-gray-400 text-sm w-6">{{ $index + 1 }}.</span>
-                                <input type="text" wire:model="site_name_segments.{{ $index }}.text" class="flex-1 bg-white focus:bg-white transition-colors rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: Komdes">
+                                <input type="text" wire:model="site_name_segments.{{ $index }}.text" class="flex-1 bg-white focus:bg-white transition-colors rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 py-3 px-4" placeholder="Contoh: Komdes">
                                 <input type="color" wire:model="site_name_segments.{{ $index }}.color" class="h-[42px] w-12 rounded-md border-gray-300 shadow-sm cursor-pointer p-1 bg-white">
                                 <button type="button" wire:click="removeSegment({{ $index }})" class="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors" title="Hapus Kata">
                                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
@@ -53,25 +53,25 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
-                    <input type="text" wire:model="phone" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: 082290533640">
+                    <input type="text" wire:model="phone" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 py-3 px-4" placeholder="Contoh: 082290533640">
                     @error('phone') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Alamat Email</label>
-                    <input type="email" wire:model="email" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: kantor@jaringnusa.id">
+                    <input type="email" wire:model="email" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 py-3 px-4" placeholder="Contoh: kantor@jaringnusa.id">
                     @error('email') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium text-gray-700 mb-1">Website URL</label>
-                    <input type="text" wire:model="website" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: jaringnusa.id">
+                    <input type="text" wire:model="website" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 py-3 px-4" placeholder="Contoh: jaringnusa.id">
                     @error('website') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium text-gray-700 mb-1">Alamat Lengkap</label>
-                    <textarea wire:model="address" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Masukkan alamat lengkap..."></textarea>
+                    <textarea wire:model="address" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 p-3" placeholder="Masukkan alamat lengkap..."></textarea>
                     @error('address') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
@@ -142,37 +142,37 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50/50 p-6 rounded-xl border border-gray-100">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Tautan Facebook</label>
-                    <input type="url" wire:model="facebook_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="https://facebook.com/...">
+                    <input type="url" wire:model="facebook_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 py-3 px-4" placeholder="https://facebook.com/...">
                     @error('facebook_url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Tautan Instagram</label>
-                    <input type="url" wire:model="instagram_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="https://instagram.com/...">
+                    <input type="url" wire:model="instagram_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 py-3 px-4" placeholder="https://instagram.com/...">
                     @error('instagram_url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Tautan Twitter/X</label>
-                    <input type="url" wire:model="twitter_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="https://twitter.com/...">
+                    <input type="url" wire:model="twitter_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 py-3 px-4" placeholder="https://twitter.com/...">
                     @error('twitter_url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Tautan TikTok</label>
-                    <input type="url" wire:model="tiktok_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="https://tiktok.com/@...">
+                    <input type="url" wire:model="tiktok_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 py-3 px-4" placeholder="https://tiktok.com/@...">
                     @error('tiktok_url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Tautan YouTube</label>
-                    <input type="url" wire:model="youtube_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="https://youtube.com/...">
+                    <input type="url" wire:model="youtube_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 py-3 px-4" placeholder="https://youtube.com/...">
                     @error('youtube_url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Tautan LinkedIn</label>
-                    <input type="url" wire:model="linkedin_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="https://linkedin.com/in/...">
+                    <input type="url" wire:model="linkedin_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 py-3 px-4" placeholder="https://linkedin.com/in/...">
                     @error('linkedin_url') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
             </div>

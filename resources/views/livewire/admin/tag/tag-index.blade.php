@@ -38,7 +38,7 @@
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <svg class="h-4 w-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
-                <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari tag..." class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm block w-full pl-9 py-2 transition-colors">
+                <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari tag..." class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm block w-full pl-9 py-3 transition-colors">
             </div>
 
             <!-- Right: Filters & Per Page -->
@@ -52,7 +52,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="text-sm font-medium text-zinc-600 hidden sm:inline">Tampil:</span>
-                    <select wire:model.live="perPage" class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 pl-3 pr-8 text-zinc-900 transition-colors">
+                    <select wire:model.live="perPage" class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-3 pl-3 pr-8 text-zinc-900 transition-colors">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>

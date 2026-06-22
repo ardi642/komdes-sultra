@@ -32,13 +32,13 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Profil Singkat</label>
-                    <textarea wire:model="profil_singkat" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"></textarea>
+                    <textarea wire:model="profil_singkat" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 p-3"></textarea>
                     @error('profil_singkat') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Mengapa Komdes Sultra</label>
-                    <textarea wire:model="mengapa_komdes" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"></textarea>
+                    <textarea wire:model="mengapa_komdes" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 p-3"></textarea>
                     @error('mengapa_komdes') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Kutipan Tujuan (Quote)</label>
-                    <textarea wire:model="tujuan_quote" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" placeholder='Misal: "Sebagai ruang belajar..."'></textarea>
+                    <textarea wire:model="tujuan_quote" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 p-3" placeholder='Misal: "Sebagai ruang belajar..."'></textarea>
                     @error('tujuan_quote') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
 
@@ -59,7 +59,7 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">Daftar Poin Tujuan</label>
                     @foreach($tujuan_list as $index => $item)
                         <div class="flex gap-2 mb-2">
-                            <textarea wire:model="tujuan_list.{{ $index }}" rows="3" class="bg-gray-100 focus:bg-white transition-colors flex-1 rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" placeholder="Masukkan poin tujuan"></textarea>
+                            <textarea wire:model="tujuan_list.{{ $index }}" rows="3" class="bg-gray-100 focus:bg-white transition-colors flex-1 rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 p-3" placeholder="Masukkan poin tujuan"></textarea>
                             <button wire:click="removeTujuan({{ $index }})" class="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors self-start" title="Hapus Poin">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
@@ -83,7 +83,7 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">Daftar Poin Intensi</label>
                     @foreach($intensi_list as $index => $item)
                         <div class="flex gap-2 mb-2">
-                            <textarea wire:model="intensi_list.{{ $index }}" rows="3" class="bg-gray-100 focus:bg-white transition-colors flex-1 rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" placeholder="Masukkan poin intensi"></textarea>
+                            <textarea wire:model="intensi_list.{{ $index }}" rows="3" class="bg-gray-100 focus:bg-white transition-colors flex-1 rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 p-3" placeholder="Masukkan poin intensi"></textarea>
                             <button wire:click="removeIntensi({{ $index }})" class="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors" title="Hapus Poin">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </button>
@@ -109,11 +109,11 @@
                         <div class="flex gap-2 mb-4 p-4 border border-gray-100 rounded-lg bg-gray-50">
                             <div class="flex-1 space-y-3">
                                 <div>
-                                    <input type="text" wire:model="sikap_list.{{ $index }}.title" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 font-medium" placeholder="Judul Sikap (Misal: Independen & Objektif)">
+                                    <input type="text" wire:model="sikap_list.{{ $index }}.title" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 font-medium py-3 px-4" placeholder="Judul Sikap (Misal: Independen & Objektif)">
                                     @error('sikap_list.'.$index.'.title') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                                 </div>
                                 <div>
-                                    <textarea wire:model="sikap_list.{{ $index }}.description" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" placeholder="Deskripsi sikap"></textarea>
+                                    <textarea wire:model="sikap_list.{{ $index }}.description" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 p-3" placeholder="Deskripsi sikap"></textarea>
                                     @error('sikap_list.'.$index.'.description') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                                 </div>
                             </div>

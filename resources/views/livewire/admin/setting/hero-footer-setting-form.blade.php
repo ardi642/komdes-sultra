@@ -24,47 +24,47 @@
             <!-- Teks Hero: Tentang Kami -->
             <div>
                 <label for="hero_about_text" class="block text-sm font-medium text-gray-700 mb-1">Hero: Tentang Kami</label>
-                <textarea wire:model="hero_about_text" id="hero_about_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Teks deskripsi..."></textarea>
+                <textarea wire:model="hero_about_text" id="hero_about_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm p-3" placeholder="Teks deskripsi..."></textarea>
             </div>
             
             <div class="space-y-1">
                 <label for="hero_event_text" class="block text-sm font-medium text-gray-700">Teks Hero Acara</label>
-                <textarea wire:model="hero_event_text" id="hero_event_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Teks deskripsi..."></textarea>
+                <textarea wire:model="hero_event_text" id="hero_event_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm p-3" placeholder="Teks deskripsi..."></textarea>
             </div>
 
             <div class="space-y-1">
                 <label for="hero_issue_text" class="block text-sm font-medium text-gray-700">Teks Hero Isu Strategis</label>
-                <textarea wire:model="hero_issue_text" id="hero_issue_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Teks deskripsi..."></textarea>
+                <textarea wire:model="hero_issue_text" id="hero_issue_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm p-3" placeholder="Teks deskripsi..."></textarea>
             </div>
 
             <div class="space-y-1">
                 <label for="hero_news_text" class="block text-sm font-medium text-gray-700">Teks Hero Berita</label>
-                <textarea wire:model="hero_news_text" id="hero_news_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Teks deskripsi..."></textarea>
+                <textarea wire:model="hero_news_text" id="hero_news_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm p-3" placeholder="Teks deskripsi..."></textarea>
             </div>
 
             <div class="space-y-1">
                 <label for="hero_article_text" class="block text-sm font-medium text-gray-700">Teks Hero Artikel</label>
-                <textarea wire:model="hero_article_text" id="hero_article_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Teks deskripsi..."></textarea>
+                <textarea wire:model="hero_article_text" id="hero_article_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm p-3" placeholder="Teks deskripsi..."></textarea>
             </div>
 
             <div class="space-y-1">
                 <label for="hero_research_text" class="block text-sm font-medium text-gray-700">Teks Hero Riset</label>
-                <textarea wire:model="hero_research_text" id="hero_research_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Teks deskripsi..."></textarea>
+                <textarea wire:model="hero_research_text" id="hero_research_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm p-3" placeholder="Teks deskripsi..."></textarea>
             </div>
 
             <div class="space-y-1">
                 <label for="hero_press_text" class="block text-sm font-medium text-gray-700">Teks Hero Siaran Pers</label>
-                <textarea wire:model="hero_press_text" id="hero_press_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Teks deskripsi..."></textarea>
+                <textarea wire:model="hero_press_text" id="hero_press_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm p-3" placeholder="Teks deskripsi..."></textarea>
             </div>
 
             <div class="space-y-1">
                 <label for="hero_gallery_text" class="block text-sm font-medium text-gray-700">Teks Hero Galeri</label>
-                <textarea wire:model="hero_gallery_text" id="hero_gallery_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Teks deskripsi..."></textarea>
+                <textarea wire:model="hero_gallery_text" id="hero_gallery_text" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm p-3" placeholder="Teks deskripsi..."></textarea>
             </div>
 
             <div class="space-y-1">
                 <label for="footer_description" class="block text-sm font-medium text-gray-700">Deskripsi Footer Singkat</label>
-                <textarea wire:model="footer_description" id="footer_description" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Teks deskripsi..."></textarea>
+                <textarea wire:model="footer_description" id="footer_description" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm p-3" placeholder="Teks deskripsi..."></textarea>
             </div>
         </div>
 

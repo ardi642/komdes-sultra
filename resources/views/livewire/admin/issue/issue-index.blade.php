@@ -41,14 +41,14 @@
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <svg class="h-4 w-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
-                <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari isu..." class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm block w-full pl-9 py-2 transition-colors">
+                <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari isu..." class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm block w-full pl-9 py-3 transition-colors">
             </div>
 
             <!-- Right: Per Page & Filter Toggle -->
             <div class="flex items-center gap-3 w-full sm:w-auto">
                 <div class="flex items-center gap-2">
                     <span class="text-sm font-medium text-zinc-600 hidden sm:inline">Tampil:</span>
-                    <select wire:model.live="perPage" class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 pl-3 pr-8 text-zinc-900 transition-colors">
+                    <select wire:model.live="perPage" class="bg-zinc-100 focus:bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-3 pl-3 pr-8 text-zinc-900 transition-colors">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -70,7 +70,7 @@
 
                 <div>
                     <label class="block text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">Status</label>
-                    <select wire:model.live="filterStatus" class="w-full bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 px-3 text-zinc-900">
+                    <select wire:model.live="filterStatus" class="w-full bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-3 px-4 text-zinc-900">
                         <option value="">Semua Status</option>
                         <option value="active">Aktif</option>
                         <option value="inactive">Nonaktif</option>
@@ -89,13 +89,13 @@
                 <div>
                     <label class="block text-xs font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">Waktu (Bulan / Tahun)</label>
                     <div class="flex gap-2">
-                        <select wire:model.live="filterMonth" class="w-1/2 bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 px-3 text-zinc-900">
+                        <select wire:model.live="filterMonth" class="w-1/2 bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-3 px-4 text-zinc-900">
                             <option value="">Bulan</option>
                             @for($i=1; $i<=12; $i++)
                                 <option value="{{ $i }}">{{ date('F', mktime(0, 0, 0, $i, 10)) }}</option>
                             @endfor
                         </select>
-                        <select wire:model.live="filterYear" class="w-1/2 bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-2 px-3 text-zinc-900">
+                        <select wire:model.live="filterYear" class="w-1/2 bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-3 px-4 text-zinc-900">
                             <option value="">Tahun</option>
                             @for($i=date('Y'); $i>=2020; $i--)
                                 <option value="{{ $i }}">{{ $i }}</option>
@@ -238,7 +238,7 @@
                                 
                                 <div>
                                     <x-label for="status" value="Status Tampilan" />
-                                    <select id="status" wire:model="status" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2.5 px-3 text-zinc-900 transition-colors">
+                                    <select id="status" wire:model="status" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-3 px-4 text-zinc-900 transition-colors">
                                         <option value="active">Aktif (Tampil di Web)</option>
                                         <option value="inactive">Nonaktif (Sembunyikan)</option>
                                     </select>
@@ -273,13 +273,13 @@
                             <div class="space-y-4 md:col-span-2">
                                 <div>
                                     <x-label for="description" value="Deskripsi Singkat" />
-                                    <textarea id="description" wire:model="description" rows="3" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2.5 px-3 text-zinc-900 transition-colors" placeholder="Jelaskan secara singkat mengenai isu ini..."></textarea>
+                                    <textarea id="description" wire:model="description" rows="3" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-3 px-4 text-zinc-900 transition-colors" placeholder="Jelaskan secara singkat mengenai isu ini..."></textarea>
                                     @error('description') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                                 </div>
                                 
                                 <div>
                                     <x-label for="icon_svg" value="Icon SVG (Opsional, untuk desain spesifik)" />
-                                    <textarea id="icon_svg" wire:model="icon_svg" rows="2" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-2.5 px-3 text-zinc-900 font-mono text-sm transition-colors" placeholder="<svg>...</svg>"></textarea>
+                                    <textarea id="icon_svg" wire:model="icon_svg" rows="2" class="bg-zinc-100 focus:bg-white border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm w-full py-3 px-4 text-zinc-900 font-mono text-sm transition-colors" placeholder="<svg>...</svg>"></textarea>
                                     <p class="text-xs text-zinc-500 mt-1">Anda bisa menempelkan kode SVG dari Heroicons atau ikon lainnya.</p>
                                     @error('icon_svg') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                                 </div>
