@@ -33,7 +33,7 @@
 
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6 tracking-widest uppercase text-white drop-shadow-md">Tentang Kami</h1>
                 <p class="text-base md:text-lg text-white/90 leading-relaxed drop-shadow-sm font-light">
-                    {{ $about?->hero_description }}
+                    {{ \App\Models\SiteSetting::where('key', 'hero_about_text')->value('value') ?? 'Mengenal lebih dekat visi dan arah pergerakan Komdes Sultra.' }}
                 </p>
             </div>
         </div>

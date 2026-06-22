@@ -26,12 +26,6 @@
             
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Utama (Hero Section)</label>
-                    <textarea wire:model="hero_description" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" placeholder="Mengenal lebih dekat..."></textarea>
-                    @error('hero_description') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                </div>
-                
-                <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Profil Singkat</label>
                     <textarea wire:model="profil_singkat" rows="3" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"></textarea>
                     @error('profil_singkat') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror

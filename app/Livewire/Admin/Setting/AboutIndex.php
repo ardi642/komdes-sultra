@@ -8,7 +8,6 @@ use App\Models\About;
 class AboutIndex extends Component
 {
     public $about_id;
-    public $hero_description;
     public $profil_singkat;
     public $mengapa_komdes;
     public $tujuan_quote;
@@ -28,7 +27,6 @@ class AboutIndex extends Component
         }
         
         $this->about_id = $about->id;
-        $this->hero_description = $about->hero_description ?? 'Mengenal lebih dekat KOMUNITAS MASYARAKAT DESA-SULAWESI TENGGARA (Komdes Sultra) sebagai wadah kolaborasi untuk kelestarian alam dan kesejahteraan masyarakat.';
         $this->profil_singkat = $about->profil_singkat ?? 'Komdes Sultra didirikan atas dasar kepedulian terhadap kelestarian ekosistem dan kesejahteraan masyarakat. Organisasi ini percaya bahwa kolaborasi dan edukasi adalah kunci utama untuk menjaga keseimbangan alam sekaligus memajukan kemandirian ekonomi.';
         $this->mengapa_komdes = $about->mengapa_komdes ?? 'Komdes Sultra hadir sebagai jembatan penghubung antara masyarakat akar rumput, pemerintah, dan pemangku kepentingan lainnya. Dengan komitmen pada pembangunan yang inklusif, Komdes Sultra berupaya menginisiasi program-program berkelanjutan yang memberikan dampak positif secara langsung bagi lingkungan dan masyarakat luas.';
         $this->tujuan_quote = $about->tujuan_quote ?? '"Melangkah bersama masyarakat, menjaga kelestarian alam, dan mewujudkan kesejahteraan yang berkelanjutan dan berkeadilan."';
@@ -54,7 +52,6 @@ class AboutIndex extends Component
     public function store()
     {
         $this->validate([
-            'hero_description' => 'nullable|string',
             'profil_singkat' => 'nullable|string',
             'mengapa_komdes' => 'nullable|string',
             'tujuan_quote' => 'nullable|string',
@@ -71,7 +68,6 @@ class AboutIndex extends Component
 
         $about = About::find($this->about_id);
         $about->update([
-            'hero_description' => $this->hero_description,
             'profil_singkat' => $this->profil_singkat,
             'mengapa_komdes' => $this->mengapa_komdes,
             'tujuan_quote' => $this->tujuan_quote,
