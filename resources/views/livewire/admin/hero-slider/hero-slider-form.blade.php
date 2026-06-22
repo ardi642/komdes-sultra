@@ -1,8 +1,9 @@
 <div>
-    <div class="flex justify-between items-center mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <h1 class="text-2xl font-bold text-zinc-900">{{ $sliderId ? 'Edit' : 'Tambah' }} Slider Beranda</h1>
-        <a href="{{ route('admin.hero.index') }}" class="text-zinc-500 hover:text-zinc-700 font-medium text-sm transition-colors">
-            &larr; Kembali ke Daftar
+        <a href="{{ route('admin.hero.index') }}" class="inline-flex items-center px-4 py-2 bg-white border border-zinc-300 rounded-lg font-semibold text-xs text-zinc-700 uppercase tracking-widest hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-primary-500 transition shadow-sm w-fit">
+            <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Kembali
         </a>
     </div>
 

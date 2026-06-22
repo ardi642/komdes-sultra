@@ -3,20 +3,15 @@
 namespace App\Livewire\Admin\Profile;
 
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 use Laravel\Fortify\Contracts\UpdatesUserPasswords;
-use Illuminate\Support\Facades\Storage;
 
 class ProfileIndex extends Component
 {
-    use WithFileUploads;
-
     public $name;
     public $email;
     public $posisi;
-    public $new_avatar;
 
     public $current_password;
     public $password;
@@ -35,22 +30,6 @@ class ProfileIndex extends Component
     {
         $this->resetErrorBag();
 
-        if ($this->new_avatar) {
-            $this->validate([
-                'new_avatar' => ['image', 'max:1024'], // 1MB Max
-            ]);
-
-            $user = auth()->user();
-            
-            if ($user->avatar) {
-                Storage::disk('public')->delete($user->avatar);
-            }
-
-            $user->forceFill([
-                'avatar' => $this->new_avatar->store('avatars', 'public'),
-            ])->save();
-        }
-
         // Jika email diubah, wajib verifikasi menggunakan kata sandi saat ini
         if ($this->email !== auth()->user()->email) {
             $this->validate([
@@ -67,7 +46,6 @@ class ProfileIndex extends Component
             'posisi' => $this->posisi,
         ]);
 
-        $this->new_avatar = null;
         $this->profile_current_password = null;
 
         session()->flash('profile_message', 'Profil berhasil diperbarui.');

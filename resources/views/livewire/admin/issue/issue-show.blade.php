@@ -1,10 +1,10 @@
 <div class="space-y-6">
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
         <div>
             <h1 class="text-2xl font-bold text-zinc-900">Kelola Konten Isu: {{ $issue->title }}</h1>
             <p class="text-sm text-zinc-500 mt-1">Daftar publikasi dan acara yang terkait dengan isu ini.</p>
         </div>
-        <a href="{{ route('admin.issue.index') }}" class="inline-flex items-center px-4 py-2 bg-white border border-zinc-300 rounded-lg font-semibold text-xs text-zinc-700 uppercase tracking-widest hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 transition shadow-sm">
+        <a href="{{ route('admin.issue.index') }}" class="inline-flex items-center px-4 py-2 bg-white border border-zinc-300 rounded-lg font-semibold text-xs text-zinc-700 uppercase tracking-widest hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 transition shadow-sm w-fit">
             <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
             Kembali
         </a>

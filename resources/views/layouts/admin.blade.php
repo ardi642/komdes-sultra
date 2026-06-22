@@ -197,10 +197,12 @@
             <div class="flex items-center gap-4">
                 <div class="relative group">
                     <div class="flex items-center gap-3 p-1.5 rounded-xl hover:bg-zinc-50 transition-colors cursor-default">
-                        <div class="hidden sm:flex flex-col text-right">
+                        <div class="flex flex-col text-right">
                             <span class="text-sm font-semibold text-zinc-700 group-hover:text-primary-700 transition-colors">{{ auth()->user()->name ?? 'Guest' }}</span>
                         </div>
-                        <img src="{{ auth()->user() && auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name ?? 'User') . '&background=165a3f&color=fff' }}" alt="Avatar" class="w-10 h-10 rounded-full border-2 border-primary-100 shadow-sm object-cover group-hover:ring-2 group-hover:ring-primary-500 group-hover:ring-offset-2 transition-all">
+                        <div class="w-10 h-10 rounded-full bg-primary-50 border-2 border-primary-100 text-primary-600 flex items-center justify-center shadow-sm group-hover:ring-2 group-hover:ring-primary-500 group-hover:ring-offset-2 transition-all">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        </div>
                     </div>
                     
                     <!-- Dropdown on Hover -->

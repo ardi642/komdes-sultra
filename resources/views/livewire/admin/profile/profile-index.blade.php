@@ -28,29 +28,6 @@
                     @endif
 
                     <div class="space-y-6">
-                        
-                        <!-- Avatar Upload -->
-                        <div class="flex items-center gap-6">
-                            <div class="relative shrink-0">
-                                @if ($new_avatar)
-                                    <img src="{{ $new_avatar->temporaryUrl() }}" alt="Preview Avatar" class="w-20 h-20 rounded-full border-4 border-white shadow-md object-cover">
-                                @else
-                                    <img src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->name) . '&background=165a3f&color=fff' }}" alt="Current Avatar" class="w-20 h-20 rounded-full border-4 border-white shadow-md object-cover">
-                                @endif
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-zinc-700 mb-2">Foto Profil Baru</label>
-                                <div class="flex items-center gap-3">
-                                    <label class="relative cursor-pointer bg-white py-2 px-4 border border-zinc-300 rounded-xl shadow-sm text-sm font-medium text-zinc-700 hover:bg-zinc-50 transition-colors focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500">
-                                        <span>Pilih Gambar</span>
-                                        <input type="file" wire:model="new_avatar" class="sr-only" accept="image/*">
-                                    </label>
-                                    <span class="text-xs text-zinc-500" wire:loading wire:target="new_avatar">Mengunggah...</span>
-                                </div>
-                                @error('new_avatar') <span class="text-xs text-red-500 mt-1 block">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
                                 <label for="name" class="block text-sm font-medium text-zinc-700">Nama Lengkap <span class="text-red-500">*</span></label>

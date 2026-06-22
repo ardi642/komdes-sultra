@@ -67,8 +67,8 @@
                         <tr class="hover:bg-zinc-50/50 transition-colors {{ $user->trashed() ? 'opacity-60' : '' }}">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-10 w-10">
-                                        <img class="h-10 w-10 rounded-full object-cover border border-zinc-200" src="{{ $user->avatar ? asset('storage/' . $user->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=165a3f&color=fff' }}" alt="">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-50 border border-primary-100 flex items-center justify-center text-primary-600">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                                     </div>
                                     <div class="ml-4">
                                         <div class="text-sm font-semibold text-zinc-900">{{ $user->name }}</div>
