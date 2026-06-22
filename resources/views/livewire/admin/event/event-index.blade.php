@@ -567,7 +567,7 @@
     @script
     <script>
         $wire.on('open-preview-tab', () => {
-            window.open('{{ route('preview-live') }}', '_blank');
+            window.open('{{ route('admin.preview-live') }}', '_blank');
         });
     </script>
     @endscript

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FrontendController;
 
-Route::get('/preview-live', [FrontendController::class, 'previewLive'])->name('preview-live');
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [FrontendController::class, 'tentangKami'])->name('tentang-kami');
 Route::get('/anggota', [FrontendController::class, 'anggota'])->name('anggota');
@@ -40,6 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // Admin Routes (Livewire)
 Route::prefix('admin')->name('admin.')->group(function () {
     // We will apply auth middleware later, for development we can access directly or add later.
+    Route::get('/preview-live', [\App\Http\Controllers\FrontendController::class, 'previewLive'])->name('preview-live');
     Route::post('/upload-image', [\App\Http\Controllers\Admin\UploadController::class, 'uploadImage'])->name('upload.image');
     Route::post('/upload-gallery-image', [\App\Http\Controllers\Admin\UploadController::class, 'uploadGalleryImage'])->name('upload.gallery.image');
     

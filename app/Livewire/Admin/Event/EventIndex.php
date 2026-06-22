@@ -444,9 +444,8 @@ class EventIndex extends Component
         session(['preview_post_data' => [
             'title' => $this->title,
             'type' => 'acara',
-            'content' => $this->description,
+            'content' => $this->content,
             'event_date' => $this->event_date,
-            'time' => $this->time,
             'location' => $this->location,
             'cover_image' => $coverImageUrl,
         ]]);
