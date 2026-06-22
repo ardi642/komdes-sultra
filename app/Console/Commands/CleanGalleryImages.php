@@ -25,11 +25,13 @@ class CleanGalleryImages extends Command
 
         $images = \App\Models\GalleryImage::whereNull('gallery_id')
             ->where('created_at', '<', now()->subHours($hours))
-            ->get();
+            ->cursor();
 
-        $count = $images->count();
-
-        $images->each->delete();
+        $count = 0;
+        foreach ($images as $image) {
+            $image->delete();
+            $count++;
+        }
 
         $this->info("Successfully deleted {$count} orphaned gallery images.");
     }

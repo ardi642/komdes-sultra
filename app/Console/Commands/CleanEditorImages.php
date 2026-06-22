@@ -35,7 +35,7 @@ class CleanEditorImages extends Command
         
         $orphanedImages = EditorImage::whereNull('imageable_id')
             ->where('created_at', '<', Carbon::now()->subHours($hours))
-            ->get();
+            ->cursor();
 
         foreach ($orphanedImages as $image) {
             // Determine relative path for Storage disk
