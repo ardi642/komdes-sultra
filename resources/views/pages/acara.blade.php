@@ -23,7 +23,7 @@
     <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
         
         <!-- Main Content (Daftar Acara) -->
-        <div class="flex-1" x-data="{ showFilter: false }">
+        <div class="w-full lg:flex-1" x-data="{ showFilter: false }">
             
             @include('partials.post-filter', ['title' => 'Semua Acara'])
 

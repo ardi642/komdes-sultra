@@ -1,6 +1,6 @@
 <!-- Header & Toggle Button -->
-<div class="flex flex-col mb-16 gap-4 relative">
-    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+<div class="flex flex-col mb-6 md:mb-8 gap-4 relative">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
             <h2 class="font-heading font-bold text-xl md:text-2xl text-[#165a3f] uppercase tracking-widest">{{ $title ?? 'Daftar Tulisan' }}</h2>
         </div>
