@@ -235,6 +235,22 @@
             </div>
         </header>
 
+        <!-- Offline Banner -->
+        <div x-data="{ online: navigator.onLine }" 
+             @online.window="online = true" 
+             @offline.window="online = false" 
+             x-show="!online" 
+             style="display: none;"
+             class="sticky top-20 z-20 w-full bg-red-500 text-white text-center py-2.5 text-sm font-medium shadow-sm transition-all"
+        >
+            <div class="flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a4.978 4.978 0 01-1.414-2.83m-1.414 5.658a9 9 0 01-2.167-9.238m7.824 2.167a1 1 0 111.414 1.414m-1.414-1.414L3 3m8.293 8.293l1.414 1.414"/>
+                </svg>
+                Anda sedang offline. Koneksi internet terputus.
+            </div>
+        </div>
+
         <!-- Main Content -->
         <main class="flex-1 p-4 sm:p-6 lg:p-8 flex flex-col">
             <div class="max-w-7xl mx-auto w-full flex-1">
@@ -319,6 +335,9 @@
           </div>
         </div>
     </div>
+
+    <!-- Global Toast Notification -->
+    <x-toast />
 
     @livewireScripts
     @stack('scripts')
