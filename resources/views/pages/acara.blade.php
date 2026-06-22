@@ -11,7 +11,7 @@
         <div class="text-center" data-aos="fade-up">
 
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white uppercase tracking-widest mb-6 drop-shadow-md">Agenda Acara</h1>
-            <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed drop-shadow-sm">Ikuti berbagai kegiatan edukasi, diskusi, dan pelatihan bersama Komdes Sultra.</p>
+            <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed drop-shadow-sm">{{ \App\Models\SiteSetting::where('key', 'hero_event_text')->value('value') }}</p>
         </div>
     </div>
 </div>

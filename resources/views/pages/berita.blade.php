@@ -12,7 +12,7 @@
         <div class="text-center" data-aos="fade-up">
 
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white uppercase tracking-widest mb-6 drop-shadow-md">Berita Terkini</h1>
-            <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed drop-shadow-sm">Kabar terbaru seputar advokasi, program kerja, dan dinamika komunitas desa di Sulawesi Tenggara.</p>
+            <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed drop-shadow-sm">{{ \App\Models\SiteSetting::where('key', 'hero_news_text')->value('value') }}</p>
         </div>
     </div>
 </div>

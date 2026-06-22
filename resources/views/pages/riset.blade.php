@@ -10,7 +10,7 @@
         <div class="text-center" data-aos="fade-up">
 
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white uppercase tracking-widest mb-6 drop-shadow-md">Riset dan Publikasi</h1>
-            <p class="text-white/90 text-base md:text-lg font-light leading-relaxed drop-shadow-sm max-w-2xl mx-auto">Kerja advokasi Komdes Sultra selalu berdasarkan pada temuan hasil investigasi, pemetaan lapangan, dan riset ilmiah. Berikut ini adalah kumpulan publikasi yang menjadi panduan dan referensi dalam perjuangan kami.</p>
+            <p class="text-white/90 text-base md:text-lg font-light leading-relaxed drop-shadow-sm max-w-2xl mx-auto">{{ \App\Models\SiteSetting::where('key', 'hero_research_text')->value('value') }}</p>
         </div>
     </div>
 </div>

@@ -185,13 +185,6 @@
                 <div class="text-white/90 text-base md:text-lg font-light leading-loose space-y-6" data-aos="fade-up" data-aos-delay="200">
                     @if($homepageSetting && $homepageSetting->about_description)
                         {!! nl2br(e($homepageSetting->about_description)) !!}
-                    @else
-                        <p>
-                            KOMUNITAS MASYARAKAT DESA-SULAWESI TENGGARA (Komdes Sultra) adalah organisasi masyarakat sipil yang memfokuskan diri pada isu-isu pesisir, laut, dan pulau-pulau kecil. Berdiri sebagai respons terhadap tantangan degradasi ekosistem dan ketidakadilan ruang yang dialami oleh masyarakat pesisir.
-                        </p>
-                        <p>
-                            Melalui pengorganisasian akar rumput, riset partisipatif, dan kampanye kebijakan, kami berupaya memastikan hak-hak nelayan tradisional terlindungi dan sumber daya alam dikelola secara adil dan berkelanjutan bagi generasi mendatang.
-                        </p>
                     @endif
                 </div>
                 
@@ -254,7 +247,7 @@
             <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest mb-4">
                 Anggota Jaring Komdes Sultra
             </h2>
-            <p class="text-zinc-500 text-base md:text-lg font-light">{{ $homepageSetting->network_subtitle ?? 'Jejaring komunitas dan organisasi lokal yang bergerak bersama kami.' }}</p>
+            <p class="text-zinc-500 text-base md:text-lg font-light">{{ $homepageSetting->network_subtitle }}</p>
         </div>
         
         <div class="flex flex-wrap justify-center lg:justify-start gap-6 lg:gap-10 items-center mb-20" data-aos="zoom-in" data-aos-delay="200">
@@ -346,7 +339,7 @@
             <h2 class="text-xl md:text-2xl font-heading font-bold text-white uppercase tracking-widest mb-4">
                 Fokus Isu
             </h2>
-            <p class="text-white/80 text-base md:text-lg font-light">{{ $homepageSetting->issue_subtitle ?? 'Isu strategis yang menjadi fokus pergerakan kami.' }}</p>
+            <p class="text-white/80 text-base md:text-lg font-light">{{ $homepageSetting->issue_subtitle }}</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 mb-20 justify-items-center lg:justify-items-start">
@@ -380,7 +373,7 @@
             <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest mb-4">
                 Pusat Publikasi
             </h2>
-            <p class="text-zinc-500 text-base md:text-lg font-light">{{ $homepageSetting->publication_subtitle ?? 'Kabar terbaru, artikel opini, dan laporan riset dari kami.' }}</p>
+            <p class="text-zinc-500 text-base md:text-lg font-light">{{ $homepageSetting->publication_subtitle }}</p>
         </div>
         
         <!-- Tab Navigation -->
@@ -493,7 +486,7 @@
             <h2 class="text-xl md:text-2xl font-heading font-bold text-white uppercase tracking-widest mb-4">
                 Agenda Acara
             </h2>
-            <p class="text-white/80 text-base md:text-lg font-light">{{ $homepageSetting->agenda_subtitle ?? 'Ikuti berbagai kegiatan edukasi, diskusi, dan pelatihan bersama kami.' }}</p>
+            <p class="text-white/80 text-base md:text-lg font-light">{{ $homepageSetting->agenda_subtitle }}</p>
         </div>
 
         <div class="flex flex-wrap justify-center lg:justify-start gap-10 mb-20 relative z-20">
@@ -547,7 +540,7 @@
             <h2 class="text-xl md:text-2xl font-heading font-bold text-primary-700 uppercase tracking-widest mb-4">
                 Galeri Kegiatan
             </h2>
-            <p class="text-zinc-500 text-base md:text-lg font-light">{{ $homepageSetting->gallery_subtitle ?? 'Dokumentasi aksi lapangan dan advokasi bersama masyarakat.' }}</p>
+            <p class="text-zinc-500 text-base md:text-lg font-light">{{ $homepageSetting->gallery_subtitle }}</p>
         </div>
 
         <div class="flex flex-wrap justify-center lg:justify-start gap-10 mb-20 relative z-20">

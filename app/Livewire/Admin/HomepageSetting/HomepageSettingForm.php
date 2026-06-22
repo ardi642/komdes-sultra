@@ -48,11 +48,11 @@ class HomepageSettingForm extends Component
             $this->gallery_subtitle = $setting->gallery_subtitle;
         } else {
             // Default subtitles
-            $this->network_subtitle = 'Jejaring komunitas dan organisasi lokal yang bergerak bersama kami.';
-            $this->issue_subtitle = 'Isu strategis yang menjadi fokus advokasi dan gerakan kami.';
-            $this->agenda_subtitle = 'Ikuti berbagai kegiatan edukasi, diskusi, dan pelatihan bersama kami.';
-            $this->publication_subtitle = 'Kabar terbaru, artikel opini, dan laporan riset dari kami.';
-            $this->gallery_subtitle = 'Dokumentasi aksi lapangan dan advokasi bersama masyarakat.';
+            $this->network_subtitle = 'Jejaring komunitas dan organisasi yang berkolaborasi bersama Komdes Sultra.';
+            $this->issue_subtitle = 'Isu-isu strategis yang menjadi fokus utama kegiatan Komdes Sultra.';
+            $this->agenda_subtitle = 'Ikuti berbagai kegiatan edukasi, diskusi, dan pelatihan bersama Komdes Sultra.';
+            $this->publication_subtitle = 'Kumpulan berita, artikel, dan laporan riset terbaru dari Komdes Sultra.';
+            $this->gallery_subtitle = 'Kumpulan foto dokumentasi aksi lapangan dan kegiatan Komdes Sultra.';
         }
     }
 

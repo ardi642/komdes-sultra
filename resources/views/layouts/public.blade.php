@@ -308,7 +308,7 @@
                         </span>
                     </a>
                     <p class="text-white/70 text-sm leading-relaxed mb-6">
-                        {{ $siteSetting->footer_description ?? 'Lembaga Swadaya Masyarakat yang berdedikasi untuk pemberdayaan komunitas desa di Sulawesi Tenggara melalui advokasi, riset, dan program berkelanjutan.' }}
+                        {{ \App\Models\SiteSetting::where('key', 'footer_description')->value('value') }}
                     </p>
                 </div>
                 

@@ -13,7 +13,7 @@
             Fokus Isu
         </h1>
         <p class="text-base md:text-lg text-white/90 max-w-2xl mx-auto drop-shadow-sm font-light leading-relaxed">
-            Temukan berbagai berita, artikel, siaran pers, dan riset berdasarkan topik dan fokus advokasi utama kami.
+            {{ \App\Models\SiteSetting::where('key', 'hero_issue_text')->value('value') }}
         </p>
     </div>
 </div>

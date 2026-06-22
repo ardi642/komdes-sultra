@@ -33,7 +33,7 @@
 
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6 tracking-widest uppercase text-white drop-shadow-md">Tentang Kami</h1>
                 <p class="text-base md:text-lg text-white/90 leading-relaxed drop-shadow-sm font-light">
-                    {{ $about?->hero_description ?? 'Mengenal lebih dekat KOMUNITAS MASYARAKAT DESA-SULAWESI TENGGARA (Komdes Sultra) sebagai wadah kolaborasi untuk kelestarian alam dan kesejahteraan masyarakat pesisir.' }}
+                    {{ $about?->hero_description }}
                 </p>
             </div>
         </div>

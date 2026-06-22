@@ -36,6 +36,16 @@
                     <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600"></div>
                 @endif
             </button>
+
+            <button wire:click="$set('tab', 'hero_footer')" class="shrink-0 relative py-4 px-6 text-sm font-medium transition-colors {{ $tab === 'hero_footer' ? 'text-primary-600 bg-primary-50/50' : 'text-zinc-500 hover:text-zinc-700 hover:bg-zinc-50' }}">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    Teks Hero & Footer
+                </div>
+                @if($tab === 'hero_footer')
+                    <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600"></div>
+                @endif
+            </button>
         </nav>
     </div>
 
@@ -47,6 +57,8 @@
             @livewire('admin.homepage-setting.homepage-setting-form', key('tab-beranda'))
         @elseif($tab === 'tentang')
             @livewire('admin.setting.about-index', key('tab-tentang'))
+        @elseif($tab === 'hero_footer')
+            @livewire('admin.setting.hero-footer-setting-form', key('tab-hero-footer'))
         @endif
     </div>
 </div>

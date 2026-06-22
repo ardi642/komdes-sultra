@@ -15,7 +15,7 @@
 
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6 tracking-widest uppercase text-white drop-shadow-md">Galeri Kegiatan</h1>
                 <p class="text-base md:text-lg text-white/90 leading-relaxed drop-shadow-sm font-light">
-                    Jelajahi berbagai momen dan aktivitas yang merekam semangat kolaborasi Komdes Sultra.
+                    {{ \App\Models\SiteSetting::where('key', 'hero_gallery_text')->value('value') }}
                 </p>
             </div>
         </div>

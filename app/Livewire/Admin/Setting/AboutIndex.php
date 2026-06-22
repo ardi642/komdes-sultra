@@ -20,21 +20,18 @@ class AboutIndex extends Component
 
     public function mount()
     {
-        $about = About::firstOrCreate(['id' => 1], [
-            'hero_description' => 'Mengenal lebih dekat KOMUNITAS MASYARAKAT DESA-SULAWESI TENGGARA (Komdes Sultra) sebagai wadah kolaborasi untuk kelestarian alam dan kesejahteraan masyarakat pesisir.',
-            'profil_singkat' => '',
-            'mengapa_komdes' => '',
-            'tujuan_quote' => '',
-            'tujuan_list' => [],
-            'intensi_list' => [],
-            'sikap_list' => []
-        ]);
-
+        $about = About::first();
+        
+        if (!$about) {
+            $about = new About();
+            $about->id = 1;
+        }
+        
         $this->about_id = $about->id;
-        $this->hero_description = $about->hero_description;
-        $this->profil_singkat = $about->profil_singkat;
-        $this->mengapa_komdes = $about->mengapa_komdes;
-        $this->tujuan_quote = $about->tujuan_quote;
+        $this->hero_description = $about->hero_description ?? 'Mengenal lebih dekat KOMUNITAS MASYARAKAT DESA-SULAWESI TENGGARA (Komdes Sultra) sebagai wadah kolaborasi untuk kelestarian alam dan kesejahteraan masyarakat.';
+        $this->profil_singkat = $about->profil_singkat ?? 'Komdes Sultra didirikan atas dasar kepedulian terhadap kelestarian ekosistem dan kesejahteraan masyarakat. Organisasi ini percaya bahwa kolaborasi dan edukasi adalah kunci utama untuk menjaga keseimbangan alam sekaligus memajukan kemandirian ekonomi.';
+        $this->mengapa_komdes = $about->mengapa_komdes ?? 'Komdes Sultra hadir sebagai jembatan penghubung antara masyarakat akar rumput, pemerintah, dan pemangku kepentingan lainnya. Dengan komitmen pada pembangunan yang inklusif, Komdes Sultra berupaya menginisiasi program-program berkelanjutan yang memberikan dampak positif secara langsung bagi lingkungan dan masyarakat luas.';
+        $this->tujuan_quote = $about->tujuan_quote ?? '"Melangkah bersama masyarakat, menjaga kelestarian alam, dan mewujudkan kesejahteraan yang berkelanjutan dan berkeadilan."';
         $this->tujuan_list = is_array($about->tujuan_list) ? $about->tujuan_list : [];
         $this->intensi_list = is_array($about->intensi_list) ? $about->intensi_list : [];
         $this->sikap_list = is_array($about->sikap_list) ? $about->sikap_list : [];

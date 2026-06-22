@@ -10,7 +10,7 @@
         <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
 
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white uppercase tracking-widest mb-6 drop-shadow-md">Artikel</h1>
-            <p class="text-white/90 text-base md:text-lg font-light leading-relaxed drop-shadow-sm max-w-2xl mx-auto">Kumpulan esai, opini, dan kajian dari Lembaga Swadaya Masyarakat.</p>
+            <p class="text-white/90 text-base md:text-lg font-light leading-relaxed drop-shadow-sm max-w-2xl mx-auto">{{ \App\Models\SiteSetting::where('key', 'hero_article_text')->value('value') }}</p>
         </div>
     </div>
 </div>
