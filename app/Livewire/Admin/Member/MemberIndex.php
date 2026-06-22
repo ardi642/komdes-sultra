@@ -16,7 +16,7 @@ class MemberIndex extends Component
     public $member_id;
     
     // Form fields
-    public $name, $description, $address, $email, $phone, $website, $instagram;
+    public $name, $description, $address, $email, $phone, $website, $instagram, $facebook, $twitter, $tiktok, $youtube, $linkedin;
     public $order_number = 0;
     public $is_active = true;
     public $logo, $new_logo;
@@ -98,6 +98,11 @@ class MemberIndex extends Component
         $this->phone = '';
         $this->website = '';
         $this->instagram = '';
+        $this->facebook = '';
+        $this->twitter = '';
+        $this->tiktok = '';
+        $this->youtube = '';
+        $this->linkedin = '';
         $this->order_number = 0;
         $this->is_active = true;
         $this->logo = null;
@@ -114,6 +119,11 @@ class MemberIndex extends Component
             'phone' => 'nullable|string|max:255',
             'website' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
+            'facebook' => 'nullable|string|max:255',
+            'twitter' => 'nullable|string|max:255',
+            'tiktok' => 'nullable|string|max:255',
+            'youtube' => 'nullable|string|max:255',
+            'linkedin' => 'nullable|string|max:255',
             'is_active' => 'boolean',
             'new_logo' => 'nullable|image|max:2048', // max 2MB
         ]);
@@ -126,6 +136,11 @@ class MemberIndex extends Component
             'phone' => $this->phone,
             'website' => $this->website,
             'instagram' => $this->instagram,
+            'facebook' => $this->facebook,
+            'twitter' => $this->twitter,
+            'tiktok' => $this->tiktok,
+            'youtube' => $this->youtube,
+            'linkedin' => $this->linkedin,
             'is_active' => $this->is_active,
         ];
 
@@ -160,6 +175,11 @@ class MemberIndex extends Component
         $this->phone = $member->phone;
         $this->website = $member->website;
         $this->instagram = $member->instagram;
+        $this->facebook = $member->facebook;
+        $this->twitter = $member->twitter;
+        $this->tiktok = $member->tiktok;
+        $this->youtube = $member->youtube;
+        $this->linkedin = $member->linkedin;
         $this->order_number = $member->order_number;
         $this->is_active = (bool) $member->is_active;
         $this->logo = $member->logo;

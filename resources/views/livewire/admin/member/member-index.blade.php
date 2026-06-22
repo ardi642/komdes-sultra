@@ -236,6 +236,31 @@
                                     <x-input id="instagram" type="text" wire:model="instagram" placeholder="https://instagram.com/..." class="w-full mt-1" />
                                     @error('instagram') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                                 </div>
+                                <div>
+                                    <x-label for="facebook" value="Link Facebook" />
+                                    <x-input id="facebook" type="text" wire:model="facebook" placeholder="https://facebook.com/..." class="w-full mt-1" />
+                                    @error('facebook') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
+                                </div>
+                                <div>
+                                    <x-label for="twitter" value="Link X (Twitter)" />
+                                    <x-input id="twitter" type="text" wire:model="twitter" placeholder="https://x.com/..." class="w-full mt-1" />
+                                    @error('twitter') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
+                                </div>
+                                <div>
+                                    <x-label for="tiktok" value="Link TikTok" />
+                                    <x-input id="tiktok" type="text" wire:model="tiktok" placeholder="https://tiktok.com/..." class="w-full mt-1" />
+                                    @error('tiktok') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
+                                </div>
+                                <div>
+                                    <x-label for="youtube" value="Link YouTube" />
+                                    <x-input id="youtube" type="text" wire:model="youtube" placeholder="https://youtube.com/..." class="w-full mt-1" />
+                                    @error('youtube') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
+                                </div>
+                                <div>
+                                    <x-label for="linkedin" value="Link LinkedIn" />
+                                    <x-input id="linkedin" type="text" wire:model="linkedin" placeholder="https://linkedin.com/..." class="w-full mt-1" />
+                                    @error('linkedin') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
+                                </div>
                             </div>
                         </div>
                     </div>

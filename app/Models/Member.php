@@ -15,6 +15,11 @@ class Member extends Model
         'phone',
         'website',
         'instagram',
+        'facebook',
+        'twitter',
+        'tiktok',
+        'youtube',
+        'linkedin',
         'order_number',
         'is_active',
     ];

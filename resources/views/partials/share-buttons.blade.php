@@ -19,8 +19,8 @@
             <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
         <!-- Telegram -->
-        <a href="https://t.me/share/url?url={{ $shareUrl }}&text={{ $shareTitle }}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-sky-100 text-sky-500 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-colors" title="Bagikan ke Telegram">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M1.946 9.315c-.522-.174-.527-.455.01-.664L21.051.272c.571-.245 1.052.129.845.698L15.305 23.36c-.198.547-.49.565-.791.171l-4.509-5.836-3.805 3.518a.508.508 0 0 1-.365.176v-4.32l9.02-8.312c.162-.15.088-.231-.088-.112L4.621 15.01l-2.675-.806z" /></svg>
+        <a href="https://t.me/share/url?url={{ $shareUrl }}&text={{ $shareTitle }}" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-[#229ED9] text-white flex items-center justify-center hover:bg-[#1CA0D1] transition-colors shadow-sm" title="Bagikan ke Telegram">
+            <svg class="w-4 h-4 pr-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M1.946 9.315c-.522-.174-.527-.455.01-.664L21.051.272c.571-.245 1.052.129.845.698L15.305 23.36c-.198.547-.49.565-.791.171l-4.509-5.836-3.805 3.518a.508.508 0 0 1-.365.176v-4.32l9.02-8.312c.162-.15.088-.231-.088-.112L4.621 15.01l-2.675-.806z" /></svg>
         </a>
         <!-- Copy Link -->
         <button type="button" onclick="navigator.clipboard.writeText('{{ urldecode($shareUrl) }}'); alert('Tautan berhasil disalin!');" class="w-8 h-8 rounded-full bg-zinc-100 text-zinc-600 flex items-center justify-center hover:bg-zinc-600 hover:text-white transition-colors" title="Salin Tautan">
