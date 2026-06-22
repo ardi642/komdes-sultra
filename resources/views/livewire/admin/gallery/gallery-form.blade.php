@@ -21,13 +21,13 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Judul Galeri <span class="text-red-500">*</span></label>
-                            <input type="text" wire:model="title" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder="Contoh: Penanaman Mangrove 2026">
+                            <input type="text" wire:model="title" class="bg-gray-100 px-4 py-2.5 focus:bg-white transition-colors w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" placeholder="Contoh: Penanaman Mangrove 2026">
                             @error('title') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal Kegiatan <span class="text-red-500">*</span></label>
-                            <input type="date" wire:model="date" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500">
+                            <input type="date" wire:model="date" class="bg-gray-100 px-4 py-2.5 focus:bg-white transition-colors w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
                             @error('date') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -40,7 +40,7 @@
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">URL / Embed Video Youtube (Opsional)</label>
-                        <input type="text" wire:model="video_url" class="bg-gray-100 focus:bg-white transition-colors w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500" placeholder='https://www.youtube.com/watch?v=... atau kode <iframe...'>
+                        <input type="text" wire:model="video_url" class="bg-gray-100 px-4 py-2.5 focus:bg-white transition-colors w-full rounded-lg border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500" placeholder='https://www.youtube.com/watch?v=... atau kode <iframe...'>
                         <p class="text-xs text-gray-500 mt-1">Anda dapat memasukkan Link Video biasa atau menempelkan langsung kode <code class="bg-gray-100 px-1 rounded">&lt;iframe&gt;</code> yang didapat dari menu <b>Share &gt; Embed</b> YouTube.</p>
                         @error('video_url') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                     </div>
@@ -169,7 +169,7 @@
             </div>
             <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end gap-3">
                 <a href="{{ route('admin.gallery.index') }}" class="px-5 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 font-medium text-sm transition">Batal</a>
-                <button type="submit" :disabled="isUploading" class="px-5 py-2 border border-transparent rounded-lg text-white bg-green-600 hover:bg-green-700 font-medium text-sm transition shadow-sm flex items-center disabled:opacity-50 disabled:cursor-not-allowed">
+                <button type="submit" :disabled="isUploading" class="px-6 py-2.5 border border-transparent rounded-xl text-white bg-primary-600 hover:bg-primary-700 font-semibold text-sm transition shadow-sm flex items-center disabled:opacity-50 disabled:cursor-not-allowed">
                     <span wire:loading.remove wire:target="save">{{ $galleryId ? 'Perbarui Galeri' : 'Simpan Galeri' }}</span>
                     <span wire:loading wire:target="save" class="flex items-center">
                         <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
