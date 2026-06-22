@@ -6,7 +6,7 @@
 <!-- Page Header -->
 <div class="relative pt-64 pb-48 overflow-hidden bg-[#165a3f]">
     <!-- Ambient Glow -->
-    <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
+    <div class="hidden md:block absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
     
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center" data-aos="fade-up">
@@ -20,7 +20,7 @@
 <!-- Main Content Area -->
 <div class="relative bg-white py-28 lg:py-36 overflow-hidden">
     <!-- Ambient Glow Elements -->
-    <div class="absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-30 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+    <div class="hidden md:block absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-30 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
 
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
@@ -33,7 +33,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                 @forelse($posts as $post)
                 <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
-                    <div class="relative h-56 overflow-hidden">
+                    <div class="relative h-48 sm:h-56 overflow-hidden">
                         <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1574046664972-e565980fcbc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         @if($post->category)
                         <div class="absolute top-4 left-4 bg-primary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">{{ $post->category->name }}</div>
@@ -76,7 +76,7 @@
         </div>
 
         <!-- Sidebar (Right Content) -->
-        <div class="lg:w-[350px] flex-shrink-0" data-aos="fade-left" data-aos-delay="200">
+        <div class="w-full lg:w-[350px] flex-shrink-0" data-aos="fade-left" data-aos-delay="200">
             @include('partials.post-sidebar')
         </div>
         

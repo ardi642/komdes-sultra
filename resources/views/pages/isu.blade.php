@@ -6,7 +6,7 @@
 
 <!-- Page Header / Hero -->
 <div class="relative pt-64 pb-48 overflow-hidden bg-[#165a3f]">
-    <div class="absolute right-0 bottom-0 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 translate-y-1/4 bg-white"></div>
+    <div class="hidden md:block absolute right-0 bottom-0 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 translate-y-1/4 bg-white"></div>
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" data-aos="fade-up">
 
         <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white uppercase tracking-widest mb-6 drop-shadow-md">
@@ -21,8 +21,8 @@
 <!-- Main Content Area -->
 <div class="relative bg-white py-24 overflow-hidden">
     <!-- Ambient Glow Elements -->
-    <div class="absolute left-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-40 -translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
-    <div class="absolute right-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-30 translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
+    <div class="hidden md:block absolute left-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-40 -translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+    <div class="hidden md:block absolute right-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-30 translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
 
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

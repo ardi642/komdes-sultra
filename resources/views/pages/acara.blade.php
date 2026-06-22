@@ -5,7 +5,7 @@
 @section('content')
 <!-- Page Header -->
 <div class="relative pt-64 pb-48 overflow-hidden bg-[#165a3f]">
-    <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
+    <div class="hidden md:block absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
     
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center" data-aos="fade-up">
@@ -33,7 +33,7 @@
                 @forelse($events as $event)
                 <!-- Event Card -->
                 <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group relative" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
-                    <div class="relative h-56 overflow-hidden bg-zinc-100">
+                    <div class="relative h-48 sm:h-56 overflow-hidden bg-zinc-100">
                         <img src="{{ $event->cover_image ? asset($event->cover_image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $event->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
@@ -85,7 +85,7 @@
         </div>
 
         <!-- Sidebar (Widget) -->
-        <div class="lg:w-[350px] flex-shrink-0" data-aos="fade-left" data-aos-delay="200">
+        <div class="w-full lg:w-[350px] flex-shrink-0" data-aos="fade-left" data-aos-delay="200">
             @include('partials.event-sidebar')
         </div>
 

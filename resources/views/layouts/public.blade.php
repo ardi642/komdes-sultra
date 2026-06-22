@@ -22,7 +22,7 @@
         h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Outfit', sans-serif; }
     </style>
 </head>
-<body class="bg-zinc-50 text-zinc-900 antialiased font-sans flex flex-col min-h-screen">
+<body class="bg-zinc-50 text-zinc-900 antialiased font-sans flex flex-col min-h-screen overflow-x-hidden w-full">
 
     <!-- Header / Navbar -->
     @php
@@ -53,7 +53,7 @@
                     </a>
                 </div>
 
-                <nav class="hidden md:flex space-x-1 lg:space-x-3 items-center">
+                <nav class="hidden lg:flex space-x-1 lg:space-x-3 items-center">
                     <a href="{{ route('home') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('home') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }} transition-colors">Beranda</a>
                     <a href="{{ route('tentang-kami') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('tentang-kami') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }} transition-colors">Tentang Kami</a>
                     <a href="{{ route('anggota') }}" class="px-4 py-2.5 rounded-md text-base font-medium {{ request()->routeIs('anggota') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }} transition-colors">Anggota</a>
@@ -165,13 +165,13 @@
                 </nav>
 
                 <!-- Mobile menu button -->
-                <div class="flex items-center md:hidden">
+                <div class="flex items-center lg:hidden">
                     <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-white/80 hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white/50" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
-                        <svg x-show="!mobileMenuOpen" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <svg x-show="!mobileMenuOpen" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                         </svg>
-                        <svg x-show="mobileMenuOpen" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" style="display: none;">
+                        <svg x-show="mobileMenuOpen" x-cloak class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" style="display: none;">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
@@ -187,38 +187,37 @@
              x-transition:leave="transition ease-in duration-150"
              x-transition:leave-start="opacity-100 translate-y-0"
              x-transition:leave-end="opacity-0 -translate-y-4"
-             class="md:hidden bg-white border-b border-zinc-100 shadow-lg absolute w-full" 
-             style="display: none;">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="{{ route('home') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('home') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">Beranda</a>
-                <a href="{{ route('tentang-kami') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('tentang-kami') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">Tentang Kami</a>
-                <a href="{{ route('anggota') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('anggota') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">Anggota</a>
+             class="lg:hidden bg-[#165a3f] border-b border-white/10 shadow-lg absolute w-full" 
+             style="display: none;" x-cloak>
+            <div class="px-4 pt-4 pb-6 space-y-2 max-h-[80vh] overflow-y-auto">
+                <a href="{{ route('home') }}" class="block px-4 py-3 rounded-lg text-base font-medium {{ request()->routeIs('home') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }}">Beranda</a>
+                <a href="{{ route('tentang-kami') }}" class="block px-4 py-3 rounded-lg text-base font-medium {{ request()->routeIs('tentang-kami') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }}">Tentang Kami</a>
+                <a href="{{ route('anggota') }}" class="block px-4 py-3 rounded-lg text-base font-medium {{ request()->routeIs('anggota') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }}">Anggota</a>
+                
                 <div x-data="{ beritaOpen: {{ request()->routeIs('berita*') ? 'true' : 'false' }} }">
-                    <div class="w-full flex justify-between items-center rounded-md {{ request()->routeIs('berita*') ? 'bg-primary-50' : 'hover:bg-zinc-50' }}">
-                        <a href="{{ route('berita') }}" class="flex-grow px-3 py-2 text-base font-medium {{ request()->routeIs('berita*') ? 'text-primary-600' : 'text-zinc-700 hover:text-primary-600' }}">Berita</a>
-                        <button @click="beritaOpen = !beritaOpen" class="px-3 py-2 focus:outline-none text-zinc-500 hover:text-primary-600">
-                            <svg class="w-4 h-4 transition-transform duration-200" :class="beritaOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </button>
-                    </div>
-                    <div x-show="beritaOpen" class="pl-6 pr-3 py-2 space-y-1 bg-zinc-50/50 rounded-md mt-1" style="{{ request()->routeIs('berita*') ? '' : 'display: none;' }}">
+                    <button @click="beritaOpen = !beritaOpen" class="w-full flex justify-between items-center px-4 py-3 rounded-lg text-base font-medium {{ request()->routeIs('berita*') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }}">
+                        <span>Berita</span>
+                        <svg class="w-5 h-5 transition-transform duration-200" :class="beritaOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div x-show="beritaOpen" class="pl-4 pr-2 py-2 space-y-1 bg-black/10 rounded-lg mt-1 mx-2" style="{{ request()->routeIs('berita*') ? '' : 'display: none;' }}">
                         @php
                             if (!isset($navBeritaCategories)) {
                                 $navBeritaCategories = \App\Models\Category::where('type', 'berita')->get();
                             }
                         @endphp
                         @foreach($navBeritaCategories as $cat)
-                        <a href="{{ route('berita', ['category' => $cat->slug]) }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request('category') == $cat->slug ? 'text-primary-600 bg-primary-100' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-100' }}">{{ $cat->name }}</a>
+                        <a href="{{ route('berita', ['category' => $cat->slug]) }}" class="block px-4 py-2.5 rounded-md text-sm font-medium {{ request('category') == $cat->slug ? 'text-white bg-white/20' : 'text-white/70 hover:text-white hover:bg-white/10' }}">{{ $cat->name }}</a>
                         @endforeach
                     </div>
                 </div>
                 
                 <div x-data="{ pubOpen: {{ request()->routeIs('acara*', 'artikel*', 'riset*', 'siaran-pers*') ? 'true' : 'false' }} }">
-                    <button @click="pubOpen = !pubOpen" class="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('acara*', 'artikel*', 'riset*', 'siaran-pers*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">
+                    <button @click="pubOpen = !pubOpen" class="w-full flex justify-between items-center px-4 py-3 rounded-lg text-base font-medium {{ request()->routeIs('acara*', 'artikel*', 'riset*', 'siaran-pers*') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }}">
                         <span>Publikasi</span>
-                        <svg class="w-4 h-4 transition-transform duration-200" :class="pubOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg class="w-5 h-5 transition-transform duration-200" :class="pubOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div x-show="pubOpen" class="pl-6 pr-3 py-2 space-y-1 bg-zinc-50/50 rounded-md mt-1" style="{{ request()->routeIs('acara*', 'artikel*', 'riset*', 'siaran-pers*') ? '' : 'display: none;' }}">
-                        <a href="{{ route('acara') }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('acara*') ? 'text-primary-600 bg-primary-100' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-100' }}">Acara</a>
+                    <div x-show="pubOpen" class="pl-4 pr-2 py-2 space-y-2 bg-black/10 rounded-lg mt-1 mx-2" style="{{ request()->routeIs('acara*', 'artikel*', 'riset*', 'siaran-pers*') ? '' : 'display: none;' }}">
+                        <a href="{{ route('acara') }}" class="block px-4 py-2.5 rounded-md text-sm font-medium {{ request()->routeIs('acara*') ? 'text-white bg-white/20' : 'text-white/70 hover:text-white hover:bg-white/10' }}">Acara</a>
                         
                         <!-- Artikel Mobile Accordion -->
                         @php
@@ -228,22 +227,22 @@
                         @endphp
                         @if($navArtikelCategories->count() > 0)
                         <div x-data="{ artOpen: {{ request()->routeIs('artikel*') ? 'true' : 'false' }} }">
-                            <div class="w-full flex justify-between items-center rounded-md {{ request()->routeIs('artikel*') ? 'bg-primary-100' : 'hover:bg-zinc-100' }}">
-                                <a href="{{ route('artikel') }}" class="flex-grow px-3 py-2 text-sm font-medium {{ request()->routeIs('artikel*') ? 'text-primary-600' : 'text-zinc-600 hover:text-primary-600' }}">Artikel</a>
-                                <button @click="artOpen = !artOpen" class="px-3 py-2 focus:outline-none text-zinc-500 hover:text-primary-600">
+                            <div class="w-full flex justify-between items-center rounded-md {{ request()->routeIs('artikel*') ? 'bg-white/10' : 'hover:bg-white/5' }}">
+                                <a href="{{ route('artikel') }}" class="flex-grow px-4 py-2.5 text-sm font-medium {{ request()->routeIs('artikel*') ? 'text-white' : 'text-white/70 hover:text-white' }}">Artikel</a>
+                                <button @click.prevent="artOpen = !artOpen" class="px-4 py-2.5 focus:outline-none text-white/50 hover:text-white">
                                     <svg class="w-4 h-4 transition-transform duration-200" :class="artOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </button>
                             </div>
-                            <div x-show="artOpen" class="pl-4 pr-2 py-1 space-y-1 mt-1 border-l-2 border-primary-200 ml-2" style="{{ request()->routeIs('artikel*') ? '' : 'display: none;' }}">
+                            <div x-show="artOpen" class="pl-4 pr-2 py-1 space-y-1 mt-1 border-l border-white/20 ml-4" style="{{ request()->routeIs('artikel*') ? '' : 'display: none;' }}">
                                 @foreach($navArtikelCategories as $cat)
-                                <a href="{{ route('artikel', ['category' => $cat->slug]) }}" class="block px-3 py-2 rounded-md text-xs font-medium {{ request('category') == $cat->slug ? 'text-primary-600 bg-primary-100' : 'text-zinc-500 hover:text-primary-600' }}">{{ $cat->name }}</a>
+                                <a href="{{ route('artikel', ['category' => $cat->slug]) }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request('category') == $cat->slug ? 'text-white bg-white/20' : 'text-white/60 hover:text-white hover:bg-white/10' }}">{{ $cat->name }}</a>
                                 @endforeach
                             </div>
                         </div>
                         @else
-                        <a href="{{ route('artikel') }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('artikel*') ? 'text-primary-600 bg-primary-100' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-100' }}">Artikel</a>
+                        <a href="{{ route('artikel') }}" class="block px-4 py-2.5 rounded-md text-sm font-medium {{ request()->routeIs('artikel*') ? 'text-white bg-white/20' : 'text-white/70 hover:text-white hover:bg-white/10' }}">Artikel</a>
                         @endif
-
+                        
                         <!-- Riset Mobile Accordion -->
                         @php
                             if (!isset($navRisetCategories)) {
@@ -252,29 +251,29 @@
                         @endphp
                         @if($navRisetCategories->count() > 0)
                         <div x-data="{ risetOpen: {{ request()->routeIs('riset*') ? 'true' : 'false' }} }">
-                            <div class="w-full flex justify-between items-center rounded-md {{ request()->routeIs('riset*') ? 'bg-primary-100' : 'hover:bg-zinc-100' }}">
-                                <a href="{{ route('riset') }}" class="flex-grow px-3 py-2 text-sm font-medium {{ request()->routeIs('riset*') ? 'text-primary-600' : 'text-zinc-600 hover:text-primary-600' }}">Publikasi Riset</a>
-                                <button @click="risetOpen = !risetOpen" class="px-3 py-2 focus:outline-none text-zinc-500 hover:text-primary-600">
+                            <div class="w-full flex justify-between items-center rounded-md {{ request()->routeIs('riset*') ? 'bg-white/10' : 'hover:bg-white/5' }}">
+                                <a href="{{ route('riset') }}" class="flex-grow px-4 py-2.5 text-sm font-medium {{ request()->routeIs('riset*') ? 'text-white' : 'text-white/70 hover:text-white' }}">Publikasi Riset</a>
+                                <button @click.prevent="risetOpen = !risetOpen" class="px-4 py-2.5 focus:outline-none text-white/50 hover:text-white">
                                     <svg class="w-4 h-4 transition-transform duration-200" :class="risetOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </button>
                             </div>
-                            <div x-show="risetOpen" class="pl-4 pr-2 py-1 space-y-1 mt-1 border-l-2 border-primary-200 ml-2" style="{{ request()->routeIs('riset*') ? '' : 'display: none;' }}">
+                            <div x-show="risetOpen" class="pl-4 pr-2 py-1 space-y-1 mt-1 border-l border-white/20 ml-4" style="{{ request()->routeIs('riset*') ? '' : 'display: none;' }}">
                                 @foreach($navRisetCategories as $cat)
-                                <a href="{{ route('riset', ['category' => $cat->slug]) }}" class="block px-3 py-2 rounded-md text-xs font-medium {{ request('category') == $cat->slug ? 'text-primary-600 bg-primary-100' : 'text-zinc-500 hover:text-primary-600' }}">{{ $cat->name }}</a>
+                                <a href="{{ route('riset', ['category' => $cat->slug]) }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request('category') == $cat->slug ? 'text-white bg-white/20' : 'text-white/60 hover:text-white hover:bg-white/10' }}">{{ $cat->name }}</a>
                                 @endforeach
                             </div>
                         </div>
                         @else
-                        <a href="{{ route('riset') }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('riset*') ? 'text-primary-600 bg-primary-100' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-100' }}">Publikasi Riset</a>
+                        <a href="{{ route('riset') }}" class="block px-4 py-2.5 rounded-md text-sm font-medium {{ request()->routeIs('riset*') ? 'text-white bg-white/20' : 'text-white/70 hover:text-white hover:bg-white/10' }}">Publikasi Riset</a>
                         @endif
 
-                        <a href="{{ route('siaran-pers') }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('siaran-pers*') ? 'text-primary-600 bg-primary-100' : 'text-zinc-600 hover:text-primary-600 hover:bg-zinc-100' }}">Siaran Pers</a>
+                        <a href="{{ route('siaran-pers') }}" class="block px-4 py-2.5 rounded-md text-sm font-medium {{ request()->routeIs('siaran-pers*') ? 'text-white bg-white/20' : 'text-white/70 hover:text-white hover:bg-white/10' }}">Siaran Pers</a>
                     </div>
                 </div>
                 
-                <a href="{{ route('isu') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('isu*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">Isu</a>
-                <a href="{{ route('galeri') }}" class="block px-3 py-2 rounded-md text-base font-medium {{ request()->routeIs('galeri*') ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:text-primary-600 hover:bg-zinc-50' }}">Galeri</a>
-                <a href="{{ route('kontak') }}" class="block px-3 py-2 rounded-md text-base font-medium text-primary-600 hover:text-primary-700 hover:bg-primary-50 mt-4 border border-primary-200 text-center">Kontak</a>
+                <a href="{{ route('isu') }}" class="block px-4 py-3 rounded-lg text-base font-medium {{ request()->routeIs('isu*') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }}">Isu</a>
+                <a href="{{ route('galeri') }}" class="block px-4 py-3 rounded-lg text-base font-medium {{ request()->routeIs('galeri*') ? 'text-white bg-white/20' : 'text-white/80 hover:text-white hover:bg-white/10' }}">Galeri</a>
+                <a href="{{ route('kontak') }}" class="block px-4 py-3 rounded-full text-base font-bold text-[#165a3f] bg-[#FFD700] hover:bg-white mt-6 border border-transparent text-center transition-colors shadow-md">Kontak</a>
             </div>
         </div>
     </header>
@@ -287,9 +286,9 @@
     <!-- Footer -->
     <footer class="bg-[#114a33] pt-16 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 mb-12">
+            <div class="grid grid-cols-2 md:grid-cols-12 gap-y-12 gap-x-8 lg:gap-16 mb-12 text-left">
                 <!-- Brand & Mission -->
-                <div class="md:col-span-5 space-y-6">
+                <div class="col-span-2 md:col-span-5 space-y-6 flex flex-col items-start">
                     <a href="/" class="inline-flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/10 hover:bg-white/10 transition-colors group">
                         @if(isset($siteSetting) && $siteSetting->logo)
                             <img src="{{ asset($siteSetting->logo) }}" alt="Logo {{ $siteSetting->site_name }}" class="h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md">
@@ -307,14 +306,14 @@
                             @endif
                         </span>
                     </a>
-                    <p class="text-white/70 text-sm leading-relaxed mb-6">
+                    <p class="text-white/70 text-sm leading-relaxed mb-6 max-w-md">
                         {{ \App\Models\SiteSetting::where('key', 'footer_description')->value('value') }}
                     </p>
                 </div>
                 
-                <div class="md:col-span-2">
+                <div class="col-span-1 md:col-span-2">
                     <h3 class="font-heading font-semibold text-white tracking-wider uppercase text-sm mb-4">Navigasi</h3>
-                    <ul class="space-y-3 text-sm">
+                    <ul class="space-y-3 text-sm flex flex-col items-start">
                         <li><a href="{{ route('home') }}" class="text-white/70 hover:text-[#FFD700] transition-colors">Beranda</a></li>
                         <li><a href="{{ route('tentang-kami') }}" class="text-white/70 hover:text-[#FFD700] transition-colors">Tentang Kami</a></li>
                         <li><a href="{{ route('anggota') }}" class="text-white/70 hover:text-[#FFD700] transition-colors">Anggota</a></li>
@@ -323,9 +322,9 @@
                     </ul>
                 </div>
                 
-                <div class="md:col-span-2">
+                <div class="col-span-1 md:col-span-2">
                     <h3 class="font-heading font-semibold text-white tracking-wider uppercase text-sm mb-4">Konten</h3>
-                    <ul class="space-y-3 text-sm">
+                    <ul class="space-y-3 text-sm flex flex-col items-start">
                         <li><a href="{{ route('berita') }}" class="text-white/70 hover:text-[#FFD700] transition-colors">Berita Terkini</a></li>
                         <li><a href="{{ route('artikel') }}" class="text-white/70 hover:text-[#FFD700] transition-colors">Artikel & Opini</a></li>
                         <li><a href="{{ route('riset') }}" class="text-white/70 hover:text-[#FFD700] transition-colors">Publikasi Riset</a></li>
@@ -334,24 +333,24 @@
                     </ul>
                 </div>
 
-                <div class="md:col-span-3">
+                <div class="col-span-2 md:col-span-3">
                     <h3 class="font-heading font-semibold text-white tracking-wider uppercase text-sm mb-4">Hubungi Kami</h3>
-                    <ul class="space-y-4 text-sm text-white/70">
-                        <li class="flex items-start">
-                            <svg class="h-5 w-5 text-white/50 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <ul class="space-y-4 text-sm text-white/70 flex flex-col items-start">
+                        <li class="flex flex-row items-start text-left gap-3">
+                            <svg class="h-5 w-5 text-white/50 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                             <span>{{ $siteSetting->address ?? 'Jl. Pembangunan No. 45, Kendari, Sulawesi Tenggara 93111' }}</span>
                         </li>
-                        <li class="flex items-center">
-                            <svg class="h-5 w-5 text-white/50 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <li class="flex flex-row items-start gap-3">
+                            <svg class="h-5 w-5 text-white/50 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
-                            <a href="mailto:{{ $siteSetting->email ?? 'info@komdessultra.org' }}" class="hover:text-white transition-colors">{{ $siteSetting->email ?? 'info@komdessultra.org' }}</a>
+                            <a href="mailto:{{ $siteSetting->email ?? 'info@komdessultra.org' }}" class="hover:text-white transition-colors break-all">{{ $siteSetting->email ?? 'info@komdessultra.org' }}</a>
                         </li>
-                        <li class="flex items-center">
-                            <svg class="h-5 w-5 text-white/50 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <li class="flex flex-row items-start gap-3">
+                            <svg class="h-5 w-5 text-white/50 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
                             <span>{{ $siteSetting->phone ?? '+62 811 2345 6789' }}</span>

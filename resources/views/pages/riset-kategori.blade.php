@@ -5,7 +5,7 @@
 @section('content')
 <!-- Page Header -->
 <div class="relative pt-64 pb-48 overflow-hidden bg-[#165a3f]">
-    <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
+    <div class="hidden md:block absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
 
         <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-6 uppercase tracking-widest drop-shadow-md">Tata Kelola Desa</h1>
@@ -120,7 +120,7 @@
                 
                 <!-- Riset Item 1 -->
                 <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                    <div class="relative h-56 overflow-hidden">
+                    <div class="relative h-48 sm:h-56 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1574046664972-e565980fcbc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Rapat Desa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -152,7 +152,7 @@
 
                 <!-- Riset Item 2 -->
                 <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                    <div class="relative h-56 overflow-hidden">
+                    <div class="relative h-48 sm:h-56 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Jurnal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -196,7 +196,7 @@
         </div>
 
         <!-- Sidebar (Right Content) -->
-        <div class="lg:w-[350px] flex-shrink-0">
+        <div class="w-full lg:w-[350px] flex-shrink-0">
             <div class="sticky top-28 space-y-8">
                 
                 <!-- Search Widget -->

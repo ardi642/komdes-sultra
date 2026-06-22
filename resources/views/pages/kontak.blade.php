@@ -10,7 +10,7 @@
     <!-- 1. Hero Section: Info Kontak Utama -->
     <section class="relative text-white pt-64 pb-48 overflow-hidden bg-[#165a3f]">
         <!-- Ambient Glow Putih -->
-        <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
+        <div class="hidden md:block absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
         <div class="max-w-[90rem] mx-auto px-6 md:px-10 lg:px-12 relative z-10">
             <!-- Judul & Link Aduan -->
             <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6" data-aos="fade-up">
@@ -87,8 +87,8 @@
     <!-- 2. Section: Kontak Anggota -->
     <section class="py-28 lg:py-36 relative overflow-hidden bg-white">
         <!-- Ambient Glow Elements -->
-        <div class="absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-50 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
-        <div class="absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-40 -translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
+        <div class="hidden md:block absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-50 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+        <div class="hidden md:block absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-40 -translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
 
         <div class="max-w-[90rem] mx-auto px-6 md:px-10 lg:px-12 relative z-10">
             <!-- Judul -->
@@ -167,7 +167,7 @@
     <!-- 3. Section: Formulir Laporan / Aduan -->
     <section id="aduan" class="py-28 lg:py-36 relative overflow-hidden bg-[#165a3f]">
         <!-- Ambient Glow Putih -->
-        <div class="absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 -translate-x-1/4 translate-y-1/4 bg-white"></div>
+        <div class="hidden md:block absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 -translate-x-1/4 translate-y-1/4 bg-white"></div>
         <div class="max-w-4xl mx-auto px-6 md:px-10 lg:px-12 relative z-10">
             
             <div class="mb-10" data-aos="fade-up">

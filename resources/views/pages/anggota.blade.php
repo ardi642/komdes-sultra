@@ -27,7 +27,7 @@
     class="bg-zinc-50 min-h-screen pt-40 pb-36 relative">
     
     <!-- Decorative Background: Organic Blobs (Glassmorphism) -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="hidden md:block absolute inset-0 overflow-hidden pointer-events-none">
         <!-- Top Right Blob -->
         <div class="absolute -top-32 -right-32 w-[500px] md:w-[700px] h-[500px] md:h-[700px] rounded-[40%_60%_70%_30%] bg-primary-200/40 blur-[100px] md:blur-[140px] transform rotate-12"></div>
         

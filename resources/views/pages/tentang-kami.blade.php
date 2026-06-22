@@ -27,7 +27,7 @@
 
     <!-- Hero Section (Green Solid) -->
     <div class="relative pt-64 pb-48 overflow-hidden bg-[#165a3f]">
-        <div class="absolute right-0 bottom-0 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 translate-y-1/4 bg-white"></div>
+        <div class="hidden md:block absolute right-0 bottom-0 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 translate-y-1/4 bg-white"></div>
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             <div class="text-center mt-10 mb-8 max-w-6xl mx-auto" data-aos="fade-up">
 
@@ -42,8 +42,8 @@
     <!-- Section 1: Profil Singkat (White with hint of green) -->
     <section class="relative py-28 lg:py-36 overflow-hidden bg-white">
         <!-- Ambient Glow Elements -->
-        <div class="absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-40 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
-        <div class="absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-30 -translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
+        <div class="hidden md:block absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-40 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+        <div class="hidden md:block absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-30 -translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
 
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             <div class="max-w-6xl" data-aos="fade-up">
@@ -60,7 +60,7 @@
     <!-- Section 2: Mengapa Komdes Sultra (Green Solid) -->
     <section class="relative py-28 lg:py-36 overflow-hidden bg-[#165a3f]">
         <!-- Ambient Glow Putih -->
-        <div class="absolute left-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 -translate-x-1/3 -translate-y-1/4 bg-white"></div>
+        <div class="hidden md:block absolute left-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 -translate-x-1/3 -translate-y-1/4 bg-white"></div>
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             <div class="max-w-6xl" data-aos="fade-up">
                 <div class="w-32 h-[1px] bg-white mb-4"></div>
@@ -76,8 +76,8 @@
     <!-- Section 3: Tujuan & Intensi (White with hint of green) -->
     <section class="relative py-28 lg:py-36 overflow-hidden bg-white">
         <!-- Ambient Glow Elements -->
-        <div class="absolute left-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-40 -translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
-        <div class="absolute right-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-30 translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
+        <div class="hidden md:block absolute left-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-40 -translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+        <div class="hidden md:block absolute right-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-30 translate-x-1/3 translate-y-1/3" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
 
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             
@@ -131,7 +131,7 @@
     <!-- Section 4: Sikap dan Deklarasi (Green Solid) -->
     <section class="relative py-28 lg:py-36 overflow-hidden bg-[#165a3f]">
         <!-- Ambient Glow Putih -->
-        <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
+        <div class="hidden md:block absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
 
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             <div class="w-32 h-[1px] bg-white mb-4" data-aos="fade-up"></div>
@@ -159,7 +159,7 @@
     <!-- Section 5: Anggota (White) -->
     <section class="relative py-28 lg:py-36 overflow-hidden bg-white">
         <!-- Ambient Glow Elements -->
-        <div class="absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-40 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+        <div class="hidden md:block absolute right-0 top-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full blur-[120px] pointer-events-none opacity-40 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
         
         <div class="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
             <div class="mb-16 flex flex-col md:items-end text-left md:text-right" data-aos="fade-up">

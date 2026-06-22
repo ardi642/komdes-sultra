@@ -12,8 +12,8 @@
     </div>
     
     <!-- Decorative Elements -->
-    <div class="absolute top-1/4 right-0 w-96 h-96 bg-primary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-secondary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20" style="animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;"></div>
+    <div class="hidden md:block absolute top-1/4 right-0 w-96 h-96 bg-primary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+    <div class="hidden md:block absolute bottom-1/4 right-1/4 w-72 h-72 bg-secondary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20" style="animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div class="max-w-3xl">
@@ -119,7 +119,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- News Card 1 -->
             <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                <div class="relative h-56 overflow-hidden">
+                <div class="relative h-48 sm:h-56 overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1574046664972-e565980fcbc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Rapat Desa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     <div class="absolute top-4 left-4 bg-primary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">Berita</div>
                 </div>
@@ -141,7 +141,7 @@
 
             <!-- News Card 2 -->
             <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                <div class="relative h-56 overflow-hidden">
+                <div class="relative h-48 sm:h-56 overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Konservasi Hutan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     <div class="absolute top-4 left-4 bg-primary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">Berita</div>
                 </div>
@@ -163,7 +163,7 @@
 
             <!-- News Card 3 -->
             <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                <div class="relative h-56 overflow-hidden">
+                <div class="relative h-48 sm:h-56 overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pemuda Desa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     <div class="absolute top-4 left-4 bg-primary-500 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">Berita</div>
                 </div>
@@ -212,7 +212,7 @@
                 <div class="space-y-6">
                     <!-- Item Publikasi -->
                     <div class="group flex flex-col sm:flex-row gap-6 p-4 rounded-2xl hover:bg-zinc-50 border border-transparent hover:border-zinc-200 transition-all duration-300">
-                        <div class="sm:w-48 h-32 rounded-xl overflow-hidden flex-shrink-0 relative">
+                        <div class="w-full sm:w-48 h-48 sm:h-32 rounded-xl overflow-hidden flex-shrink-0 relative">
                             <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Riset" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                             <div class="absolute top-2 left-2 bg-zinc-900/80 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Publikasi Riset</div>
                         </div>
@@ -231,7 +231,7 @@
 
                     <!-- Item Artikel -->
                     <div class="group flex flex-col sm:flex-row gap-6 p-4 rounded-2xl hover:bg-zinc-50 border border-transparent hover:border-zinc-200 transition-all duration-300">
-                        <div class="sm:w-48 h-32 rounded-xl overflow-hidden flex-shrink-0 relative">
+                        <div class="w-full sm:w-48 h-48 sm:h-32 rounded-xl overflow-hidden flex-shrink-0 relative">
                             <img src="https://images.unsplash.com/photo-1455390582262-044cdead27d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Artikel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                             <div class="absolute top-2 left-2 bg-zinc-900/80 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Artikel</div>
                         </div>
@@ -247,7 +247,7 @@
                     
                     <!-- Item Siaran Pers -->
                     <div class="group flex flex-col sm:flex-row gap-6 p-4 rounded-2xl hover:bg-zinc-50 border border-transparent hover:border-zinc-200 transition-all duration-300">
-                        <div class="sm:w-48 h-32 rounded-xl bg-primary-50 flex-shrink-0 relative flex items-center justify-center border border-primary-100 text-primary-500">
+                        <div class="w-full sm:w-48 h-48 sm:h-32 rounded-xl bg-primary-50 flex-shrink-0 relative flex items-center justify-center border border-primary-100 text-primary-500">
                             <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H14"></path></svg>
                             <div class="absolute top-2 left-2 bg-primary-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Siaran Pers</div>
                         </div>
@@ -328,8 +328,8 @@
 <!-- Call to Action -->
 <section class="py-20 relative overflow-hidden bg-primary-600">
     <div class="absolute inset-0 z-0">
-        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-primary-500 opacity-50 blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-secondary-400 opacity-30 blur-3xl"></div>
+        <div class="hidden md:block absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-primary-500 opacity-50 blur-3xl"></div>
+        <div class="hidden md:block absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-secondary-400 opacity-30 blur-3xl"></div>
     </div>
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-6 tracking-tight">Mari Bergabung Menjadi Bagian dari Perubahan</h2>

@@ -101,7 +101,7 @@
             </div>
 
             <!-- Sidebar (Right Content) -->
-            <div class="lg:w-[350px] flex-shrink-0 lg:-mt-24 relative z-20">
+            <div class="w-full lg:w-[350px] flex-shrink-0 lg:-mt-24 relative z-20">
                 @include('partials.post-sidebar', [
                     'searchRoute' => route('artikel'),
                     'relatedPosts' => $relatedPosts ?? collect()

@@ -148,7 +148,7 @@
             </div>
             <!-- Overlay Gelap Merata -->
             <div class="absolute inset-0 bg-black/20 z-0"></div>
-            <div class="absolute right-0 bottom-0 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 translate-y-1/4 bg-white"></div>
+            <div class="hidden md:block absolute right-0 bottom-0 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 translate-y-1/4 bg-white"></div>
             
             <div class="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 w-full">
                 <div class="max-w-3xl">
@@ -168,7 +168,7 @@
 <!-- 2. TENTANG KAMI (HIJAU SOLID) -->
 <section class="py-28 lg:py-36 bg-[#165a3f] relative overflow-hidden">
     <!-- Ambient Glow Putih -->
-    <div class="absolute left-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 -translate-x-1/3 -translate-y-1/4 bg-white"></div>
+    <div class="hidden md:block absolute left-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 -translate-x-1/3 -translate-y-1/4 bg-white"></div>
 
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="flex flex-col {{ (!$homepageSetting || $homepageSetting->about_media_type !== 'none') ? 'lg:flex-row' : '' }} items-center gap-16 lg:gap-20">
@@ -238,7 +238,7 @@
 <!-- 3. ANGGOTA JARING (PUTIH) -->
 <section class="py-28 lg:py-36 bg-white relative overflow-hidden">
     <!-- Ambient Glow Hijau -->
-    <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-40 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+    <div class="hidden md:block absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-40 translate-x-1/3 -translate-y-1/3" style="background-color: var(--color-primary-100, #dcfce7);"></div>
 
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10" x-data="{ modalOpen: false, selectedMember: null }">
         
@@ -330,7 +330,7 @@
 <!-- 4. FOKUS ISU (HIJAU GELAP) -->
 <section class="py-28 lg:py-36 bg-[#165a3f] relative overflow-hidden">
     <!-- Ambient Glow Putih -->
-    <div class="absolute left-0 bottom-0 w-[400px] h-[400px] rounded-full blur-[100px] pointer-events-none opacity-5 -translate-x-1/4 translate-y-1/4 bg-white"></div>
+    <div class="hidden md:block absolute left-0 bottom-0 w-[400px] h-[400px] rounded-full blur-[100px] pointer-events-none opacity-5 -translate-x-1/4 translate-y-1/4 bg-white"></div>
     
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -363,8 +363,8 @@
 <!-- 5. PUSAT PUBLIKASI (PUTIH) -->
 <section class="py-28 lg:py-36 bg-white relative overflow-hidden" x-data="{ activeTab: 'berita' }">
     <!-- Ambient Glow Hijau -->
-    <div class="absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-40 -translate-x-1/4 translate-y-1/4" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
-    <div class="absolute right-0 top-0 w-[400px] h-[400px] rounded-full blur-[100px] pointer-events-none opacity-30 translate-x-1/3 -translate-y-1/4" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+    <div class="hidden md:block absolute left-0 bottom-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-40 -translate-x-1/4 translate-y-1/4" style="background-color: var(--color-primary-50, #f0fdf4);"></div>
+    <div class="hidden md:block absolute right-0 top-0 w-[400px] h-[400px] rounded-full blur-[100px] pointer-events-none opacity-30 translate-x-1/3 -translate-y-1/4" style="background-color: var(--color-primary-100, #dcfce7);"></div>
 
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -477,7 +477,7 @@
 <!-- 6. AGENDA ACARA (HIJAU GELAP) -->
 <section class="py-28 lg:py-36 bg-[#165a3f] relative overflow-hidden">
     <!-- Ambient Glow Putih -->
-    <div class="absolute left-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-10 -translate-x-1/4 -translate-y-1/4 bg-white"></div>
+    <div class="hidden md:block absolute left-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-10 -translate-x-1/4 -translate-y-1/4 bg-white"></div>
     
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -531,7 +531,7 @@
 <!-- 7. GALERI KEGIATAN (PUTIH) -->
 <section class="py-28 lg:py-36 bg-white overflow-hidden relative">
     <!-- Ambient Glow Hijau -->
-    <div class="absolute right-0 top-1/2 w-[700px] h-[700px] rounded-full blur-[120px] pointer-events-none opacity-40 translate-x-1/4 -translate-y-1/2" style="background-color: var(--color-primary-100, #dcfce7);"></div>
+    <div class="hidden md:block absolute right-0 top-1/2 w-[700px] h-[700px] rounded-full blur-[120px] pointer-events-none opacity-40 translate-x-1/4 -translate-y-1/2" style="background-color: var(--color-primary-100, #dcfce7);"></div>
 
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

@@ -5,7 +5,7 @@
 @section('content')
 <!-- Page Header / Issue Overview -->
 <div class="relative pt-64 pb-48 overflow-hidden bg-[#165a3f]">
-    <div class="absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
+    <div class="hidden md:block absolute right-0 top-0 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none opacity-5 translate-x-1/4 -translate-y-1/4 bg-white"></div>
     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center gap-12">
         <!-- Logo -->
         <div class="w-32 h-32 md:w-40 md:h-40 flex-shrink-0 bg-white/10 rounded-2xl shadow-sm border border-white/20 flex items-center justify-center text-white backdrop-blur-sm overflow-hidden" data-aos="fade-right">
@@ -290,7 +290,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="200">
             @forelse($relatedPosts as $post)
             <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                <div class="relative h-56 overflow-hidden">
+                <div class="relative h-48 sm:h-56 overflow-hidden">
                     <span class="absolute top-4 left-4 z-10 bg-primary-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">{{ ucfirst(str_replace('_', ' ', $post->type)) }}</span>
                     <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
