@@ -20,7 +20,28 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(\Laravel\Fortify\Contracts\LogoutResponse::class, function () {
+            return new class implements \Laravel\Fortify\Contracts\LogoutResponse {
+                public function toResponse($request)
+                {
+                    return redirect()->route('login');
+                }
+            };
+        });
+
+        $this->app->bind(\Laravel\Fortify\Contracts\SuccessfulPasswordResetLinkRequestResponse::class, function ($app, $params) {
+            return new class($params['status'] ?? 'passwords.sent') implements \Laravel\Fortify\Contracts\SuccessfulPasswordResetLinkRequestResponse {
+                private $status;
+                public function __construct($status) {
+                    $this->status = $status;
+                }
+                public function toResponse($request)
+                {
+                    return back()->with('status', trans($this->status))
+                                 ->with('reset_email', $request->input('email'));
+                }
+            };
+        });
     }
 
     /**
