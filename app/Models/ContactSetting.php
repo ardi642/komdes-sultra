@@ -7,10 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class ContactSetting extends Model
 {
     protected $fillable = [
+        'site_name',
+        'site_name_segments',
+        'logo',
+        'favicon',
         'phone',
         'email',
         'website',
         'address',
-        'logo',
+        'map_embed',
+    ];
+
+    protected $casts = [
+        'site_name_segments' => 'array',
     ];
 }

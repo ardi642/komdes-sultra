@@ -1,10 +1,4 @@
 <div>
-    <div class="mb-6 flex justify-between items-center">
-        <div>
-            <h2 class="text-2xl font-bold text-gray-800">Pengaturan Tentang Kami</h2>
-            <p class="text-gray-600 text-sm mt-1">Kelola konten halaman Tentang Kami (Profil, Tujuan, Intensi, Sikap).</p>
-        </div>
-    </div>
 
     @if (session()->has('message'))
         <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded shadow-sm flex items-center justify-between">
@@ -137,28 +131,27 @@
             </div>
         </div>
 
-    </div>
-    
-    <div class="mt-8 mb-4 flex justify-start gap-4">
-        <button type="button" @click="$dispatch('open-confirm-modal', {
-            title: 'Simpan Pengaturan?',
-            message: 'Apakah Anda yakin ingin menyimpan perubahan pada halaman Tentang Kami?',
-            confirmText: 'Ya, Simpan',
-            onConfirm: () => $wire.store()
-        })" class="px-5 py-2.5 bg-primary-600 text-white text-sm font-semibold rounded-lg shadow hover:bg-primary-700 transition-colors flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-            Simpan Pengaturan
-        </button>
+        <div class="mt-8 mb-4 flex justify-end gap-4 border-t border-gray-100 pt-6">
+            <button type="button" @click="$dispatch('open-confirm-modal', {
+                title: 'Batalkan Perubahan?',
+                message: 'Semua tulisan yang belum disimpan akan hilang dan formulir akan dikembalikan ke data terakhir.',
+                confirmText: 'Ya, Batal',
+                onConfirm: () => window.location.reload()
+            })" class="px-5 py-2 bg-white text-zinc-700 font-semibold rounded-lg shadow-sm border border-zinc-300 hover:bg-zinc-50 hover:text-zinc-900 transition-colors flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                Batal
+            </button>
 
-        <button type="button" @click="$dispatch('open-confirm-modal', {
-            title: 'Batalkan Perubahan?',
-            message: 'Semua tulisan yang belum disimpan akan hilang dan formulir akan dikembalikan ke data terakhir.',
-            confirmText: 'Ya, Batal',
-            onConfirm: () => $wire.resetForm()
-        })" class="px-5 py-2.5 bg-white text-zinc-700 text-sm font-semibold rounded-lg shadow-sm border border-zinc-300 hover:bg-zinc-50 hover:text-zinc-900 transition-colors flex items-center gap-2">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-            Batal
-        </button>
+            <button type="button" @click="$dispatch('open-confirm-modal', {
+                title: 'Simpan Pengaturan?',
+                message: 'Apakah Anda yakin ingin menyimpan perubahan pada halaman Tentang Kami?',
+                confirmText: 'Ya, Simpan',
+                onConfirm: () => $wire.store()
+            })" class="px-6 py-2 bg-primary-600 text-white font-semibold rounded-lg shadow-md hover:bg-primary-700 transition-colors flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                Simpan Pengaturan
+            </button>
+        </div>
     </div>
 
     @script

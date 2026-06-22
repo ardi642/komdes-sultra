@@ -25,6 +25,13 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureDefaults();
 
+        try {
+            $siteSetting = \App\Models\ContactSetting::first();
+            \Illuminate\Support\Facades\View::share('siteSetting', $siteSetting);
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\View::share('siteSetting', null);
+        }
+
         \Illuminate\Auth\Notifications\ResetPassword::toMailUsing(function ($notifiable, $token) {
             $url = url(route('password.reset', [
                 'token' => $token,

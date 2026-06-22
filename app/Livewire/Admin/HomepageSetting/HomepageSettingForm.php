@@ -106,9 +106,7 @@ class HomepageSettingForm extends Component
         $setting->save();
 
         session()->flash('message', 'Pengaturan beranda berhasil disimpan.');
-        
-        // Refresh the form
-        return redirect()->route('admin.homepage.setting');
+        $this->dispatch('scroll-to-top');
     }
 
     public function render()

@@ -65,9 +65,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/hero-slider/tambah', \App\Livewire\Admin\HeroSlider\HeroSliderForm::class)->name('hero.create');
         Route::get('/hero-slider/{id}/edit', \App\Livewire\Admin\HeroSlider\HeroSliderForm::class)->name('hero.edit');
 
-        Route::get('/pengaturan-beranda', \App\Livewire\Admin\HomepageSetting\HomepageSettingForm::class)->name('homepage.setting');
-        Route::get('/tentang-kami', \App\Livewire\Admin\Setting\AboutIndex::class)->name('about.index');
-        Route::get('/kontak', \App\Livewire\Admin\Setting\ContactIndex::class)->name('contact.index');
+        Route::get('/pengaturan-situs', \App\Livewire\Admin\Setting\SettingIndex::class)->name('setting.index');
         Route::get('/pesan-masuk', \App\Livewire\Admin\Inbox\InboxIndex::class)->name('inbox.index');
         
         // Storage Management

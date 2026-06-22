@@ -3,7 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Komdes Sultra - Komunitas Desa')</title>
+    <title>@yield('title', ($siteSetting->site_name ?? 'Komdes Sultra') . ' - Komunitas Desa')</title>
+    @if(isset($siteSetting) && $siteSetting->favicon)
+        <link rel="icon" href="{{ asset($siteSetting->favicon) }}">
+    @endif
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -30,10 +33,23 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-24 items-center">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center bg-white px-5 py-2 rounded-full shadow-sm border border-zinc-100">
+                <div class="flex-shrink-0 flex items-center">
                     <a href="/" class="flex items-center gap-3 group">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo Komdes Sultra" class="h-10 md:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
-                        <span class="font-heading font-bold text-lg md:text-xl tracking-tight text-[#165a3f] transition-colors">Komdes <span class="text-[#FFD700]">Sultra</span></span>
+                        @if(isset($siteSetting) && $siteSetting->logo)
+                            <img src="{{ asset($siteSetting->logo) }}" alt="Logo {{ $siteSetting->site_name }}" class="h-10 md:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-sm">
+                        @else
+                            <img src="{{ asset('images/logo.png') }}" alt="Logo Komdes Sultra" class="h-10 md:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-sm">
+                        @endif
+                        <span class="font-heading font-bold text-lg md:text-xl tracking-tight transition-colors drop-shadow-sm">
+                            @if(isset($siteSetting) && !empty($siteSetting->site_name_segments))
+                                @foreach($siteSetting->site_name_segments as $segment)
+                                    <span style="color: {{ $segment['color'] ?? '#ffffff' }}">{{ $segment['text'] }}</span>
+                                @endforeach
+                            @else
+                                <span style="color: #ffffff">Komdes</span>
+                                <span style="color: #FFD700">Sultra</span>
+                            @endif
+                        </span>
                     </a>
                 </div>
 
@@ -271,11 +287,25 @@
     <!-- Footer -->
     <footer class="bg-[#114a33] pt-16 pb-8 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-8 mb-12">
-                <div class="col-span-1 md:col-span-1 lg:col-span-1">
-                    <a href="/" class="inline-flex items-center gap-3 mb-6 group bg-white/5 p-2 pr-4 rounded-xl w-fit border border-white/10">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo Komdes Sultra" class="h-14 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
-                        <span class="font-heading font-bold text-xl md:text-2xl tracking-tight text-white transition-colors">Komdes <span class="text-[#FFD700]">Sultra</span></span>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 mb-12">
+                <!-- Brand & Mission -->
+                <div class="md:col-span-5 space-y-6">
+                    <a href="/" class="inline-flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/10 hover:bg-white/10 transition-colors group">
+                        @if(isset($siteSetting) && $siteSetting->logo)
+                            <img src="{{ asset($siteSetting->logo) }}" alt="Logo {{ $siteSetting->site_name }}" class="h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md">
+                        @else
+                            <img src="{{ asset('images/logo.png') }}" alt="Logo Komdes Sultra" class="h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md">
+                        @endif
+                        <span class="font-heading font-bold text-2xl tracking-tight transition-colors drop-shadow-sm">
+                            @if(isset($siteSetting) && !empty($siteSetting->site_name_segments))
+                                @foreach($siteSetting->site_name_segments as $segment)
+                                    <span style="color: {{ $segment['color'] ?? '#ffffff' }}">{{ $segment['text'] }}</span>
+                                @endforeach
+                            @else
+                                <span style="color: #ffffff">Komdes</span>
+                                <span style="color: #FFD700">Sultra</span>
+                            @endif
+                        </span>
                     </a>
                     <p class="text-white/70 text-sm leading-relaxed mb-6">
                         Lembaga Swadaya Masyarakat yang berdedikasi untuk pemberdayaan komunitas desa di Sulawesi Tenggara melalui advokasi, riset, dan program berkelanjutan.
@@ -296,7 +326,7 @@
                     </div>
                 </div>
                 
-                <div>
+                <div class="md:col-span-2">
                     <h3 class="font-heading font-semibold text-white tracking-wider uppercase text-sm mb-4">Navigasi</h3>
                     <ul class="space-y-3 text-sm">
                         <li><a href="{{ route('home') }}" class="text-white/70 hover:text-[#FFD700] transition-colors">Beranda</a></li>
@@ -307,7 +337,7 @@
                     </ul>
                 </div>
                 
-                <div>
+                <div class="md:col-span-2">
                     <h3 class="font-heading font-semibold text-white tracking-wider uppercase text-sm mb-4">Konten</h3>
                     <ul class="space-y-3 text-sm">
                         <li><a href="{{ route('berita') }}" class="text-white/70 hover:text-[#FFD700] transition-colors">Berita Terkini</a></li>
@@ -318,33 +348,33 @@
                     </ul>
                 </div>
 
-                <div>
+                <div class="md:col-span-3">
                     <h3 class="font-heading font-semibold text-white tracking-wider uppercase text-sm mb-4">Hubungi Kami</h3>
                     <ul class="space-y-4 text-sm text-white/70">
                         <li class="flex items-start">
-                            <svg class="h-5 w-5 text-white/50 mr-3 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg class="h-5 w-5 text-white/50 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
-                            <span>Jl. Pembangunan No. 45, Kendari, Sulawesi Tenggara 93111</span>
+                            <span>{{ $siteSetting->address ?? 'Jl. Pembangunan No. 45, Kendari, Sulawesi Tenggara 93111' }}</span>
                         </li>
                         <li class="flex items-center">
                             <svg class="h-5 w-5 text-white/50 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
-                            <a href="mailto:info@komdessultra.org" class="hover:text-white transition-colors">info@komdessultra.org</a>
+                            <a href="mailto:{{ $siteSetting->email ?? 'info@komdessultra.org' }}" class="hover:text-white transition-colors">{{ $siteSetting->email ?? 'info@komdessultra.org' }}</a>
                         </li>
                         <li class="flex items-center">
                             <svg class="h-5 w-5 text-white/50 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
-                            <span>+62 811 2345 6789</span>
+                            <span>{{ $siteSetting->phone ?? '+62 811 2345 6789' }}</span>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="border-t border-white/10 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center text-sm text-white/50">
-                <p>&copy; {{ date('Y') }} Komdes Sultra. Hak Cipta Dilindungi.</p>
+                <p>&copy; {{ date('Y') }} {{ $siteSetting->site_name ?? 'Komdes Sultra' }}. Hak Cipta Dilindungi.</p>
                 <div class="flex space-x-4 mt-4 md:mt-0">
                     <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
                     <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>

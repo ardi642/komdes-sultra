@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? 'Autentikasi' }} - {{ config('app.name', 'Komdes Sultra') }}</title>
+    <title>{{ $title ?? 'Autentikasi' }} - {{ $siteSetting->site_name ?? config('app.name', 'Komdes Sultra') }}</title>
+    @if(isset($siteSetting) && $siteSetting->favicon)
+        <link rel="icon" href="{{ asset($siteSetting->favicon) }}">
+    @endif
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -26,11 +29,24 @@
             <!-- Decorative top accent -->
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-400 to-primary-600"></div>
             
-            <!-- Header / Logo Inside Card -->
-            <div class="mb-10 mt-2">
+            <!-- Header -->
+            <div class="mb-8 flex justify-center">
                 <a href="{{ route('home') }}" class="flex flex-col items-center justify-center gap-2" wire:navigate>
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo Komdes Sultra" class="h-16 w-auto drop-shadow-sm">
-                    <span class="text-base font-bold text-zinc-700 tracking-wide mt-1">Komdes Sultra</span>
+                    @if(isset($siteSetting) && $siteSetting->logo)
+                        <img src="{{ asset($siteSetting->logo) }}" alt="Logo {{ $siteSetting->site_name }}" class="h-16 w-auto drop-shadow-sm">
+                    @else
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo Komdes Sultra" class="h-16 w-auto drop-shadow-sm">
+                    @endif
+                    <span class="text-base font-bold tracking-wide mt-1 drop-shadow-sm">
+                        @if(isset($siteSetting) && !empty($siteSetting->site_name_segments))
+                            @foreach($siteSetting->site_name_segments as $segment)
+                                <span style="color: {{ $segment['color'] ?? '#ffffff' }}">{{ $segment['text'] }}</span>
+                            @endforeach
+                        @else
+                            <span style="color: #ffffff">Komdes</span>
+                            <span style="color: #FFD700">Sultra</span>
+                        @endif
+                    </span>
                 </a>
             </div>
 
@@ -39,7 +55,7 @@
         
         <!-- Footer / Back to home -->
         <div class="mt-8 text-center text-sm text-zinc-500">
-            &copy; {{ date('Y') }} Komdes Sultra. Hak cipta dilindungi.
+            &copy; {{ date('Y') }} {{ $siteSetting->site_name ?? 'Komdes Sultra' }}. Hak cipta dilindungi.
         </div>
     </div>
 
