@@ -107,6 +107,10 @@ class FrontendController extends Controller
             $query->whereYear('date', $request->tahun);
         }
 
+        if ($request->filled('bulan')) {
+            $query->whereMonth('date', $request->bulan);
+        }
+
         $galleries = $query->latest('date')->paginate(9)->withQueryString();
         
         $years = \App\Models\Gallery::selectRaw('YEAR(date) as year')->distinct()->orderBy('year', 'desc')->pluck('year');

@@ -27,7 +27,7 @@
         <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
             <!-- Filters & Search Wrapper -->
-            <div class="mb-12" x-data="{ showFilter: {{ (request()->filled('q') || request()->filled('tahun')) ? 'true' : 'false' }} }" data-aos="fade-up">
+            <div class="mb-12" x-data="{ showFilter: false }" data-aos="fade-up">
                 
                 <!-- Toggle Button -->
                 <div class="flex justify-between items-center mb-6">
@@ -38,6 +38,33 @@
                         <span x-text="showFilter ? 'Tutup Filter' : 'Cari & Filter'"></span>
                     </button>
                 </div>
+
+                <!-- Summary Filter Aktif -->
+                @if(request()->filled('q') || request()->filled('tahun') || request()->filled('bulan'))
+                <div x-show="!showFilter" x-transition class="flex items-center flex-wrap gap-4 mb-6">
+                    <span class="text-[11px] font-bold text-zinc-400 uppercase tracking-widest">Filter Aktif:</span>
+                    <div class="flex flex-wrap items-center gap-2">
+                        @if(request('q'))
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-semibold bg-primary-50 text-primary-700 border border-primary-100/60 shadow-sm gap-1.5">Pencarian: "{{ request('q') }}"</span>
+                        @endif
+                        @if(request('tahun') && !request('bulan'))
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-semibold bg-primary-50 text-primary-700 border border-primary-100/60 shadow-sm gap-1.5">Tahun: {{ request('tahun') }}</span>
+                        @endif
+                        @if(request('bulan') && request('tahun'))
+                            @php 
+                                $monthNames = [1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'];
+                            @endphp
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-semibold bg-primary-50 text-primary-700 border border-primary-100/60 shadow-sm gap-1.5">Bulan: {{ $monthNames[request('bulan')] ?? request('bulan') }} {{ request('tahun') }}</span>
+                        @endif
+                        @if(request('bulan') && !request('tahun'))
+                            @php 
+                                $monthNames = [1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'];
+                            @endphp
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-xl text-xs font-semibold bg-primary-50 text-primary-700 border border-primary-100/60 shadow-sm gap-1.5">Bulan: {{ $monthNames[request('bulan')] ?? request('bulan') }}</span>
+                        @endif
+                    </div>
+                </div>
+                @endif
 
                 <!-- Filters Form -->
                 <div x-show="showFilter" 
@@ -52,12 +79,32 @@
                     
                     <form action="{{ route('galeri') }}" method="GET" class="flex flex-col sm:flex-row gap-4 items-center justify-between">
                         
-                        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto flex-grow max-w-2xl">
+                        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto flex-grow max-w-4xl">
                             <!-- Search Box -->
-                            <div class="relative w-full sm:max-w-md">
+                            <div class="relative w-full flex-grow sm:max-w-md">
                                 <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari galeri kegiatan..." class="w-full bg-zinc-50 border border-zinc-200 text-zinc-800 text-sm rounded-xl focus:ring-primary-500 focus:border-primary-500 block pl-10 p-3 transition-colors">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg class="w-5 h-5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                </div>
+                            </div>
+
+                            <!-- Month Filter -->
+                            <div class="relative w-full sm:w-48">
+                                <select name="bulan" class="w-full bg-zinc-50 border border-zinc-200 text-zinc-800 text-sm rounded-xl focus:ring-primary-500 focus:border-primary-500 block p-3 appearance-none transition-colors">
+                                    <option value="">Semua Bulan</option>
+                                    @php
+                                        $months = [
+                                            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+                                            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+                                            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+                                        ];
+                                    @endphp
+                                    @foreach($months as $key => $name)
+                                        <option value="{{ $key }}" {{ request('bulan') == $key ? 'selected' : '' }}>{{ $name }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </div>
                             </div>
 
@@ -76,8 +123,8 @@
                         </div>
                         
                         <!-- Search Button -->
-                        <div class="flex items-center gap-3 w-full sm:w-auto">
-                            @if(request()->filled('q') || request()->filled('tahun'))
+                        <div class="flex items-center gap-3 w-full sm:w-auto mt-4 sm:mt-0">
+                            @if(request()->filled('q') || request()->filled('tahun') || request()->filled('bulan'))
                                 <a href="{{ route('galeri') }}" class="text-zinc-500 hover:text-red-500 text-sm font-medium transition-colors px-3">Reset</a>
                             @endif
                             <button type="submit" class="w-full sm:w-auto bg-[#165a3f] hover:bg-primary-700 text-white font-medium rounded-xl text-sm px-6 py-3 transition-colors shadow-sm whitespace-nowrap">
