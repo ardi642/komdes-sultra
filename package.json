@@ -16,8 +16,10 @@
         "laravel-vite-plugin": "^3.1",
         "sortablejs": "^1.15.7",
         "tailwindcss": "^4.0.7",
+        "tinymce": "^6.8.3",
         "tom-select": "^2.6.1",
-        "vite": "^8.0.0"
+        "vite": "^8.0.0",
+        "vite-plugin-static-copy": "^4.1.1"
     },
     "optionalDependencies": {
         "@rollup/rollup-linux-x64-gnu": "4.9.5",

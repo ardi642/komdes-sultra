@@ -8,11 +8,26 @@
         editor: null,
         isUpdating: false,
         destroy() {
-            if (this.editor) {
-                tinymce.remove(this.editor);
+            if (this.editor && window.tinymce) {
+                window.tinymce.remove(this.editor);
             }
         },
         init() {
+            try {
+                if (window.loadTinyMCE) {
+                    window.loadTinyMCE().then((tinymce) => {
+                        this.initEditor(tinymce);
+                    });
+                } else if (window.tinymce) {
+                    this.initEditor(window.tinymce);
+                } else {
+                    console.error('TinyMCE is not loaded');
+                }
+            } catch (error) {
+                console.error('Failed to initialize TinyMCE:', error);
+            }
+        },
+        initEditor(tinymce) {
             try {
                 // Pre-cleanup just in case
                 if (this.$refs.editor.id && tinymce.get(this.$refs.editor.id)) {
@@ -22,9 +37,12 @@
                 tinymce.init({
                     target: this.$refs.editor,
                     ui_container: this.$refs.editor.parentElement,
+                    base_url: '/vendor/tinymce',
+                    suffix: '.min',
+                    license_key: 'gpl',
                     min_height: 400,
                     menubar: false,
-                    content_style: `body { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 16px; color: #18181b; line-height: 1.6; transition: max-width 0.3s ease; } body.is-fullscreen { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }`,
+                    content_style: `body { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 16px; color: #18181b; line-height: 1.6; transition: max-width 0.3s ease; } body:focus { outline: none; } body.is-fullscreen { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }`,
                     font_size_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
                     font_size_input_default_unit: 'pt',
                     font_family_formats: 'Default=Inter, ui-sans-serif, system-ui, -apple-system, sans-serif; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Tahoma=tahoma,arial,helvetica,sans-serif; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva',
@@ -138,4 +156,16 @@
     }">
         <textarea x-ref="editor" class="bg-white text-base border-zinc-300 rounded-lg"></textarea>
     </div>
+
+    <style>
+        /* Override TinyMCE skin.css */
+        body .tox-tinymce--focused,
+        body .tox-tinymce:focus-within,
+        body .tox.tox-tinymce--focused,
+        body .tox.tox-tinymce:focus-within {
+            border-color: #e5e5e5 !important;
+            box-shadow: none !important;
+            outline: none !important;
+        }
+    </style>
 </div>

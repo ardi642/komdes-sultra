@@ -205,12 +205,13 @@
 @push('scripts')
 @if(!$isMitraMedia)
 <script>
-    document.addEventListener('livewire:initialized', () => {
+    document.addEventListener('livewire:initialized', async () => {
         const ctx = document.getElementById('publicationChart');
-        if (ctx && window.Chart) {
+        if (ctx && window.loadChartJs) {
+            const Chart = await window.loadChartJs();
             const chartData = @json($chartData);
             
-            new window.Chart(ctx, {
+            new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: chartData.labels,
