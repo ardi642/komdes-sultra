@@ -73,6 +73,7 @@ class InboxIndex extends Component
             ]);
 
             session()->flash('message', 'Progres penanganan berhasil disimpan.');
+            $this->closeModal();
         }
     }
 

@@ -68,7 +68,7 @@ class FrontendController extends Controller
             'is_read' => false,
         ]);
 
-        return redirect()->back()->with('success', 'Laporan/aduan Anda berhasil dikirim. Terima kasih!');
+        return redirect()->to(route('kontak') . '#aduan')->with('success', 'Laporan/aduan Anda berhasil dikirim. Terima kasih!');
     }
 
     public function berita()
