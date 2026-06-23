@@ -192,9 +192,21 @@ class GalleryIndex extends Component
             ->latest('date')
             ->paginate($this->perPage);
 
+        $availableYears = Gallery::selectRaw('YEAR(date) as year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->pluck('year')
+            ->filter()
+            ->toArray();
+
+        if (empty($availableYears)) {
+            $availableYears = [date('Y')];
+        }
+
         return view('livewire.admin.gallery.gallery-index', [
             'galleries' => $galleries,
             'authors' => \App\Models\User::orderBy('name')->get(),
+            'availableYears' => $availableYears,
         ])->layout('layouts.admin');
     }
 }

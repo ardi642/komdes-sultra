@@ -153,12 +153,25 @@ class PostIndex extends Component
 
         $posts = $query->paginate($this->perPage);
 
+        $availableYears = Post::selectRaw('YEAR(created_at) as year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->pluck('year')
+            ->filter()
+            ->toArray();
+
+        // Ensure at least current year is in the array if empty
+        if (empty($availableYears)) {
+            $availableYears = [date('Y')];
+        }
+
         return view('livewire.admin.post.post-index', [
             'posts' => $posts,
             'categories' => Category::where('type', $this->filterType ?: 'berita')->get(),
             'allTags' => Tag::orderBy('name')->get(),
             'allIssues' => Issue::where('status', 'active')->orderBy('title')->get(),
             'authors' => \App\Models\User::orderBy('name')->get(),
+            'availableYears' => $availableYears,
         ])->layout('layouts.admin');
     }
     

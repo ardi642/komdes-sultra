@@ -131,15 +131,23 @@
                             <div class="flex gap-2">
                                 <select wire:model.live="filterMonth" class="w-1/2 bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-3 px-4 text-zinc-900">
                                     <option value="">Bulan</option>
-                                    @for($i=1; $i<=12; $i++)
-                                        <option value="{{ $i }}">{{ date('F', mktime(0, 0, 0, $i, 10)) }}</option>
-                                    @endfor
+                                    @php
+                                        $bulanIndo = [
+                                            1 => 'Januari', 2 => 'Februari', 3 => 'Maret',
+                                            4 => 'April', 5 => 'Mei', 6 => 'Juni',
+                                            7 => 'Juli', 8 => 'Agustus', 9 => 'September',
+                                            10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+                                        ];
+                                    @endphp
+                                    @foreach($bulanIndo as $num => $name)
+                                        <option value="{{ $num }}">{{ $name }}</option>
+                                    @endforeach
                                 </select>
                                 <select wire:model.live="filterYear" class="w-1/2 bg-white text-sm border-zinc-300 focus:border-primary-500 focus:ring-primary-500 rounded-lg shadow-sm py-3 px-4 text-zinc-900">
                                     <option value="">Tahun</option>
-                                    @for($i=date('Y'); $i>=2020; $i--)
-                                        <option value="{{ $i }}">{{ $i }}</option>
-                                    @endfor
+                                    @foreach($availableYears ?? [date('Y')] as $year)
+                                        <option value="{{ $year }}">{{ $year }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

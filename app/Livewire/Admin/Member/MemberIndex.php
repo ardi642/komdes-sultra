@@ -71,8 +71,20 @@ class MemberIndex extends Component
             $query->whereMonth('created_at', $this->filterMonth);
         }
 
+        $availableYears = Member::selectRaw('YEAR(created_at) as year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->pluck('year')
+            ->filter()
+            ->toArray();
+
+        if (empty($availableYears)) {
+            $availableYears = [date('Y')];
+        }
+
         return view('livewire.admin.member.member-index', [
             'members' => $query->paginate($this->perPage),
+            'availableYears' => $availableYears,
         ])->layout('layouts.admin');
     }
 

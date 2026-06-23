@@ -183,7 +183,13 @@ class InboxIndex extends Component
         $availableYears = Inbox::selectRaw('YEAR(created_at) as year')
             ->distinct()
             ->orderBy('year', 'desc')
-            ->pluck('year');
+            ->pluck('year')
+            ->filter()
+            ->toArray();
+
+        if (empty($availableYears)) {
+            $availableYears = [date('Y')];
+        }
 
         return view('livewire.admin.inbox.inbox-index', [
             'availableYears' => $availableYears,

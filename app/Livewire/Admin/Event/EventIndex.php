@@ -132,11 +132,23 @@ class EventIndex extends Component
 
         $events = $query->paginate($this->perPage);
 
+        $availableYears = Event::selectRaw('YEAR(created_at) as year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->pluck('year')
+            ->filter()
+            ->toArray();
+
+        if (empty($availableYears)) {
+            $availableYears = [date('Y')];
+        }
+
         return view('livewire.admin.event.event-index', [
             'events' => $events,
             'allTags' => Tag::orderBy('name')->get(),
             'allIssues' => Issue::where('status', 'active')->orderBy('title')->get(),
             'authors' => \App\Models\User::orderBy('name')->get(),
+            'availableYears' => $availableYears,
         ])->layout('layouts.admin');
     }
     

@@ -63,25 +63,24 @@
                         <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Bulan</label>
                         <select wire:model.live="filterMonth" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-3 px-4 text-gray-900">
                             <option value="">Semua Bulan</option>
-                            <option value="1">Januari</option>
-                            <option value="2">Februari</option>
-                            <option value="3">Maret</option>
-                            <option value="4">April</option>
-                            <option value="5">Mei</option>
-                            <option value="6">Juni</option>
-                            <option value="7">Juli</option>
-                            <option value="8">Agustus</option>
-                            <option value="9">September</option>
-                            <option value="10">Oktober</option>
-                            <option value="11">November</option>
-                            <option value="12">Desember</option>
+                            @php
+                                $bulanIndo = [
+                                    1 => 'Januari', 2 => 'Februari', 3 => 'Maret',
+                                    4 => 'April', 5 => 'Mei', 6 => 'Juni',
+                                    7 => 'Juli', 8 => 'Agustus', 9 => 'September',
+                                    10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+                                ];
+                            @endphp
+                            @foreach($bulanIndo as $num => $name)
+                                <option value="{{ $num }}">{{ $name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">Tahun</label>
                         <select wire:model.live="filterYear" class="w-full bg-white text-sm border-gray-300 focus:border-green-500 focus:ring-green-500 rounded-lg shadow-sm py-3 px-4 text-gray-900">
                             <option value="">Semua Tahun</option>
-                            @foreach($availableYears as $year)
+                            @foreach($availableYears ?? [date('Y')] as $year)
                                 <option value="{{ $year }}">{{ $year }}</option>
                             @endforeach
                         </select>
