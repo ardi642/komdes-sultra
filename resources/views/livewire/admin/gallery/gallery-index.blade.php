@@ -167,10 +167,10 @@
                                     {{ $item->user?->name ?? 'Sistem' }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-gray-500">
-                                    {{ $item->created_at ? $item->created_at->format('d M Y, H:i') : '-' }}
+                                    {{ $item->created_at ? $item->created_at->locale('id')->translatedFormat('d F Y, H:i') : '-' }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ $item->date->format('d M Y') }}
+                                    {{ $item->date->locale('id')->translatedFormat('d F Y') }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">

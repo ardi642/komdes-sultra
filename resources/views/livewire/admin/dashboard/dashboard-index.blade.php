@@ -94,7 +94,7 @@
                                         @else
                                             <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-zinc-100 text-zinc-800">Draft</span>
                                         @endif
-                                        <span class="text-xs text-zinc-500">{{ $post->created_at->format('d M Y') }}</span>
+                                        <span class="text-xs text-zinc-500">{{ $post->created_at->locale('id')->translatedFormat('d F Y') }}</span>
                                     </div>
                                 </div>
                             </div>

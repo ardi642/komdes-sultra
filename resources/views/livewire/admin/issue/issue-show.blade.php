@@ -55,7 +55,7 @@
                     <tr class="hover:bg-zinc-50 transition-colors">
                         <td class="px-6 py-4">
                             <div class="font-medium text-zinc-900">{{ $post->title }}</div>
-                            <div class="text-xs text-zinc-500 mt-1">{{ $post->published_at ? \Carbon\Carbon::parse($post->published_at)->format('d M Y') : '-' }}</div>
+                            <div class="text-xs text-zinc-500 mt-1">{{ $post->published_at ? \Carbon\Carbon::parse($post->published_at)->locale('id')->translatedFormat('d F Y') : '-' }}</div>
                         </td>
                         <td class="px-6 py-4">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 capitalize">
@@ -124,7 +124,7 @@
                             <div class="font-medium text-zinc-900">{{ $event->title }}</div>
                         </td>
                         <td class="px-6 py-4 text-zinc-700 whitespace-nowrap">
-                            {{ \Carbon\Carbon::parse($event->event_date)->format('d M Y, H:i') }}
+                            {{ \Carbon\Carbon::parse($event->event_date)->locale('id')->translatedFormat('d F Y, H:i') }}
                         </td>
                         <td class="px-6 py-4">
                             <div class="text-zinc-700">{{ $event->location }}</div>

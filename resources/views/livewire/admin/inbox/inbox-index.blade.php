@@ -133,7 +133,7 @@
                                 </td>
                                 <td class="px-6 py-4 text-center font-medium text-zinc-500">{{ ($this->inboxMessages->currentPage() - 1) * $this->inboxMessages->perPage() + $loop->iteration }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap {{ !$message->is_read ? 'font-semibold text-gray-900' : 'text-gray-500' }}">
-                                    {{ $message->created_at->format('d M Y, H:i') }}
+                                    {{ $message->created_at->locale('id')->translatedFormat('d F Y, H:i') }}
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="{{ !$message->is_read ? 'font-semibold text-gray-900' : 'font-medium text-gray-800' }}">{{ $message->name }}</div>
@@ -232,7 +232,7 @@
                                 {{ $selectedMessage->subject ?: '(Tanpa Subjek)' }}
                             </h3>
                             <p class="text-sm text-gray-500 mt-1">
-                                Dikirim pada: {{ $selectedMessage->created_at->format('d M Y, H:i') }}
+                                Dikirim pada: {{ $selectedMessage->created_at->locale('id')->translatedFormat('d F Y, H:i') }}
                             </p>
                         </div>
                         <button wire:click="closeModal" class="text-gray-400 hover:text-gray-500">

@@ -223,7 +223,7 @@
                                     {{ $post->author?->name ?? 'Sistem' }}
                                 </td>
                                 <td class="px-6 py-4 text-zinc-700 whitespace-nowrap">
-                                    {{ $post->created_at ? $post->created_at->format('d M Y, H:i') : '-' }}
+                                    {{ $post->created_at ? $post->created_at->locale('id')->translatedFormat('d F Y, H:i') : '-' }}
                                 </td>
                                 @if(empty($filterType) || $filterType === 'berita')
                                 <td class="px-6 py-4 text-zinc-700">

@@ -159,7 +159,7 @@
                             {{ $issue->user?->name ?? 'Sistem' }}
                         </td>
                         <td class="px-6 py-4 text-zinc-700 whitespace-nowrap">
-                            {{ $issue->created_at ? $issue->created_at->format('d M Y, H:i') : '-' }}
+                            {{ $issue->created_at ? $issue->created_at->locale('id')->translatedFormat('d F Y, H:i') : '-' }}
                         </td>
                         <td class="px-6 py-4">
                             @if($issue->status === 'active')

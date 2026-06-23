@@ -169,7 +169,7 @@
                                     <div class="text-xs text-zinc-500 mt-1 line-clamp-1">{{ $member->email ?? '-' }} | {{ $member->phone ?? '-' }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-zinc-700 whitespace-nowrap">
-                                    {{ $member->created_at ? $member->created_at->format('d M Y, H:i') : '-' }}
+                                    {{ $member->created_at ? $member->created_at->locale('id')->translatedFormat('d F Y, H:i') : '-' }}
                                 </td>
                                 <td class="px-6 py-4">
                                     @if($member->is_active)

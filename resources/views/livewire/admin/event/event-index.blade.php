@@ -177,10 +177,10 @@
                                     {{ $event->user?->name ?? 'Sistem' }}
                                 </td>
                                 <td class="px-6 py-4 text-zinc-700 whitespace-nowrap">
-                                    {{ $event->created_at ? $event->created_at->format('d M Y, H:i') : '-' }}
+                                    {{ $event->created_at ? $event->created_at->locale('id')->translatedFormat('d F Y, H:i') : '-' }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="font-medium text-zinc-700">{{ $event->event_date->format('d M Y') }}</div>
+                                    <div class="font-medium text-zinc-700">{{ $event->event_date->locale('id')->translatedFormat('d F Y') }}</div>
                                     <div class="text-xs text-zinc-500 mt-1">{{ $event->event_date->format('H:i') }} WIB</div>
                                 </td>
                                 <td class="px-6 py-4">
