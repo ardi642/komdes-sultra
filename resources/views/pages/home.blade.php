@@ -395,7 +395,7 @@
                             <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80' }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
-                            <span class="text-xs font-bold text-primary-600 mb-3">{{ $post->published_at->format('d M Y') }}</span>
+                            <span class="text-xs font-bold text-primary-600 mb-3">{{ \Carbon\Carbon::parse($post->published_at)->locale('id')->translatedFormat('d F Y') }}</span>
                             <h3 class="font-heading text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors leading-snug">{{ $post->title }}</h3>
                         </div>
                     </a>
@@ -414,7 +414,7 @@
                             <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1526976663112-0050854d1937?auto=format&fit=crop&w=800&q=80' }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
-                            <span class="text-xs font-bold text-secondary-600 mb-3">{{ $post->published_at->format('d M Y') }}</span>
+                            <span class="text-xs font-bold text-secondary-600 mb-3">{{ \Carbon\Carbon::parse($post->published_at)->locale('id')->translatedFormat('d F Y') }}</span>
                             <h3 class="font-heading text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors leading-snug">{{ $post->title }}</h3>
                         </div>
                     </a>
@@ -433,7 +433,7 @@
                             <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80' }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
-                            <span class="text-xs font-bold text-zinc-500 mb-3">{{ $post->published_at->format('d M Y') }}</span>
+                            <span class="text-xs font-bold text-zinc-500 mb-3">{{ \Carbon\Carbon::parse($post->published_at)->locale('id')->translatedFormat('d F Y') }}</span>
                             <h3 class="font-heading text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors leading-snug">{{ $post->title }}</h3>
                         </div>
                     </a>
@@ -454,7 +454,7 @@
                         </div>
                         @endif
                         <div class="p-6 flex flex-col justify-center flex-grow">
-                            <span class="text-xs text-zinc-500 font-bold mb-3 block">{{ $post->published_at->format('d M Y') }}</span>
+                            <span class="text-xs text-zinc-500 font-bold mb-3 block">{{ \Carbon\Carbon::parse($post->published_at)->locale('id')->translatedFormat('d F Y') }}</span>
                             <h3 class="font-heading text-base md:text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors">{{ $post->title }}</h3>
                         </div>
                     </a>
@@ -511,7 +511,7 @@
                             <div class="w-10 h-10 rounded-full bg-zinc-50 flex items-center justify-center mr-4 text-primary-600">
                                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             </div>
-                            <span class="font-medium">{{ $event->event_date->format('d M Y') }} - {{ $event->location }}</span>
+                            <span class="font-medium">{{ \Carbon\Carbon::parse($event->event_date)->locale('id')->translatedFormat('d F Y') }} - {{ $event->location }}</span>
                         </div>
                     </div>
                 </div>

@@ -44,10 +44,10 @@
             
             <!-- Poster Wrapper -->
             @if($event->cover_image)
-            <div class="w-full bg-zinc-900 flex justify-center relative border-b border-zinc-100">
+            <div class="w-full bg-zinc-50 flex justify-center relative border-b border-zinc-100">
                 <!-- Blurred background for aesthetics -->
-                <div class="absolute inset-0 opacity-40">
-                    <img src="{{ asset($event->cover_image) }}" alt="Background Blur" class="w-full h-full object-cover blur-xl">
+                <div class="absolute inset-0 opacity-20">
+                    <img src="{{ asset($event->cover_image) }}" alt="Background Blur" class="w-full h-full object-cover blur-2xl">
                 </div>
                 <!-- Actual Poster (Constrained to natural aspect ratio) -->
                 <img src="{{ asset($event->cover_image) }}" alt="{{ $event->title }}" class="relative z-10 w-full max-w-2xl max-h-[600px] object-contain object-top">

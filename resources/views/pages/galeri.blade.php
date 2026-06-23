@@ -165,7 +165,7 @@
                         <div class="flex items-center gap-4 text-sm text-zinc-500 mb-4 font-medium">
                             <span class="flex items-center gap-1.5">
                                 <svg class="w-4 h-4 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                {{ $item->date->format('d M Y') }}
+                                {{ \Carbon\Carbon::parse($item->date)->locale('id')->translatedFormat('d F Y') }}
                             </span>
                             <span class="flex items-center gap-1.5">
                                 <svg class="w-4 h-4 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L28 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -174,12 +174,15 @@
                         </div>
 
                         <!-- Title -->
-                        <h2 class="font-heading text-xl md:text-2xl font-bold text-zinc-900 leading-snug mb-6 group-hover:text-primary-600 transition-colors duration-300">
+                        <h2 class="font-heading text-xl md:text-2xl font-bold text-zinc-900 leading-snug mb-4 group-hover:text-primary-600 transition-colors duration-300">
                             {{ $item->title }}
                         </h2>
-
-                        <!-- Spacer -->
+                        
+                        @if($item->description)
+                        <p class="text-zinc-600 mb-6 line-clamp-2 text-sm flex-grow">{{ Str::limit(strip_tags($item->description), 100) }}</p>
+                        @else
                         <div class="flex-grow"></div>
+                        @endif
 
                         <!-- Action Link -->
                         <div class="mt-4 inline-flex items-center text-sm font-bold text-primary-600 group-hover:text-primary-700">

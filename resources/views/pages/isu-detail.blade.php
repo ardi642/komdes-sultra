@@ -301,7 +301,7 @@
                     <p class="text-zinc-500 mb-6 line-clamp-3 text-sm leading-relaxed">{{ Str::limit(strip_tags($post->content), 120) }}</p>
                     <div class="flex items-center justify-between mt-auto pt-4 border-t border-zinc-100">
                         <span class="text-xs font-semibold text-zinc-900">{{ $post->author->name ?? 'Admin' }}</span>
-                        <span class="text-xs text-zinc-400">{{ $post->published_at->format('d M Y') }}</span>
+                        <span class="text-xs text-zinc-400">{{ \Carbon\Carbon::parse($post->published_at)->locale('id')->translatedFormat('d F Y') }}</span>
                     </div>
                 </div>
             </article>

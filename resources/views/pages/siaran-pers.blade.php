@@ -34,15 +34,37 @@
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <div class="flex items-center text-sm text-zinc-500 mb-3 gap-4">
-                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> {{ $post->published_at->format('d M Y') }}</span>
+                            <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> {{ \Carbon\Carbon::parse($post->published_at)->locale('id')->translatedFormat('d F Y') }}</span>
                             <span class="flex items-center gap-1"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> {{ $post->author->name ?? 'Admin' }}</span>
                         </div>
                         
-                        @if($post->issues->isNotEmpty())
-                        <a href="{{ route('isu.detail', $post->issues->first()->slug) }}" class="inline-flex items-center gap-1.5 px-2.5 py-1 mb-2 rounded-lg bg-primary-50 text-primary-700 text-xs font-bold border border-primary-100 hover:bg-primary-100 transition-colors w-fit">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
-                            {{ $post->issues->first()->title }}
-                        </a>
+                        @php
+                            $allTags = $post->tags;
+                        @endphp
+                        @if($allTags->isNotEmpty())
+                        <div class="flex flex-wrap gap-2 mb-3" x-data="{ expanded: false }">
+                            @foreach($allTags->take(3) as $tag)
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-zinc-100 text-zinc-600 text-[11px] font-semibold uppercase tracking-wider border border-zinc-200/60">
+                                #{{ $tag->name }}
+                            </span>
+                            @endforeach
+                            
+                            @if($allTags->count() > 3)
+                            <template x-if="expanded">
+                                <div class="contents">
+                                    @foreach($allTags->skip(3) as $tag)
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-zinc-100 text-zinc-600 text-[11px] font-semibold uppercase tracking-wider border border-zinc-200/60">
+                                        #{{ $tag->name }}
+                                    </span>
+                                    @endforeach
+                                </div>
+                            </template>
+                            <button x-show="!expanded" @click.prevent="expanded = true" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-primary-50 text-primary-600 text-[11px] font-bold hover:bg-primary-100 transition-colors cursor-pointer">
+                                +{{ $allTags->count() - 3 }} lainnya
+                                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            @endif
+                        </div>
                         @endif
 
                         <a href="{{ route('siaran-pers.detail', $post->slug) }}" class="block group-hover:text-primary-600 transition-colors">

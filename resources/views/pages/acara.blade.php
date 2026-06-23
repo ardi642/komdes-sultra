@@ -43,23 +43,47 @@
                             <span class="text-xs font-bold text-secondary-600 bg-secondary-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Acara</span>
                         </div>
                         
-                        @if($event->issues->isNotEmpty())
-                        <a href="{{ route('isu.detail', $event->issues->first()->slug) }}" class="inline-flex items-center gap-1.5 px-2.5 py-1 mb-2 rounded-lg bg-primary-50 text-primary-700 text-xs font-bold border border-primary-100 hover:bg-primary-100 transition-colors w-fit">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
-                            {{ $event->issues->first()->title }}
-                        </a>
+                        @php
+                            $allTags = $event->tags;
+                        @endphp
+                        @if($allTags->isNotEmpty())
+                        <div class="flex flex-wrap gap-2 mb-3" x-data="{ expanded: false }">
+                            @foreach($allTags->take(3) as $tag)
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-zinc-100 text-zinc-600 text-[11px] font-semibold uppercase tracking-wider border border-zinc-200/60">
+                                #{{ $tag->name }}
+                            </span>
+                            @endforeach
+                            
+                            @if($allTags->count() > 3)
+                            <template x-if="expanded">
+                                <div class="contents">
+                                    @foreach($allTags->skip(3) as $tag)
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-md bg-zinc-100 text-zinc-600 text-[11px] font-semibold uppercase tracking-wider border border-zinc-200/60">
+                                        #{{ $tag->name }}
+                                    </span>
+                                    @endforeach
+                                </div>
+                            </template>
+                            <button x-show="!expanded" @click.prevent="expanded = true" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-primary-50 text-primary-600 text-[11px] font-bold hover:bg-primary-100 transition-colors cursor-pointer">
+                                +{{ $allTags->count() - 3 }} lainnya
+                                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            @endif
+                        </div>
                         @endif
 
-                        <a href="{{ route('acara.detail', $event->slug) }}" class="block group-hover:text-primary-600 transition-colors mb-4">
+                        <a href="{{ route('acara.detail', $event->slug) }}" class="block group-hover:text-primary-600 transition-colors mb-3">
                             <h3 class="font-heading text-xl font-bold text-zinc-900 leading-snug">{{ $event->title }}</h3>
                         </a>
+                        
+                        <p class="text-zinc-600 mb-6 line-clamp-3 text-sm flex-grow">{{ Str::limit(strip_tags($event->description ?? $event->content), 120) }}</p>
                         
                         <div class="mt-auto space-y-2.5 border-t border-zinc-100 pt-4">
                             <div class="flex items-center text-sm text-zinc-600">
                                 <div class="w-8 h-8 rounded-full bg-primary-50 flex items-center justify-center mr-3 text-primary-600">
                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                 </div>
-                                <span class="font-medium">{{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }}</span>
+                                <span class="font-medium">{{ \Carbon\Carbon::parse($event->event_date)->locale('id')->translatedFormat('d F Y') }}</span>
                             </div>
                             <div class="flex items-center text-sm text-zinc-600">
                                 <div class="w-8 h-8 rounded-full bg-primary-50 flex items-center justify-center mr-3 text-primary-600">
