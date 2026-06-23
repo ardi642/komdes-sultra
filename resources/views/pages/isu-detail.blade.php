@@ -292,8 +292,14 @@
             <article class="bg-white rounded-2xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
                 <div class="relative h-48 sm:h-56 overflow-hidden">
                     <span class="absolute top-4 left-4 z-10 bg-primary-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">{{ ucfirst(str_replace('_', ' ', $post->type)) }}</span>
-                    <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                </div>
+                    @if($post->cover_image)
+                        <img src="{{ asset($post->cover_image) }}" alt="{{ $post->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    @else
+                        <div class="w-full h-full bg-zinc-50 flex flex-col items-center justify-center text-zinc-300 group-hover:bg-zinc-100 group-hover:scale-105 transition-all duration-500">
+                            <svg class="w-12 h-12 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L28 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Komdes Sultra</span>
+                        </div>
+                    @endif                </div>
                 <div class="p-6 flex flex-col flex-grow">
                     <a href="{{ route(str_replace('_', '-', $post->type) . '.detail', $post->slug) }}" class="block group-hover:text-primary-600 transition-colors">
                         <h3 class="font-heading text-xl font-bold text-zinc-900 mb-3 leading-snug">{{ Str::limit($post->title, 60) }}</h3>

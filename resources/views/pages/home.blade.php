@@ -391,8 +391,15 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     @forelse($berita as $post)
                     <a href="{{ route('berita.detail', $post->slug) }}" class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100 relative">
-                        <div class="aspect-video w-full overflow-hidden relative">
-                            <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80' }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="aspect-video w-full overflow-hidden relative bg-zinc-50 flex items-center justify-center">
+                            @if($post->cover_image)
+                                <img src="{{ asset($post->cover_image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            @else
+                                <div class="text-zinc-300 flex flex-col items-center group-hover:scale-110 transition-transform duration-700">
+                                    <svg class="w-10 h-10 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L28 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Komdes Sultra</span>
+                                </div>
+                            @endif
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
                             <span class="text-xs font-bold text-primary-600 mb-3">{{ \Carbon\Carbon::parse($post->published_at)->locale('id')->translatedFormat('d F Y') }}</span>
@@ -410,8 +417,15 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     @forelse($artikel as $post)
                     <a href="{{ route('artikel.detail', $post->slug) }}" class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100">
-                        <div class="aspect-video w-full overflow-hidden relative">
-                            <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1526976663112-0050854d1937?auto=format&fit=crop&w=800&q=80' }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="aspect-video w-full overflow-hidden relative bg-zinc-50 flex items-center justify-center">
+                            @if($post->cover_image)
+                                <img src="{{ asset($post->cover_image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            @else
+                                <div class="text-zinc-300 flex flex-col items-center group-hover:scale-110 transition-transform duration-700">
+                                    <svg class="w-10 h-10 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L28 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Komdes Sultra</span>
+                                </div>
+                            @endif
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
                             <span class="text-xs font-bold text-secondary-600 mb-3">{{ \Carbon\Carbon::parse($post->published_at)->locale('id')->translatedFormat('d F Y') }}</span>
@@ -429,8 +443,15 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     @forelse($riset as $post)
                     <a href="{{ route('riset.detail', $post->slug) }}" class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100 relative">
-                        <div class="aspect-video w-full overflow-hidden relative">
-                            <img src="{{ $post->cover_image ? asset($post->cover_image) : 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80' }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="aspect-video w-full overflow-hidden relative bg-zinc-50 flex items-center justify-center">
+                            @if($post->cover_image)
+                                <img src="{{ asset($post->cover_image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            @else
+                                <div class="text-zinc-300 flex flex-col items-center group-hover:scale-110 transition-transform duration-700">
+                                    <svg class="w-10 h-10 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L28 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Komdes Sultra</span>
+                                </div>
+                            @endif
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
                             <span class="text-xs font-bold text-zinc-500 mb-3">{{ \Carbon\Carbon::parse($post->published_at)->locale('id')->translatedFormat('d F Y') }}</span>
@@ -448,11 +469,16 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     @forelse($siaran as $post)
                     <a href="{{ route('siaran-pers.detail', $post->slug) }}" class="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 h-full border border-zinc-100 relative">
-                        @if($post->cover_image)
                         <div class="aspect-video w-full overflow-hidden relative bg-zinc-50 flex items-center justify-center">
+                            @if($post->cover_image)
                             <img src="{{ asset($post->cover_image) }}" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-700 p-4">
+                            @else
+                            <div class="text-zinc-300 flex flex-col items-center group-hover:scale-110 transition-transform duration-700">
+                                <svg class="w-10 h-10 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L28 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Komdes Sultra</span>
+                            </div>
+                            @endif
                         </div>
-                        @endif
                         <div class="p-6 flex flex-col justify-center flex-grow">
                             <span class="text-xs text-zinc-500 font-bold mb-3 block">{{ \Carbon\Carbon::parse($post->published_at)->locale('id')->translatedFormat('d F Y') }}</span>
                             <h3 class="font-heading text-base md:text-lg font-bold text-zinc-900 group-hover:text-primary-600 transition-colors">{{ $post->title }}</h3>
@@ -492,8 +518,15 @@
         <div class="flex flex-wrap justify-center lg:justify-start gap-10 mb-20 relative z-20">
             @foreach($events as $event)
             <article class="w-full sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.666rem)] bg-white rounded-[2rem] overflow-hidden border border-zinc-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col group relative" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 150 }}">
-                <div class="relative aspect-video overflow-hidden bg-zinc-100">
-                    <img src="{{ $event->cover_image ? asset($event->cover_image) : 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }}" alt="{{ $event->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div class="relative aspect-video overflow-hidden bg-zinc-100 flex items-center justify-center">
+                    @if($event->cover_image)
+                        <img src="{{ asset($event->cover_image) }}" alt="{{ $event->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    @else
+                        <div class="text-zinc-300 flex flex-col items-center group-hover:scale-110 transition-transform duration-700">
+                            <svg class="w-10 h-10 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L28 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Komdes Sultra</span>
+                        </div>
+                    @endif
                     <div class="absolute inset-0 bg-primary-900/10 group-hover:bg-transparent transition-colors duration-300"></div>
                 </div>
                 
