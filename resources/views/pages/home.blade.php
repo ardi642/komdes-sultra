@@ -5,7 +5,7 @@
 @section('content')
 
 <!-- 1. HERO SECTION (Carousel Horizontal dengan Ken Burns & Smart Hover) -->
-<section class="relative h-[96vh] min-h-[650px] bg-[#0d3b29] overflow-hidden group" 
+<section class="relative mt-24 w-full aspect-square sm:aspect-video md:aspect-auto md:h-[85vh] md:min-h-[550px] bg-[#0d3b29] overflow-hidden group" 
     x-data="{ 
         activeSlide: 0, 
         slides: {{ $sliders->count() > 0 ? $sliders->count() : 1 }},
@@ -342,17 +342,17 @@
             <p class="text-white/80 text-base md:text-lg font-light">{{ $homepageSetting->issue_subtitle }}</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 mb-20 justify-items-center lg:justify-items-start">
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-12 md:gap-x-8 md:gap-y-16 mb-20 justify-items-center lg:justify-items-start">
             @foreach($issues as $issue)
             <a href="{{ route('isu.detail', $issue->slug) }}" class="group flex flex-col items-center text-center w-full max-w-xs" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
-                <div class="w-48 h-48 rounded-2xl overflow-hidden mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300 bg-white flex items-center justify-center">
+                <div class="w-full max-w-[140px] md:max-w-none aspect-square md:w-48 md:h-48 rounded-2xl overflow-hidden mb-4 md:mb-6 shadow-xl group-hover:-translate-y-2 transition-transform duration-300 bg-white flex items-center justify-center">
                     @if($issue->cover_image)
                         <img src="{{ asset($issue->cover_image) }}" alt="{{ $issue->title }}" class="w-full h-full object-cover">
                     @else
                         {!! $issue->icon_svg !!}
                     @endif
                 </div>
-                <h3 class="font-heading font-semibold text-sm md:text-base text-white group-hover:text-zinc-200 transition-colors">{{ $issue->title }}</h3>
+                <h3 class="font-heading font-semibold text-xs sm:text-sm md:text-base text-white group-hover:text-zinc-200 transition-colors">{{ $issue->title }}</h3>
             </a>
             @endforeach
         </div>
