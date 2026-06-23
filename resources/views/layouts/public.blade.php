@@ -80,7 +80,7 @@
                                     $navBeritaCategories = \App\Models\Category::where('type', 'berita')->get();
                                 @endphp
                                 @foreach($navBeritaCategories as $cat)
-                                <a href="{{ route('berita', ['category' => $cat->slug]) }}" class="block px-4 py-3 text-base {{ request('category') == $cat->slug ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:bg-primary-50 hover:text-primary-600' }} transition-colors">{{ $cat->name }}</a>
+                                <a href="{{ route('berita.kategori', $cat->slug) }}" class="block px-4 py-3 text-base {{ request('category') == $cat->slug ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:bg-primary-50 hover:text-primary-600' }} transition-colors">{{ $cat->name }}</a>
                                 @endforeach
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                                     <div x-show="subOpen" class="absolute left-full top-0 ml-1 w-56 rounded-xl shadow-xl bg-white ring-1 ring-black ring-opacity-5 z-50 overflow-hidden" style="display: none;">
                                         <div class="py-1">
                                             @foreach($navArtikelCategories as $cat)
-                                            <a href="{{ route('artikel', ['category' => $cat->slug]) }}" class="block px-4 py-3 text-sm {{ request('category') == $cat->slug ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:bg-primary-50 hover:text-primary-600' }} transition-colors">{{ $cat->name }}</a>
+                                            <a href="{{ route('artikel.kategori', $cat->slug) }}" class="block px-4 py-3 text-sm {{ request('category') == $cat->slug ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:bg-primary-50 hover:text-primary-600' }} transition-colors">{{ $cat->name }}</a>
                                             @endforeach
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@
                                     <div x-show="subOpen" class="absolute left-full top-0 ml-1 w-56 rounded-xl shadow-xl bg-white ring-1 ring-black ring-opacity-5 z-50 overflow-hidden" style="display: none;">
                                         <div class="py-1">
                                             @foreach($navRisetCategories as $cat)
-                                            <a href="{{ route('riset', ['category' => $cat->slug]) }}" class="block px-4 py-3 text-sm {{ request('category') == $cat->slug ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:bg-primary-50 hover:text-primary-600' }} transition-colors">{{ $cat->name }}</a>
+                                            <a href="{{ route('riset.kategori', $cat->slug) }}" class="block px-4 py-3 text-sm {{ request('category') == $cat->slug ? 'text-primary-600 bg-primary-50' : 'text-zinc-700 hover:bg-primary-50 hover:text-primary-600' }} transition-colors">{{ $cat->name }}</a>
                                             @endforeach
                                         </div>
                                     </div>
@@ -206,7 +206,7 @@
                             }
                         @endphp
                         @foreach($navBeritaCategories as $cat)
-                        <a href="{{ route('berita', ['category' => $cat->slug]) }}" class="block px-4 py-2.5 rounded-md text-sm font-medium {{ request('category') == $cat->slug ? 'text-white bg-white/20' : 'text-white/70 hover:text-white hover:bg-white/10' }}">{{ $cat->name }}</a>
+                        <a href="{{ route('berita.kategori', $cat->slug) }}" class="block px-4 py-2.5 rounded-md text-sm font-medium {{ request('category') == $cat->slug ? 'text-white bg-white/20' : 'text-white/70 hover:text-white hover:bg-white/10' }}">{{ $cat->name }}</a>
                         @endforeach
                     </div>
                 </div>
@@ -235,7 +235,7 @@
                             </div>
                             <div x-show="artOpen" class="pl-4 pr-2 py-1 space-y-1 mt-1 border-l border-white/20 ml-4" style="{{ request()->routeIs('artikel*') ? '' : 'display: none;' }}">
                                 @foreach($navArtikelCategories as $cat)
-                                <a href="{{ route('artikel', ['category' => $cat->slug]) }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request('category') == $cat->slug ? 'text-white bg-white/20' : 'text-white/60 hover:text-white hover:bg-white/10' }}">{{ $cat->name }}</a>
+                                <a href="{{ route('artikel.kategori', $cat->slug) }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request('category') == $cat->slug ? 'text-white bg-white/20' : 'text-white/60 hover:text-white hover:bg-white/10' }}">{{ $cat->name }}</a>
                                 @endforeach
                             </div>
                         </div>
@@ -259,7 +259,7 @@
                             </div>
                             <div x-show="risetOpen" class="pl-4 pr-2 py-1 space-y-1 mt-1 border-l border-white/20 ml-4" style="{{ request()->routeIs('riset*') ? '' : 'display: none;' }}">
                                 @foreach($navRisetCategories as $cat)
-                                <a href="{{ route('riset', ['category' => $cat->slug]) }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request('category') == $cat->slug ? 'text-white bg-white/20' : 'text-white/60 hover:text-white hover:bg-white/10' }}">{{ $cat->name }}</a>
+                                <a href="{{ route('riset.kategori', $cat->slug) }}" class="block px-3 py-2 rounded-md text-sm font-medium {{ request('category') == $cat->slug ? 'text-white bg-white/20' : 'text-white/60 hover:text-white hover:bg-white/10' }}">{{ $cat->name }}</a>
                                 @endforeach
                             </div>
                         </div>

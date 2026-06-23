@@ -6,9 +6,14 @@
         </div>
         
         <div class="flex items-center gap-3 relative z-10">
+            @php
+                $currentRouteName = request()->route()->getName();
+                $baseRouteName = explode('.', $currentRouteName)[0];
+                $resetUrl = route($baseRouteName);
+            @endphp
             <!-- Tampilkan indikator jika ada filter aktif -->
             @if(request()->hasAny(['category', 'year', 'month', 'tags', 'search']))
-            <a href="{{ request()->url() }}" class="text-xs font-semibold text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3 py-2 rounded-xl transition-colors flex items-center gap-1.5">
+            <a href="{{ $resetUrl }}" class="text-xs font-semibold text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3 py-2 rounded-xl transition-colors flex items-center gap-1.5">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 Reset
             </a>
@@ -70,7 +75,7 @@
      class="bg-white/80 backdrop-blur-xl rounded-[2rem] p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 mb-12 relative overflow-visible" 
      style="display: {{ request()->hasAny(['category', 'year', 'month', 'tags']) ? 'block' : 'none' }};">
     
-    <form action="{{ request()->url() }}" method="GET" class="flex flex-col gap-8">
+    <form action="{{ $resetUrl }}" method="GET" class="flex flex-col gap-8">
         
         <!-- Hidden input for search to persist -->
         @if(request('search'))
@@ -200,7 +205,7 @@
 
         <!-- Action Buttons -->
         <div class="flex items-center justify-end gap-3 mt-2 border-t border-zinc-100/80 pt-6">
-            <button type="button" @click="window.location.href='{{ url()->current() }}'" class="px-6 py-3 text-sm font-bold text-zinc-500 hover:text-zinc-800 bg-transparent hover:bg-zinc-100 rounded-2xl transition-colors">Tutup & Hapus Filter</button>
+            <button type="button" @click="window.location.href='{{ $resetUrl }}'" class="px-6 py-3 text-sm font-bold text-zinc-500 hover:text-zinc-800 bg-transparent hover:bg-zinc-100 rounded-2xl transition-colors">Tutup & Hapus Filter</button>
             <button type="submit" class="px-8 py-3 text-sm font-bold text-white bg-primary-600 hover:bg-primary-500 rounded-2xl transition-all shadow-[0_4px_14px_0_rgba(22,90,63,0.39)] hover:shadow-[0_6px_20px_rgba(22,90,63,0.23)] hover:-translate-y-0.5">Terapkan Filter</button>
         </div>
     </form>

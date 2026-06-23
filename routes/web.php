@@ -8,19 +8,23 @@ Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [FrontendController::class, 'tentangKami'])->name('tentang-kami');
 Route::get('/anggota', [FrontendController::class, 'anggota'])->name('anggota');
 Route::get('/berita', [FrontendController::class, 'berita'])->name('berita');
+Route::get('/berita/kategori/{category:slug}', [FrontendController::class, 'berita'])->name('berita.kategori');
 Route::get('/berita/{post:slug}', [FrontendController::class, 'postDetail'])->name('berita.detail');
 
 Route::get('/artikel', [FrontendController::class, 'artikel'])->name('artikel');
+Route::get('/artikel/kategori/{category:slug}', [FrontendController::class, 'artikel'])->name('artikel.kategori');
 Route::get('/artikel/{post:slug}', [FrontendController::class, 'postDetail'])->name('artikel.detail');
 
 Route::get('/acara', [FrontendController::class, 'acara'])->name('acara');
 Route::get('/acara/{event:slug}', [FrontendController::class, 'eventDetail'])->name('acara.detail');
 
 Route::get('/riset', [FrontendController::class, 'riset'])->name('riset');
-Route::view('/riset/kategori', 'pages.riset-kategori')->name('riset.kategori'); // Nanti bisa disesuaikan jika perlu
+
+Route::get('/riset/kategori/{category:slug}', [FrontendController::class, 'riset'])->name('riset.kategori');
 Route::get('/riset/{post:slug}', [FrontendController::class, 'postDetail'])->name('riset.detail');
 
 Route::get('/siaran-pers', [FrontendController::class, 'siaranPers'])->name('siaran-pers');
+Route::get('/siaran-pers/kategori/{category:slug}', [FrontendController::class, 'siaranPers'])->name('siaran-pers.kategori');
 Route::get('/siaran-pers/{post:slug}', [FrontendController::class, 'postDetail'])->name('siaran-pers.detail');
 
 Route::get('/isu', [FrontendController::class, 'isu'])->name('isu');

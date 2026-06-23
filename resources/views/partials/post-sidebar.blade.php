@@ -41,7 +41,21 @@
         <ul class="space-y-3">
             @foreach($categories as $cat)
             <li>
-                <a href="{{ $buildUrl(['category' => $cat->slug, 'page' => null]) }}" class="flex items-center justify-between group">
+                @php
+                    $currentRouteName = request()->route()->getName();
+                    $baseRouteName = explode('.', $currentRouteName)[0];
+                    $catQuery = request()->except('category', 'page');
+                    
+                    if (in_array($baseRouteName, ['berita', 'artikel', 'riset', 'siaran-pers'])) {
+                        $catUrl = route($baseRouteName . '.kategori', ['category' => $cat->slug]);
+                        if (!empty($catQuery)) {
+                            $catUrl .= '?' . http_build_query($catQuery);
+                        }
+                    } else {
+                        $catUrl = $buildUrl(['category' => $cat->slug, 'page' => null]);
+                    }
+                @endphp
+                <a href="{{ $catUrl }}" class="flex items-center justify-between group">
                     <span class="text-sm transition-colors flex items-center gap-2 {{ request('category') == $cat->slug ? 'text-primary-600 font-bold' : 'text-zinc-600 group-hover:text-primary-600' }}">
                         <svg class="w-4 h-4 text-secondary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
                         {{ $cat->name }}

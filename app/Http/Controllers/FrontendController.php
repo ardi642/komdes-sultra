@@ -71,26 +71,38 @@ class FrontendController extends Controller
         return redirect()->to(route('kontak') . '#aduan')->with('success', 'Laporan/aduan Anda berhasil dikirim. Terima kasih!');
     }
 
-    public function berita()
+    public function berita(\App\Models\Category $category = null)
     {
+        if ($category) {
+            request()->merge(['category' => $category->slug]);
+        }
         $posts = Post::berita()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(8)->withQueryString();
         return view('pages.berita', compact('posts'));
     }
 
-    public function artikel()
+    public function artikel(\App\Models\Category $category = null)
     {
+        if ($category) {
+            request()->merge(['category' => $category->slug]);
+        }
         $posts = Post::artikel()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(8)->withQueryString();
         return view('pages.artikel', compact('posts'));
     }
 
-    public function riset()
+    public function riset(\App\Models\Category $category = null)
     {
+        if ($category) {
+            request()->merge(['category' => $category->slug]);
+        }
         $posts = Post::riset()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(8)->withQueryString();
         return view('pages.riset', compact('posts'));
     }
 
-    public function siaranPers()
+    public function siaranPers(\App\Models\Category $category = null)
     {
+        if ($category) {
+            request()->merge(['category' => $category->slug]);
+        }
         $posts = Post::siaranPers()->published()->filter(request(['search', 'category', 'year', 'month', 'tags']))->latest('published_at')->paginate(8)->withQueryString();
         return view('pages.siaran-pers', compact('posts'));
     }
