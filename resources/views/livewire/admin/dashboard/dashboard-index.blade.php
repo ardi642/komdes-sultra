@@ -182,10 +182,25 @@
                             <div class="flex items-start gap-4">
                                 <div class="w-2 h-2 mt-1.5 rounded-full {{ $post->is_published ? 'bg-green-500' : 'bg-zinc-300' }} shrink-0"></div>
                                 <div class="flex-1 min-w-0">
-                                    <h3 class="font-medium text-sm text-zinc-900 line-clamp-1">{{ $post->title }}</h3>
+                                    @php
+                                        $typeStr = str_replace('_', ' ', $post->type);
+                                        $badgeColor = match($post->type) {
+                                            'berita' => 'bg-blue-100 text-blue-800',
+                                            'artikel' => 'bg-indigo-100 text-indigo-800',
+                                            'riset' => 'bg-purple-100 text-purple-800',
+                                            'siaran_pers' => 'bg-emerald-100 text-emerald-800',
+                                            'galeri' => 'bg-orange-100 text-orange-800',
+                                            'agenda' => 'bg-rose-100 text-rose-800',
+                                            default => 'bg-zinc-100 text-zinc-800'
+                                        };
+                                    @endphp
+                                    <h3 class="font-medium text-sm text-zinc-900 line-clamp-1">
+                                        <span class="inline-block px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider {{ $badgeColor }} mr-1 align-middle leading-none">{{ $typeStr }}</span>
+                                        <span class="align-middle">{{ $post->title }}</span>
+                                    </h3>
                                     <div class="flex items-center justify-between mt-1">
-                                        <p class="text-xs text-zinc-500 truncate">{{ $post->author?->name ?? 'Sistem' }}</p>
-                                        <p class="text-[10px] text-zinc-400 whitespace-nowrap ml-2">{{ $post->created_at->diffForHumans() }}</p>
+                                        <p class="text-xs text-zinc-500 truncate">{{ $post->author }}</p>
+                                        <p class="text-[10px] text-zinc-400 whitespace-nowrap ml-2">{{ \Carbon\Carbon::parse($post->date)->diffForHumans() }}</p>
                                     </div>
                                 </div>
                             </div>

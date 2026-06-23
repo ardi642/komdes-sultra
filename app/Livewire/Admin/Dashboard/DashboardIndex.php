@@ -47,10 +47,7 @@ class DashboardIndex extends Component
                             ->take(5)
                             ->get();
 
-            $latestActivities = Post::where('author_id', $user->id)
-                                  ->latest()
-                                  ->take(5)
-                                  ->get();
+            $latestActivities = $this->fetchLatestActivities($user->id);
         } else {
             // Super Admin / Admin Stats
             $stats['total_posts'] = Post::count();
@@ -68,10 +65,7 @@ class DashboardIndex extends Component
             }
 
             // Latest Posts Activity
-            $latestActivities = Post::with('author')
-                                  ->latest()
-                                  ->take(6)
-                                  ->get();
+            $latestActivities = $this->fetchLatestActivities();
         }
 
         return view('livewire.admin.dashboard.dashboard-index', [
@@ -81,5 +75,52 @@ class DashboardIndex extends Component
             'draftPosts' => $draftPosts,
             'latestActivities' => $latestActivities,
         ])->layout('layouts.admin');
+    }
+
+    private function fetchLatestActivities($userId = null)
+    {
+        $posts = Post::with('author')
+            ->when($userId, fn($q) => $q->where('author_id', $userId))
+            ->latest()->take(6)->get()
+            ->map(fn($item) => (object)[
+                'id' => $item->id,
+                'title' => $item->title,
+                'author' => $item->author?->name ?? 'Sistem',
+                'date' => $item->updated_at ?? $item->created_at,
+                'is_published' => $item->is_published,
+                'type' => $item->type,
+            ]);
+
+        $galleries = Gallery::with('user')
+            ->when($userId, fn($q) => $q->where('user_id', $userId))
+            ->latest()->take(6)->get()
+            ->map(fn($item) => (object)[
+                'id' => $item->id,
+                'title' => $item->title,
+                'author' => $item->user?->name ?? 'Sistem',
+                'date' => $item->updated_at ?? $item->created_at,
+                'is_published' => true,
+                'type' => 'galeri',
+            ]);
+
+        $events = Event::with('user')
+            ->when($userId, fn($q) => $q->where('user_id', $userId))
+            ->latest()->take(6)->get()
+            ->map(fn($item) => (object)[
+                'id' => $item->id,
+                'title' => $item->title,
+                'author' => $item->user?->name ?? 'Sistem',
+                'date' => $item->updated_at ?? $item->created_at,
+                'is_published' => true,
+                'type' => 'agenda',
+            ]);
+
+        return collect()
+            ->concat($posts)
+            ->concat($galleries)
+            ->concat($events)
+            ->sortByDesc('date')
+            ->take(6)
+            ->values();
     }
 }
