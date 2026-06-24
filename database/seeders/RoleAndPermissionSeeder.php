@@ -25,15 +25,15 @@ class RoleAndPermissionSeeder extends Seeder
         // Check if there is an existing User ID 1, else create one
         $user = User::find(1);
         
-        if (!$user) {
-            $user = User::create([
-                'id' => 1,
+        $user = User::updateOrCreate(
+            ['id' => 1],
+            [
                 'name' => 'Super Admin',
-                'email' => 'admin@example.com',
-                'password' => Hash::make('password'),
+                'email' => 'komnasdesa@gmail.com',
+                'password' => Hash::make('Komdes04'),
                 'posisi' => 'Pemilik Sistem',
-            ]);
-        }
+            ]
+        );
 
         // Assign Super Admin role to user ID 1
         $user->assignRole('Super Admin');
