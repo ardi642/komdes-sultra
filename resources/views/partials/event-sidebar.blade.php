@@ -186,7 +186,7 @@
                 <ul class="p-2 space-y-1">
                     @foreach($months as $monthData)
                     @php
-                        $monthName = \Carbon\Carbon::create()->month($monthData->month)->locale('id')->translatedFormat('F');
+                        $monthName = \Carbon\Carbon::create()->month((int) $monthData->month)->locale('id')->translatedFormat('F');
                         $isMonthActive = request('year') == $year && request('month') == str_pad($monthData->month, 2, '0', STR_PAD_LEFT);
                     @endphp
                     <li>
